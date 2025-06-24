@@ -145,17 +145,7 @@ jobs:
           npx cucumber-js --tags "${{ github.event.inputs.tag }}" --format json:cucumber-report.json
           node reporter.js
 
-      # 🆕 NUEVA INTEGRACIÓN: Test Reporter para GitHub
-      - name: Publish Test Results
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: "Cucumber Test Results"
-          path: "cucumber-report.json"
-          reporter: "java-junit"
-          fail-on-error: false
-
-      # 🆕 NUEVA INTEGRACIÓN: Test Reporter para mostrar en Checks
+      # 🆕 NUEVA INTEGRACIÓN: Test Summary para GitHub
       - name: Publish Test Summary
         uses: test-summary/action@v2
         if: always()
@@ -171,79 +161,82 @@ jobs:
           path: |
             cucumber-report.html
             reports/
-            pdf-report/  # si también estás generando el PDF aquí
+            cucumber-report.json
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
-        if: always()
-        with:
-          credentials_json: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
+      # 🔒 GOOGLE DRIVE INTEGRATION (COMMENTED OUT)
+      # Uncomment the sections below if you want to upload reports to Google Drive
+      
+      # - name: Authenticate to Google Cloud
+      #   uses: google-github-actions/auth@v2
+      #   if: always()
+      #   with:
+      #     credentials_json: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-        if: always()
+      # - name: Set up Cloud SDK
+      #   uses: google-github-actions/setup-gcloud@v2
+      #   if: always()
 
-      - name: Upload reports to Google Drive using Python
-        if: always()
-        run: |
-          # Instalar dependencias de Python
-          pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
-
-          # Crear script de Python para subir archivos
-          cat > upload_to_drive.py << 'EOF'
-          import os
-          import json
-          from googleapiclient.discovery import build
-          from googleapiclient.http import MediaFileUpload
-          from google.oauth2 import service_account
-
-          # Configurar credenciales
-          credentials_json = os.environ.get('GOOGLE_CREDENTIALS')
-          if credentials_json:
-              credentials_info = json.loads(credentials_json)
-              credentials = service_account.Credentials.from_service_account_info(credentials_info)
-          else:
-              # Usar gcloud auth
-              import subprocess
-              token = subprocess.check_output(['gcloud', 'auth', 'print-access-token']).decode().strip()
-              credentials = None  # Usaremos el token directamente
-
-          # Construir servicio
-          service = build('drive', 'v3', credentials=credentials)
-
-          folder_id = os.environ.get('FOLDER_ID')
-
-          # Función para subir archivo
-          def upload_file(file_path, file_name):
-              if os.path.exists(file_path):
-                  file_metadata = {
-                      'name': file_name,
-                      'parents': [folder_id]
-                  }
-                  media = MediaFileUpload(file_path, resumable=True)
-                  
-                  try:
-                      file = service.files().create(
-                          body=file_metadata,
-                          media_body=media,
-                          fields='id'
-                      ).execute()
-                      print(f'Archivo {file_name} subido con ID: {file.get("id")}')
-                  except Exception as e:
-                      print(f'Error subiendo {file_name}: {e}')
-              else:
-                  print(f'Archivo {file_path} no encontrado')
-
-          # Subir archivos
-          if os.path.exists('reports/'):
-              upload_file('reports/cucumber-report.html', 'cucumber-report.html')
-              upload_file('reports/cucumber-report.pdf', 'cucumber-report.pdf')
-          else:
-              print('Directorio reports/ no encontrado')
-          EOF
-
-          # Ejecutar el script
-          python upload_to_drive.py
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
-          FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
+      # - name: Upload reports to Google Drive using Python
+      #   if: always()
+      #   run: |
+      #     # Instalar dependencias de Python
+      #     pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
+      #
+      #     # Crear script de Python para subir archivos
+      #     cat > upload_to_drive.py << 'EOF'
+      #     import os
+      #     import json
+      #     from googleapiclient.discovery import build
+      #     from googleapiclient.http import MediaFileUpload
+      #     from google.oauth2 import service_account
+      #
+      #     # Configurar credenciales
+      #     credentials_json = os.environ.get('GOOGLE_CREDENTIALS')
+      #     if credentials_json:
+      #         credentials_info = json.loads(credentials_json)
+      #         credentials = service_account.Credentials.from_service_account_info(credentials_info)
+      #     else:
+      #         # Usar gcloud auth
+      #         import subprocess
+      #         token = subprocess.check_output(['gcloud', 'auth', 'print-access-token']).decode().strip()
+      #         credentials = None  # Usaremos el token directamente
+      #
+      #     # Construir servicio
+      #     service = build('drive', 'v3', credentials=credentials)
+      #
+      #     folder_id = os.environ.get('FOLDER_ID')
+      #
+      #     # Función para subir archivo
+      #     def upload_file(file_path, file_name):
+      #         if os.path.exists(file_path):
+      #             file_metadata = {
+      #                 'name': file_name,
+      #                 'parents': [folder_id]
+      #             }
+      #             media = MediaFileUpload(file_path, resumable=True)
+      #             
+      #             try:
+      #                 file = service.files().create(
+      #                     body=file_metadata,
+      #                     media_body=media,
+      #                     fields='id'
+      #                 ).execute()
+      #                 print(f'Archivo {file_name} subido con ID: {file.get("id")}')
+      #             except Exception as e:
+      #                 print(f'Error subiendo {file_name}: {e}')
+      #         else:
+      #             print(f'Archivo {file_path} no encontrado')
+      #
+      #     # Subir archivos
+      #     if os.path.exists('reports/'):
+      #         upload_file('reports/cucumber-report.html', 'cucumber-report.html')
+      #         upload_file('reports/cucumber-report.pdf', 'cucumber-report.pdf')
+      #     else:
+      #         print('Directorio reports/ no encontrado')
+      #     EOF
+      #
+      #     # Ejecutar el script
+      #     python upload_to_drive.py
+      #   env:
+      #     GOOGLE_CREDENTIALS: ${{ secrets.GDRIVE_SERVICE_ACCOUNT_KEY }}
+      #     FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
