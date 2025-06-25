@@ -72,7 +72,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
 
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Esperar procesamiento de la "orden QR" por 5 segundos
+        When Esperar procesamiento de la "orden QR" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -148,7 +148,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
 
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Esperar procesamiento de la "orden QR" por 5 segundos
+        When Esperar procesamiento de la "orden QR" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -189,7 +189,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
 
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -266,7 +266,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
 
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -308,8 +308,8 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009628 | pixmanualamount | ARS     | 1000   | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | embebido | 100009628 | pix             | ARS     | 1000   | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | manual   | 100009628 | pixmanualamount | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | embebido | 100009628 | pix             | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
     #*************************************
     # ------ DESCUBIERTOS -------
