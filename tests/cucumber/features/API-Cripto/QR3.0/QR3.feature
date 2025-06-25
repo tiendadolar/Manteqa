@@ -607,7 +607,7 @@ Feature: Sintético QR 3.0
             | QR  | Brasil      | USDT | manual   | 100009407 | pixmanualamount    | USDT    | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | pix                | USDT    | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
-    @Smoke @BybitPixkey
+    @Smoke @BybitPixkeyb
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" hacia PixKey en descubierto para usuario "<nacionality>" vía ByBit endpoints
         Given Contar con la api-key "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"

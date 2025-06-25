@@ -146,7 +146,7 @@ When(
         endpoint === "/v2/synthetics/qr-payment"
       ) {
         this.userData.userAnyId =
-          CustomWorld.getStoreData("userId") || this.userData.userAnyId;
+          this.userData.userAnyId ?? CustomWorld.getStoreData("userId");
         // API-Cambio
       } else if (endpoint === "/v3/api/onboarding-actions/initial") {
         // Onboarding inicial
