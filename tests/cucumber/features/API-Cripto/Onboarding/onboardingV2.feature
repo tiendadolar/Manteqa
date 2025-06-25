@@ -170,6 +170,7 @@ Feature: Onboarding User - V2
 
     # Validar en DB, para realizar nuevamente el test eliminar bankAccounts en DB
     # No tocar datos de userAnyId, en caso de reutilizar elimnar datos de banking en DB. Maximo 15 banks por user
+    #* Para volver a realizar test se debe limpiar el bankAddress de la DB de casa user
     @testBankingCHL
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
