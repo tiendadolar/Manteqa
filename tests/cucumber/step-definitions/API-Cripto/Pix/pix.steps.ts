@@ -209,6 +209,7 @@ When(
       this.response = await request(this.urlBase)
         .get(paramEndpoint)
         .set("md-api-key", this.apiKey);
+      console.log("API response:", this.response.body);
     } catch (error: unknown) {
       const err = error as { response?: any };
       this.response = err.response || {

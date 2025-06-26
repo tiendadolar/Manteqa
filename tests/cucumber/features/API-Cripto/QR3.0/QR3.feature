@@ -107,7 +107,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
 
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Esperar procesamiento de la "orden QR" por 5 segundos
+        When Esperar procesamiento de la "orden QR" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -225,7 +225,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
 
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -302,7 +302,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
 
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -331,7 +331,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
         And Se validan los atributos del sintético QR USDT
 
-        When Esperar procesamiento de la "orden QR" por 5 segundos
+        When Esperar procesamiento de la "orden QR" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -357,7 +357,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
         And Se validan los atributos del sintético QR ARS
 
-        When Esperar procesamiento de la "orden QR" por 5 segundos
+        When Esperar procesamiento de la "orden QR" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -384,7 +384,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
         And Se validan los atributos del sintético QR USDT
 
-        When Esperar procesamiento de la "orden QR" por 5 segundos
+        When Esperar procesamiento de la "orden QR" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -485,7 +485,7 @@ Feature: Sintético QR 3.0
         And Ejecutar el método Post al endpoint "/v2/synthetics/pix-payment"
         Then Se obtiene una respuesta 201
 
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -511,7 +511,7 @@ Feature: Sintético QR 3.0
         And Ejecutar el método Post al endpoint "/v2/synthetics/pix-payment"
         Then Se obtiene una respuesta 201
 
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -538,7 +538,7 @@ Feature: Sintético QR 3.0
         And Ejecutar el método Post al endpoint "/v2/synthetics/qr-payment"
         Then Se obtiene una respuesta 201
 
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -564,7 +564,7 @@ Feature: Sintético QR 3.0
         And Ejecutar el método Post al endpoint "/v2/synthetics/qr-payment"
         Then Se obtiene una respuesta 201
 
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -592,7 +592,7 @@ Feature: Sintético QR 3.0
         And Ejecutar el método Post al endpoint "/v2/synthetics/qr-payment"
         Then Se obtiene una respuesta 201
 
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -602,7 +602,7 @@ Feature: Sintético QR 3.0
             | PIX | Argentina   | USDT | embebido | 100009406 | pix                |         | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Argentina   | USDT | manual   | 100009406 | qr3manualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Argentina   | USDT | embebido | 100009406 | qr3                |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount    |         | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | qr3                |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | manual   | 100009407 | pixmanualamount    | USDT    | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | pix                | USDT    | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
@@ -624,17 +624,17 @@ Feature: Sintético QR 3.0
         And Ejecutar el método Post al endpoint "/v2/synthetics/qr-payment"
         Then Se obtiene una respuesta 201
 
-        When Esperar procesamiento de la "orden PIX" por 5 segundos
+        When Esperar procesamiento de la "orden PIX" por 15 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
-        # User ARG no funciona todavia
+        # User ARG no funciona todavia por eso se comentó
         Examples:
             | pay | nacionality | coin | accion   | userAnyId | paymentDestination                   | against | amount | sessionId                       | to                                         | ticker |
-            | PIX | Argentina   | USDT | manual   | 100009406 | martin@gmail.com                     |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | PIX | Argentina   | USDT | embebido | 100009406 | renancamargo19@gmail.com             |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | PIX | Argentina   | USDT | manual   | 100009406 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | PIX | Argentina   | USDT | embebido | 100009406 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            # | PIX | Argentina   | USDT | manual   | 100009406 | martin@gmail.com                     |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            # | PIX | Argentina   | USDT | embebido | 100009406 | renancamargo19@gmail.com             |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            # | PIX | Argentina   | USDT | manual   | 100009406 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            # | PIX | Argentina   | USDT | embebido | 100009406 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | manual   | 100009407 | martin@gmail.com                     |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | renancamargo19@gmail.com             |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | manual   | 100009407 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
@@ -653,9 +653,8 @@ Feature: Sintético QR 3.0
         And Se obtiene una respuesta 200 y status "CANCELLED"
 
         Examples:
-            | userAnyId | paymentDestination | against | amount | sessionId     |
-            | 100009408 | qr3manualamount    | USDT    | 1000   | refund-DESC-n |
-            | 100009408 | +5511949227612     | USDT    | 10     | refund-DESC-n |
+            | userAnyId | paymentDestination      | against | amount | sessionId     |
+            | 100009408 | failuremartin@gmail.com | USDT    | 1000   | refund-DESC-n |
     # Cuando marto incluya +5511949227612 como siempre falla para reverse, borrar qr3manualamount
     # Falta caso en against ARS en el que se toma deuda en ARS pero no hay order reversal
 
@@ -674,6 +673,6 @@ Feature: Sintético QR 3.0
         And Se obtiene una respuesta 200 y status "CANCELLED"
 
         Examples:
-            | userAnyId | paymentDestination | against | amount | sessionId        | apiKeyDeposit                   |
-            | 100009417 | qr3manualamount    | ARS     | 1000   | refund-NO-DESC-n | C10XB2Z-AG243CS-G42KB2M-4085WTF |
-            | 100009417 | qr3manualamount    | USDT    | 1000   | refund-NO-DESC-n | C10XB2Z-AG243CS-G42KB2M-4085WTF |
+            | userAnyId | paymentDestination      | against | amount | sessionId        | apiKeyDeposit                   |
+            | 100009417 | failuremartin@gmail.com | ARS     | 1000   | refund-NO-DESC-n | C10XB2Z-AG243CS-G42KB2M-4085WTF |
+

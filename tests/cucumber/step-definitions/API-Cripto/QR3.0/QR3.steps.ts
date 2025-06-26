@@ -55,6 +55,8 @@ Then(
   { timeout: 500 * 1000 },
   async function (this: CustomWorld, statusCode: number, statusName: string) {
     const response = this.response;
+    console.log(`Response Status: ${response.status}`);
+
     expect(response.status).to.equal(statusCode);
     expect(response.body.status).to.equal(statusName);
   }
