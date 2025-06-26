@@ -3,9 +3,6 @@ import { CustomWorld } from "../support/world";
 
 export const delay = (ms: number): Promise<void> => {
   console.log("EJECUTANDO DELAY");
-
-  console.log("EJECUTANDO DELAY");
-
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
@@ -176,7 +173,7 @@ export const criptoDepositApiCrypto = (userData: any) => {
 // Deposito fiat
 export const fiatDepositApiCrypto = (userData: any) => {
   return {
-    userId: CustomWorld.getStoreData("userNumberId") || userData.userId,
+    userId: CustomWorld.getStoreData("userNumberId") || userData.userNumberId,
     amount:
       CustomWorld.getStoreData("thresholdAmount") ||
       userData.amount ||
@@ -359,21 +356,19 @@ export const refundPollingWithDeposit = async function (
         .send(depositCryptoPayload);
       console.log("API payload:", depositCryptoPayload);
       console.log("API response:", userData.response.body);
+    } else {
+      let endpointDeposit = "/v1/fiat/deposit";
+      let depositFiatPayload = fiatDepositApiCrypto(userData.response.body);
+
+      // Fiat deposit
+      userData.response = await request(data.urlBase)
+        .post(endpointDeposit)
+        .set("md-api-key", "C10XB2Z-AG243CS-G42KB2M-4085WTF")
+        .set("x-api-secret", data.apiSecret)
+        .send(depositFiatPayload);
+      console.log("API payload:", depositFiatPayload);
+      console.log("API response:", userData.response.body);
     }
-
-    // } else {
-    //   let endpointDeposit = "/v1/fiat/deposit";
-    //   let depositFiatPayload = fiatDepositApiCrypto(userData.response.body);
-
-    //   // Fiat deposit
-    //   userData.response = await request(data.urlBase)
-    //     .post(endpointDeposit)
-    //     .set("md-api-key", "C10XB2Z-AG243CS-G42KB2M-4085WTF")
-    //     .set("x-api-secret", data.apiSecret)
-    //     .send(depositFiatPayload);
-    //   console.log("API payload:", depositFiatPayload);
-    //   console.log("API response:", userData.response.body);
-    // }
 
     await delay(10000);
 

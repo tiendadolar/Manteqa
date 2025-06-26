@@ -72,7 +72,7 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
 
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Esperar procesamiento de la "orden QR" por 15 segundos
+        When Esperar procesamiento de la "orden QR" por 20 segundos
         And Ejecutar el método Get al endpoint "/v1/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -640,7 +640,7 @@ Feature: Sintético QR 3.0
             | QR  | Brasil      | USDT | manual   | 100009407 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
-    @Smoke @Refunds @RefundsDs
+    @Smoke1 @Refunds @RefundsDs
     Scenario Outline: Validar refund para usuario operando en descubierto
         Given Contar con la api-key "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -658,7 +658,7 @@ Feature: Sintético QR 3.0
     # Cuando marto incluya +5511949227612 como siempre falla para reverse, borrar qr3manualamount
     # Falta caso en against ARS en el que se toma deuda en ARS pero no hay order reversal
 
-    @Smoke @Refunds @RefundsNDt
+    @Smoke2 @Refunds @RefundsNDt
     Scenario Outline: Validar refund para usuario operando en no descubierto contra <against>
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la api-secret "1RpvdT7Vc7ukKeGKdU"
