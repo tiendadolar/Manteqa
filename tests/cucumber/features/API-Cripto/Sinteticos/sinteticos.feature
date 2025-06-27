@@ -433,7 +433,7 @@ Feature: Sintéticos
 
     # ----- Descubierto -----
 
-    @Smoke @E2EFlow @RampOnDesc
+    @Smoke1 @E2EFlow @RampOnDesc
     Scenario Outline: Flujo E2E Ramp-On descubierto
         # Parte 1: Creación de sintético
         Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
@@ -516,7 +516,7 @@ Feature: Sintéticos
 
     # ----- No Descubierto -----
 
-    @Smoke @E2EFlow @RampOn
+    @Smoke1 @E2EFlow @RampOn
     Scenario Outline: Flujo E2E Ramp-On con Depósito
         # Parte 1: Creación de sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -572,7 +572,7 @@ Feature: Sintéticos
     # | 100008214 | smoke-test-n | BNB   | ARS     | 1           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
     # | 100008214 | smoke-test-n | SDAI  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
-    @Smoke @E2EFlow @RampOff
+    @Smoke1 @E2EFlow @RampOff
     Scenario Outline: Flujo E2E Ramp-Off con Depósito
         # Parte 1: Creación de sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
