@@ -206,6 +206,8 @@ When(
       .replace("{syntheticId}", CustomWorld.getStoreData("syntheticId") || "")
       .replace("{withdrawAnyId}", CustomWorld.getStoreData("withdrawId") || "");
     try {
+      console.log("API endpoint:", paramEndpoint);
+
       this.response = await request(this.urlBase)
         .get(paramEndpoint)
         .set("md-api-key", this.apiKey);
@@ -249,6 +251,11 @@ Then(
     if (this.response.body.numberId) {
       CustomWorld.setStoreData("withdrawId", this.response.body.numberId);
     }
+
+    if (this.response.body[0].numberId) {
+      CustomWorld.setStoreData("withdrawId", this.response.body[0].numberId);
+    }
+
     if (this.response.body.stages && this.response.body.stages.withdrawId) {
       const stage = this.response.body.stages[1];
       CustomWorld.setStoreData("withdrawId", stage.withdrawId);

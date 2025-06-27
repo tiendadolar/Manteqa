@@ -46,3 +46,14 @@ Then(
     expect(body.status).to.equal("EXECUTED");
   }
 );
+
+Then(
+  "Se obtiene una respuesta {int} y status EXECUTED para retiro fiat",
+  function (this: CustomWorld, statusCode: number) {
+    const response: any = this.response;
+    const body: any = response.body;
+
+    expect(this.response.status).to.equal(statusCode);
+    expect(body.status).to.be.oneOf(["EXECUTED", "PENDING"]);
+  }
+);

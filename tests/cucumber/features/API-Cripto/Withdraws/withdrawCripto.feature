@@ -86,13 +86,13 @@ Feature: Retiros Crypto
         # Parte 2: Validar ejeccución del sintético
         Given Contar con la api-key "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la orden
+        When Esperar procesamiento de la "orden" por 40 segundos
         And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Se obtiene una respuesta 200 y status EXECUTED
 
         Examples:
             | coin  | userId    | chain      | amount | wallet                                     |
-            | WLD   | 100007647 | WORLDCHAIN | 10     | 383484333314712389                         |
+            | WLD   | 100007647 | WORLDCHAIN | 10     | 0x96c5d20b2a975c050e4220be276ace4892f4b41a |
             | USDT  | 100007647 | POLYGON    | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT  | 100007647 | BINANCE    | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT  | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
