@@ -431,7 +431,92 @@ Feature: Sintéticos
             | 100008214 | regression-test-n | AXS   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
             | 100008214 | regression-test-n | MANA  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
-    @Regression @Smoke @E2EFlow @RampOn
+    # ----- Descubierto -----
+
+    @Smoke @E2EFlow @RampOnDesc
+    Scenario Outline: Flujo E2E Ramp-On descubierto
+        # Parte 1: Creación de sintético
+        Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
+        And Asignar el valor "<sessionId>" a la variable "sessionId"
+        And Asignar el valor "<asset>" a la variable "asset"
+        And Asignar el valor "<against>" a la variable "against"
+        And Asignar el valor "<assetAmount>" a la variable "assetAmount"
+        And Asignar el valor "<withdrawAddress>" a la variable "withdrawAddress"
+        And Asignar el valor "<withdrawNetwork>" a la variable "withdrawNetwork"
+        And Ejecutar el método Post al endpoint "/v1/synthetics/ramp-on"
+        Then Se obtiene una respuesta 201
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 40 segundos
+        And Ejecutar el método Get al endpoint "/v2/synthetics/{syntheticId}"
+        Then Se obtiene una respuesta 200 y status COMPLETED
+
+        Examples:
+            | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100008214 | smoke-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009780 | smoke-rampOn-DESC-test-n | ETH   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009780 | smoke-rampOn-DESC-test-n | BNB   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009780 | smoke-rampOn-DESC-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100008214 | smoke-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+
+
+    @Smoke @E2EFlow @PartialRampOnDesc
+    Scenario Outline: Flujo E2E Partial-Ramp-On descubierto
+        # Parte 1: Creación de sintético
+        Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
+        And Asignar el valor "<sessionId>" a la variable "sessionId"
+        And Asignar el valor "<asset>" a la variable "asset"
+        And Asignar el valor "<against>" a la variable "against"
+        And Asignar el valor "<assetAmount>" a la variable "assetAmount"
+        And Asignar el valor "<withdrawAddress>" a la variable "withdrawAddress"
+        And Asignar el valor "<withdrawNetwork>" a la variable "withdrawNetwork"
+        And Ejecutar el método Post al endpoint "/v1/synthetics/partial-ramp-on"
+        Then Se obtiene una respuesta 201
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 40 segundos
+        And Ejecutar el método Get al endpoint "/v2/synthetics/{syntheticId}"
+        Then Se obtiene una respuesta 200 y status COMPLETED
+
+        Examples:
+            | userAnyId | sessionId                       | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100009719 | smoke-partialRampOn-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | ETH   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | BNB   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100009719 | smoke-partialRampOn-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+
+    # ----- No Descubierto -----
+
+    @Smoke @E2EFlow @RampOn
     Scenario Outline: Flujo E2E Ramp-On con Depósito
         # Parte 1: Creación de sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -487,7 +572,7 @@ Feature: Sintéticos
     # | 100008214 | smoke-test-n | BNB   | ARS     | 1           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
     # | 100008214 | smoke-test-n | SDAI  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
-    @Regression @Smoke @E2EFlow @RampOff
+    @Smoke @E2EFlow @RampOff
     Scenario Outline: Flujo E2E Ramp-Off con Depósito
         # Parte 1: Creación de sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -539,7 +624,7 @@ Feature: Sintéticos
             | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |
 
 
-    @Regression @Smoke @E2EFlow @PartialRampOn
+    @Smoke @E2EFlow @PartialRampOn
     Scenario Outline: Flujo E2E Partial-Ramp-On con Depósito
         # Parte 1: Creación de sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -595,7 +680,7 @@ Feature: Sintéticos
     # | 100009719 | smoke-partialRampOn-test-n | BNB   | ARS     | 1           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
     # | 100009719 | smoke-partialRampOn-test-n | SDAI  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
-    @Regression @Smoke @E2EFlow @PartialRampOff
+    @Smoke @E2EFlow @PartialRampOff
     Scenario Outline: Flujo E2E Partial-Ramp-Off con Depósito
         # Parte 1: Creación de sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
