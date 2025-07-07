@@ -134,7 +134,358 @@ Feature: Retiros Crypto
             # | NUARS | 100007647 | BSC        | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             # | SDAI  | 100007647 | OPTIMISM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDCB | 100007647 | POLYGON    | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-# | USDCB | 100007647 | BINANCE  | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-# | USDCB | 100007647 | BSC      | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-# | USDCB | 100007647 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-# | USDCB | 100007647 | ARBITRUM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+    # | USDCB | 100007647 | BINANCE  | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+    # | USDCB | 100007647 | BSC      | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+    # | USDCB | 100007647 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+    # | USDCB | 100007647 | ARBITRUM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+
+    @SmokeWithdraw @ARG @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user ARG por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 40 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009893 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009893 | BINANCE    | 0.1    | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009893 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009893 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009893 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009893 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009893 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009893 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @SmokeWithdraw @CHL @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user CHL por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 40 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009892 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009892 | BINANCE    | 0.1    | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009892 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009892 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009892 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009892 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009892 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009892 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @SmokeWithdraw @COL @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user COL por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 40 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009891 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009891 | BINANCE    | 0.1    | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009891 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009891 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009891 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009891 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009891 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009891 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @SmokeWithdraw @MXN @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user MXN por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 60 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009889 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009889 | BINANCE    | 0.1    | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009889 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009889 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009889 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009889 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009889 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009889 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @SmokeWithdraw @PAN @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user PAN por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 60 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009887 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009887 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009887 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009887 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009887 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009887 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009887 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009887 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @SmokeWithdraw @GTQ @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user GTQ por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 60 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009886 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009886 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009886 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009886 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009886 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009886 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009886 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009886 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @SmokeWithdraw @PHP @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user PHP por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 60 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009885 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009885 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009885 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009885 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009885 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009885 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009885 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009885 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @SmokeWithdraw @BRA @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user BRA por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 60 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009884 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009884 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009884 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009884 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009884 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009884 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009884 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009884 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @SmokeWithdraw @CRC @V1
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user CRC por V1
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
+        Then Se obtiene una respuesta 200
+
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Asignar el valor "<coin>" a la variable "coin"
+        And Asignar el valor "<amount>" a la variable "amount"
+        And Asignar el valor "<wallet>" a la variable "to"
+        And Asignar el valor "<chain>" a la variable "chain"
+        And Asignar el valor "<userId>" a la variable "userId"
+        And Asignar el valor "code" a la variable "costCode"
+        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
+        Then Se obtiene una respuesta 200
+
+        # Parte 2: Validar ejeccución del sintético
+        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        When Esperar procesamiento de la "orden" por 60 segundos
+        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Se obtiene una respuesta 200 y status EXECUTED
+
+        Examples:
+            | coin | userId    | chain      | amount | wallet                                     |
+            | WLD  | 100009883 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BNB  | 100009883 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009883 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | BTC  | 100009883 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009883 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009883 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009883 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | ETH  | 100009883 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |

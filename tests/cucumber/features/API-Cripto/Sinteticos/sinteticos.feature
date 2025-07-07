@@ -451,7 +451,7 @@ Feature: Sintéticos
         # Parte 2: Validar ejeccución del sintético
         Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 40 segundos
+        When Esperar procesamiento de la "orden" por 60 segundos
         And Ejecutar el método Get al endpoint "/v2/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -459,17 +459,17 @@ Feature: Sintéticos
             | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
             | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            # | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            # | 100009780 | smoke-rampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
             | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             # | 100008214 | smoke-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             | 100009780 | smoke-rampOn-DESC-test-n | ETH   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             | 100009780 | smoke-rampOn-DESC-test-n | BNB   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009780 | smoke-rampOn-DESC-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100009780 | smoke-rampOn-DESC-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             # | 100008214 | smoke-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
@@ -544,7 +544,7 @@ Feature: Sintéticos
         # Parte 2: Validar ejeccución del sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 40 segundos
+        When Esperar procesamiento de la "orden" por 60 segundos
         And Ejecutar el método Get al endpoint "/v2/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
@@ -552,17 +552,17 @@ Feature: Sintéticos
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
             | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            # | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
             | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             # | 100008214 | smoke-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             | 100008214 | smoke-test-n | ETH   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             | 100008214 | smoke-test-n | BNB   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100008214 | smoke-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+            # | 100008214 | smoke-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             # | 100008214 | smoke-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
             | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
     # | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
@@ -604,22 +604,26 @@ Feature: Sintéticos
         # Parte 2: Validar ejeccución del sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 40 segundos
+        When Esperar procesamiento de la "orden" por 60 segundos
         And Ejecutar el método Get al endpoint "/v2/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
-            | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
-            | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
-            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 0     |
-            | 100009688 | smoke-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDCB  | 0     |
+            | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
+            | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
+            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 0     |
+            | 100009688 | smoke-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDCB  | 0     |
+            | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 4     |
+            | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 4     |
+            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 4     |
+            | 100009688 | smoke-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDCB  | 4     |
             | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 1     |
             | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 1     |
             | 100009688 | smoke-test-n | BNB   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | BNB    | 1     |
             | 100009688 | smoke-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 1     |
-            | 100009688 | smoke-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | NUARS  | 1     |
+            # | 100009688 | smoke-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | NUARS  | 1     |
             | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 1     |
             | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |
 

@@ -211,7 +211,7 @@ When(
       this.response = await request(this.urlBase)
         .get(paramEndpoint)
         .set("md-api-key", this.apiKey);
-      console.log("API response:", this.response.body);
+      console.log("API response:", JSON.stringify(this.response.body, null, 2));
     } catch (error: unknown) {
       const err = error as { response?: any };
       this.response = err.response || {
@@ -252,7 +252,7 @@ Then(
       CustomWorld.setStoreData("withdrawId", this.response.body.numberId);
     }
 
-    if (this.response.body[0].numberId) {
+    if (Array.isArray(this.response.body) && this.response.body[0]?.numberId) {
       CustomWorld.setStoreData("withdrawId", this.response.body[0].numberId);
     }
 

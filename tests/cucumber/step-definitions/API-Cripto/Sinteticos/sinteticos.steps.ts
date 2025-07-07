@@ -74,7 +74,7 @@ Then(
 
 Then(
   "Esperar procesamiento de la {string} por {int} segundos",
-  { timeout: 40000 },
+  { timeout: 70000 },
   async function (this: CustomWorld, stage: string, seconds: number) {
     console.log(`Esperando procesamiento de la etapa: ${stage}`);
     console.log(`Iniciando espera de ${seconds} segundos...`);

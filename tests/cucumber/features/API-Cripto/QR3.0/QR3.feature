@@ -80,7 +80,7 @@ Feature: Sintético QR 3.0
             | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
             | 100009352 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
-    @Smoke @QRV1NoDesc
+    @Smoke @QRV1NoDesc @ARS
     Scenario Outline: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -160,7 +160,7 @@ Feature: Sintético QR 3.0
     # ------ PIX V1 ------
 
     @Smoke @PixV1NoDesc
-    Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra USDT en descubierto vía V1 endpoints
+    Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra USDT en no descubierto vía V1 endpoints
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "<userAnyId>" a la variable "userAnyId"
@@ -198,8 +198,8 @@ Feature: Sintético QR 3.0
             | embebido | 100009624 | pix             | 10     | PIX-embebido-V1-NO-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
             | manual   | 100009624 | pixmanualamount | 10     | PIX-manual-V1-NO-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
 
-    @Smoke @PixV1NoDesc
-    Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra ARS en descubierto vía V1 endpoints
+    @Smoke @PixV1NoDesc @ARS
+    Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V1 endpoints
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "<userAnyId>" a la variable "userAnyId"
@@ -231,13 +231,13 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
-            | embebido | 100009624 | pix             | ARS     | 10     | PIX-embebido-V1-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | embebido | 100009624 | pix             | ARS     | 1000   | PIX-embebido-V1-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
             | manual   | 100009624 | pixmanualamount | ARS     | 10     | PIX-manual-V1-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
 
     # ------ PIX V2 ------
 
     @Smoke @PixV2NoDesc
-    Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra USDT en descubierto vía V2 endpoints
+    Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra USDT en no descubierto vía V2 endpoints
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "<userAnyId>" a la variable "userAnyId"
@@ -276,7 +276,7 @@ Feature: Sintético QR 3.0
             | embebido | 100009628 | pix             | 10     | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
 
     @Smoke @PixV2NoDesc
-    Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en descubierto vía V2 endpoints
+    Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V2 endpoints
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "<userAnyId>" a la variable "userAnyId"
