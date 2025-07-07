@@ -171,10 +171,10 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009893 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009893 | BINANCE    | 0.1    | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009893 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009893 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009893 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009893 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009893 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009893 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009893 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009893 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009893 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -210,10 +210,10 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009892 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009892 | BINANCE    | 0.1    | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009892 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009892 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009892 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009892 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009892 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009892 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009892 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009892 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009892 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -249,10 +249,10 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009891 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009891 | BINANCE    | 0.1    | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009891 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009891 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009891 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009891 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009891 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009891 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009891 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009891 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009891 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -288,10 +288,10 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009889 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009889 | BINANCE    | 0.1    | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009889 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009889 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009889 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009889 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009889 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009889 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009889 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009889 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009889 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -327,10 +327,10 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009887 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009887 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009887 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009887 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009887 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009887 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009887 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009887 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009887 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009887 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009887 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -366,10 +366,10 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009886 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009886 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009886 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009886 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009886 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009886 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009886 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009886 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009886 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009886 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009886 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -405,10 +405,10 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009885 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009885 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009885 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009885 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009885 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009885 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009885 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009885 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009885 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009885 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009885 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -444,10 +444,10 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009884 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009884 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009884 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009884 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009884 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009884 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009884 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009884 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009884 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009884 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009884 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -483,9 +483,9 @@ Feature: Retiros Crypto
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009883 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BNB  | 100009883 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDC | 100009883 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDC | 100009883 | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | BTC  | 100009883 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009883 | BINANCE    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | USDT | 100009883 | POLYGON    | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009883 | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | USDT | 100009883 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009883 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009883 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
