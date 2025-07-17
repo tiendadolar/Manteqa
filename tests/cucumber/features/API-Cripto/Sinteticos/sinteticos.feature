@@ -433,7 +433,7 @@ Feature: Sintéticos
 
     # ----- Descubierto -----
 
-    @Smoke1 @E2EFlow @RampOnDesc
+    @Smoke @E2EFlow @RampOnDesc
     Scenario Outline: Flujo E2E Ramp-On descubierto
         # Parte 1: Creación de sintético
         Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
@@ -457,23 +457,29 @@ Feature: Sintéticos
 
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
-            # | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            # | 100009780 | smoke-rampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100008214 | smoke-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009780 | smoke-rampOn-DESC-test-n | ETH   | ARS     | 0.01        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 100009780 | smoke-rampOn-DESC-test-n | BNB   | ARS     | 0.01        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            # | 100009780 | smoke-rampOn-DESC-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100008214 | smoke-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
+            | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+            | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+    # | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100008214 | smoke-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | ETH   | ARS     | 0.01        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | BNB   | ARS     | 0.01        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100008214 | smoke-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
 
 
+    # Se ejecuta solo el stage de orden
     @Smoke @E2EFlow @PartialRampOnDesc
     Scenario Outline: Flujo E2E Partial-Ramp-On descubierto
         # Parte 1: Creación de sintético
@@ -490,7 +496,7 @@ Feature: Sintéticos
         Then Se obtiene una respuesta 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
+        Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Esperar procesamiento de la "orden" por 40 segundos
         And Ejecutar el método Get al endpoint "/v2/synthetics/{syntheticId}"
@@ -499,24 +505,27 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId                       | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
             | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
             | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100009719 | smoke-partialRampOn-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | ETH   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | BNB   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100009719 | smoke-partialRampOn-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BASE            |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # # | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # # | 100009719 | smoke-partialRampOn-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | ETH   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | BNB   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # # | 100009719 | smoke-partialRampOn-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
     # ----- No Descubierto -----
 
-    @Smoke1 @E2EFlow @RampOn
+    @Smoke @E2EFlow @RampOn
     Scenario Outline: Flujo E2E Ramp-On con Depósito
         # Parte 1: Creación de sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -551,20 +560,25 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+            | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
             | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
-            # | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100008214 | smoke-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100008214 | smoke-test-n | ETH   | ARS     | 0.01        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 100008214 | smoke-test-n | BNB   | ARS     | 0.01        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            # | 100008214 | smoke-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100008214 | smoke-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
+            | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+            | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+    # | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+    # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+    # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+    # | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+    # | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+    # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100008214 | smoke-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100008214 | smoke-test-n | ETH   | ARS     | 0.01        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+    # | 100008214 | smoke-test-n | BNB   | ARS     | 0.01        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+    # | 100008214 | smoke-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100008214 | smoke-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
     # | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
     # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
     # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
@@ -572,7 +586,7 @@ Feature: Sintéticos
     # | 100008214 | smoke-test-n | BNB   | ARS     | 1           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
     # | 100008214 | smoke-test-n | SDAI  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
-    @Smoke1 @E2EFlow @RampOff
+    @Smoke @E2EFlow @RampOff
     Scenario Outline: Flujo E2E Ramp-Off con Depósito
         # Parte 1: Creación de sintético
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -611,22 +625,21 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
+            | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 5     |
             | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
-            | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
-            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 0     |
-            | 100009688 | smoke-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDCB  | 0     |
+            | 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
+            # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 0     |
+            # | 100009688 | smoke-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 0     |
             | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 4     |
-            | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 4     |
             | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 4     |
-            | 100009688 | smoke-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDCB  | 4     |
-            | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 1     |
-            | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 1     |
-            | 100009688 | smoke-test-n | BNB   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | BNB    | 1     |
-            | 100009688 | smoke-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 1     |
-            # | 100009688 | smoke-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | NUARS  | 1     |
-            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 1     |
-            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |
-
+            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BASE            | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 7     |
+    # | 100009688 | smoke-test-n | POL   | ARS     | 3           | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDCB  | 4     |
+    # | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 1     |
+    # | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 1     |
+    # | 100009688 | smoke-test-n | BNB   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | BNB    | 1     |
+    # | 100009688 | smoke-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 1     |
+    # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 1     |
+    # | 100009688 | smoke-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | NUARS  | 1     |
 
     @Smoke @E2EFlow @PartialRampOn
     Scenario Outline: Flujo E2E Partial-Ramp-On con Depósito
@@ -662,27 +675,26 @@ Feature: Sintéticos
 
         Examples:
             | userAnyId | sessionId                  | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 100009719 | smoke-partialRampOn-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
-            | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009719 | smoke-partialRampOn-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009719 | smoke-partialRampOn-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100009719 | smoke-partialRampOn-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009719 | smoke-partialRampOn-test-n | ETH   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009719 | smoke-partialRampOn-test-n | BNB   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009719 | smoke-partialRampOn-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            # | 100009719 | smoke-partialRampOn-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
-            | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
-    # | 100009719 | smoke-partialRampOn-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
-    # | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
-    # | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
-    # | 100009719 | smoke-partialRampOn-test-n | ETH   | ARS     | 1           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
-    # | 100009719 | smoke-partialRampOn-test-n | BNB   | ARS     | 1           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
-    # | 100009719 | smoke-partialRampOn-test-n | SDAI  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+            | 100009719 | smoke-partialRampOn-test-n | WLD   | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
+            | 100009719 | smoke-partialRampOn-test-n | WLD   | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+            | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
+            | 100009719 | smoke-partialRampOn-test-n | DAI   | ARS     | 4           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
+            | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BASE            |
+    #         | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    #         # | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    #         # | 100009719 | smoke-partialRampOn-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    #         | 100009719 | smoke-partialRampOn-test-n | ETH   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    #         | 100009719 | smoke-partialRampOn-test-n | BNB   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    #         | 100009719 | smoke-partialRampOn-test-n | BTC   | ARS     | 0.01        | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # # | 100009719 | smoke-partialRampOn-test-n | SOL   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
+    # # | 100009719 | smoke-partialRampOn-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+    # # | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+    # # | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+    # # | 100009719 | smoke-partialRampOn-test-n | ETH   | ARS     | 1           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+    # # | 100009719 | smoke-partialRampOn-test-n | BNB   | ARS     | 1           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+    # # | 100009719 | smoke-partialRampOn-test-n | SDAI  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
     @Smoke @E2EFlow @PartialRampOff
     Scenario Outline: Flujo E2E Partial-Ramp-Off con Depósito
@@ -723,14 +735,17 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId                   | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009774 | smoke-partialRampOff-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | WLD    | 6     |
-            | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 0     |
-            | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 0     |
-            | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 0     |
-            | 100009774 | smoke-partialRampOff-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDCB  | 0     |
-            | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 1     |
-            | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 1     |
-            | 100009774 | smoke-partialRampOff-test-n | BNB   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | BNB    | 1     |
-            | 100009774 | smoke-partialRampOff-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | ETH    | 1     |
-            | 100009774 | smoke-partialRampOff-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | NUARS  | 1     |
-            | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 1     |
-            | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 5     |
+            | 100009774 | smoke-partialRampOff-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | WLD    | 5     |
+            | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 4     |
+            | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 0     |
+            | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 0     |
+            # | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 0     |
+            | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 4     |
+            # | 100009774 | smoke-partialRampOff-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDCB  | 0     |
+            # | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 1     |
+            # | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 1     |
+            # | 100009774 | smoke-partialRampOff-test-n | BNB   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | BNB    | 1     |
+            # | 100009774 | smoke-partialRampOff-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | ETH    | 1     |
+            # | 100009774 | smoke-partialRampOff-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | NUARS  | 1     |
+            # | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 1     |
+            | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BASE            | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 7     |

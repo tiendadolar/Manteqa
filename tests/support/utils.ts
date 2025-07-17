@@ -1,4 +1,5 @@
 const request = require("supertest");
+import { use } from "chai";
 import { CustomWorld } from "../support/world";
 
 export const delay = (ms: number): Promise<void> => {
@@ -67,18 +68,18 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
         },
       },
       banking: {
-        accounts: [
-          {
-            cbu: userData.ARScbu,
-            currency: userData.ARScurrency,
-            description: userData.ARSdescription,
-          },
-          {
-            cbu: userData.USDcbu,
-            currency: userData.USDcurrency,
-            description: userData.USDdescription,
-          },
-        ],
+        // accounts: [
+        //   {
+        //     cbu: userData.ARScbu,
+        //     currency: userData.ARScurrency,
+        //     description: userData.ARSdescription,
+        //   },
+        //   {
+        //     cbu: userData.USDcbu,
+        //     currency: userData.USDcurrency,
+        //     description: userData.USDdescription,
+        //   },
+        // ],
       },
     };
   } else {
@@ -103,17 +104,17 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
         },
       },
       banking: {
-        accounts: [
-          {
-            cbu: userData.ARScbu,
-            currency: userData.ARScurrency,
-            description: userData.ARSdescription,
-            bank: {
-              code: userData.bankCode,
-            },
-            accountType: userData.accountType,
-          },
-        ],
+        // accounts: [
+        //   {
+        //     cbu: userData.ARScbu,
+        //     currency: userData.ARScurrency,
+        //     description: userData.ARSdescription,
+        //     bank: {
+        //       code: userData.bankCode,
+        //     },
+        //     accountType: userData.accountType,
+        //   },
+        // ],
       },
     };
   }
@@ -198,6 +199,70 @@ export const fiatWithdrawApiCrypto = (userData: any) => {
   };
 };
 
+export const fiatWithdrawApiCryptoV2 = (userData: any) => {
+  if (
+    userData.asset === "ARS" ||
+    userData.asset === "USD" ||
+    userData.asset === "BRL"
+  ) {
+    return {
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      network: userData.network,
+      asset: userData.asset,
+      amount: userData.amount,
+      destination: {
+        network: userData.network,
+        address: userData.address,
+      },
+    };
+  } else if (userData.asset === "CRC") {
+    return {
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      network: userData.network,
+      asset: userData.asset,
+      amount: userData.amount,
+      destination: {
+        network: userData.network,
+        address: userData.address,
+        bankCode: userData.bankCode,
+        accountType: userData.accountType,
+      },
+    };
+  }
+
+  if (userData.type === "crypto") {
+    // if (userData.country === "ARG" || userData.country === "BRL") {
+    return {
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      // network: userData.network,
+      asset: userData.asset,
+      amount: userData.amount,
+      destination: {
+        network: userData.network,
+        address: userData.address,
+      },
+      // };
+    };
+  }
+
+  return {
+    sessionId: CustomWorld.getSessionId(userData.sessionId),
+    userAnyId: userData.userAnyId,
+    network: userData.network,
+    asset: userData.asset,
+    amount: userData.amount,
+    destination: {
+      network: userData.network,
+      address: userData.address,
+      bankCode: userData.bankCode,
+      accountType: userData.accountType,
+    },
+  };
+};
+
 export const pepInfoCrypto = (userData: any) => {
   return {
     pepData: {
@@ -221,6 +286,8 @@ export const bankingOnboardingApiCrypto = (userData: any) => {
     accountType: userData.accountType,
   };
 };
+
+export const criptoWithdrawApiCryptoV2 = (userData: any) => {};
 
 //-----API CRIPTO-----//
 //-----*********-----//

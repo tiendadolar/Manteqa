@@ -23,18 +23,18 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 201
         And Se crea el sintetico de pago
 
-    @INTest
+    @INTestd
     Scenario: Generar deposito Crypto
         Given Contar con la api-key "C10XB2Z-AG243CS-G42KB2M-4085WTF"
         And Contar con la api-secret "rcrgtDnGxjY2AYC5qs"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" a la variable "hash"
         And Asignar el valor "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" a la variable "from"
-        And Asignar el valor "0x2C6e6C7B3855EB945bF01DcB715131e039871C74" a la variable "to"
+        And Asignar el valor "0x449aC40afE7C69e67Ac0321970d72d3107153F30" a la variable "to"
         And Asignar el valor "10000000000000000000" a la variable "wei"
         And Asignar el valor "10" a la variable "human"
-        And Asignar el valor "USDT" a la variable "ticker"
-        And Asignar el valor 0 a la variable "chain"
+        And Asignar el valor "WLD" a la variable "ticker"
+        And Asignar el valor 6 a la variable "chain"
         And Ejecutar el método Post al endpoint "/v1/transaction/deposit"
         Then Se obtiene una respuesta 201
 
@@ -42,7 +42,7 @@ Feature: Sintético QR 3.0
     # ! NO TOCAR DATOS
     # ------ NO DESCUBIERTOS -------
     # ------ QR V1 ------
-    @Smoke @QRV1NoDesc
+    @Smoke @QRV1NoDesc @rt
     Scenario Outline: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -77,10 +77,10 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 200 y status COMPLETED
 
         Examples:
-            | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
-            | 100009352 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | userAnyId | qrCode                                                                                                                                              | amount | sessionId      | to                                         | ticker |
+            | 100009352 | 00020126580014br.gov.bcb.pix0136a3fa98c3-0a7b-4e9e-8b2f-123456789abc520400005303986540420.005802BR5913MANTECA TESTE6010SAO PAULO62070503***6304E55C | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
-    @Smoke @QRV1NoDesc @ARS
+    @Smoke @QRV1NoDesc @ARS @rt
     Scenario Outline: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -112,8 +112,8 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 200 y status COMPLETED
 
         Examples:
-            | userAnyId | qrCode                                                                                                                                                                                                     | against | amount | sessionId      | to                                         | ticker |
-            | 100009352 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | userAnyId | qrCode                                                                                                                                              | against | amount | sessionId      | to                                         | ticker |
+            | 100009352 | 00020126580014br.gov.bcb.pix0136a3fa98c3-0a7b-4e9e-8b2f-123456789abc520400005303986540420.005802BR5913MANTECA TESTE6010SAO PAULO62070503***6304E55C | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
     # ------ QR V2 ------
 
@@ -314,7 +314,7 @@ Feature: Sintético QR 3.0
     #*************************************
     # ------ DESCUBIERTOS -------
     # ------ QR V1 ------
-    @Smoke @V1Desc
+    @Smoke @V1Desc @rt
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V1 endpoints
         Given Contar con la api-key "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -336,10 +336,10 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 200 y status COMPLETED
 
         Examples:
-            | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId    | to                                         | ticker |
-            | embebido | 100009358 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+            | accion   | userAnyId | qrCode                                                                                                                                              | amount | sessionId    | to                                         | ticker |
+            | embebido | 100009358 | 00020126580014br.gov.bcb.pix0136a3fa98c3-0a7b-4e9e-8b2f-123456789abc520400005303986540420.005802BR5913MANTECA TESTE6010SAO PAULO62070503***6304E55C | 10     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
 
-    @Smoke @V1Desc
+    @Smoke @V1Desc @rt
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra ARS en descubierto vía V1 endpoints
         Given Contar con la api-key "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -362,8 +362,8 @@ Feature: Sintético QR 3.0
         Then Se obtiene una respuesta 200 y status COMPLETED
 
         Examples:
-            | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | against | sessionId    | to                                         | ticker |
-            | embebido | 100009358 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | ARS     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+            | accion   | userAnyId | qrCode                                                                                                                                              | amount | against | sessionId    | to                                         | ticker |
+            | embebido | 100009358 | 00020126580014br.gov.bcb.pix0136a3fa98c3-0a7b-4e9e-8b2f-123456789abc520400005303986540420.005802BR5913MANTECA TESTE6010SAO PAULO62070503***6304E55C | 10     | ARS     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
 
     # ------ QR V2 ------
 
@@ -522,7 +522,7 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V2 ------
 
-    @Smoke @PixV2Desc
+    @Smoke @PixV2Desc @testing
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra USDT en descubierto vía V2 endpoints
         Given Contar con la api-key "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -654,7 +654,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | userAnyId | paymentDestination      | against | amount | sessionId     |
-            | 100009408 | failuremartin@gmail.com | USDT    | 1000   | refund-DESC-n |
+            | 100009408 | failuremartin@gmail.com | USDT    | 10     | refund-DESC-n |
     # Cuando marto incluya +5511949227612 como siempre falla para reverse, borrar qr3manualamount
     # Falta caso en against ARS en el que se toma deuda en ARS pero no hay order reversal
 
@@ -674,5 +674,5 @@ Feature: Sintético QR 3.0
 
         Examples:
             | userAnyId | paymentDestination      | against | amount | sessionId        | apiKeyDeposit                   |
-            | 100009417 | failuremartin@gmail.com | ARS     | 1000   | refund-NO-DESC-n | C10XB2Z-AG243CS-G42KB2M-4085WTF |
+            | 100009417 | failuremartin@gmail.com | ARS     | 10     | refund-NO-DESC-n | C10XB2Z-AG243CS-G42KB2M-4085WTF |
 

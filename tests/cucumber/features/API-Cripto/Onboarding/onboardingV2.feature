@@ -7,7 +7,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Onboarding inicial de usuario
-        Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        Given Contar con la api-key "XVAVCCX-Z3XM3R4-J7910ZZ-AEQ2THW"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "<email>" a la variable "email"
         And Asignar el valor "<legalId>" a la variable "legalId"
@@ -34,14 +34,14 @@ Feature: Onboarding User - V2
         Then Se obtiene una respuesta 201
 
         Examples:
-            | email                                | legalId   | exchange  | name  | surname | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street     | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | TestOnboardingV2test-004@yopmail.com | 164408116 | ARGENTINA | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001127  | Argentina   | Cochabamba | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
-            | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
+            | email                                    | legalId     | exchange  | name  | surname | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street     | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | TestOnboardingV2test-002bind@yopmail.com | 20422246437 | ARGENTINA | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001131  | Argentina   | Cochabamba | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+    # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 
     @test
     Scenario: Obtener S3 url para carga de DNI FRONT
-        Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        Given Contar con la api-key "XVAVCCX-Z3XM3R4-J7910ZZ-AEQ2THW"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "userAnyId" a la variable "userAnyId"
         And Asignar el valor "FRONT" a la variable "side"
@@ -56,7 +56,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de DNI BACK
-        Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        Given Contar con la api-key "XVAVCCX-Z3XM3R4-J7910ZZ-AEQ2THW"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "userAnyId" a la variable "userAnyId"
         And Asignar el valor "BACK" a la variable "side"
@@ -71,7 +71,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de selfie
-        Given Contar con la api-key "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        Given Contar con la api-key "XVAVCCX-Z3XM3R4-J7910ZZ-AEQ2THW"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "userAnyId" a la variable "userAnyId"
         And Asignar el valor "selfie.jpg" a la variable "fileName"
@@ -140,30 +140,30 @@ Feature: Onboarding User - V2
         Then Se obtiene una respuesta 200
 
         Examples:
-            | email                               | legalId     | exchange | name | surname    | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | street         | nationality | ARScbu      | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription | bankCode | accountType |
-            # | TestOnboardingV2-100@yopmail.com    | 20416245313        | ARGENTINA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001115  | Av. Libertador | Argentina   | 0000003100086679972343               | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |           |             |
-            | TestOnboardingV2b-031@yopmail.com   | 07338896895 | BRAZIL   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 05671773350 | BRL         | HSBC           | 07338896895            | BRL         | CHASE          |          |             |
-            # | TestOnboardingV2b-032@yopmail.com   | 05671773350        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | TestOnboardingV2b-032@yopmail.com    | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
-            # | TestOnboardingV2b-033@yopmail.com   | 14085386875        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 5522978963214                        | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
-            # | TestOnboardingV2b-034@yopmail.com   | 37753057855        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 3f6d0eeb-9837-493a-8f02-b0d1cbb5e5f4 | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
-            | TestOnboardingV2chi-100@yopmail.com | 164408116   | CHILE    | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 164408116   | CLP         | HSBC           |                        |             |                | 317      | RUT         |
-            # | TestOnboardingV2chi-032@yopmail.com | 193774601          | CHILE       | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 19377460                             | CLP         | HSBC           | 0000003100000341514293 | CLP         | CHASE          | 323       | RUT         |
-            # | TestOnboardingV2chi-033@yopmail.com | 130888550          | CHILE       | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 13088855                             | CLP         | HSBC           | 0000003100000341514293 | CLP         | CHASE          | 318       | RUT         |
-            | TestOnboardingV2c-031@yopmail.com   | 1048064708  | COLOMBIA | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 3004442949  | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1507     | PHONE       |
-    # | TestOnboardingV2c-032@yopmail.com   | 1012352927         | COLOMBIA    | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 03206981788                          | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1007      | CHECKING    |
-    # | TestOnboardingV2c-033@yopmail.com   | 1046340371         | COLOMBIA    | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 3013203754                           | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1007      | SAVINGS     |
-    # | TestOnboardingV2cr-031@yopmail.com  | 205770024          | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR18010402840511853818               | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 102       | CHECKING    |
-    # | TestOnboardingV2cr-032@yopmail.com  | 503850450          | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR43015120820012587874               | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 120       | CHECKING    |
-    # | TestOnboardingV2cr-033@yopmail.com  | 112400167533       | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR68010200009182613229               | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 152       | PHONE       |
-    # | TestOnboardingV2gua-031@yopmail.com | 1590375060611      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 4739056173                           | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 001       | SAVINGS     |
-    # | TestOnboardingV2gua-032@yopmail.com | 2387558511221      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 02995010406234                       | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 016       | CHECKING    |
-    # | TestOnboardingV2gua-033@yopmail.com | 3710425930101      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 5010406234                           | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 016       | CHECKING    |
-    # | TestOnboardingV2mex-031@yopmail.com | aahl860307hnllrs00 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 4741745703581930                     | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 610       | DEBIT       |
-    # | TestOnboardingV2mex-031@yopmail.com | paae860828hdflvr08 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 5703581930                           | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 614       | PHONE       |
-    # | TestOnboardingV2mex-032@yopmail.com | namg880219mmcvrd02 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 638180010183866948                   | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 615       | SAVINGS     |
-    # | TestOnboardingV2pan-031@yopmail.com | 89371697           | PANAMA      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Panamá      | 0472962071284                        | PUSD        | HSBC           | 0000003100000341514293 | PUSD        | CHASE          | 0013      | CHECKING    |
-    # | TestOnboardingV2pan-032@yopmail.com | 8222955            | PANAMA      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Panamá      | 0472018417970                        | PUSD        | HSBC           | 0000003100000341514293 | PUSD        | CHASE          | 0013      | SAVINGS     |
-    # | TestOnboardingV2phi-031@yopmail.com | 6457841509713859   | PHILIPPINES | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Filipinas   | 09694243149                          | PHP         | HSBC           | 0000003100000341514293 | PHP         | CHASE          | shopeepay | SAVINGS     |
+            | email                                | legalId  | exchange | name | surname    | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | street         | nationality | ARScbu        | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription | bankCode | accountType |
+            # | TestOnboardingV2arg-001@yopmail.com  | 27225605144        | ARGENTINA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001115  | Av. Libertador | Argentina   | 0000003100086679972343 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |           |             |
+            # | TestOnboardingV2c-001@yopmail.com    | 46625832847        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 05671773350            | BRL         | HSBC           | 07338896895            | BRL         | CHASE          |           |             |
+            # # | TestOnboardingV2b-032@yopmail.com   | 05671773350        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | TestOnboardingV2b-032@yopmail.com    | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
+            # # | TestOnboardingV2b-033@yopmail.com   | 14085386875        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 5522978963214                        | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
+            # # | TestOnboardingV2b-034@yopmail.com   | 37753057855        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 3f6d0eeb-9837-493a-8f02-b0d1cbb5e5f4 | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
+            # | TestOnboardingV2chic-001@yopmail.com | 214918021          | CHILE       | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 164408116              | CLP         | HSBC           |                        |             |                | 317       | RUT         |
+            # # | TestOnboardingV2chi-032@yopmail.com | 193774601          | CHILE       | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 19377460                             | CLP         | HSBC           | 0000003100000341514293 | CLP         | CHASE          | 323       | RUT         |
+            # # | TestOnboardingV2chi-033@yopmail.com | 130888550          | CHILE       | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 13088855                             | CLP         | HSBC           | 0000003100000341514293 | CLP         | CHASE          | 318       | RUT         |
+            #         | TestOnboardingV2colc-002@yopmail.com | 1018479359 | COLOMBIA | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 3004442949 | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1507     | PHONE       |
+            # # | TestOnboardingV2c-032@yopmail.com   | 1012352927         | COLOMBIA    | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 03206981788                          | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1007      | CHECKING    |
+            # # | TestOnboardingV2c-033@yopmail.com   | 1046340371         | COLOMBIA    | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 3013203754                           | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1007      | SAVINGS     |
+            # | TestOnboardingV2crc-001@yopmail.com  | 701370085          | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR18010402840511853818 | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 102       | CHECKING    |
+            # # | TestOnboardingV2cr-032@yopmail.com  | 503850450          | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR43015120820012587874               | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 120       | CHECKING    |
+            # # | TestOnboardingV2cr-033@yopmail.com  | 112400167533       | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR68010200009182613229               | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 152       | PHONE       |
+            # | TestOnboardingV2guac-001@yopmail.com | 2617555360116      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 4739056173             | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 001       | SAVINGS     |
+            # # | TestOnboardingV2gua-032@yopmail.com | 2387558511221      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 02995010406234                       | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 016       | CHECKING    |
+            # # | TestOnboardingV2gua-033@yopmail.com | 3710425930101      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 5010406234                           | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 016       | CHECKING    |
+            # | TestOnboardingV2mexc-001@yopmail.com | aafl881004mdfllr01 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 4741745703581930       | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 610       | DEBIT       |
+            # # | TestOnboardingV2mex-031@yopmail.com | paae860828hdflvr08 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 5703581930                           | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 614       | PHONE       |
+            # # | TestOnboardingV2mex-032@yopmail.com | namg880219mmcvrd02 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 638180010183866948                   | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 615       | SAVINGS     |
+            | TestOnboardingV2panc-002@yopmail.com | 88351072 | PANAMA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Panamá      | 0472962071284 | PUSD        | HSBC           | 0000003100000341514293 | PUSD        | CHASE          | 0013     | CHECKING    |
+    # # | TestOnboardingV2pan-032@yopmail.com | 8222955            | PANAMA      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Panamá      | 0472018417970                        | PUSD        | HSBC           | 0000003100000341514293 | PUSD        | CHASE          | 0013      | SAVINGS     |
+    # | TestOnboardingV2phic-001@yopmail.com | 2193480756459814   | PHILIPPINES | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Filipinas   | 09694243149            | PHP         | HSBC           | 0000003100000341514293 | PHP         | CHASE          | shopeepay | SAVINGS     |
 
 
 
@@ -304,35 +304,35 @@ Feature: Onboarding User - V2
 
         Examples:
             | country  | userAnyId | address         | currency | description | bankCode | accountType |
-            | Colombia | 100009524 | 3511234567      | COP      | HSBC        | 1507     | PHONE       |
+            | Colombia | 100009524 | 3511234567      | COP      | HSBC        | 1507     | SAVINGS     |
             # | Colombia | 100009524 | 3009876543         | COP      | HSBC        | 1507     | SAVINGS     |
-            | Colombia | 100009524 | 1234567890      | COP      | CHASE       | 1007     | PHONE       |
+            | Colombia | 100009524 | 1234567890      | COP      | CHASE       | 1007     | CHECKING    |
             # | Colombia | 100009524 | 09876543210        | COP      | CHASE       | 1007     | SAVINGS     |
             # | Colombia | 100009524 | 12345678           | COP      | BANCO       | 1809     | CHECKING    |
-            | Colombia | 100009524 | 1234567891      | COP      | BANCO       | 1809     | PHONE       |
-            | Colombia | 100009524 | 03012345678     | COP      | HSBC        | 1551     | PHONE       |
+            | Colombia | 100009524 | 1234567891      | COP      | BANCO       | 1809     | CHECKING    |
+            | Colombia | 100009524 | 03012345678     | COP      | HSBC        | 1551     | SAVINGS     |
             # | Colombia | 100009524 | 3519876543         | COP      | HSBC        | 1551     | CHECKING    |
             # | Colombia | 100009524 | 8123456789012345   | COP      | CHASE       | 1051     | CHECKING    |
-            | Colombia | 100009524 | 0123456789      | COP      | CHASE       | 1051     | PHONE       |
+            | Colombia | 100009524 | 0123456789      | COP      | CHASE       | 1051     | SAVINGS     |
             | Colombia | 100009524 | 987654321       | COP      | BANCO       | 1001     | SAVINGS     |
             | Colombia | 100009524 | 987654587       | COP      | BANCO       | 1001     | CHECKING    |
             # | Colombia | 100009524 | 0472018417981      | COP      | HSBC        | 1032     | CHECKING    |
-            | Colombia | 100009524 | 49999999999     | COP      | HSBC        | 1032     | PHONE       |
+            | Colombia | 100009524 | 49999999999     | COP      | HSBC        | 1032     | CHECKING    |
             # | Colombia | 100009524 | 123456789012345678 | COP      | CHASE       | 1013     | CHECKING    |
-            | Colombia | 100009524 | 12345678901234  | COP      | CHASE       | 1013     | PHONE       |
+            | Colombia | 100009524 | 12345678901234  | COP      | CHASE       | 1013     | SAVINGS     |
             # | Colombia | 100009525 | 467890123       | COP      | BANCO       | 1052     | CHECKING    |
-            | Colombia | 100009524 | 987654323       | COP      | BANCO       | 1052     | PHONE       |
+            | Colombia | 100009524 | 987654323       | COP      | BANCO       | 1052     | SAVINGS     |
             # | Colombia | 100009525 | 1234937892      | COP      | HSBC        | 1801     | SAVINGS     |
-            | Colombia | 100009524 | 1234467884      | COP      | HSBC        | 1801     | PHONE       |
+            | Colombia | 100009524 | 1234467884      | COP      | HSBC        | 1801     | CHECKING    |
             # | Colombia | 100009525 | 1234567890      | COP      | CHASE       | 1804     | CHECKING    |
-            | Colombia | 100009524 | 123456789012345 | COP      | CHASE       | 1804     | PHONE       |
-            | Colombia | 100009524 | 1234567893      | COP      | BANCO       | 1019     | PHONE       |
+            | Colombia | 100009524 | 123456789012345 | COP      | CHASE       | 1804     | SAVINGS     |
+            | Colombia | 100009524 | 1234567893      | COP      | BANCO       | 1019     | CHECKING    |
             # | Colombia | 100009525 | 2234567890      | COP      | BANCO       | 1019     | CHECKING    |
-            | Colombia | 100009524 | 512345678901    | COP      | CHASE       | 1062     | PHONE       |
+            | Colombia | 100009524 | 512345678901    | COP      | CHASE       | 1062     | SAVINGS     |
             # | Colombia | 100009525 | 512345678901    | COP      | CHASE       | 1062     | CHECKING    |
             | Colombia | 100009524 | 0472018417995   | COP      | BANCO       | 1070     | CHECKING    |
             | Colombia | 100009525 | 0472018417996   | COP      | BANCO       | 1070     | SAVINGS     |
-            | Colombia | 100009525 | 1123456789012   | COP      | BANCO       | 1002     | PHONE       |
+            | Colombia | 100009525 | 1123456789012   | COP      | BANCO       | 1002     | CHECKING    |
             # | Colombia | 100009525 | 512345678901    | COP      | BANCO       | 1002     | SAVINGS     |
             | Colombia | 100009525 | 0472018417999   | COP      | BANCO       | 1292     | CHECKING    |
             | Colombia | 100009525 | 0472018417960   | COP      | BANCO       | 1292     | SAVINGS     |
@@ -400,38 +400,38 @@ Feature: Onboarding User - V2
 
         Examples:
             | country    | userAnyId | address                | currency | description | bankCode | accountType |
-            | Costa Rica | 100009602 | CR1066456789123456789  | CRC      | HSBC        | 102      | CHECKING    |
-            | Costa Rica | 100009602 | CR8541567891234567145  | CRC      | HSBC        | 102      | SAVINGS     |
-            | Costa Rica | 100009602 | CR1252567891234561597  | CRC      | CHASE       | 104      | CHECKING    |
-            | Costa Rica | 100009602 | CR125456789123456885   | CRC      | CHASE       | 104      | SAVINGS     |
-            | Costa Rica | 100009602 | CR1234567891234566965  | CRC      | BANCO       | 107      | CHECKING    |
-            | Costa Rica | 100009602 | CR1234567157234566987  | CRC      | BANCO       | 107      | SAVINGS     |
-            | Costa Rica | 100009602 | CR1234567891234567635  | CRC      | HSBC        | 114      | SAVINGS     |
-            | Costa Rica | 100009602 | CR12345678912345677896 | CRC      | HSBC        | 114      | CHECKING    |
-            | Costa Rica | 100009602 | CR1234567891234545471  | CRC      | CHASE       | 116      | CHECKING    |
-            | Costa Rica | 100009602 | CR12345678912344546983 | CRC      | CHASE       | 116      | SAVINGS     |
-            | Costa Rica | 100009602 | CR123556789123456911   | CRC      | BANCO       | 120      | SAVINGS     |
-            | Costa Rica | 100009602 | CR1234458589123226711  | CRC      | BANCO       | 120      | CHECKING    |
-            | Costa Rica | 100009602 | CR12345678912345671123 | CRC      | HSBC        | 123      | SAVINGS     |
-            | Costa Rica | 100009602 | CR523456789123452259   | CRC      | HSBC        | 123      | CHECKING    |
-            | Costa Rica | 100009602 | CR122226789123456766   | CRC      | CHASE       | 125      | CHECKING    |
-            | Costa Rica | 100009603 | CR1234567891234447548  | CRC      | CHASE       | 125      | SAVINGS     |
-            | Costa Rica | 100009603 | CR123456789123456789   | CRC      | BANCO       | 126      | CHECKING    |
-            | Costa Rica | 100009603 | CR1234567895554561123  | CRC      | BANCO       | 126      | SAVINGS     |
-            | Costa Rica | 100009603 | CR1247567891234567788  | CRC      | HSBC        | 127      | SAVINGS     |
-            | Costa Rica | 100009603 | CR1774567891234564564  | CRC      | HSBC        | 127      | CHECKING    |
-            | Costa Rica | 100009603 | CR663456789123445789   | CRC      | CHASE       | 151      | CHECKING    |
-            | Costa Rica | 100009603 | CR1234567891232267366  | CRC      | CHASE       | 151      | SAVINGS     |
-            | Costa Rica | 100009603 | CR1215156789993456789  | CRC      | BANCO       | 152      | SAVINGS     |
-            | Costa Rica | 100009603 | CR1234567892224567151  | CRC      | BANCO       | 152      | CHECKING    |
-            | Costa Rica | 100009603 | CR9634567891234567966  | CRC      | CHASE       | 161      | SAVINGS     |
-            | Costa Rica | 100009603 | CR2234567891234567811  | CRC      | CHASE       | 161      | CHECKING    |
-            | Costa Rica | 100009603 | CR123456795123456755   | CRC      | BANCO       | 162      | CHECKING    |
-            | Costa Rica | 100009603 | CR1234777891234567999  | CRC      | BANCO       | 162      | SAVINGS     |
-            | Costa Rica | 100009603 | CR123452287123456744   | CRC      | BANCO       | 231      | CHECKING    |
-            | Costa Rica | 100009603 | CR12345674451236656789 | CRC      | BANCO       | 231      | SAVINGS     |
-            | Costa Rica | 100009604 | CR123456789123776789   | CRC      | BANCO       | 312      | CHECKING    |
-            | Costa Rica | 100009604 | CR123456789123451189   | CRC      | BANCO       | 312      | SAVINGS     |
+            | Costa Rica | 100009602 | CR1066456789123456789  | CRC      | HSBC        | 0102     | CHECKING    |
+            | Costa Rica | 100009602 | CR8541567891234567145  | CRC      | HSBC        | 0102     | SAVINGS     |
+            | Costa Rica | 100009602 | CR1252567891234561597  | CRC      | CHASE       | 0104     | CHECKING    |
+            | Costa Rica | 100009602 | CR125456789123456885   | CRC      | CHASE       | 0104     | SAVINGS     |
+            | Costa Rica | 100009602 | CR1234567891234566965  | CRC      | BANCO       | 0107     | CHECKING    |
+            | Costa Rica | 100009602 | CR1234567157234566987  | CRC      | BANCO       | 0107     | SAVINGS     |
+            | Costa Rica | 100009602 | CR1234567891234567635  | CRC      | HSBC        | 0114     | SAVINGS     |
+            | Costa Rica | 100009602 | CR12345678912345677896 | CRC      | HSBC        | 0114     | CHECKING    |
+            | Costa Rica | 100009602 | CR1234567891234545471  | CRC      | CHASE       | 0116     | CHECKING    |
+            | Costa Rica | 100009602 | CR12345678912344546983 | CRC      | CHASE       | 0116     | SAVINGS     |
+            | Costa Rica | 100009602 | CR123556789123456911   | CRC      | BANCO       | 0120     | SAVINGS     |
+            | Costa Rica | 100009602 | CR1234458589123226711  | CRC      | BANCO       | 0120     | CHECKING    |
+            | Costa Rica | 100009602 | CR12345678912345671123 | CRC      | HSBC        | 0123     | SAVINGS     |
+            | Costa Rica | 100009602 | CR523456789123452259   | CRC      | HSBC        | 0123     | CHECKING    |
+            | Costa Rica | 100009602 | CR122226789123456766   | CRC      | CHASE       | 0125     | CHECKING    |
+            | Costa Rica | 100009603 | CR1234567891234447548  | CRC      | CHASE       | 0125     | SAVINGS     |
+            | Costa Rica | 100009603 | CR123456789123456789   | CRC      | BANCO       | 0126     | CHECKING    |
+            | Costa Rica | 100009603 | CR1234567895554561123  | CRC      | BANCO       | 0126     | SAVINGS     |
+            | Costa Rica | 100009603 | CR1247567891234567788  | CRC      | HSBC        | 0127     | SAVINGS     |
+            | Costa Rica | 100009603 | CR1774567891234564564  | CRC      | HSBC        | 0127     | CHECKING    |
+            | Costa Rica | 100009603 | CR663456789123445789   | CRC      | CHASE       | 0151     | CHECKING    |
+            | Costa Rica | 100009603 | CR1234567891232267366  | CRC      | CHASE       | 0151     | SAVINGS     |
+            | Costa Rica | 100009603 | CR1215156789993456789  | CRC      | BANCO       | 0152     | SAVINGS     |
+            | Costa Rica | 100009603 | CR1234567892224567151  | CRC      | BANCO       | 0152     | CHECKING    |
+            | Costa Rica | 100009603 | CR9634567891234567966  | CRC      | CHASE       | 0161     | SAVINGS     |
+            | Costa Rica | 100009603 | CR2234567891234567811  | CRC      | CHASE       | 0161     | CHECKING    |
+            | Costa Rica | 100009603 | CR123456795123456755   | CRC      | BANCO       | 0162     | CHECKING    |
+            | Costa Rica | 100009603 | CR1234777891234567999  | CRC      | BANCO       | 0162     | SAVINGS     |
+            | Costa Rica | 100009603 | CR123452287123456744   | CRC      | BANCO       | 0231     | CHECKING    |
+            | Costa Rica | 100009603 | CR12345674451236656789 | CRC      | BANCO       | 0231     | SAVINGS     |
+            | Costa Rica | 100009604 | CR123456789123776789   | CRC      | BANCO       | 0312     | CHECKING    |
+            | Costa Rica | 100009604 | CR123456789123451189   | CRC      | BANCO       | 0312     | SAVINGS     |
 
     @testBankingMXN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
@@ -457,27 +457,27 @@ Feature: Onboarding User - V2
             | Mexico  | 100009607 | 1245858587         | MXN      | BANCO       | 006      | PHONE       |
             | Mexico  | 100009607 | 323245789654122125 | MXN      | HSBC        | 009      | CHECKING    |
             | Mexico  | 100009607 | 4342562861667390   | MXN      | HSBC        | 009      | DEBIT       |
-            | Mexico  | 100009607 | 3232457896         | MXN      | CHASE       | 009      | PHONE       |
+            | Mexico  | 100009607 | 3232457896         | MXN      | CHASE       | 009      | SAVINGS     |
             | Mexico  | 100009607 | 856565322791366478 | MXN      | CHASE       | 012      | CHECKING    |
             | Mexico  | 100009607 | 4342562861667390   | MXN      | BANCO       | 012      | DEBIT       |
-            | Mexico  | 100009607 | 8565653227         | MXN      | BANCO       | 012      | PHONE       |
+            | Mexico  | 100009607 | 8565653227         | MXN      | BANCO       | 012      | CHECKING    |
             | Mexico  | 100009607 | 968851447362144586 | MXN      | HSBC        | 014      | SAVINGS     |
             | Mexico  | 100009607 | 4342562861667390   | MXN      | HSBC        | 014      | DEBIT       |
-            | Mexico  | 100009607 | 9688514415         | MXN      | CHASE       | 014      | PHONE       |
+            | Mexico  | 100009607 | 9688514415         | MXN      | CHASE       | 014      | SAVINGS     |
             | Mexico  | 100009608 | 669878485123659878 | MXN      | CHASE       | 019      | CHECKING    |
             | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 019      | DEBIT       |
-            | Mexico  | 100009608 | 6698784851         | MXN      | BANCO       | 019      | PHONE       |
+            | Mexico  | 100009608 | 6698784851         | MXN      | BANCO       | 019      | CHECKING    |
             | Mexico  | 100009608 | 599633214454612257 | MXN      | HSBC        | 021      | CHECKING    |
             | Mexico  | 100009608 | 4342562861667390   | MXN      | HSBC        | 021      | DEBIT       |
-            | Mexico  | 100009608 | 5996332144         | MXN      | CHASE       | 021      | PHONE       |
+            | Mexico  | 100009608 | 5996332144         | MXN      | CHASE       | 021      | SAVINGS     |
             | Mexico  | 100009608 | 152248798866547891 | MXN      | CHASE       | 030      | CHECKING    |
             | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 030      | DEBIT       |
-            | Mexico  | 100009608 | 1522487988         | MXN      | BANCO       | 030      | PHONE       |
+            | Mexico  | 100009608 | 1522487988         | MXN      | BANCO       | 030      | CHECKING    |
             | Mexico  | 100009608 | 225578961977833259 | MXN      | CHASE       | 124      | CHECKING    |
             | Mexico  | 100009608 | 4342562861667390   | MXN      | CHASE       | 124      | DEBIT       |
-            | Mexico  | 100009608 | 2255789619         | MXN      | BANCO       | 124      | PHONE       |
+            | Mexico  | 100009608 | 2255789619         | MXN      | BANCO       | 124      | SAVINGS     |
             | Mexico  | 100009608 | 996632647782201019 | MXN      | BANCO       | 126      | CHECKING    |
             | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 126      | DEBIT       |
-            | Mexico  | 100009608 | 9966326477         | MXN      | BANCO       | 126      | PHONE       |
+            | Mexico  | 100009608 | 9966326477         | MXN      | BANCO       | 126      | CHECKING    |
 
 

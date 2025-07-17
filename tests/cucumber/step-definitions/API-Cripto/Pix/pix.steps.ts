@@ -13,6 +13,7 @@ import {
   inicialOnboardingApiCrypto,
   inicialOnboardingApiCryptoV2,
   bankingOnboardingApiCrypto,
+  fiatWithdrawApiCryptoV2,
 } from "../../../../support/utils";
 
 Before({ tags: "@Pix" }, function () {
@@ -147,6 +148,13 @@ When(
       ) {
         this.userData.userAnyId =
           this.userData.userAnyId ?? CustomWorld.getStoreData("userId");
+      } else if (
+        endpoint === "/v1/fiat/withdraw" &&
+        this.userData.coin === "CRC"
+      ) {
+        this.userData.cbu = "";
+      } else if (endpoint === "/v2/withdraws") {
+        this.userData = fiatWithdrawApiCryptoV2(this.userData);
         // API-Cambio
       } else if (endpoint === "/v3/api/onboarding-actions/initial") {
         // Onboarding inicial
@@ -184,7 +192,11 @@ When(
         .set("md-api-key", this.apiKey)
         .set("x-api-secret", this.apiSecret)
         .set("x-access-token", this.token)
+        .set("User-Agent", "PostmanRuntime/7.44.1")
         .send(this.userData);
+
+      console.log("Request headers:", this.response.request.header);
+      console.log(this.response.status);
       console.log("API response:", this.response.body);
       this.userData = {};
     } catch (error: any) {
@@ -210,7 +222,8 @@ When(
 
       this.response = await request(this.urlBase)
         .get(paramEndpoint)
-        .set("md-api-key", this.apiKey);
+        .set("md-api-key", this.apiKey)
+        .set("User-Agent", "PostmanRuntime/7.44.1");
       console.log("API response:", JSON.stringify(this.response.body, null, 2));
     } catch (error: unknown) {
       const err = error as { response?: any };
