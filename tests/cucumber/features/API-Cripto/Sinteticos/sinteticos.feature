@@ -178,7 +178,7 @@ Feature: Sintéticos
     # ----- REGRESSION NO TOCAR -----
     # ----- Company No Descubierto -----
 
-    @Regression @Smoke @RampOn
+    @Regression @RampOn
     Scenario: Creación de sintético Ramp-On con asset
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -193,7 +193,7 @@ Feature: Sintéticos
         Then Se obtiene una respuesta 201
         And Se validan atributos para sintético ramp-on operado en no descubierto
 
-    @Regression @Smoke @RampOn
+    @Regression @RampOn
     Scenario: Generar deposito Fiat
         Given Contar con la api-key "C10XB2Z-AG243CS-G42KB2M-4085WTF"
         And Contar con la api-secret "rcrgtDnGxjY2AYC5qs"
@@ -205,7 +205,7 @@ Feature: Sintéticos
         And Ejecutar el método Post al endpoint "/v1/fiat/deposit"
         Then Se obtiene una respuesta 201
 
-    @Regression @Smoke @RampOn
+    @Regression @RampOn
     Scenario: Validar ejecución del sintético Ramp-On
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -213,7 +213,7 @@ Feature: Sintéticos
         And Ejecutar el método Get al endpoint "/v2/synthetics/{syntheticId}"
         Then Se obtiene una respuesta 200 y status COMPLETED
 
-    @Regression @Smoke @RampOn
+    @Regression @RampOn
     Scenario: Creación de sintético Ramp-On con against
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
@@ -228,7 +228,7 @@ Feature: Sintéticos
         Then Se obtiene una respuesta 201
         And Se validan atributos para sintético ramp-on operado en no descubierto
 
-    @Regression @Smoke @RampOn
+    @Regression @RampOn
     Scenario: Generar deposito Fiat
         Given Contar con la api-key "C10XB2Z-AG243CS-G42KB2M-4085WTF"
         And Contar con la api-secret "rcrgtDnGxjY2AYC5qs"
@@ -240,7 +240,7 @@ Feature: Sintéticos
         And Ejecutar el método Post al endpoint "/v1/fiat/deposit"
         Then Se obtiene una respuesta 201
 
-    @Regression @Smoke @RampOn
+    @Regression @RampOn
     Scenario: Validar ejecución del sintético Ramp-On
         Given Contar con la api-key "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
