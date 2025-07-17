@@ -121,6 +121,8 @@ on:
         description: "Etiqueta de los escenarios a correr (ej: @QR)"
         required: false
         default: "@QR and @Desc"
+  schedule:
+    - cron: "0 1 * * 1,3"
 
 jobs:
   test:
@@ -150,7 +152,7 @@ jobs:
         if: always()
         run: |
           echo "## 🧪 Resumen de Tests" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ -f cucumber-report.json ]; then
             # Analizar resultados con Node.js
             cat > analyze-results.js << 'EOF'
@@ -248,7 +250,7 @@ jobs:
               console.log('❌ Error analizando resultados:', error.message);
             }
           EOF
-          
+
             node analyze-results.js >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ No se encontró cucumber-report.json" >> $GITHUB_STEP_SUMMARY
@@ -266,7 +268,7 @@ jobs:
 
       # 🔒 GOOGLE DRIVE INTEGRATION (COMMENTED OUT)
       # Uncomment the sections below if you want to upload reports to Google Drive
-      
+
       # - name: Authenticate to Google Cloud
       #   uses: google-github-actions/auth@v2
       #   if: always()
@@ -315,7 +317,7 @@ jobs:
       #                 'parents': [folder_id]
       #             }
       #             media = MediaFileUpload(file_path, resumable=True)
-      #             
+      #
       #             try:
       #                 file = service.files().create(
       #                     body=file_metadata,
