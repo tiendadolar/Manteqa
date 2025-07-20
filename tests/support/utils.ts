@@ -200,6 +200,8 @@ export const fiatWithdrawApiCrypto = (userData: any) => {
 };
 
 export const fiatWithdrawApiCryptoV2 = (userData: any) => {
+  console.log(CustomWorld.getStoreData("code"));
+
   if (
     userData.asset === "ARS" ||
     userData.asset === "USD" ||
@@ -244,7 +246,23 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
         network: userData.network,
         address: userData.address,
       },
-      // };
+      withdrawLockCode: CustomWorld.getStoreData("code"),
+    };
+  } else if (
+    userData.type === "crypto" &&
+    CustomWorld.getStoreData("code") !== undefined
+  ) {
+    return {
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      // network: userData.network,
+      asset: userData.asset,
+      amount: userData.amount,
+      destination: {
+        network: userData.network,
+        address: userData.address,
+      },
+      withdrawLockCode: CustomWorld.getStoreData("code"),
     };
   }
 
@@ -288,6 +306,17 @@ export const bankingOnboardingApiCrypto = (userData: any) => {
 };
 
 export const criptoWithdrawApiCryptoV2 = (userData: any) => {};
+
+export const withdrawLockApiCryptoV2 = (userData: any) => {
+  return {
+    userAnyId: userData.userAnyId,
+    asset: userData.asset,
+    destination: {
+      address: userData.address,
+      network: userData.network,
+    },
+  };
+};
 
 //-----API CRIPTO-----//
 //-----*********-----//

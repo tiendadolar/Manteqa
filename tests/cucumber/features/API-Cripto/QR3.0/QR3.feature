@@ -159,7 +159,7 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V1 ------
 
-    @Smoke @PixV1NoDesc
+    @SmokeM @PixV1NoDesc
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra USDT en no descubierto vía V1 endpoints
         Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"

@@ -14,6 +14,7 @@ import {
   inicialOnboardingApiCryptoV2,
   bankingOnboardingApiCrypto,
   fiatWithdrawApiCryptoV2,
+  withdrawLockApiCryptoV2,
 } from "../../../../support/utils";
 
 Before({ tags: "@Pix" }, function () {
@@ -152,9 +153,12 @@ When(
         endpoint === "/v1/fiat/withdraw" &&
         this.userData.coin === "CRC"
       ) {
+        // V2
         this.userData.cbu = "";
       } else if (endpoint === "/v2/withdraws") {
         this.userData = fiatWithdrawApiCryptoV2(this.userData);
+      } else if (endpoint === "/v2/withdraw-locks") {
+        this.userData = withdrawLockApiCryptoV2(this.userData);
         // API-Cambio
       } else if (endpoint === "/v3/api/onboarding-actions/initial") {
         // Onboarding inicial
@@ -195,7 +199,6 @@ When(
         .set("User-Agent", "PostmanRuntime/7.44.1")
         .send(this.userData);
 
-      console.log("Request headers:", this.response.request.header);
       console.log(this.response.status);
       console.log("API response:", this.response.body);
       this.userData = {};
@@ -247,6 +250,13 @@ Then(
     if (this.response.body.code) {
       CustomWorld.setStoreData("pixCode", this.response.body.code);
       // console.log(CustomWorld.getStoreData("pixCode"));
+    }
+
+    if (this.response.body[Object.keys(this.response.body)[0]].code) {
+      CustomWorld.setStoreData(
+        "code",
+        this.response.body[Object.keys(this.response.body)[0]].code
+      );
     }
 
     // POSIBLE ERROR EN OTROS MODULOS
