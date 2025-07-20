@@ -143,9 +143,14 @@ jobs:
       - name: Run Cucumber tests by tag
         continue-on-error: true
         run: |
-          echo "Running scenarios with tag ${{ github.event.inputs.tag }}"
-          npx cucumber-js --tags "${{ github.event.inputs.tag }}" --format json:cucumber-report.json
-          node reporter.js
+          TAGS="${{ github.event.inputs.tag }}"
+           if [ -z "$TAGS" ]; then
+             TAGS="(@QR and @Smoke) or (@Sintetico and @Smoke)"
+           fi
+
+           echo "Running scenarios with tags: $TAGS"
+           npx cucumber-js --tags "$TAGS" --format json:cucumber-report.json
+           node reporter.js
 
       # 🆕 CREAR RESUMEN PERSONALIZADO DE TESTS
       - name: Generate Test Summary
