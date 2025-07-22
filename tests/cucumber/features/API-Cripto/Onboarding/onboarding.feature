@@ -52,6 +52,45 @@ Feature: Onboarding User - V1
     Then Se obtiene una respuesta 200
 
   # -----
+
+  @SmokeOnboarding5
+  Scenario Outline: Validar onboarding exitoso de usuario
+    When Asignar el valor "<name>" a la variable "name"
+    And Asignar el valor "<email>" a la variable "email"
+    And Asignar el valor "<legalId>" a la variable "legalId"
+    And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
+    And Asignar el valor "<country>" a la variable "country"
+    And Asignar el valor "<civilState>" a la variable "civilState"
+    And Ejecutar el método Post al endpoint "/v1/user/"
+    Then Se obtiene una respuesta 200
+    And Se crea el usuario
+
+    When Asignar el valor "0140420703690150418728" a la variable "cbu"
+    And Asignar el valor "Galicia" a la variable "description"
+    And Ejecutar el método Post al endpoint "/v1/user/{userId}/bankaccount/ARS"
+    Then Se obtiene una respuesta 200
+    And Se agrega la cuenta bancaria
+
+    When Asignar el valor "DNI_FRONT" a la variable "docType"
+    And Asignar el valor "picfront.jpg" a la variable "fileName"
+    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Se obtiene una respuesta 200
+
+    When Ejecutar el método Put al endpoint
+    Then Se obtiene una respuesta 200
+
+    When Asignar el valor "DNI_BACK" a la variable "docType"
+    And Asignar el valor "picback.jpg" a la variable "fileName"
+    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Se obtiene una respuesta 200
+
+    When Ejecutar el método Put al endpoint
+    Then Se obtiene una respuesta 200
+
+    Examples:
+      | name               | email           | legalId     | phoneNumber   | country   | civilState |
+      | TestUserAutomation | tua@yopmail.com | 20337447504 | 5492616621075 | Argentina | SOLTERO    |
+
   @SmokeOnboarding1
   Scenario Outline: Validar onboarding exitoso de usuario
     When Asignar el valor "<name>" a la variable "name"

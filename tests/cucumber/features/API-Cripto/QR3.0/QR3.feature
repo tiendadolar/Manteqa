@@ -272,8 +272,8 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009628 | pixmanualamount | 10     | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
-            | embebido | 100009628 | pix             | 10     | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
+            | manual   | 100009628 | pixmanualamount | 5      | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
+            | embebido | 100009628 | pix             | 5      | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
 
     @Smoke @PixV2NoDesc
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V2 endpoints

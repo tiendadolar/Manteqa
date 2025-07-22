@@ -17,6 +17,17 @@ import {
   withdrawLockApiCryptoV2,
 } from "../../../../support/utils";
 
+const chainArray = [
+  "WORLDCHAIN",
+  "BSC",
+  "ETHEREUM",
+  "POLYGON",
+  "BINANCE",
+  "BASE",
+  "ARBITRUM",
+  "OPTIMISM",
+];
+
 Before({ tags: "@Pix" }, function () {
   console.log("Ejecutando steps para pix");
 });
@@ -252,7 +263,10 @@ Then(
       // console.log(CustomWorld.getStoreData("pixCode"));
     }
 
-    if (this.response.body[Object.keys(this.response.body)[0]].code) {
+    if (
+      chainArray.includes(Object.keys(this.response.body)[0]) &&
+      this.response.body[Object.keys(this.response.body)[0]].code
+    ) {
       CustomWorld.setStoreData(
         "code",
         this.response.body[Object.keys(this.response.body)[0]].code

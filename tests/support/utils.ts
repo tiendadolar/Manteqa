@@ -2,9 +2,39 @@ const request = require("supertest");
 import { use } from "chai";
 import { CustomWorld } from "../support/world";
 
+const getUserByLegalId = async (
+  legalId: string,
+  url: string,
+  token: string
+) => {
+  const urlBase = `https://api-qa.tiendacrypto.com`;
+  const endpoint = `/v1/admin/user/search?keyword=${legalId}&page=1&limit=10`;
+
+  const response = await request(urlBase)
+    .get(endpoint)
+    .set("x-access-token", token)
+    .set("User-Agent", "PostmanRuntime/7.44.1");
+  return response.body.users.numberId;
+};
+
 export const delay = (ms: number): Promise<void> => {
   console.log("EJECUTANDO DELAY");
   return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+export const deleteOnbUser = async (userData: any) => {
+  const urlBase = `https://api-qa.tiendacrypto.com`;
+  const endpoint = `/v1/admin/user`;
+
+  let payload = {
+    numberId: getUserByLegalId(userData.legalId, userData.url, userData.token),
+  };
+
+  const response = await request(urlBase)
+    .delete(endpoint)
+    .set("x-access-token", userData.token)
+    .set("User-Agent", "PostmanRuntime/7.44.1")
+    .send(payload);
 };
 
 //-----API CRIPTO-----//
@@ -48,6 +78,7 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
 
   if (userData.nationality === "Argentina") {
     return {
+      userExternalId: userData.userExternalId,
       email: userData.email,
       legalId: userData.legalId,
       exchange: userData.exchange,
@@ -318,6 +349,159 @@ export const withdrawLockApiCryptoV2 = (userData: any) => {
   };
 };
 
+export const refundPollingWithDeposit = async function (
+  data: any,
+  userData: any
+) {
+  const maxAttemps: number = 15;
+  let attempsCounter: number = 0;
+
+  const endpointLock: String = "/v2/payment-locks";
+  let payloadLock: object = {
+    userAnyId: userData.userAnyId,
+    paymentDestination: userData.paymentDestination,
+    against: userData.against,
+    amount: userData.amount,
+  };
+
+  const endpointPayment: String = "/v2/synthetics/qr-payment";
+  let payloadPayment: object = {};
+
+  let endpointGetSynthetic: String = "";
+
+  while (attempsCounter < maxAttemps) {
+    // Lock-Price Creation
+    userData.response = await request(data.urlBase)
+      .post(endpointLock)
+      .set("md-api-key", data.apiKey)
+      .set("User-Agent", "PostmanRuntime/7.44.1")
+      .send(payloadLock);
+    console.log("API payload:", payloadLock);
+    console.log("API response:", userData.response.body);
+
+    let pixCode = userData.response.body.code;
+    payloadPayment = {
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      pixCode: pixCode,
+    };
+
+    await delay(3000);
+
+    // Synthetic creation
+    userData.response = await request(data.urlBase)
+      .post(endpointPayment)
+      .set("md-api-key", data.apiKey)
+      .set("User-Agent", "PostmanRuntime/7.44.1")
+      .send(payloadPayment);
+    console.log("API payload:", payloadPayment);
+    console.log("API response:", userData.response.body);
+
+    await delay(3000);
+
+    let syntheticId = userData.response.body.id;
+    endpointGetSynthetic = `/v1/synthetics/${syntheticId}`;
+
+    // Deposits
+    if (userData.against === "USDT") {
+      let endpointDeposit = "/v1/transaction/deposit";
+      let depositCryptoPayload = criptoDepositApiCrypto(userData.response.body);
+
+      // Crypto deposit
+      userData.response = await request(data.urlBase)
+        .post(endpointDeposit)
+        .set("md-api-key", userData.apiKeyDeposit)
+        .set("x-api-secret", data.apiSecret)
+        .set("User-Agent", "PostmanRuntime/7.44.1")
+        .send(depositCryptoPayload);
+      console.log("API payload:", depositCryptoPayload);
+      console.log("API response:", userData.response.body);
+    } else {
+      let endpointDeposit = "/v1/fiat/deposit";
+      let depositFiatPayload = fiatDepositApiCrypto(userData.response.body);
+
+      // Fiat deposit
+      userData.response = await request(data.urlBase)
+        .post(endpointDeposit)
+        .set("md-api-key", "C10XB2Z-AG243CS-G42KB2M-4085WTF")
+        .set("x-api-secret", data.apiSecret)
+        .set("User-Agent", "PostmanRuntime/7.44.1")
+        .send(depositFiatPayload);
+      console.log("API payload:", depositFiatPayload);
+      console.log("API response:", userData.response.body);
+    }
+
+    await delay(10000);
+
+    // Get synthetic
+    userData.response = await request(data.urlBase)
+      .get(endpointGetSynthetic)
+      .set("md-api-key", data.apiKey)
+      .set("User-Agent", "PostmanRuntime/7.44.1");
+    console.log("API response GET:", userData.response.body);
+
+    if (userData.response.body.status === "CANCELLED") return userData.response;
+
+    attempsCounter++;
+  }
+};
+
+export const refundsPolling = async function (data: any, userData: any) {
+  const maxAttemps: number = 15;
+  let attempsCounter: number = 0;
+
+  const endpointLock: String = "/v2/payment-locks";
+  let payloadLock: object = {
+    userAnyId: userData.userAnyId,
+    paymentDestination: userData.paymentDestination,
+    against: userData.against,
+    amount: userData.amount,
+  };
+
+  const endpointPayment: String = "/v2/synthetics/qr-payment";
+  let payloadPayment: object = {};
+
+  let endpointGetSynthetic: String = ``;
+
+  while (attempsCounter < maxAttemps) {
+    userData.response = await request(data.urlBase)
+      .post(endpointLock)
+      .set("md-api-key", data.apiKey)
+      .set("User-Agent", "PostmanRuntime/7.44.1")
+      .send(payloadLock);
+
+    let pixCode = userData.response.body.code;
+    payloadPayment = {
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      pixCode: pixCode,
+    };
+
+    await delay(3000);
+
+    userData.response = await request(data.urlBase)
+      .post(endpointPayment)
+      .set("md-api-key", data.apiKey)
+      .set("User-Agent", "PostmanRuntime/7.44.1")
+      .send(payloadPayment);
+
+    let syntheticId = userData.response.body.id;
+    endpointGetSynthetic = `/v1/synthetics/${syntheticId}`;
+
+    await delay(10000);
+
+    userData.response = await request(data.urlBase)
+      .get(endpointGetSynthetic)
+      .set("md-api-key", data.apiKey)
+      .set("User-Agent", "PostmanRuntime/7.44.1");
+    console.log("API response GET:", userData.response.body);
+
+    if (userData.response.body.status === "CANCELLED") return userData.response;
+
+    attempsCounter++;
+  }
+};
+
 //-----API CRIPTO-----//
 //-----*********-----//
 //-----API CAMBIO-----//
@@ -386,149 +570,4 @@ export const fiatDepositApiCambio = (userData: any) => {
     amount: CustomWorld.getStoreData("thresholdAmount"),
     coin: CustomWorld.getStoreData("coin"),
   };
-};
-
-export const refundPollingWithDeposit = async function (
-  data: any,
-  userData: any
-) {
-  const maxAttemps: number = 15;
-  let attempsCounter: number = 0;
-
-  const endpointLock: String = "/v2/payment-locks";
-  let payloadLock: object = {
-    userAnyId: userData.userAnyId,
-    paymentDestination: userData.paymentDestination,
-    against: userData.against,
-    amount: userData.amount,
-  };
-
-  const endpointPayment: String = "/v2/synthetics/qr-payment";
-  let payloadPayment: object = {};
-
-  let endpointGetSynthetic: String = "";
-
-  while (attempsCounter < maxAttemps) {
-    // Lock-Price Creation
-    userData.response = await request(data.urlBase)
-      .post(endpointLock)
-      .set("md-api-key", data.apiKey)
-      .send(payloadLock);
-    console.log("API payload:", payloadLock);
-    console.log("API response:", userData.response.body);
-
-    let pixCode = userData.response.body.code;
-    payloadPayment = {
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
-      userAnyId: userData.userAnyId,
-      pixCode: pixCode,
-    };
-
-    await delay(3000);
-
-    // Synthetic creation
-    userData.response = await request(data.urlBase)
-      .post(endpointPayment)
-      .set("md-api-key", data.apiKey)
-      .send(payloadPayment);
-    console.log("API payload:", payloadPayment);
-    console.log("API response:", userData.response.body);
-
-    await delay(3000);
-
-    let syntheticId = userData.response.body.id;
-    endpointGetSynthetic = `/v1/synthetics/${syntheticId}`;
-
-    // Deposits
-    if (userData.against === "USDT") {
-      let endpointDeposit = "/v1/transaction/deposit";
-      let depositCryptoPayload = criptoDepositApiCrypto(userData.response.body);
-
-      // Crypto deposit
-      userData.response = await request(data.urlBase)
-        .post(endpointDeposit)
-        .set("md-api-key", userData.apiKeyDeposit)
-        .set("x-api-secret", data.apiSecret)
-        .send(depositCryptoPayload);
-      console.log("API payload:", depositCryptoPayload);
-      console.log("API response:", userData.response.body);
-    } else {
-      let endpointDeposit = "/v1/fiat/deposit";
-      let depositFiatPayload = fiatDepositApiCrypto(userData.response.body);
-
-      // Fiat deposit
-      userData.response = await request(data.urlBase)
-        .post(endpointDeposit)
-        .set("md-api-key", "C10XB2Z-AG243CS-G42KB2M-4085WTF")
-        .set("x-api-secret", data.apiSecret)
-        .send(depositFiatPayload);
-      console.log("API payload:", depositFiatPayload);
-      console.log("API response:", userData.response.body);
-    }
-
-    await delay(10000);
-
-    // Get synthetic
-    userData.response = await request(data.urlBase)
-      .get(endpointGetSynthetic)
-      .set("md-api-key", data.apiKey);
-    console.log("API response GET:", userData.response.body);
-
-    if (userData.response.body.status === "CANCELLED") return userData.response;
-
-    attempsCounter++;
-  }
-};
-
-export const refundsPolling = async function (data: any, userData: any) {
-  const maxAttemps: number = 15;
-  let attempsCounter: number = 0;
-
-  const endpointLock: String = "/v2/payment-locks";
-  let payloadLock: object = {
-    userAnyId: userData.userAnyId,
-    paymentDestination: userData.paymentDestination,
-    against: userData.against,
-    amount: userData.amount,
-  };
-
-  const endpointPayment: String = "/v2/synthetics/qr-payment";
-  let payloadPayment: object = {};
-
-  let endpointGetSynthetic: String = ``;
-
-  while (attempsCounter < maxAttemps) {
-    userData.response = await request(data.urlBase)
-      .post(endpointLock)
-      .set("md-api-key", data.apiKey)
-      .send(payloadLock);
-
-    let pixCode = userData.response.body.code;
-    payloadPayment = {
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
-      userAnyId: userData.userAnyId,
-      pixCode: pixCode,
-    };
-
-    await delay(3000);
-
-    userData.response = await request(data.urlBase)
-      .post(endpointPayment)
-      .set("md-api-key", data.apiKey)
-      .send(payloadPayment);
-
-    let syntheticId = userData.response.body.id;
-    endpointGetSynthetic = `/v1/synthetics/${syntheticId}`;
-
-    await delay(10000);
-
-    userData.response = await request(data.urlBase)
-      .get(endpointGetSynthetic)
-      .set("md-api-key", data.apiKey);
-    console.log("API response GET:", userData.response.body);
-
-    if (userData.response.body.status === "CANCELLED") return userData.response;
-
-    attempsCounter++;
-  }
 };
