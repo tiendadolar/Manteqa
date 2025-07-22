@@ -115,6 +115,10 @@ When(
     // Si no existe userData se leen los examples
     dataTable.rawTable.forEach(([key, value]: [string, string]) => {
       this.userData[key] = value;
+      if (key === "sessionId") {
+        this.userData[key] = CustomWorld.getSessionId(value);
+        return;
+      }
     });
   }
 );
@@ -230,7 +234,8 @@ When(
   async function (this: CustomWorld, endpoint: string) {
     const paramEndpoint = endpoint
       .replace("{syntheticId}", CustomWorld.getStoreData("syntheticId") || "")
-      .replace("{withdrawAnyId}", CustomWorld.getStoreData("withdrawId") || "");
+      .replace("{withdrawAnyId}", CustomWorld.getStoreData("withdrawId") || "")
+      .replace("{orderNumberId}", CustomWorld.getStoreData("withdrawId") || "");
     try {
       console.log("API endpoint:", paramEndpoint);
 

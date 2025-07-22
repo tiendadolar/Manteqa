@@ -7,9 +7,9 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Onboarding inicial de usuario
-        Given Contar con la api-key "2FRR7Q9-JHA4P50-JESDCJ8-CCB38BW"
+        Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userExternalId>" a la variable "userExternalId"
+        When Asignar el valor "<externalId>" a la variable "externalId"
         And Asignar el valor "<email>" a la variable "email"
         And Asignar el valor "<legalId>" a la variable "legalId"
         And Asignar el valor "<exchange>" a la variable "exchange"
@@ -35,14 +35,14 @@ Feature: Onboarding User - V2
         Then Se obtiene una respuesta 201
 
         Examples:
-            | userExternalId | email                                      | legalId     | exchange  | name  | surname | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street     | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | vesseo1        | TestOnboardingV2test-008vesseo@yopmail.com | 20959275611 | ARGENTINA | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001138  | Argentina   | Cochabamba | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | externalId | email                                   | legalId     | exchange  | name  | surname | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street     | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | orderqaa1  | TestOnboardingV2test-order1@yopmail.com | 20332194551 | ARGENTINA | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001142  | Argentina   | Cochabamba | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
     # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 
     @test
     Scenario: Obtener S3 url para carga de DNI FRONT
-        Given Contar con la api-key "2FRR7Q9-JHA4P50-JESDCJ8-CCB38BW"
+        Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "userAnyId" a la variable "userAnyId"
         And Asignar el valor "FRONT" a la variable "side"
@@ -57,7 +57,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de DNI BACK
-        Given Contar con la api-key "2FRR7Q9-JHA4P50-JESDCJ8-CCB38BW"
+        Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "userAnyId" a la variable "userAnyId"
         And Asignar el valor "BACK" a la variable "side"
@@ -72,7 +72,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de selfie
-        Given Contar con la api-key "2FRR7Q9-JHA4P50-JESDCJ8-CCB38BW"
+        Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
         When Asignar el valor "userAnyId" a la variable "userAnyId"
         And Asignar el valor "selfie.jpg" a la variable "fileName"
