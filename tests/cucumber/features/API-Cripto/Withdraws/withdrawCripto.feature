@@ -139,7 +139,7 @@ Feature: Retiros Crypto
     # | USDCB | 100007647 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
     # | USDCB | 100007647 | ARBITRUM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
-    @SmokeWithdraw @ARG @V1
+    @SmokeWithdraw @Crypto @ARG @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user ARG por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -187,7 +187,7 @@ Feature: Retiros Crypto
     # | ETH  | 100009893 | ETHEREUM | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     # | ETH  | 100009893 | BINANCE  | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @CHL @V1
+    @SmokeWithdraw @Crypto @CHL @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user CHL por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -235,7 +235,7 @@ Feature: Retiros Crypto
     # | ETH  | 100009892 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     # | ETH  | 100009892 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @COL @V1
+    @SmokeWithdraw @Crypto @COL @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user COL por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -279,7 +279,7 @@ Feature: Retiros Crypto
             | ETH  | 100009891 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009891 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @MXN @V1
+    @SmokeWithdraw @Crypto @MXN @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user MXN por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -323,7 +323,7 @@ Feature: Retiros Crypto
             | ETH  | 100009889 | ETHEREUM   | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009889 | BINANCE    | 0.01   | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @PAN @V1
+    @SmokeWithdraw @Crypto @PAN @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user PAN por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -367,7 +367,7 @@ Feature: Retiros Crypto
             | ETH  | 100009887 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009887 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @GTQ @V1
+    @SmokeWithdraw @Crypto @GTQ @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user GTQ por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -411,7 +411,7 @@ Feature: Retiros Crypto
             | ETH  | 100009886 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009886 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @PHP @V1
+    @SmokeWithdraw @Crypto @PHP @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user PHP por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -455,7 +455,7 @@ Feature: Retiros Crypto
             | ETH  | 100009885 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009885 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @BRA @V1
+    @SmokeWithdraw @Crypto @BRA @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user BRA por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -499,7 +499,7 @@ Feature: Retiros Crypto
             | ETH  | 100009884 | ETHEREUM   | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | ETH  | 100009884 | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @CRC @V1
+    @SmokeWithdraw @Crypto @CRC @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user CRC por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -548,7 +548,7 @@ Feature: Retiros Crypto
 
 
 
-    @SmokeWithdraw @ARGv2 @V2
+    @SmokeWithdraw @Crypto @ARGv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -595,7 +595,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @BRLv2 @V2
+    @SmokeWithdraw @Crypto @BRLv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -643,7 +643,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @CPLv2 @V2
+    @SmokeWithdraw @Crypto @CPLv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -691,7 +691,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @COPv2 @V2
+    @SmokeWithdraw @Crypto @COPv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -739,7 +739,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @MXNv2 @V2
+    @SmokeWithdraw @Crypto @MXNv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -787,7 +787,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @PANv2 @V2
+    @SmokeWithdraw @Crypto @PANv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -835,7 +835,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @GTQv2 @V2
+    @SmokeWithdraw @Crypto @GTQv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -883,7 +883,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @PHPv2 @V2
+    @SmokeWithdraw @Crypto @PHPv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -931,7 +931,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @SmokeWithdraw @CRCv2 @V2
+    @SmokeWithdraw @Crypto @CRCv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
