@@ -118,11 +118,11 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Etiqueta de los escenarios a correr (ej: @QR)"
+        description: 'Etiqueta de los escenarios a correr (ej: @QR)'
         required: false
-        default: "@QR and @Desc"
-  schedule:
-    - cron: "0 1 * * 1,3"
+        default: '@QR and @Desc'
+  # schedule:
+  #   - cron: "0 1 * * 1,3"
 
 jobs:
   test:
@@ -135,7 +135,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install

@@ -74,7 +74,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden QR" por 20 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
@@ -109,7 +109,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden QR" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | userAnyId | qrCode                                                                                                                                                                                                     | against | amount | sessionId      | to                                         | ticker |
@@ -150,7 +150,46 @@ Feature: Sintético QR 3.0
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden QR" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
+
+        Examples:
+            | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
+            | manual   | 100009502 | qr3manualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | embebido | 100009502 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+
+    Scenario Outline: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<qrCode>" to the variable "qrCode"
+        And Assign the value "<amount>" to the variable "amount"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201
+
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        And The attributes of the QR USDT synthetic are validated
+
+        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
+        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
+        And Assign the value "<to>" to the variable "to"
+        And Assign the value "10000000000000000000" to the variable "wei"
+        And Assign the value "10" to the variable "human"
+        And Assign the value "<ticker>" to the variable "ticker"
+        And Assign the value 0 to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/deposit"
+        Then Obtain a response 201
+
+        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        When Wait for the processing of the "orden QR" por 15 seconds
+        And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
@@ -191,7 +230,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
@@ -227,7 +266,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
@@ -268,7 +307,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
@@ -304,7 +343,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId                 | to                                         | ticker |
@@ -333,7 +372,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden QR" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId    | to                                         | ticker |
@@ -359,7 +398,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden QR" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | against | sessionId    | to                                         | ticker |
@@ -386,7 +425,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden QR" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
@@ -413,7 +452,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden QR" por 5 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId    | to                                         | ticker |
@@ -440,7 +479,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden QR" por 5 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion | userAnyId | qrCode          | against | amount | sessionId    | to                                         | ticker |
@@ -487,7 +526,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
@@ -513,7 +552,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
@@ -540,7 +579,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
@@ -566,7 +605,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
@@ -594,7 +633,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         Examples:
             | pay | nacionality | coin | accion   | userAnyId | paymentDestination | against | amount | sessionId                    | to                                         | ticker |
@@ -626,7 +665,7 @@ Feature: Sintético QR 3.0
 
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
         # User ARG no funciona todavia por eso se comentó
         Examples:

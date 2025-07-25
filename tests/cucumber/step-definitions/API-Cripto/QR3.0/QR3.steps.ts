@@ -35,7 +35,7 @@ Then('Execute the refund synthetic {string}', { timeout: 500 * 1000 }, async fun
   }
 });
 
-Then('Obtain a response {int} y status {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, statusCode: number, statusName: string) {
+Then('Obtain a response {int} y status {string} for payment synthetics', { timeout: 500 * 1000 }, async function (this: CustomWorld, statusCode: number, statusName: string) {
   const response = this.response;
   const stages = response.body.stages;
   console.log(`Response Status: ${response.status}`);
