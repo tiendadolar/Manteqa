@@ -73,18 +73,18 @@ Then(
 );
 
 Then(
-  "Esperar procesamiento de la {string} por {int} segundos",
+  "Wait for the processing of the {string} por {int} seconds",
   { timeout: 70000 },
   async function (this: CustomWorld, stage: string, seconds: number) {
     console.log(`Esperando procesamiento de la etapa: ${stage}`);
-    console.log(`Iniciando espera de ${seconds} segundos...`);
+    console.log(`Iniciando espera de ${seconds} seconds...`);
     await new Promise((resolve) => setTimeout(resolve, seconds * 1000));
-    console.log(`Espera de ${seconds} segundos completada`);
+    console.log(`Espera de ${seconds} seconds completada`);
   }
 );
 
 Then(
-  "Se obtiene una respuesta {int} y status COMPLETED",
+  "Obtain a response {int} y status COMPLETED",
   function (this: CustomWorld, statusCode: number) {
     const response: any = this.response;
     const body: any = response.body;

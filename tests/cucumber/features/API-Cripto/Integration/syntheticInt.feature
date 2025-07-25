@@ -2,67 +2,67 @@
 Feature: Test de intragación sintético
 
     Background:
-        Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
     Scenario Outline: Validar onboarding exitoso de usuario
-        When Asignar el valor "<name>" a la variable "name"
-        And Asignar el valor "<email>" a la variable "email"
-        And Asignar el valor "<legalId>" a la variable "legalId"
-        And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
-        And Asignar el valor "<country>" a la variable "country"
-        And Asignar el valor "<civilState>" a la variable "civilState"
-        And Ejecutar el método Post al endpoint "/v1/user/"
-        Then Se obtiene una respuesta 200
-        And Se crea el usuario
+        When Assign the value "<name>" to the variable "name"
+        And Assign the value "<email>" to the variable "email"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+        And Assign the value "<country>" to the variable "country"
+        And Assign the value "<civilState>" to the variable "civilState"
+        And Execute the POST method on the endpoint "/v1/user/"
+        Then Obtain a response 200
+        And The user is created
 
         #Add Bank Account
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        When Asignar el valor "0140420703690150418728" a la variable "cbu"
-        And Asignar el valor "Galicia" a la variable "description"
-        And Ejecutar el método Post al endpoint "/v1/user/{userId}/bankaccount/ARS"
-        Then Se obtiene una respuesta 200
-        And Se agrega la cuenta bancaria
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        When Assign the value "0140420703690150418728" to the variable "cbu"
+        And Assign the value "Galicia" to the variable "description"
+        And Execute the POST method on the endpoint "/v1/user/{userId}/bankaccount/ARS"
+        Then Obtain a response 200
+        And The bank account is added
 
         #Add Documentation
-        When Asignar el valor "DNI" a la variable "docType"
-        When Asignar el valor "DNI_FRONT" a la variable "docType"
-        And Asignar el valor "picfront.jpg" a la variable "fileName"
-        And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-        Then Se obtiene una respuesta 200
+        When Assign the value "DNI" to the variable "docType"
+        When Assign the value "DNI_FRONT" to the variable "docType"
+        And Assign the value "picfront.jpg" to the variable "fileName"
+        And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+        Then Obtain a response 200
 
-        When Ejecutar el método Put al endpoint
-        Then Se obtiene una respuesta 200
+        When Execute the PUT method on the endpoint
+        Then Obtain a response 200
 
         #Add Documentation
-        When Asignar el valor "DNI_BACK" a la variable "docType"
-        And Asignar el valor "picback.jpg" a la variable "fileName"
-        And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-        Then Se obtiene una respuesta 200
+        When Assign the value "DNI_BACK" to the variable "docType"
+        And Assign the value "picback.jpg" to the variable "fileName"
+        And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+        Then Obtain a response 200
 
-        When Ejecutar el método Put al endpoint
-        Then Se obtiene una respuesta 200
-        And Esperar procesamiento de la "validación de documentación" por 20 segundos
+        When Execute the PUT method on the endpoint
+        Then Obtain a response 200
+        And Wait for the processing of the "validación de documentación" por 20 seconds
 
         # Create Ramp On Synthetic
-        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<against>" a la variable "against"
-        And Asignar el valor "<assetAmount>" a la variable "assetAmount"
-        And Asignar el valor "<withdrawAddress>" a la variable "withdrawAddress"
-        And Asignar el valor "<withdrawNetwork>" a la variable "withdrawNetwork"
-        And Ejecutar el método Post al endpoint "/v1/synthetics/ramp-on"
-        Then Se obtiene una respuesta 201
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
+        And Execute the POST method on the endpoint "/v1/synthetics/ramp-on"
+        Then Obtain a response 201
 
         # Create Fiat Deposit
-        Given Contar con la api-key "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And Contar con la api-secret "mZJ5r9KCdRjnWCdPJg"
-        When Asignar el valor "userNumberId" a la variable "userId"
-        And Asignar el valor "amount" a la variable "amount"
-        And Asignar el valor "coin" a la variable "coin"
-        And Ejecutar el método Post al endpoint "/v1/fiat/deposit"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
+        And The API secret is available "mZJ5r9KCdRjnWCdPJg"
+        When Assign the value "userNumberId" to the variable "userId"
+        And Assign the value "amount" to the variable "amount"
+        And Assign the value "coin" to the variable "coin"
+        And Execute the POST method on the endpoint "/v1/fiat/deposit"
+        Then Obtain a response 201
 
         Examples:
             | name                | email                          | legalId     | phoneNumber   | country   | civilState | sessionId          | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |

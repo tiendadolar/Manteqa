@@ -3,7 +3,7 @@ const { expect } = require("chai");
 const request = require("supertest");
 import { CustomWorld, UserData } from "../../../../support/world";
 
-Then("Se crea el lock-price", function (this: CustomWorld) {
+Then("The lock-price is created", function (this: CustomWorld) {
   const response = this.response; // Asegúrate que guardaste la respuesta en this.response
   expect(response).to.not.be.undefined;
 

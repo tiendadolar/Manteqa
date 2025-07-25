@@ -3,21 +3,21 @@ Feature: Retiros Fiat
 
     @Fiat
     Scenario Outline: Crear retiro fiat
-        Given Contar con la api-key "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<cbu>" a la variable "cbu"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Ejecutar el método Post al endpoint "/v1/fiat/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<cbu>" to the variable "cbu"
+        And Assign the value "<amount>" to the variable "amount"
+        And Execute the POST method on the endpoint "/v1/fiat/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 2 segundos
-        And Ejecutar el método Get al endpoint "/v1/fiat/withdraw/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED para retiro fiat
+        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 2 seconds
+        And Execute the GET method on the endpoint "/v1/fiat/withdraw/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         # Solo ARS/USD se puede retirar a un cbu declarado en el user, las demas son por accountIndex
         Examples:
@@ -35,29 +35,29 @@ Feature: Retiros Fiat
 
     @Smoke @Fiat @V1
     Scenario Outline: Crear retiro fiat user por country por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<accountIndex>" a la variable "accountIndex"
-        And Asignar el valor "<cbu>" a la variable "cbu"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Ejecutar el método Post al endpoint "/v1/fiat/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<accountIndex>" to the variable "accountIndex"
+        And Assign the value "<cbu>" to the variable "cbu"
+        And Assign the value "<amount>" to the variable "amount"
+        And Execute the POST method on the endpoint "/v1/fiat/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 2 segundos
-        And Ejecutar el método Get al endpoint "/v1/fiat/withdraw/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED para retiro fiat
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 2 seconds
+        And Execute the GET method on the endpoint "/v1/fiat/withdraw/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         Examples:
             | userId    | coin | cbu                    | amount | accountIndex |
             | 100009883 | CRC  | CR09010402346674053515 | 500    | 0            |
             | 100009884 | BRL  | 06383835793            | 10     |              |
             | 100009892 | CLP  | 13661544               | 10000  |              |
-            | 100009891 | COP  | 3142959505             | 100    |              |
+            | 100009891 | COP  | 1362017052             | 100    |              |
             | 100009886 | GTQ  | 972004709              | 100    |              |
             | 100009889 | MXN  | 638180010139391962     | 100    |              |
             | 100009885 | PHP  | 20867104660592         | 100    |              |
@@ -68,25 +68,25 @@ Feature: Retiros Fiat
 
     @Smoke @Fiat @V2
     Scenario Outline: Crear retiro fiat user por country por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        # And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        # And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 5 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED para retiro fiat
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 5 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         Examples:
             | userAnyId | asset | address                | amount | bankCode  | accountType |
@@ -103,25 +103,25 @@ Feature: Retiros Fiat
 
     @Smoke @Fiat @pendingAdmin
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        # And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        # And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 2 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED para retiro fiat
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 2 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         Examples:
             | userAnyId | asset | address                | amount   | bankCode  | accountType |
@@ -139,25 +139,25 @@ Feature: Retiros Fiat
 
     @Smoke @Fiat @coinag
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING TAKENOS
-        Given Contar con la api-key "4J05H32-N4JM9ZB-QYQRNH1-3E6V8ZN"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        # And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "4J05H32-N4JM9ZB-QYQRNH1-3E6V8ZN"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        # And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "4J05H32-N4JM9ZB-QYQRNH1-3E6V8ZN"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 2 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED para retiro fiat
+        Given The API key is available "4J05H32-N4JM9ZB-QYQRNH1-3E6V8ZN"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 2 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         Examples:
             | userAnyId | asset | address                | amount   | bankCode | accountType |
@@ -165,25 +165,25 @@ Feature: Retiros Fiat
 
     @Smoke @Fiat @coinag
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
-        Given Contar con la api-key "1TP79KS-KPX4QYG-J0T505E-Z8PT3CC"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        # And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "1TP79KS-KPX4QYG-J0T505E-Z8PT3CC"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        # And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "1TP79KS-KPX4QYG-J0T505E-Z8PT3CC"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 2 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED para retiro fiat
+        Given The API key is available "1TP79KS-KPX4QYG-J0T505E-Z8PT3CC"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 2 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         Examples:
             | userAnyId | asset | address                | amount   | bankCode | accountType |
@@ -191,25 +191,25 @@ Feature: Retiros Fiat
 
     @Smoke @Fiat @coinag
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING MERU
-        Given Contar con la api-key "JHD27DA-1KNMGS7-KZS2V9R-963H29E"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        # And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "JHD27DA-1KNMGS7-KZS2V9R-963H29E"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        # And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "JHD27DA-1KNMGS7-KZS2V9R-963H29E"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 2 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED para retiro fiat
+        Given The API key is available "JHD27DA-1KNMGS7-KZS2V9R-963H29E"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 2 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         Examples:
             | userAnyId | asset | address                | amount   | bankCode | accountType |

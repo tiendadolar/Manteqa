@@ -3,18 +3,18 @@ Feature: Depositos
 
     @Crypto
     Scenario: Generar deposito Crypto
-        Given Contar con la api-key "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And Contar con la api-secret "rcrgtDnGxjY2AYC5qs"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<hash>" a la variable "hash"
-        And Asignar el valor "<from>" a la variable "from"
-        And Asignar el valor "<to>" a la variable "to"
-        And Asignar el valor "<wei>" a la variable "wei"
-        And Asignar el valor "<human>" a la variable "human"
-        And Asignar el valor "<ticker>" a la variable "ticker"
-        And Asignar el valor <chain> a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/deposit"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
+        And The API secret is available "vH2W199pE1Re5ZR4Z7"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<hash>" to the variable "hash"
+        And Assign the value "<from>" to the variable "from"
+        And Assign the value "<to>" to the variable "to"
+        And Assign the value "<wei>" to the variable "wei"
+        And Assign the value "<human>" to the variable "human"
+        And Assign the value "<ticker>" to the variable "ticker"
+        And Assign the value <chain> to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/deposit"
+        Then Obtain a response 201
 
         Examples:
             | hash | from                                       | to                                         | wei                  | human | ticker | chain |

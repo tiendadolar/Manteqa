@@ -3,14 +3,14 @@ Feature: Retiros Crypto
 
     @LockCode
     Scenario Outline: Crear lock de retiro crypto
-        Given Contar con la api-key "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
-        And Se validan atributos para lock de retiro crypto
+        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
+        And Attributes for the crypto withdrawal lock are validated
 
         Examples:
             | coin  | userId    | chain    |
@@ -64,31 +64,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain>
-        Given Contar con la api-key "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 40 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 40 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         Examples:
             | coin  | userId    | chain      | amount | wallet                                     |
@@ -141,31 +141,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @ARG @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user ARG por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 40 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 40 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -189,31 +189,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @CHL @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user CHL por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 40 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 40 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -237,31 +237,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @COL @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user COL por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 40 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 40 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -281,31 +281,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @MXN @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user MXN por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -325,31 +325,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @PAN @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user PAN por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -369,31 +369,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @GTQ @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user GTQ por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -413,31 +413,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @PHP @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user PHP por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -457,31 +457,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @BRA @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user BRA por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -501,31 +501,31 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @CRC @V1
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user CRC por V1
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw/lock"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
 
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<coin>" a la variable "coin"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<wallet>" a la variable "to"
-        And Asignar el valor "<chain>" a la variable "chain"
-        And Asignar el valor "<userId>" a la variable "userId"
-        And Asignar el valor "code" a la variable "costCode"
-        And Ejecutar el método Post al endpoint "/v1/transaction/withdraw"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -550,26 +550,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @ARGv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -597,26 +597,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @BRLv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -645,26 +645,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @CPLv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -693,26 +693,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @COPv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -741,26 +741,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @MXNv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -789,26 +789,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @PANv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -837,26 +837,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @GTQv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -885,26 +885,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @PHPv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -933,26 +933,26 @@ Feature: Retiros Crypto
 
     @SmokeWithdraw @CRCv2 @V2
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
@@ -981,30 +981,30 @@ Feature: Retiros Crypto
 
     @Smoke3
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> haciendo lock price por V2
-        Given Contar con la api-key "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<network>" a la variable "network"
-        And Ejecutar el método Post al endpoint "/v2/withdraw-locks"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<network>" to the variable "network"
+        And Execute the POST method on the endpoint "/v2/withdraw-locks"
+        Then Obtain a response 201
 
-        When Asignar el valor "<sessionId>" a la variable "sessionId"
-        And Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<asset>" a la variable "asset"
-        And Asignar el valor "<amount>" a la variable "amount"
-        And Asignar el valor "<network>" a la variable "network"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<type>" a la variable "type"
-        And Asignar el valor "<country>" a la variable "country"
-        And Ejecutar el método Post al endpoint "/v2/withdraws"
-        Then Se obtiene una respuesta 201
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
 
-        When Esperar procesamiento de la "orden" por 60 segundos
-        And Ejecutar el método Get al endpoint "/v2/withdraws/{withdrawAnyId}"
-        Then Se obtiene una respuesta 200 y status EXECUTED
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:

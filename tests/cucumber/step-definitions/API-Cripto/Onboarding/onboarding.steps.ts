@@ -11,7 +11,7 @@ Before({ tags: "@Onboarding" }, function () {
 });
 
 Then(
-  "Ejecutar el método Put al endpoint",
+  "Execute the PUT method on the endpoint",
   { timeout: 50 * 1000 },
   async function (this: CustomWorld) {
     const imagePath = path.join(__dirname, "../../../../../images/pic2.png");
@@ -41,7 +41,7 @@ Then(
 );
 
 Then(
-  "Ejecutar el método Put al endpoint {string}",
+  "Execute the PUT method on the endpoint {string}",
   async function (this: CustomWorld, endpoint: string) {
     let paramEndpoint = endpoint;
 
@@ -81,7 +81,7 @@ Then(
 );
 
 // Then(
-//   "Se obtiene una respuesta {int} y el userId",
+//   "Obtain a response {int} y el userId",
 //   function t(this: CustomWorld, statusCode: number) {
 //     expect(this.response.status).to.equal(statusCode);
 
@@ -92,7 +92,7 @@ Then(
 //   }
 // );
 
-Then("Se crea el usuario", function (this: CustomWorld) {
+Then("The user is created", function (this: CustomWorld) {
   const response: any = this.response;
   const body: any = response.body;
   const expectedCurrencies = [
@@ -175,12 +175,12 @@ Then("Se crea el usuario", function (this: CustomWorld) {
   // }
 });
 
-Then("Se agrega la cuenta bancaria", function (this: CustomWorld) {
+Then("The bank account is added", function (this: CustomWorld) {
   expect(this.response.body).to.be.an("object");
 });
 
 Then(
-  "Se obtiene el error {string}",
+  "The error is received {string}",
   async function (this: CustomWorld, value: string) {
     this.userData["mensaje"] = value;
     const response: any = this.response;

@@ -2,143 +2,143 @@
 Feature: Onboarding User - V2
 
     # Background:
-    #     Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-    #     And Contar con la urlBase "https://sandbox.manteca.dev/crypto/v2"
+    #     Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+    #     And The urlBase is available "https://sandbox.manteca.dev/crypto/v2"
 
     @test
     Scenario: Onboarding inicial de usuario
-        Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<externalId>" a la variable "externalId"
-        And Asignar el valor "<email>" a la variable "email"
-        And Asignar el valor "<legalId>" a la variable "legalId"
-        And Asignar el valor "<exchange>" a la variable "exchange"
-        And Asignar el valor "<name>" a la variable "name"
-        And Asignar el valor "<surname>" a la variable "surname"
-        And Asignar el valor "<sex>" a la variable "sex"
-        And Asignar el valor "<work>" a la variable "work"
-        And Asignar el valor "<birthDate>" a la variable "birthDate"
-        And Asignar el valor "<maritalStatus>" a la variable "maritalStatus"
-        And Asignar el valor "<isPep>" a la variable "isPep"
-        And Asignar el valor "<isFep>" a la variable "isFep"
-        And Asignar el valor "<isFatca>" a la variable "isFatca"
-        And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
-        And Asignar el valor "<nationality>" a la variable "nationality"
-        And Asignar el valor "<street>" a la variable "street"
-        And Asignar el valor "<ARScbu>" a la variable "ARScbu"
-        And Asignar el valor "<ARScurrency>" a la variable "ARScurrency"
-        And Asignar el valor "<ARSdescription>" a la variable "ARSdescription"
-        And Asignar el valor "<USDcbu>" a la variable "USDcbu"
-        And Asignar el valor "<USDcurrency>" a la variable "USDcurrency"
-        And Asignar el valor "<USDdescription>" a la variable "USDdescription"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/initial"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<externalId>" to the variable "externalId"
+        And Assign the value "<email>" to the variable "email"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<name>" to the variable "name"
+        And Assign the value "<surname>" to the variable "surname"
+        And Assign the value "<sex>" to the variable "sex"
+        And Assign the value "<work>" to the variable "work"
+        And Assign the value "<birthDate>" to the variable "birthDate"
+        And Assign the value "<maritalStatus>" to the variable "maritalStatus"
+        And Assign the value "<isPep>" to the variable "isPep"
+        And Assign the value "<isFep>" to the variable "isFep"
+        And Assign the value "<isFatca>" to the variable "isFatca"
+        And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+        And Assign the value "<nationality>" to the variable "nationality"
+        And Assign the value "<street>" to the variable "street"
+        And Assign the value "<ARScbu>" to the variable "ARScbu"
+        And Assign the value "<ARScurrency>" to the variable "ARScurrency"
+        And Assign the value "<ARSdescription>" to the variable "ARSdescription"
+        And Assign the value "<USDcbu>" to the variable "USDcbu"
+        And Assign the value "<USDcurrency>" to the variable "USDcurrency"
+        And Assign the value "<USDdescription>" to the variable "USDdescription"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/initial"
+        Then Obtain a response 201
 
         Examples:
-            | externalId | email                                   | legalId     | exchange  | name  | surname | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street     | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | orderqaa1  | TestOnboardingV2test-order1@yopmail.com | 20332194551 | ARGENTINA | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001142  | Argentina   | Cochabamba | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | externalId  | email                                    | legalId     | exchange  | name  | surname | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street     | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | TestQRPeru6 | TestOnboardingV2test-qrperu6@yopmail.com | 27245495590 | ARGENTINA | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001148  | Argentina   | Cochabamba | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
     # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 
     @test
     Scenario: Obtener S3 url para carga de DNI FRONT
-        Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "userAnyId" a la variable "userAnyId"
-        And Asignar el valor "FRONT" a la variable "side"
-        And Asignar el valor "dni-front.jpg" a la variable "fileName"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/upload-identity-image"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "userAnyId" to the variable "userAnyId"
+        And Assign the value "FRONT" to the variable "side"
+        And Assign the value "dni-front.jpg" to the variable "fileName"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-identity-image"
+        Then Obtain a response 200
 
     @test
     Scenario: Subir DNI FRONT
-        When Ejecutar el método Put al endpoint
-        Then Se obtiene una respuesta 200
+        When Execute the PUT method on the endpoint
+        Then Obtain a response 200
 
     @test
     Scenario: Obtener S3 url para carga de DNI BACK
-        Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "userAnyId" a la variable "userAnyId"
-        And Asignar el valor "BACK" a la variable "side"
-        And Asignar el valor "dni-back.jpg" a la variable "fileName"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/upload-identity-image"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "userAnyId" to the variable "userAnyId"
+        And Assign the value "BACK" to the variable "side"
+        And Assign the value "dni-back.jpg" to the variable "fileName"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-identity-image"
+        Then Obtain a response 200
 
     @test
     Scenario: Subir DNI BACK
-        When Ejecutar el método Put al endpoint
-        Then Se obtiene una respuesta 200
+        When Execute the PUT method on the endpoint
+        Then Obtain a response 200
 
     @test
     Scenario: Obtener S3 url para carga de selfie
-        Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "userAnyId" a la variable "userAnyId"
-        And Asignar el valor "selfie.jpg" a la variable "fileName"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/upload-selfie-image"
-        Then Se obtiene una respuesta 200
+        Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "userAnyId" to the variable "userAnyId"
+        And Assign the value "selfie.jpg" to the variable "fileName"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-selfie-image"
+        Then Obtain a response 200
 
     @test
     Scenario: Subir imagen selfie
-        When Ejecutar el método Put al endpoint
-        Then Se obtiene una respuesta 200
+        When Execute the PUT method on the endpoint
+        Then Obtain a response 200
 
     @OnbV2Smoke
     Scenario Outline: Onboarding de un usuario de "<nationality>" mediante API V2
-        Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<email>" a la variable "email"
-        And Asignar el valor "<legalId>" a la variable "legalId"
-        And Asignar el valor "<exchange>" a la variable "exchange"
-        And Asignar el valor "<name>" a la variable "name"
-        And Asignar el valor "<surname>" a la variable "surname"
-        And Asignar el valor "<sex>" a la variable "sex"
-        And Asignar el valor "<work>" a la variable "work"
-        And Asignar el valor "<birthDate>" a la variable "birthDate"
-        And Asignar el valor "<maritalStatus>" a la variable "maritalStatus"
-        And Asignar el valor "<isPep>" a la variable "isPep"
-        And Asignar el valor "<isFep>" a la variable "isFep"
-        And Asignar el valor "<isFatca>" a la variable "isFatca"
-        And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
-        And Asignar el valor "<nationality>" a la variable "nationality"
-        And Asignar el valor "<street>" a la variable "street"
-        And Asignar el valor "<ARScbu>" a la variable "ARScbu"
-        And Asignar el valor "<ARScurrency>" a la variable "ARScurrency"
-        And Asignar el valor "<ARSdescription>" a la variable "ARSdescription"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Asignar el valor "<USDcbu>" a la variable "USDcbu"
-        And Asignar el valor "<USDcurrency>" a la variable "USDcurrency"
-        And Asignar el valor "<USDdescription>" a la variable "USDdescription"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/initial"
-        Then Se obtiene una respuesta 201
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<email>" to the variable "email"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<name>" to the variable "name"
+        And Assign the value "<surname>" to the variable "surname"
+        And Assign the value "<sex>" to the variable "sex"
+        And Assign the value "<work>" to the variable "work"
+        And Assign the value "<birthDate>" to the variable "birthDate"
+        And Assign the value "<maritalStatus>" to the variable "maritalStatus"
+        And Assign the value "<isPep>" to the variable "isPep"
+        And Assign the value "<isFep>" to the variable "isFep"
+        And Assign the value "<isFatca>" to the variable "isFatca"
+        And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+        And Assign the value "<nationality>" to the variable "nationality"
+        And Assign the value "<street>" to the variable "street"
+        And Assign the value "<ARScbu>" to the variable "ARScbu"
+        And Assign the value "<ARScurrency>" to the variable "ARScurrency"
+        And Assign the value "<ARSdescription>" to the variable "ARSdescription"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Assign the value "<USDcbu>" to the variable "USDcbu"
+        And Assign the value "<USDcurrency>" to the variable "USDcurrency"
+        And Assign the value "<USDdescription>" to the variable "USDdescription"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/initial"
+        Then Obtain a response 201
 
-        When Asignar el valor "userAnyId" a la variable "userAnyId"
-        And Asignar el valor "FRONT" a la variable "side"
-        And Asignar el valor "dni-front.jpg" a la variable "fileName"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/upload-identity-image"
-        Then Se obtiene una respuesta 200
+        When Assign the value "userAnyId" to the variable "userAnyId"
+        And Assign the value "FRONT" to the variable "side"
+        And Assign the value "dni-front.jpg" to the variable "fileName"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-identity-image"
+        Then Obtain a response 200
 
-        When Ejecutar el método Put al endpoint
-        Then Se obtiene una respuesta 200
+        When Execute the PUT method on the endpoint
+        Then Obtain a response 200
 
-        When Asignar el valor "userAnyId" a la variable "userAnyId"
-        And Asignar el valor "BACK" a la variable "side"
-        And Asignar el valor "dni-back.jpg" a la variable "fileName"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/upload-identity-image"
-        Then Se obtiene una respuesta 200
+        When Assign the value "userAnyId" to the variable "userAnyId"
+        And Assign the value "BACK" to the variable "side"
+        And Assign the value "dni-back.jpg" to the variable "fileName"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-identity-image"
+        Then Obtain a response 200
 
-        When Ejecutar el método Put al endpoint
-        Then Se obtiene una respuesta 200
+        When Execute the PUT method on the endpoint
+        Then Obtain a response 200
 
-        When Asignar el valor "userAnyId" a la variable "userAnyId"
-        And Asignar el valor "selfie.jpg" a la variable "fileName"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/upload-selfie-image"
-        Then Se obtiene una respuesta 200
+        When Assign the value "userAnyId" to the variable "userAnyId"
+        And Assign the value "selfie.jpg" to the variable "fileName"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-selfie-image"
+        Then Obtain a response 200
 
-        When Ejecutar el método Put al endpoint
-        Then Se obtiene una respuesta 200
+        When Execute the PUT method on the endpoint
+        Then Obtain a response 200
 
         Examples:
             | email                                | legalId  | exchange | name | surname    | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | street         | nationality | ARScbu        | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription | bankCode | accountType |
@@ -174,17 +174,17 @@ Feature: Onboarding User - V2
     #* Para volver a realizar test se debe limpiar el bankAddress de la DB de casa user
     @testBankingCHL
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<currency>" a la variable "currency"
-        And Asignar el valor "<description>" a la variable "description"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/add-bank-account"
-        Then Se obtiene una respuesta 204
-        And Esperar procesamiento de la "DB" por 3 segundos
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<currency>" to the variable "currency"
+        And Assign the value "<description>" to the variable "description"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/add-bank-account"
+        Then Obtain a response 204
+        And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
             | country | userAnyId | address     | currency | description | bankCode | accountType |
@@ -232,17 +232,17 @@ Feature: Onboarding User - V2
 
     @testBankingPAN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<currency>" a la variable "currency"
-        And Asignar el valor "<description>" a la variable "description"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/add-bank-account"
-        Then Se obtiene una respuesta 204
-        And Esperar procesamiento de la "DB" por 3 segundos
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<currency>" to the variable "currency"
+        And Assign the value "<description>" to the variable "description"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/add-bank-account"
+        Then Obtain a response 204
+        And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
             | country | userAnyId | address       | currency | description | bankCode | accountType |
@@ -291,17 +291,17 @@ Feature: Onboarding User - V2
 
     @testBankingCOL
     Scenario: Agregar cuenta bancaria a usuario de "<country>" con tipo de cuenta <accountType>
-        Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<currency>" a la variable "currency"
-        And Asignar el valor "<description>" a la variable "description"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/add-bank-account"
-        Then Se obtiene una respuesta 204
-        And Esperar procesamiento de la "DB" por 3 segundos
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<currency>" to the variable "currency"
+        And Assign the value "<description>" to the variable "description"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/add-bank-account"
+        Then Obtain a response 204
+        And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
             | country  | userAnyId | address         | currency | description | bankCode | accountType |
@@ -340,17 +340,17 @@ Feature: Onboarding User - V2
 
     @testBankingGUA
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<currency>" a la variable "currency"
-        And Asignar el valor "<description>" a la variable "description"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/add-bank-account"
-        Then Se obtiene una respuesta 204
-        And Esperar procesamiento de la "DB" por 3 segundos
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<currency>" to the variable "currency"
+        And Assign the value "<description>" to the variable "description"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/add-bank-account"
+        Then Obtain a response 204
+        And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
             | country   | userAnyId | address        | currency | description | bankCode | accountType |
@@ -387,17 +387,17 @@ Feature: Onboarding User - V2
 
     @testBankingCTR
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<currency>" a la variable "currency"
-        And Asignar el valor "<description>" a la variable "description"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/add-bank-account"
-        Then Se obtiene una respuesta 204
-        And Esperar procesamiento de la "DB" por 3 segundos
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<currency>" to the variable "currency"
+        And Assign the value "<description>" to the variable "description"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/add-bank-account"
+        Then Obtain a response 204
+        And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
             | country    | userAnyId | address                | currency | description | bankCode | accountType |
@@ -436,17 +436,17 @@ Feature: Onboarding User - V2
 
     @testBankingMXN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given Contar con la api-key "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
-        When Asignar el valor "<userAnyId>" a la variable "userAnyId"
-        And Asignar el valor "<address>" a la variable "address"
-        And Asignar el valor "<currency>" a la variable "currency"
-        And Asignar el valor "<description>" a la variable "description"
-        And Asignar el valor "<bankCode>" a la variable "bankCode"
-        And Asignar el valor "<accountType>" a la variable "accountType"
-        And Ejecutar el método Post al endpoint "/v2/onboarding-actions/add-bank-account"
-        Then Se obtiene una respuesta 204
-        And Esperar procesamiento de la "DB" por 3 segundos
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<currency>" to the variable "currency"
+        And Assign the value "<description>" to the variable "description"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/onboarding-actions/add-bank-account"
+        Then Obtain a response 204
+        And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
             | country | userAnyId | address            | currency | description | bankCode | accountType |

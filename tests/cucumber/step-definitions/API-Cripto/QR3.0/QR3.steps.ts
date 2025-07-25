@@ -8,7 +8,7 @@ import {
 } from "../../../../support/utils";
 
 Then(
-  "Se validan los atributos del sintético QR USDT",
+  "The attributes of the QR USDT synthetic are validated",
   async function (this: CustomWorld) {
     const response: any = this.response;
     const body: any = response.body;
@@ -20,7 +20,7 @@ Then(
 );
 
 Then(
-  "Se validan los atributos del sintético QR ARS",
+  "The attributes of the QR ARS synthetic are validated",
   async function (this: CustomWorld) {
     const response: any = this.response;
     const body: any = response.body;
@@ -32,7 +32,7 @@ Then(
 );
 
 Then(
-  "Ejecutar sintetico refund {string}",
+  "Execute the refund synthetic {string}",
   { timeout: 500 * 1000 },
   async function (this: CustomWorld, flag: string) {
     try {
@@ -51,7 +51,7 @@ Then(
 );
 
 Then(
-  "Se obtiene una respuesta {int} y status {string}",
+  "Obtain a response {int} y status {string}",
   { timeout: 500 * 1000 },
   async function (this: CustomWorld, statusCode: number, statusName: string) {
     const response = this.response;

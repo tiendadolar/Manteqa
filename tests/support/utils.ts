@@ -1,24 +1,17 @@
-const request = require("supertest");
-import { use } from "chai";
-import { CustomWorld } from "../support/world";
+const request = require('supertest');
+import { use } from 'chai';
+import { CustomWorld } from '../support/world';
 
-const getUserByLegalId = async (
-  legalId: string,
-  url: string,
-  token: string
-) => {
+const getUserByLegalId = async (legalId: string, url: string, token: string) => {
   const urlBase = `https://api-qa.tiendacrypto.com`;
   const endpoint = `/v1/admin/user/search?keyword=${legalId}&page=1&limit=10`;
 
-  const response = await request(urlBase)
-    .get(endpoint)
-    .set("x-access-token", token)
-    .set("User-Agent", "PostmanRuntime/7.44.1");
+  const response = await request(urlBase).get(endpoint).set('x-access-token', token).set('User-Agent', 'PostmanRuntime/7.44.1');
   return response.body.users.numberId;
 };
 
 export const delay = (ms: number): Promise<void> => {
-  console.log("EJECUTANDO DELAY");
+  console.log('EJECUTANDO DELAY');
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
@@ -27,14 +20,10 @@ export const deleteOnbUser = async (userData: any) => {
   const endpoint = `/v1/admin/user`;
 
   let payload = {
-    numberId: getUserByLegalId(userData.legalId, userData.url, userData.token),
+    numberId: getUserByLegalId(userData.legalId, userData.url, userData.token)
   };
 
-  const response = await request(urlBase)
-    .delete(endpoint)
-    .set("x-access-token", userData.token)
-    .set("User-Agent", "PostmanRuntime/7.44.1")
-    .send(payload);
+  const response = await request(urlBase).delete(endpoint).set('x-access-token', userData.token).set('User-Agent', 'PostmanRuntime/7.44.1').send(payload);
 };
 
 //-----API CRIPTO-----//
@@ -49,34 +38,34 @@ export const inicialOnboardingApiCrypto = (userData: any) => {
       work: userData.work,
       birthDate: userData.birthDate,
       maritalStatus: userData.maritalStatus,
-      isPep: userData.isPep === "true",
-      isFep: userData.isFep === "true",
-      isFatca: userData.isFatca === "true",
+      isPep: userData.isPep === 'true',
+      isFep: userData.isFep === 'true',
+      isFatca: userData.isFatca === 'true',
       // isUif: userData.isUif === "true",
       // phoneNumber: userData.phoneNumber, // Esta roto por el momento
-      nationality: userData.nationality,
+      nationality: userData.nationality
     },
     banking: {
       accounts: [
         {
           cbu: userData.ARScbu,
           currency: userData.ARScurrency,
-          description: userData.ARSdescription,
+          description: userData.ARSdescription
         },
         {
           cbu: userData.USDcbu,
           currency: userData.USDcurrency,
-          description: userData.USDdescription,
-        },
-      ],
-    },
+          description: userData.USDdescription
+        }
+      ]
+    }
   };
 };
 
 export const inicialOnboardingApiCryptoV2 = (userData: any) => {
   console.log(userData.nationality);
 
-  if (userData.nationality === "Argentina") {
+  if (userData.nationality === 'Argentina') {
     return {
       userExternalId: userData.userExternalId,
       email: userData.email,
@@ -89,14 +78,14 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
         work: userData.work,
         birthDate: userData.birthDate,
         maritalStatus: userData.maritalStatus,
-        isPep: userData.isPep === "true",
-        isFep: userData.isFep === "true",
-        isFatca: userData.isFatca === "true",
+        isPep: userData.isPep === 'true',
+        isFep: userData.isFep === 'true',
+        isFatca: userData.isFatca === 'true',
         phoneNumber: userData.phoneNumber, // Esta roto por el momento
         nationality: userData.nationality,
         address: {
-          street: userData.street,
-        },
+          street: userData.street
+        }
       },
       banking: {
         // accounts: [
@@ -111,7 +100,7 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
         //     description: userData.USDdescription,
         //   },
         // ],
-      },
+      }
     };
   } else {
     return {
@@ -125,14 +114,14 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
         work: userData.work,
         birthDate: userData.birthDate,
         maritalStatus: userData.maritalStatus,
-        isPep: userData.isPep === "true",
-        isFep: userData.isFep === "true",
-        isFatca: userData.isFatca === "true",
+        isPep: userData.isPep === 'true',
+        isFep: userData.isFep === 'true',
+        isFatca: userData.isFatca === 'true',
         phoneNumber: userData.phoneNumber, // Esta roto por el momento
         nationality: userData.nationality,
         address: {
-          street: userData.street,
-        },
+          street: userData.street
+        }
       },
       banking: {
         // accounts: [
@@ -146,58 +135,39 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
         //     accountType: userData.accountType,
         //   },
         // ],
-      },
+      }
     };
   }
 };
 
 export const criptoDepositApiCrypto = (userData: any) => {
-  if (CustomWorld.getStoreData("thresholdAmount") === undefined) {
+  if (CustomWorld.getStoreData('thresholdAmount') === undefined) {
     return {
       tx: {
         hash: CustomWorld.getNetworkId(),
-        from: userData.from || "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5",
-        to:
-          CustomWorld.getStoreData("depositAddress") ||
-          userData.to ||
-          userData.details.depositAddress,
+        from: userData.from || '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5',
+        to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress,
         value: {
-          wei:
-            userData.wei ||
-            userData.stages["1"].thresholdAmount * 1000000000000000000,
-          human:
-            CustomWorld.getStoreData("thresholdAmount") ||
-            userData.human ||
-            userData.stages["1"].thresholdAmount,
+          wei: userData.wei || userData.stages['1'].thresholdAmount * 1000000000000000000,
+          human: CustomWorld.getStoreData('thresholdAmount') || userData.human || userData.stages['1'].thresholdAmount
         },
         ticker: userData.ticker || userData.details.paymentAgainstAsset,
-        chain: userData.chain || 0,
-      },
+        chain: userData.chain || 0
+      }
     };
   } else {
     return {
       tx: {
         hash: CustomWorld.getNetworkId(),
-        from: userData.from || "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5",
-        to:
-          CustomWorld.getStoreData("depositAddress") ||
-          userData.to ||
-          userData.details.depositAddress,
+        from: userData.from || '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5',
+        to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress,
         value: {
-          wei:
-            (
-              CustomWorld.getStoreData("thresholdAmount") * 1000000000000000000
-            ).toString() ||
-            userData.wei ||
-            userData.stages["1"].thresholdAmount * 1000000000000000000,
-          human:
-            CustomWorld.getStoreData("thresholdAmount") ||
-            userData.human ||
-            userData.stages["1"].thresholdAmount,
+          wei: (CustomWorld.getStoreData('thresholdAmount') * 1000000000000000000).toString() || userData.wei || userData.stages['1'].thresholdAmount * 1000000000000000000,
+          human: CustomWorld.getStoreData('thresholdAmount') || userData.human || userData.stages['1'].thresholdAmount
         },
         ticker: userData.ticker || userData.details.paymentAgainstAsset,
-        chain: userData.chain || 0,
-      },
+        chain: userData.chain || 0
+      }
     };
   }
 };
@@ -205,15 +175,9 @@ export const criptoDepositApiCrypto = (userData: any) => {
 // Deposito fiat
 export const fiatDepositApiCrypto = (userData: any) => {
   return {
-    userId: CustomWorld.getStoreData("userNumberId") || userData.userNumberId,
-    amount:
-      CustomWorld.getStoreData("thresholdAmount") ||
-      userData.amount ||
-      userData.stages["1"].thresholdAmount,
-    coin:
-      CustomWorld.getStoreData("coin") ||
-      userData.coin ||
-      userData.details.paymentAgainstAsset,
+    userId: CustomWorld.getStoreData('userNumberId') || userData.userNumberId || userData.userId,
+    amount: CustomWorld.getStoreData('thresholdAmount') || userData.amount || userData.stages['1'].thresholdAmount,
+    coin: CustomWorld.getStoreData('coin') || userData.coin || userData.details.paymentAgainstAsset
   };
 };
 
@@ -223,21 +187,17 @@ export const fiatWithdrawApiCrypto = (userData: any) => {
       coin: userData.coin,
       amount: (userData.amount * 1000000000000000000).toString(),
       to: userData.to,
-      chain: userData.chain,
+      chain: userData.chain
     },
     userId: userData.userId,
-    costCode: CustomWorld.getStoreData("pixCode"),
+    costCode: CustomWorld.getStoreData('pixCode')
   };
 };
 
 export const fiatWithdrawApiCryptoV2 = (userData: any) => {
-  console.log(CustomWorld.getStoreData("code"));
+  console.log(CustomWorld.getStoreData('code'));
 
-  if (
-    userData.asset === "ARS" ||
-    userData.asset === "USD" ||
-    userData.asset === "BRL"
-  ) {
+  if (userData.asset === 'ARS' || userData.asset === 'USD' || userData.asset === 'BRL') {
     return {
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
@@ -246,10 +206,10 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
       amount: userData.amount,
       destination: {
         network: userData.network,
-        address: userData.address,
-      },
+        address: userData.address
+      }
     };
-  } else if (userData.asset === "CRC") {
+  } else if (userData.asset === 'CRC') {
     return {
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
@@ -260,12 +220,12 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
         network: userData.network,
         address: userData.address,
         bankCode: userData.bankCode,
-        accountType: userData.accountType,
-      },
+        accountType: userData.accountType
+      }
     };
   }
 
-  if (userData.type === "crypto") {
+  if (userData.type === 'crypto') {
     // if (userData.country === "ARG" || userData.country === "BRL") {
     return {
       sessionId: CustomWorld.getSessionId(userData.sessionId),
@@ -275,14 +235,11 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
       amount: userData.amount,
       destination: {
         network: userData.network,
-        address: userData.address,
+        address: userData.address
       },
-      withdrawLockCode: CustomWorld.getStoreData("code"),
+      withdrawLockCode: CustomWorld.getStoreData('code')
     };
-  } else if (
-    userData.type === "crypto" &&
-    CustomWorld.getStoreData("code") !== undefined
-  ) {
+  } else if (userData.type === 'crypto' && CustomWorld.getStoreData('code') !== undefined) {
     return {
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
@@ -291,9 +248,9 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
       amount: userData.amount,
       destination: {
         network: userData.network,
-        address: userData.address,
+        address: userData.address
       },
-      withdrawLockCode: CustomWorld.getStoreData("code"),
+      withdrawLockCode: CustomWorld.getStoreData('code')
     };
   }
 
@@ -307,8 +264,8 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
       network: userData.network,
       address: userData.address,
       bankCode: userData.bankCode,
-      accountType: userData.accountType,
-    },
+      accountType: userData.accountType
+    }
   };
 };
 
@@ -317,22 +274,22 @@ export const pepInfoCrypto = (userData: any) => {
     pepData: {
       charge: userData.charge,
       authority: userData.authority,
-      character: userData.character,
-    },
+      character: userData.character
+    }
   };
 };
 
 // Onboarding Add Bank Account
 export const bankingOnboardingApiCrypto = (userData: any) => {
   return {
-    userAnyId: CustomWorld.getStoreData("userId") || userData.userAnyId,
+    userAnyId: CustomWorld.getStoreData('userId') || userData.userAnyId,
     currency: userData.currency,
     cbu: userData.address,
     description: userData.description,
     bank: {
-      code: userData.bankCode,
+      code: userData.bankCode
     },
-    accountType: userData.accountType,
+    accountType: userData.accountType
   };
 };
 
@@ -344,58 +301,47 @@ export const withdrawLockApiCryptoV2 = (userData: any) => {
     asset: userData.asset,
     destination: {
       address: userData.address,
-      network: userData.network,
-    },
+      network: userData.network
+    }
   };
 };
 
-export const refundPollingWithDeposit = async function (
-  data: any,
-  userData: any
-) {
+export const refundPollingWithDeposit = async function (data: any, userData: any) {
   const maxAttemps: number = 15;
   let attempsCounter: number = 0;
 
-  const endpointLock: String = "/v2/payment-locks";
+  const endpointLock: String = '/v2/payment-locks';
   let payloadLock: object = {
     userAnyId: userData.userAnyId,
     paymentDestination: userData.paymentDestination,
     against: userData.against,
-    amount: userData.amount,
+    amount: userData.amount
   };
 
-  const endpointPayment: String = "/v2/synthetics/qr-payment";
+  const endpointPayment: String = '/v2/synthetics/qr-payment';
   let payloadPayment: object = {};
 
-  let endpointGetSynthetic: String = "";
+  let endpointGetSynthetic: String = '';
 
   while (attempsCounter < maxAttemps) {
     // Lock-Price Creation
-    userData.response = await request(data.urlBase)
-      .post(endpointLock)
-      .set("md-api-key", data.apiKey)
-      .set("User-Agent", "PostmanRuntime/7.44.1")
-      .send(payloadLock);
-    console.log("API payload:", payloadLock);
-    console.log("API response:", userData.response.body);
+    userData.response = await request(data.urlBase).post(endpointLock).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1').send(payloadLock);
+    console.log('API payload:', payloadLock);
+    console.log('API response:', userData.response.body);
 
     let pixCode = userData.response.body.code;
     payloadPayment = {
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
-      pixCode: pixCode,
+      pixCode: pixCode
     };
 
     await delay(3000);
 
     // Synthetic creation
-    userData.response = await request(data.urlBase)
-      .post(endpointPayment)
-      .set("md-api-key", data.apiKey)
-      .set("User-Agent", "PostmanRuntime/7.44.1")
-      .send(payloadPayment);
-    console.log("API payload:", payloadPayment);
-    console.log("API response:", userData.response.body);
+    userData.response = await request(data.urlBase).post(endpointPayment).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1').send(payloadPayment);
+    console.log('API payload:', payloadPayment);
+    console.log('API response:', userData.response.body);
 
     await delay(3000);
 
@@ -403,44 +349,41 @@ export const refundPollingWithDeposit = async function (
     endpointGetSynthetic = `/v1/synthetics/${syntheticId}`;
 
     // Deposits
-    if (userData.against === "USDT") {
-      let endpointDeposit = "/v1/transaction/deposit";
+    if (userData.against === 'USDT') {
+      let endpointDeposit = '/v1/transaction/deposit';
       let depositCryptoPayload = criptoDepositApiCrypto(userData.response.body);
 
       // Crypto deposit
       userData.response = await request(data.urlBase)
         .post(endpointDeposit)
-        .set("md-api-key", userData.apiKeyDeposit)
-        .set("x-api-secret", data.apiSecret)
-        .set("User-Agent", "PostmanRuntime/7.44.1")
+        .set('md-api-key', userData.apiKeyDeposit)
+        .set('x-api-secret', data.apiSecret)
+        .set('User-Agent', 'PostmanRuntime/7.44.1')
         .send(depositCryptoPayload);
-      console.log("API payload:", depositCryptoPayload);
-      console.log("API response:", userData.response.body);
+      console.log('API payload:', depositCryptoPayload);
+      console.log('API response:', userData.response.body);
     } else {
-      let endpointDeposit = "/v1/fiat/deposit";
+      let endpointDeposit = '/v1/fiat/deposit';
       let depositFiatPayload = fiatDepositApiCrypto(userData.response.body);
 
       // Fiat deposit
       userData.response = await request(data.urlBase)
         .post(endpointDeposit)
-        .set("md-api-key", "C10XB2Z-AG243CS-G42KB2M-4085WTF")
-        .set("x-api-secret", data.apiSecret)
-        .set("User-Agent", "PostmanRuntime/7.44.1")
+        .set('md-api-key', 'C10XB2Z-AG243CS-G42KB2M-4085WTF')
+        .set('x-api-secret', data.apiSecret)
+        .set('User-Agent', 'PostmanRuntime/7.44.1')
         .send(depositFiatPayload);
-      console.log("API payload:", depositFiatPayload);
-      console.log("API response:", userData.response.body);
+      console.log('API payload:', depositFiatPayload);
+      console.log('API response:', userData.response.body);
     }
 
     await delay(10000);
 
     // Get synthetic
-    userData.response = await request(data.urlBase)
-      .get(endpointGetSynthetic)
-      .set("md-api-key", data.apiKey)
-      .set("User-Agent", "PostmanRuntime/7.44.1");
-    console.log("API response GET:", userData.response.body);
+    userData.response = await request(data.urlBase).get(endpointGetSynthetic).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1');
+    console.log('API response GET:', userData.response.body);
 
-    if (userData.response.body.status === "CANCELLED") return userData.response;
+    if (userData.response.body.status === 'CANCELLED') return userData.response;
 
     attempsCounter++;
   }
@@ -450,53 +393,42 @@ export const refundsPolling = async function (data: any, userData: any) {
   const maxAttemps: number = 15;
   let attempsCounter: number = 0;
 
-  const endpointLock: String = "/v2/payment-locks";
+  const endpointLock: String = '/v2/payment-locks';
   let payloadLock: object = {
     userAnyId: userData.userAnyId,
     paymentDestination: userData.paymentDestination,
     against: userData.against,
-    amount: userData.amount,
+    amount: userData.amount
   };
 
-  const endpointPayment: String = "/v2/synthetics/qr-payment";
+  const endpointPayment: String = '/v2/synthetics/qr-payment';
   let payloadPayment: object = {};
 
   let endpointGetSynthetic: String = ``;
 
   while (attempsCounter < maxAttemps) {
-    userData.response = await request(data.urlBase)
-      .post(endpointLock)
-      .set("md-api-key", data.apiKey)
-      .set("User-Agent", "PostmanRuntime/7.44.1")
-      .send(payloadLock);
+    userData.response = await request(data.urlBase).post(endpointLock).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1').send(payloadLock);
 
     let pixCode = userData.response.body.code;
     payloadPayment = {
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
-      pixCode: pixCode,
+      pixCode: pixCode
     };
 
     await delay(3000);
 
-    userData.response = await request(data.urlBase)
-      .post(endpointPayment)
-      .set("md-api-key", data.apiKey)
-      .set("User-Agent", "PostmanRuntime/7.44.1")
-      .send(payloadPayment);
+    userData.response = await request(data.urlBase).post(endpointPayment).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1').send(payloadPayment);
 
     let syntheticId = userData.response.body.id;
     endpointGetSynthetic = `/v1/synthetics/${syntheticId}`;
 
     await delay(10000);
 
-    userData.response = await request(data.urlBase)
-      .get(endpointGetSynthetic)
-      .set("md-api-key", data.apiKey)
-      .set("User-Agent", "PostmanRuntime/7.44.1");
-    console.log("API response GET:", userData.response.body);
+    userData.response = await request(data.urlBase).get(endpointGetSynthetic).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1');
+    console.log('API response GET:', userData.response.body);
 
-    if (userData.response.body.status === "CANCELLED") return userData.response;
+    if (userData.response.body.status === 'CANCELLED') return userData.response;
 
     attempsCounter++;
   }
@@ -516,46 +448,46 @@ export const inicialOnboardingApiCambio = (userData: any) => {
       work: userData.work,
       birthDate: userData.birthDate,
       maritalStatus: userData.maritalStatus,
-      isPep: userData.isPep === "true",
-      isFep: userData.isFep === "true",
-      isFatca: userData.isFatca === "true",
-      isUif: userData.isUif === "true",
+      isPep: userData.isPep === 'true',
+      isFep: userData.isFep === 'true',
+      isFatca: userData.isFatca === 'true',
+      isUif: userData.isUif === 'true',
       phoneNumber: userData.phoneNumber,
-      nationality: userData.nationality,
+      nationality: userData.nationality
     },
     banking: {
       accounts: [
         {
           cbu: userData.ARScbu,
           currency: userData.ARScurrency,
-          description: userData.ARSdescription,
+          description: userData.ARSdescription
         },
         {
           cbu: userData.USDcbu,
           currency: userData.USDcurrency,
-          description: userData.USDdescription,
-        },
-      ],
-    },
+          description: userData.USDdescription
+        }
+      ]
+    }
   };
 };
 
 //  Onboarding Validate Docs
 export const validateOnboardingApiCambio = (userData: any) => {
   return {
-    userAnyId: CustomWorld.getStoreData("userId"),
+    userAnyId: CustomWorld.getStoreData('userId'),
     side: userData.side,
-    fileName: userData.fileName,
+    fileName: userData.fileName
   };
 };
 
 // Onboarding Add Bank Account
 export const bankingOnboardingApiCambio = (userData: any) => {
   return {
-    userAnyId: CustomWorld.getStoreData("userId"),
+    userAnyId: CustomWorld.getStoreData('userId'),
     address: userData.address,
     currency: userData.currency,
-    description: userData.description,
+    description: userData.description
   };
 };
 
@@ -567,7 +499,7 @@ export const fiatDepositApiCambio = (userData: any) => {
     userId: userData.userId,
     source: userData.source,
     legalId: userData.legalId,
-    amount: CustomWorld.getStoreData("thresholdAmount"),
-    coin: CustomWorld.getStoreData("coin"),
+    amount: CustomWorld.getStoreData('thresholdAmount'),
+    coin: CustomWorld.getStoreData('coin')
   };
 };

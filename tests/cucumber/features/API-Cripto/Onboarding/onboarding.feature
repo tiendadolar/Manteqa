@@ -2,22 +2,22 @@
 Feature: Onboarding User - V1
 
   Background:
-    Given Contar con la api-key "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-    And Contar con la urlBase "https://sandbox.manteca.dev/crypto"
+    Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+    And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
 
   # E2E
   @f
   Scenario Outline: Registro exitoso de usuario
-    When Asignar el valor "<name>" a la variable "name"
-    And Asignar el valor "<email>" a la variable "email"
-    And Asignar el valor "<legalId>" a la variable "legalId"
-    And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
-    And Asignar el valor "<country>" a la variable "country"
-    And Asignar el valor "<civilState>" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 200
-    And Se crea el usuario
+    When Assign the value "<name>" to the variable "name"
+    And Assign the value "<email>" to the variable "email"
+    And Assign the value "<legalId>" to the variable "legalId"
+    And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+    And Assign the value "<country>" to the variable "country"
+    And Assign the value "<civilState>" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 200
+    And The user is created
 
     #Para generar nuevos usuarios ingresar CUIL válido e incrementar en uno el numero de email y phoneNumber en Examples
     Examples:
@@ -25,67 +25,67 @@ Feature: Onboarding User - V1
       | User QR V2 NoDesc | no_tocar13@yopmail.com | 23213974629 | 5492696621080 | Argentina | SOLTERO    |
   @f
   Scenario: Agregar cuenta bancaria
-    When Asignar el valor "0140420703690150418728" a la variable "cbu"
-    And Asignar el valor "Galicia" a la variable "description"
-    And Ejecutar el método Post al endpoint "/v1/user/{userId}/bankaccount/ARS"
-    Then Se obtiene una respuesta 200
-    And Se agrega la cuenta bancaria
+    When Assign the value "0140420703690150418728" to the variable "cbu"
+    And Assign the value "Galicia" to the variable "description"
+    And Execute the POST method on the endpoint "/v1/user/{userId}/bankaccount/ARS"
+    Then Obtain a response 200
+    And The bank account is added
   @f
   Scenario: Obtener S3 url
-    When Asignar el valor "DNI_FRONT" a la variable "docType"
-    And Asignar el valor "picfront.jpg" a la variable "fileName"
-    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-    Then Se obtiene una respuesta 200
+    When Assign the value "DNI_FRONT" to the variable "docType"
+    And Assign the value "picfront.jpg" to the variable "fileName"
+    And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Obtain a response 200
   @f
   Scenario: Subir documento
-    When Ejecutar el método Put al endpoint
-    Then Se obtiene una respuesta 200
+    When Execute the PUT method on the endpoint
+    Then Obtain a response 200
   @f
   Scenario: Obtener S3 url
-    When Asignar el valor "DNI_BACK" a la variable "docType"
-    And Asignar el valor "picback.jpg" a la variable "fileName"
-    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-    Then Se obtiene una respuesta 200
+    When Assign the value "DNI_BACK" to the variable "docType"
+    And Assign the value "picback.jpg" to the variable "fileName"
+    And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Obtain a response 200
   @f
   Scenario: Subir documento
-    When Ejecutar el método Put al endpoint
-    Then Se obtiene una respuesta 200
+    When Execute the PUT method on the endpoint
+    Then Obtain a response 200
 
   # -----
 
   @SmokeOnboarding5
   Scenario Outline: Validar onboarding exitoso de usuario
-    When Asignar el valor "<name>" a la variable "name"
-    And Asignar el valor "<email>" a la variable "email"
-    And Asignar el valor "<legalId>" a la variable "legalId"
-    And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
-    And Asignar el valor "<country>" a la variable "country"
-    And Asignar el valor "<civilState>" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 200
-    And Se crea el usuario
+    When Assign the value "<name>" to the variable "name"
+    And Assign the value "<email>" to the variable "email"
+    And Assign the value "<legalId>" to the variable "legalId"
+    And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+    And Assign the value "<country>" to the variable "country"
+    And Assign the value "<civilState>" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 200
+    And The user is created
 
-    When Asignar el valor "0140420703690150418728" a la variable "cbu"
-    And Asignar el valor "Galicia" a la variable "description"
-    And Ejecutar el método Post al endpoint "/v1/user/{userId}/bankaccount/ARS"
-    Then Se obtiene una respuesta 200
-    And Se agrega la cuenta bancaria
+    When Assign the value "0140420703690150418728" to the variable "cbu"
+    And Assign the value "Galicia" to the variable "description"
+    And Execute the POST method on the endpoint "/v1/user/{userId}/bankaccount/ARS"
+    Then Obtain a response 200
+    And The bank account is added
 
-    When Asignar el valor "DNI_FRONT" a la variable "docType"
-    And Asignar el valor "picfront.jpg" a la variable "fileName"
-    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-    Then Se obtiene una respuesta 200
+    When Assign the value "DNI_FRONT" to the variable "docType"
+    And Assign the value "picfront.jpg" to the variable "fileName"
+    And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Obtain a response 200
 
-    When Ejecutar el método Put al endpoint
-    Then Se obtiene una respuesta 200
+    When Execute the PUT method on the endpoint
+    Then Obtain a response 200
 
-    When Asignar el valor "DNI_BACK" a la variable "docType"
-    And Asignar el valor "picback.jpg" a la variable "fileName"
-    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-    Then Se obtiene una respuesta 200
+    When Assign the value "DNI_BACK" to the variable "docType"
+    And Assign the value "picback.jpg" to the variable "fileName"
+    And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Obtain a response 200
 
-    When Ejecutar el método Put al endpoint
-    Then Se obtiene una respuesta 200
+    When Execute the PUT method on the endpoint
+    Then Obtain a response 200
 
     Examples:
       | name               | email           | legalId     | phoneNumber   | country   | civilState |
@@ -93,37 +93,37 @@ Feature: Onboarding User - V1
 
   @SmokeOnboarding1
   Scenario Outline: Validar onboarding exitoso de usuario
-    When Asignar el valor "<name>" a la variable "name"
-    And Asignar el valor "<email>" a la variable "email"
-    And Asignar el valor "<legalId>" a la variable "legalId"
-    And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
-    And Asignar el valor "<country>" a la variable "country"
-    And Asignar el valor "<civilState>" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 200
-    And Se crea el usuario
+    When Assign the value "<name>" to the variable "name"
+    And Assign the value "<email>" to the variable "email"
+    And Assign the value "<legalId>" to the variable "legalId"
+    And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+    And Assign the value "<country>" to the variable "country"
+    And Assign the value "<civilState>" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 200
+    And The user is created
 
-    When Asignar el valor "0140420703690150418728" a la variable "cbu"
-    And Asignar el valor "Galicia" a la variable "description"
-    And Ejecutar el método Post al endpoint "/v1/user/{userId}/bankaccount/ARS"
-    Then Se obtiene una respuesta 200
-    And Se agrega la cuenta bancaria
+    When Assign the value "0140420703690150418728" to the variable "cbu"
+    And Assign the value "Galicia" to the variable "description"
+    And Execute the POST method on the endpoint "/v1/user/{userId}/bankaccount/ARS"
+    Then Obtain a response 200
+    And The bank account is added
 
-    When Asignar el valor "DNI_FRONT" a la variable "docType"
-    And Asignar el valor "picfront.jpg" a la variable "fileName"
-    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-    Then Se obtiene una respuesta 200
+    When Assign the value "DNI_FRONT" to the variable "docType"
+    And Assign the value "picfront.jpg" to the variable "fileName"
+    And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Obtain a response 200
 
-    When Ejecutar el método Put al endpoint
-    Then Se obtiene una respuesta 200
+    When Execute the PUT method on the endpoint
+    Then Obtain a response 200
 
-    When Asignar el valor "DNI_BACK" a la variable "docType"
-    And Asignar el valor "picback.jpg" a la variable "fileName"
-    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-    Then Se obtiene una respuesta 200
+    When Assign the value "DNI_BACK" to the variable "docType"
+    And Assign the value "picback.jpg" to the variable "fileName"
+    And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Obtain a response 200
 
-    When Ejecutar el método Put al endpoint
-    Then Se obtiene una respuesta 200
+    When Execute the PUT method on the endpoint
+    Then Obtain a response 200
 
     Examples:
       | name        | email                 | legalId     | phoneNumber   | country   | civilState |
@@ -136,43 +136,43 @@ Feature: Onboarding User - V1
 
   @OnboardingPEP @SmokeOnboarding
   Scenario Outline: Validar onboarding exitoso de usuario PEP
-    When Asignar el valor "<name>" a la variable "name"
-    And Asignar el valor "<email>" a la variable "email"
-    And Asignar el valor "<legalId>" a la variable "legalId"
-    And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
-    And Asignar el valor "<country>" a la variable "country"
-    And Asignar el valor "<civilState>" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 200
-    And Se crea el usuario
+    When Assign the value "<name>" to the variable "name"
+    And Assign the value "<email>" to the variable "email"
+    And Assign the value "<legalId>" to the variable "legalId"
+    And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+    And Assign the value "<country>" to the variable "country"
+    And Assign the value "<civilState>" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 200
+    And The user is created
 
-    When Asignar el valor "0140420703690150418728" a la variable "cbu"
-    And Asignar el valor "Galicia" a la variable "description"
-    And Ejecutar el método Post al endpoint "/v1/user/{userId}/bankaccount/ARS"
-    Then Se obtiene una respuesta 200
-    And Se agrega la cuenta bancaria
+    When Assign the value "0140420703690150418728" to the variable "cbu"
+    And Assign the value "Galicia" to the variable "description"
+    And Execute the POST method on the endpoint "/v1/user/{userId}/bankaccount/ARS"
+    Then Obtain a response 200
+    And The bank account is added
 
-    When Asignar el valor "DNI_FRONT" a la variable "docType"
-    And Asignar el valor "picfront.jpg" a la variable "fileName"
-    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-    Then Se obtiene una respuesta 200
+    When Assign the value "DNI_FRONT" to the variable "docType"
+    And Assign the value "picfront.jpg" to the variable "fileName"
+    And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Obtain a response 200
 
-    When Ejecutar el método Put al endpoint
-    Then Se obtiene una respuesta 200
+    When Execute the PUT method on the endpoint
+    Then Obtain a response 200
 
-    When Asignar el valor "DNI_BACK" a la variable "docType"
-    And Asignar el valor "picback.jpg" a la variable "fileName"
-    And Ejecutar el método Post al endpoint "/v1/documentation/{userId}/uploadUrl"
-    Then Se obtiene una respuesta 200
+    When Assign the value "DNI_BACK" to the variable "docType"
+    And Assign the value "picback.jpg" to the variable "fileName"
+    And Execute the POST method on the endpoint "/v1/documentation/{userId}/uploadUrl"
+    Then Obtain a response 200
 
-    When Ejecutar el método Put al endpoint
-    Then Se obtiene una respuesta 200
+    When Execute the PUT method on the endpoint
+    Then Obtain a response 200
 
-    When Asignar el valor "<charge>" a la variable "charge"
-    And Asignar el valor "<authority>" a la variable "authority"
-    And Asignar el valor "<character>" a la variable "character"
-    And Ejecutar el método Put al endpoint "/v1/documentation/{userId}/pep"
-    Then Se obtiene una respuesta 204
+    When Assign the value "<charge>" to the variable "charge"
+    And Assign the value "<authority>" to the variable "authority"
+    And Assign the value "<character>" to the variable "character"
+    And Execute the PUT method on the endpoint "/v1/documentation/{userId}/pep"
+    Then Obtain a response 204
 
     Examples:
       | name               | email                          | legalId     | phoneNumber   | country   | civilState | charge     | authority           | character |
@@ -180,27 +180,27 @@ Feature: Onboarding User - V1
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido con legalId repetido
-    When Asignar el valor "Pedro López" a la variable "name"
-    And Asignar el valor "legalidrepetido@yopmail.com" a la variable "email"
-    And Asignar el valor "20345897446" a la variable "legalId"
-    And Asignar el valor "549261669000" a la variable "phoneNumber"
-    And Asignar el valor "Argentina" a la variable "country"
-    And Asignar el valor "SOLTERO" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 409
-  # And Se obtiene el error "name is mising."
+    When Assign the value "Pedro López" to the variable "name"
+    And Assign the value "legalidrepetido@yopmail.com" to the variable "email"
+    And Assign the value "20345897446" to the variable "legalId"
+    And Assign the value "549261669000" to the variable "phoneNumber"
+    And Assign the value "Argentina" to the variable "country"
+    And Assign the value "SOLTERO" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 409
+  # And The error is received "name is mising."
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido enviando el campo "<campo>" vacio
-    When Asignar el valor "<name>" a la variable "name"
-    And Asignar el valor "<email>" a la variable "email"
-    And Asignar el valor "<legalId>" a la variable "legalId"
-    And Asignar el valor "<phoneNumber>" a la variable "phoneNumber"
-    And Asignar el valor "<country>" a la variable "country"
-    And Asignar el valor "<civilState>" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 400
-    And Se obtiene el error "<mensaje>"
+    When Assign the value "<name>" to the variable "name"
+    And Assign the value "<email>" to the variable "email"
+    And Assign the value "<legalId>" to the variable "legalId"
+    And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+    And Assign the value "<country>" to the variable "country"
+    And Assign the value "<civilState>" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 400
+    And The error is received "<mensaje>"
 
     Examples:
       | campo       | name     | email                          | legalId     | phoneNumber   | country   | civilState | mensaje                                                                |
@@ -213,66 +213,66 @@ Feature: Onboarding User - V1
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido sin enviar el campo "name"
-    When Asignar el valor "boddeuquipure-8563@yopmail.com" a la variable "email"
-    And Asignar el valor "20345897446" a la variable "legalId"
-    And Asignar el valor "5492616621073" a la variable "phoneNumber"
-    And Asignar el valor "Argentina" a la variable "country"
-    And Asignar el valor "SOLTERO" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 400
-    And Se obtiene el error "name is mising."
+    When Assign the value "boddeuquipure-8563@yopmail.com" to the variable "email"
+    And Assign the value "20345897446" to the variable "legalId"
+    And Assign the value "5492616621073" to the variable "phoneNumber"
+    And Assign the value "Argentina" to the variable "country"
+    And Assign the value "SOLTERO" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 400
+    And The error is received "name is mising."
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido sin enviar el campo "email"
-    When Asignar el valor "Fallido6" a la variable "name"
-    And Asignar el valor "20345897446" a la variable "legalId"
-    And Asignar el valor "5492616621073" a la variable "phoneNumber"
-    And Asignar el valor "Argentina" a la variable "country"
-    And Asignar el valor "SOLTERO" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 400
-    And Se obtiene el error "email is missing."
+    When Assign the value "Fallido6" to the variable "name"
+    And Assign the value "20345897446" to the variable "legalId"
+    And Assign the value "5492616621073" to the variable "phoneNumber"
+    And Assign the value "Argentina" to the variable "country"
+    And Assign the value "SOLTERO" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 400
+    And The error is received "email is missing."
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido sin enviar el campo "legalId"
-    When Asignar el valor "Fallido6" a la variable "name"
-    And Asignar el valor "boddeuquipure-8563@yopmail.com" a la variable "email"
-    And Asignar el valor "5492616621073" a la variable "phoneNumber"
-    And Asignar el valor "Argentina" a la variable "country"
-    And Asignar el valor "SOLTERO" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 400
-    And Se obtiene el error "legalId is missing."
+    When Assign the value "Fallido6" to the variable "name"
+    And Assign the value "boddeuquipure-8563@yopmail.com" to the variable "email"
+    And Assign the value "5492616621073" to the variable "phoneNumber"
+    And Assign the value "Argentina" to the variable "country"
+    And Assign the value "SOLTERO" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 400
+    And The error is received "legalId is missing."
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido sin enviar el campo "phoneNumber"
-    When Asignar el valor "Fallido6" a la variable "name"
-    And Asignar el valor "boddeuquipure-8563@yopmail.com" a la variable "email"
-    And Asignar el valor "20345897446" a la variable "legalId"
-    And Asignar el valor "Argentina" a la variable "country"
-    And Asignar el valor "SOLTERO" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 400
-    And Se obtiene el error "phoneNumber is missing."
+    When Assign the value "Fallido6" to the variable "name"
+    And Assign the value "boddeuquipure-8563@yopmail.com" to the variable "email"
+    And Assign the value "20345897446" to the variable "legalId"
+    And Assign the value "Argentina" to the variable "country"
+    And Assign the value "SOLTERO" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 400
+    And The error is received "phoneNumber is missing."
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido sin enviar el campo "country"
-    When Asignar el valor "Fallido6" a la variable "name"
-    And Asignar el valor "boddeuquipure-8563@yopmail.com" a la variable "email"
-    And Asignar el valor "20345897446" a la variable "legalId"
-    And Asignar el valor "5492616621073" a la variable "phoneNumber"
-    And Asignar el valor "SOLTERO" a la variable "civilState"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 400
-    And Se obtiene el error "country is missing."
+    When Assign the value "Fallido6" to the variable "name"
+    And Assign the value "boddeuquipure-8563@yopmail.com" to the variable "email"
+    And Assign the value "20345897446" to the variable "legalId"
+    And Assign the value "5492616621073" to the variable "phoneNumber"
+    And Assign the value "SOLTERO" to the variable "civilState"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 400
+    And The error is received "country is missing."
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido sin enviar el campo "civilState"
-    When Asignar el valor "Fallido6" a la variable "name"
-    And Asignar el valor "boddeuquipure-8563@yopmail.com" a la variable "email"
-    And Asignar el valor "20345897446" a la variable "legalId"
-    And Asignar el valor "5492616621073" a la variable "phoneNumber"
-    And Asignar el valor "Argentina" a la variable "country"
-    And Ejecutar el método Post al endpoint "/v1/user/"
-    Then Se obtiene una respuesta 400
-    And Se obtiene el error "civilState is missing."
+    When Assign the value "Fallido6" to the variable "name"
+    And Assign the value "boddeuquipure-8563@yopmail.com" to the variable "email"
+    And Assign the value "20345897446" to the variable "legalId"
+    And Assign the value "5492616621073" to the variable "phoneNumber"
+    And Assign the value "Argentina" to the variable "country"
+    And Execute the POST method on the endpoint "/v1/user/"
+    Then Obtain a response 400
+    And The error is received "civilState is missing."
