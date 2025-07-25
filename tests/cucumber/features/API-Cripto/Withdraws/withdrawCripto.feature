@@ -173,6 +173,7 @@ Feature: Retiros Crypto
             | WLD  | 100009893 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | WLD  | 100009893 | OPTIMISM   | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
+        @Working
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009893 | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |

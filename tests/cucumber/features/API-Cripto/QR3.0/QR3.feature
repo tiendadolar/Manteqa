@@ -77,8 +77,8 @@ Feature: Sintético QR 3.0
         Then Obtain a response 200 y status COMPLETED
 
         Examples:
-            | userAnyId | qrCode                                                                                                                                       | amount | sessionId      | to                                         | ticker |
-            | 100009352 | 00020101021140200010com.yacare02022350150011336972350495204858553030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
+            | 100009352 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
     @Smoke @QRV1NoDesc @ARS @rt
     Scenario Outline: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
@@ -112,8 +112,8 @@ Feature: Sintético QR 3.0
         Then Obtain a response 200 y status COMPLETED
 
         Examples:
-            | userAnyId | qrCode                                                                                                                                       | against | amount | sessionId      | to                                         | ticker |
-            | 100009352 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | userAnyId | qrCode                                                                                                                                                                                                     | against | amount | sessionId      | to                                         | ticker |
+            | 100009352 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
     # ------ QR V2 ------
 
@@ -336,8 +336,8 @@ Feature: Sintético QR 3.0
         Then Obtain a response 200 y status COMPLETED
 
         Examples:
-            | accion   | userAnyId | qrCode                                                                                                                                              | amount | sessionId    | to                                         | ticker |
-            | embebido | 100009358 | 00020126580014br.gov.bcb.pix0136a3fa98c3-0a7b-4e9e-8b2f-123456789abc520400005303986540420.005802BR5913MANTECA TESTE6010SAO PAULO62070503***6304E55C | 10     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+            | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId    | to                                         | ticker |
+            | embebido | 100009358 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
 
     @Smoke @V1Desc @rt
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra ARS en descubierto vía V1 endpoints
@@ -362,8 +362,8 @@ Feature: Sintético QR 3.0
         Then Obtain a response 200 y status COMPLETED
 
         Examples:
-            | accion   | userAnyId | qrCode                                                                                                                                              | amount | against | sessionId    | to                                         | ticker |
-            | embebido | 100009358 | 00020126580014br.gov.bcb.pix0136a3fa98c3-0a7b-4e9e-8b2f-123456789abc520400005303986540420.005802BR5913MANTECA TESTE6010SAO PAULO62070503***6304E55C | 10     | ARS     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+            | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | against | sessionId    | to                                         | ticker |
+            | embebido | 100009358 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | ARS     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
 
     # ------ QR V2 ------
 
@@ -640,7 +640,7 @@ Feature: Sintético QR 3.0
             | QR  | Brasil      | USDT | manual   | 100009407 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
-    @Smoke @Refunds @RefundsDs
+    @Refunds @RefundsDs
     Scenario Outline: Validar refund para usuario operando en descubierto
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -658,7 +658,7 @@ Feature: Sintético QR 3.0
     # Cuando marto incluya +5511949227612 como siempre falla para reverse, borrar qr3manualamount
     # Falta caso en against ARS en el que se toma deuda en ARS pero no hay order reversal
 
-    @Smoke @Refunds @RefundsNDt
+    @Refunds @RefundsNDt
     Scenario Outline: Validar refund para usuario operando en no descubierto contra <against>
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
