@@ -9,7 +9,7 @@ Then('The attributes of the QR USDT synthetic are validated', async function (th
   const body: any = response.body;
   const details: any = response.body.details;
 
-  expect(details.paymentAgainstAsset).equal('USDT');
+  expect(details.paymentAgainst).equal('USDT');
   // expect(body.stages).lengthOf;
 });
 
@@ -18,7 +18,7 @@ Then('The attributes of the QR ARS synthetic are validated', async function (thi
   const body: any = response.body;
   const details: any = response.body.details;
 
-  expect(details.paymentAgainstAsset).equal('ARS');
+  expect(details.paymentAgainst).equal('ARS');
   // expect(body.currentStage).equal(1);
 });
 

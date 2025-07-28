@@ -215,6 +215,12 @@ When(
 );
 
 Then('Obtain a response {int}', function t(this: CustomWorld, statusCode: number) {
+  if (statusCode === 206) {
+    expect(this.response.status).to.equal(statusCode);
+    expect(this.response.body.code).to.equal('');
+    return;
+  }
+
   expect(this.response.status).to.equal(statusCode);
 
   // console.log("Response body:", this.response.body);
