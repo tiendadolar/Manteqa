@@ -7,7 +7,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Onboarding inicial de usuario
-        Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
+        Given The API key is available "H7HC9AT-6KRMMHN-NF96KCJ-Z053Y61"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<email>" to the variable "email"
@@ -35,14 +35,14 @@ Feature: Onboarding User - V2
         Then Obtain a response 201
 
         Examples:
-            | externalId  | email                                    | legalId     | exchange  | name  | surname | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street     | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | TestQRPeru6 | TestOnboardingV2test-qrperu6@yopmail.com | 27245495590 | ARGENTINA | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001148  | Argentina   | Cochabamba | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | externalId | email                          | legalId     | exchange  | name  | surname | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street     | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | Bybit-arg  | TestSenderArgBybit@yopmail.com | 20330624087 | ARGENTINA | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001150  | Argentina   | Cochabamba | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
     # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 
     @test
     Scenario: Obtener S3 url para carga de DNI FRONT
-        Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
+        Given The API key is available "H7HC9AT-6KRMMHN-NF96KCJ-Z053Y61"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "FRONT" to the variable "side"
@@ -57,7 +57,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de DNI BACK
-        Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
+        Given The API key is available "H7HC9AT-6KRMMHN-NF96KCJ-Z053Y61"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "BACK" to the variable "side"
@@ -72,7 +72,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de selfie
-        Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
+        Given The API key is available "H7HC9AT-6KRMMHN-NF96KCJ-Z053Y61"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "selfie.jpg" to the variable "fileName"

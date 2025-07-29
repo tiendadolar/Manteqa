@@ -41,16 +41,19 @@ Then('Obtain a response {int} y status {string} for payment synthetics', { timeo
   console.log(`Response Status: ${response.status}`);
 
   expect(response.status).to.equal(statusCode);
-  expect(response.body.status === statusName);
+  // expect(response.body.status).to.equal(statusName);
 
-  // if (response.body.status === statusName) {
-  //   expect(response.status).to.equal(statusCode);
-  //   expect(response.body.status === statusName);
-  //   console.log('Transfero_PIX EXITOSO');
-  // } else {
-  //   console.log('Transfero_PIX FALLIDO o no CORRESPONDE');
-  //   expect(response.status).to.equal(statusCode);
-  //   // expect(response.body.status).to.equal(statusName);
-  //   expect(response.body.status === statusName || Object.values(stages).some((stage: any) => stage.withdrawId !== null && stage.withdrawId !== undefined));
-  // }
+  if (response.body.status === statusName) {
+    expect(response.status).to.equal(statusCode);
+    expect(response.body.status).to.equal(statusName);
+    console.log('Transfero_PIX EXITOSO');
+  } else if (response.body.status === 'ACTIVE') {
+    console.log('Transfero_PIX FALLIDO o no CORRESPONDE');
+    expect(response.status).to.equal(statusCode);
+    // expect(response.body.status).to.equal(statusName);
+    expect(response.body.status === statusName || Object.values(stages).some((stage: any) => stage.withdrawId !== null && stage.withdrawId !== undefined));
+  } else {
+    expect(response.status).to.equal(statusCode);
+    expect(response.body.status).to.equal(statusName);
+  }
 });

@@ -1,4 +1,6 @@
 const request = require('supertest');
+const qr = require('qrcode');
+import md from '@md/math';
 import { use } from 'chai';
 import { CustomWorld } from '../support/world';
 
@@ -8,6 +10,21 @@ const getUserByLegalId = async (legalId: string, url: string, token: string) => 
 
   const response = await request(urlBase).get(endpoint).set('x-access-token', token).set('User-Agent', 'PostmanRuntime/7.44.1');
   return response.body.users.numberId;
+};
+
+export const generateQRCode = async (text: string): Promise<void> => {
+  try {
+    await qr.toFile('qr.png', text, {
+      color: {
+        dark: '#000',
+        light: '#FFF'
+      }
+    });
+    console.log('QR guardado como imagen!');
+  } catch (err) {
+    console.error('Error generando el QR:', err);
+    throw err;
+  }
 };
 
 export const delay = (ms: number): Promise<void> => {
@@ -67,7 +84,7 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
 
   if (userData.nationality === 'Argentina') {
     return {
-      userExternalId: userData.userExternalId,
+      // externalId: userData.externalId,
       email: userData.email,
       legalId: userData.legalId,
       exchange: userData.exchange,
@@ -148,7 +165,7 @@ export const criptoDepositApiCrypto = (userData: any) => {
         from: userData.from || '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5',
         to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress,
         value: {
-          wei: userData.wei || userData.stages['1'].thresholdAmount * 1000000000000000000,
+          wei: userData.wei || md.toWei(userData.stages['1'].thresholdAmount),
           human: CustomWorld.getStoreData('thresholdAmount') || userData.human || userData.stages['1'].thresholdAmount
         },
         ticker: userData.ticker || userData.details.paymentAgainstAsset,
@@ -162,7 +179,7 @@ export const criptoDepositApiCrypto = (userData: any) => {
         from: userData.from || '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5',
         to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress,
         value: {
-          wei: (CustomWorld.getStoreData('thresholdAmount') * 1000000000000000000).toString() || userData.wei || userData.stages['1'].thresholdAmount * 1000000000000000000,
+          wei: (CustomWorld.getStoreData('thresholdAmount') * 1000000000000000000).toString() || userData.wei || md.toWei(userData.stages['1'].thresholdAmount),
           human: CustomWorld.getStoreData('thresholdAmount') || userData.human || userData.stages['1'].thresholdAmount
         },
         ticker: userData.ticker || userData.details.paymentAgainstAsset,

@@ -24,7 +24,9 @@
     "typescript": "5.7.3"
   },
   "dependencies": {
+    "@md/math": "^0.9.633",
     "chai": "4.5.0",
-    "express": "4.21.2"
+    "express": "4.21.2",
+    "qrcode": "^1.5.4"
   }
 }
