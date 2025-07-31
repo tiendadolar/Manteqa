@@ -20,11 +20,11 @@ Feature: Sintéticos
     @Syn @RampOn @DepoPEN
     Scenario: Generar deposito Fiat
         Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "vH2W199pE1Re5ZR4Z7"
+        And The API secret is available "mZJ5r9KCdRjnWCdPJg"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "100010538" to the variable "userId"
+        When Assign the value "100010879" to the variable "userId"
         And Assign the value "13000" to the variable "amount"
-        And Assign the value "PEN" to the variable "coin"
+        And Assign the value "BOB" to the variable "coin"
         # And Assign the value "10000000000000000000" to the variable "bank" opcional (LOCALPAYMENT por ejemplo)
         And Execute the POST method on the endpoint "/v1/fiat/deposit"
         Then Obtain a response 201
