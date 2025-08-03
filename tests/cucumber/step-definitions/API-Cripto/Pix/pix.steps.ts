@@ -15,7 +15,7 @@ import {
   bankingOnboardingApiCrypto,
   fiatWithdrawApiCryptoV2,
   withdrawLockApiCryptoV2
-} from '../../../../support/utils';
+} from '../../../../support/utils/utils';
 
 const chainArray = ['WORLDCHAIN', 'BSC', 'ETHEREUM', 'POLYGON', 'BINANCE', 'BASE', 'ARBITRUM', 'OPTIMISM'];
 

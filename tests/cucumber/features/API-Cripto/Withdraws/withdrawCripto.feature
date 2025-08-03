@@ -670,8 +670,8 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | crypto | WLD   | 100009873 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | crypto | WLD   | 100009875 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | crypto | WLD   | 100009875 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:

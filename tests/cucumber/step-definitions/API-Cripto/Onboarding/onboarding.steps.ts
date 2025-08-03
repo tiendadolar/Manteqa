@@ -3,7 +3,7 @@ const { expect } = require("chai");
 const request = require("supertest");
 const fs = require("fs");
 const path = require("path");
-import { pepInfoCrypto } from "../../../../support/utils";
+import { pepInfoCrypto } from "../../../../support/utils/utils";
 import { CustomWorld, UserData } from "../../../../support/world";
 
 Before({ tags: "@Onboarding" }, function () {

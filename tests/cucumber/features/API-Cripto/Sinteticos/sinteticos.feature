@@ -17,13 +17,13 @@ Feature: Sintéticos
         Then Obtain a response 201
         And Se validan atributos para sintético operado en no descubierto
 
-    @Syn @RampOn @DepoPEN
+    @Syn @RampOn @DepoBOB
     Scenario: Generar deposito Fiat
         Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
         And The API secret is available "mZJ5r9KCdRjnWCdPJg"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "100010879" to the variable "userId"
-        And Assign the value "13000" to the variable "amount"
+        And Assign the value "71.42" to the variable "amount"
         And Assign the value "BOB" to the variable "coin"
         # And Assign the value "10000000000000000000" to the variable "bank" opcional (LOCALPAYMENT por ejemplo)
         And Execute the POST method on the endpoint "/v1/fiat/deposit"
@@ -528,7 +528,7 @@ Feature: Sintéticos
     @Smoke @E2EFlow @RampOn
     Scenario Outline: Flujo E2E Ramp-On con Depósito
         # Parte 1: Creación de sintético
-        Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
+        Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -551,21 +551,21 @@ Feature: Sintéticos
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
+        Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status COMPLETED
 
         Examples:
-            | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
-            | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
-            | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
-            | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
-            | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
-            | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
-            | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
     # | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
     # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
     # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |

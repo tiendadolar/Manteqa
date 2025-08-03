@@ -15,6 +15,7 @@
     "@types/chai": "5.0.1",
     "@types/mocha": "10.0.10",
     "@types/supertest": "6.0.2",
+    "coingecko-api": "^1.0.10",
     "cucumber-html-reporter": "7.2.0",
     "mocha": "11.1.0",
     "multiple-cucumber-html-reporter": "^3.9.2",
@@ -24,6 +25,7 @@
     "typescript": "5.7.3"
   },
   "dependencies": {
+    "@md/math": "^0.9.633",
     "chai": "4.5.0",
     "express": "4.21.2",
     "qrcode": "^1.5.4"

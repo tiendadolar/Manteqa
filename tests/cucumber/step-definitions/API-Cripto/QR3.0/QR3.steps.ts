@@ -2,7 +2,7 @@ const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
 import { CustomWorld, UserData } from '../../../../support/world';
-import { refundPollingWithDeposit, refundsPolling } from '../../../../support/utils';
+import { refundPollingWithDeposit, refundsPolling } from '../../../../support/utils/utils';
 
 Then('The attributes of the QR USDT synthetic are validated', async function (this: CustomWorld) {
   const response: any = this.response;

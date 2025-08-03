@@ -1,9 +1,13 @@
 const request = require('supertest');
 const qr = require('qrcode');
-// import md from '@md/math';
+import md from '@md/math';
 import { use } from 'chai';
-import { CustomWorld } from '../support/world';
+import { CustomWorld } from '../world';
+const gp = require('coingecko-api');
 
+const gpClient = new gp();
+
+// Not Implemented
 const getUserByLegalId = async (legalId: string, url: string, token: string) => {
   const urlBase = `https://api-qa.tiendacrypto.com`;
   const endpoint = `/v1/admin/user/search?keyword=${legalId}&page=1&limit=10`;
@@ -12,6 +16,7 @@ const getUserByLegalId = async (legalId: string, url: string, token: string) => 
   return response.body.users.numberId;
 };
 
+// Not Implemented
 export const generateQRCode = async (text: string): Promise<void> => {
   try {
     await qr.toFile('qr.png', text, {
@@ -24,6 +29,20 @@ export const generateQRCode = async (text: string): Promise<void> => {
   } catch (err) {
     console.error('Error generando el QR:', err);
     throw err;
+  }
+};
+
+export const getParPrices = async (coin: string): Promise<any> => {
+  try {
+    const prices = await gpClient.simple.price({
+      ids: [coin],
+      vs_currencies: ['usd', 'ars', 'brl', 'clp', 'cop', 'crc', 'mxn', 'pusd', 'php', 'pen']
+    });
+
+    console.log(prices.data);
+    return prices.data;
+  } catch (error) {
+    console.error('Error obteniendo precios:', error);
   }
 };
 

@@ -42,7 +42,7 @@ Feature: Sintético QR 3.0
     # ! NO TOCAR DATOS
     # ------ NO DESCUBIERTOS -------
     # ------ QR V1 ------
-    @Smoke @QRV1NoDesc @rt
+    @Smoke @QRV1NoDesc @rtq
     Scenario Outline: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -131,7 +131,7 @@ Feature: Sintético QR 3.0
 
     # ------ QR V2 ------
 
-    @Smoke @QRV2NoDesc
+    @Smoke @QRV2NoDesc @l
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en no descubierto vía V2 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -482,7 +482,7 @@ Feature: Sintético QR 3.0
 
     # ------ QR V2 ------
 
-    @Smoke @QRV2Desc
+    @Smoke @QRV2Desc @descqr
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V2 endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
