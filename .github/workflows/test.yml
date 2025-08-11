@@ -132,6 +132,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      #Descartable
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -139,6 +140,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.REGION }}
 
+      #Descartable
       - name: Obtener token para CodeArtifact
         id: codeartifact-auth
         run: |
@@ -147,6 +149,12 @@ jobs:
           echo "registry=https://${{ secrets.AWS_DOMAIN }}-npm.pkg.dev/" >> ~/.npmrc
           # Si tienes namespace, agrega configuración para ese scope
           echo "@md:registry=https://${{ secrets.AWS_DOMAIN }}-npm.pkg.dev/" >> ~/.npmrc
+
+          # Configurar .npmrc para usar CodeArtifact
+          echo "registry=https://${DOMAIN}-${REGION}.amazonaws.com/npm/${REPOSITORY}/" > ~/.npmrc
+          echo "//${DOMAIN}-${REGION}.amazonaws.com/npm/${REPOSITORY}/:_authToken=$TOKEN" >> ~/.npmrc
+          echo "@md:registry=https://${DOMAIN}-${REGION}.amazonaws.com/npm/${REPOSITORY}/" >> ~/.npmrc
+          
           # Opcionalmente verifica el contenido
           cat ~/.npmrc
 
@@ -155,6 +163,13 @@ jobs:
         with:
           node-version: '18'
 
+      #Descartable
+      - name: Configure npm auth for public registry
+        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
+      #Descartable
       # 🔑 Configurar autenticación de NPM para paquetes privados
       - name: Configure npm auth
         run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
