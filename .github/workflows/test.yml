@@ -139,6 +139,17 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.REGION }}
 
+      - name: Obtener token para CodeArtifact
+        id: codeartifact-auth
+        run: |
+          export CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token --domain td --region ${{ secrets.AWS_REGION }} --query authorizationToken --output text)
+          echo "//${{ secrets.AWS_DOMAIN }}-npm.pkg.dev/:_authToken=$CODEARTIFACT_AUTH_TOKEN" > ~/.npmrc
+          echo "registry=https://${{ secrets.AWS_DOMAIN }}-npm.pkg.dev/" >> ~/.npmrc
+          # Si tienes namespace, agrega configuración para ese scope
+          echo "@md:registry=https://${{ secrets.AWS_DOMAIN }}-npm.pkg.dev/" >> ~/.npmrc
+          # Opcionalmente verifica el contenido
+          cat ~/.npmrc
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
