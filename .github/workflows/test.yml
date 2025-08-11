@@ -144,6 +144,12 @@ jobs:
         with:
           node-version: '18'
 
+      # 🔑 Configurar autenticación de NPM para paquetes privados
+      - name: Configure npm auth
+        run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Install dependencies
         run: npm install
 
