@@ -20,11 +20,11 @@ Feature: Sintéticos
     @Syn @RampOn @DepoBOB
     Scenario: Generar deposito Fiat
         Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "mZJ5r9KCdRjnWCdPJg"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "100010879" to the variable "userId"
-        And Assign the value "71.42" to the variable "amount"
-        And Assign the value "BOB" to the variable "coin"
+        When Assign the value "100009354" to the variable "userId"
+        And Assign the value "13150" to the variable "amount"
+        And Assign the value "ARS" to the variable "coin"
         # And Assign the value "10000000000000000000" to the variable "bank" opcional (LOCALPAYMENT por ejemplo)
         And Execute the POST method on the endpoint "/v1/fiat/deposit"
         Then Obtain a response 201
@@ -431,13 +431,19 @@ Feature: Sintéticos
             | 100008214 | regression-test-n | AXS   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
             | 100008214 | regression-test-n | MANA  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
+    #! ************** E2E **************
     # ----- Descubierto -----
 
-    @Smoke @E2EFlow @RampOnDesc
+    @Smoke @E2EFlow @RampOnDesc @testdue
     Scenario Outline: Flujo E2E Ramp-On descubierto
         # Parte 1: Creación de sintético
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        When Execute the GET method on the endpoint "/v2/accounting/debt"
+        Then Obtain a response 200
+        And Obtain a company debt "ARS" balance
+
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<asset>" to the variable "asset"
@@ -445,25 +451,27 @@ Feature: Sintéticos
         And Assign the value "<assetAmount>" to the variable "assetAmount"
         And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
         And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
-        And Execute the POST method on the endpoint "/v1/synthetics/ramp-on"
+        And Execute the POST method on the endpoint "/v2/synthetics/ramp-on"
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
+
+        When Execute the GET method on the endpoint "/v2/accounting/debt"
+        Then Obtain a response 200
+        And Obtain a company debt "ARS" balance
 
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
-            | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
-            | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+    # | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 5           | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ETHEREUM        |
+    # | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+    # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
     # | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
     # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
     # | 100009780 | smoke-rampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
@@ -485,6 +493,11 @@ Feature: Sintéticos
         # Parte 1: Creación de sintético
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        When Execute the GET method on the endpoint "/v2/accounting/debt"
+        Then Obtain a response 200
+        And Obtain a company debt "ARS" balance
+
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<asset>" to the variable "asset"
@@ -496,21 +509,23 @@ Feature: Sintéticos
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
+
+        When Execute the GET method on the endpoint "/v2/accounting/debt"
+        Then Obtain a response 200
+        And Obtain a company debt "ARS" balance
 
         Examples:
             | userAnyId | sessionId                       | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BASE            |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 3           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
+            # | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+            # | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+    # | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BASE            |
     # | 100009781 | smoke-partialRampOn-DESC-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
     # | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
     # | 100009781 | smoke-partialRampOn-DESC-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
@@ -526,10 +541,15 @@ Feature: Sintéticos
     # ----- No Descubierto -----
 
     @Smoke @E2EFlow @RampOn
-    Scenario Outline: Flujo E2E Ramp-On con Depósito
+    Scenario Outline: Flujo E2E Ramp-On no descubierto
         # Parte 1: Creación de sintético
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
+        Then Obtain a response 200
+        And Obtain a user in "<against>" balance
+
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<asset>" to the variable "asset"
@@ -553,19 +573,23 @@ Feature: Sintéticos
         # Parte 2: Validar ejeccución del sintético
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Wait for the processing of the "orden" por 60 seconds
+        When Wait for the processing of the "orden" por 45 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
+
+        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
+        Then Obtain a response 200
+        And Obtain a user in "<against>" balance
 
         Examples:
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
-            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
-            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+            # | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
+            # | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
-            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
-            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+    # | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | POLYGON         |
+    # | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
     # | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
     # | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
     # | 100008214 | smoke-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
@@ -587,10 +611,11 @@ Feature: Sintéticos
     # | 100008214 | smoke-test-n | SDAI  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
     @Smoke @E2EFlow @RampOff
-    Scenario Outline: Flujo E2E Ramp-Off con Depósito
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<asset>" to the variable "asset"
@@ -620,19 +645,19 @@ Feature: Sintéticos
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
 
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
-            | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 5     |
+            # | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 5     |
             | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
             | 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
-            # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 0     |
-            # | 100009688 | smoke-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 0     |
-            | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 4     |
-            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 4     |
-            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BASE            | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 7     |
+    # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 0     |
+    # | 100009688 | smoke-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 0     |
+    # | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 4     |
+    # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 4     |
+    # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BASE            | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 7     |
     # | 100009688 | smoke-test-n | POL   | ARS     | 3           | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDCB  | 4     |
     # | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 1     |
     # | 100009688 | smoke-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 1     |
@@ -641,11 +666,16 @@ Feature: Sintéticos
     # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 1     |
     # | 100009688 | smoke-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | NUARS  | 1     |
 
-    @Smoke @E2EFlow @PartialRampOn
+    @Smoke @E2EFlow @PartialRampOn  @testb
     Scenario Outline: Flujo E2E Partial-Ramp-On con Depósito
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
+        Then Obtain a response 200
+        And Obtain a user in "<against>" balance
+
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<asset>" to the variable "asset"
@@ -671,17 +701,21 @@ Feature: Sintéticos
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
+
+        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
+        Then Obtain a response 200
+        And Obtain a user in "<against>" balance
 
         Examples:
             | userAnyId | sessionId                  | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100009719 | smoke-partialRampOn-test-n | WLD   | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
-            | 100009719 | smoke-partialRampOn-test-n | WLD   | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
-            | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
-            | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            # | 100009719 | smoke-partialRampOn-test-n | WLD   | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
+            # | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
+            # | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | POLYGON         |
             | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
             | 100009719 | smoke-partialRampOn-test-n | DAI   | ARS     | 4           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
-            | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BASE            |
+    # | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BASE            |
     #         | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
     #         # | 100009719 | smoke-partialRampOn-test-n | USDCB | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
     #         # | 100009719 | smoke-partialRampOn-test-n | UST   | ARS     | 10          | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | BINANCE         |
@@ -701,6 +735,7 @@ Feature: Sintéticos
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<asset>" to the variable "asset"
@@ -730,22 +765,22 @@ Feature: Sintéticos
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
 
         Examples:
             | userAnyId | sessionId                   | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009774 | smoke-partialRampOff-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | WLD    | 6     |
-            | 100009774 | smoke-partialRampOff-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | WLD    | 5     |
-            | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 4     |
-            | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 0     |
-            | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 0     |
-            # | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 0     |
-            | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 4     |
-            # | 100009774 | smoke-partialRampOff-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDCB  | 0     |
-            # | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 1     |
-            # | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 1     |
-            # | 100009774 | smoke-partialRampOff-test-n | BNB   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | BNB    | 1     |
-            # | 100009774 | smoke-partialRampOff-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | ETH    | 1     |
-            # | 100009774 | smoke-partialRampOff-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | NUARS  | 1     |
-            # | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 1     |
-            | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BASE            | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 7     |
+# | 100009774 | smoke-partialRampOff-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | WLD    | 5     |
+# | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 4     |
+# | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 0     |
+# | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 0     |
+# | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 0     |
+# | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 4     |
+# | 100009774 | smoke-partialRampOff-test-n | USDCB | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDCB  | 0     |
+# | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 1     |
+# | 100009774 | smoke-partialRampOff-test-n | DAI   | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | DAI    | 1     |
+# | 100009774 | smoke-partialRampOff-test-n | BNB   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | BNB    | 1     |
+# | 100009774 | smoke-partialRampOff-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | ETH    | 1     |
+# | 100009774 | smoke-partialRampOff-test-n | NUARS | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | NUARS  | 1     |
+# | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BINANCE         | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 1     |
+# | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | BASE            | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 7     |

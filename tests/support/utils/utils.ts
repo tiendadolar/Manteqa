@@ -216,7 +216,7 @@ export const fiatDepositApiCrypto = (userData: any) => {
   return {
     userId: CustomWorld.getStoreData('userNumberId') || userData.userNumberId || userData.userId,
     amount: CustomWorld.getStoreData('thresholdAmount') || userData.amount || userData.stages['1'].thresholdAmount,
-    coin: CustomWorld.getStoreData('coin') || userData.coin || userData.details.paymentAgainstAsset
+    coin: CustomWorld.getStoreData('coin') || userData.coin || userData.details.paymentAgainst
   };
 };
 
@@ -416,13 +416,16 @@ export const refundPollingWithDeposit = async function (data: any, userData: any
       console.log('API response:', userData.response.body);
     }
 
-    await delay(10000);
+    await delay(30000);
 
     // Get synthetic
     userData.response = await request(data.urlBase).get(endpointGetSynthetic).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1');
     console.log('API response GET:', userData.response.body);
 
-    if (userData.response.body.status === 'CANCELLED') return userData.response;
+    if (userData.response.body.status === 'CANCELLED') {
+      CustomWorld.setStoreData('paymentAgainstAmount', userData.response.body.details.paymentAgainstAmount);
+      return userData.response;
+    }
 
     attempsCounter++;
   }
@@ -462,7 +465,7 @@ export const refundsPolling = async function (data: any, userData: any) {
     let syntheticId = userData.response.body.id;
     endpointGetSynthetic = `/v1/synthetics/${syntheticId}`;
 
-    await delay(10000);
+    await delay(30000);
 
     userData.response = await request(data.urlBase).get(endpointGetSynthetic).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1');
     console.log('API response GET:', userData.response.body);

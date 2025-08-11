@@ -392,8 +392,8 @@ Feature: Ordenes
         @BuyByUser @BOB
         Examples:
             | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-            # | order-qaa-n | compra | USDT  | BUY  | 100010879 | 5           | BOB     |
-            # | order-qaa-n | compra | USDCB | BUY  | 100010879 | 5           | BOB     |
+            | order-qaa-n | compra | USDT  | BUY  | 100010879 | 5           | BOB     |
+            | order-qaa-n | compra | USDCB | BUY  | 100010879 | 5           | BOB     |
             # | order-qaa-n | compra | WLD   | BUY  | 100010879 | 5           | BOB     |
             | order-qaa-n | compra | USDC  | BUY  | 100010879 | 5           | BOB     |
 

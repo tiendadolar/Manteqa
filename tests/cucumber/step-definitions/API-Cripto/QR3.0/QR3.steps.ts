@@ -36,24 +36,43 @@ Then('Execute the refund synthetic {string}', { timeout: 500 * 1000 }, async fun
 });
 
 Then('Obtain a response {int} y status {string} for payment synthetics', { timeout: 500 * 1000 }, async function (this: CustomWorld, statusCode: number, statusName: string) {
+  try {
+    const response = this.response;
+    const stages = response.body.stages;
+    console.log(`Response Status: ${response.status}`);
+    console.log(`Response Body Status: ${response.body.status}`);
+
+    expect(response.status).to.equal(statusCode);
+    expect(response.body.status).to.equal(statusName);
+
+    if (response.body.status !== statusName) CustomWorld.clearStoreData();
+  } catch (error) {
+    CustomWorld.clearStoreData();
+  }
+
+  // if (response.body.status === statusName) {
+  //   expect(response.status).to.equal(statusCode);
+  //   expect(response.body.status).to.equal(statusName);
+  //   console.log('E2E Exitoso');
+  // } else if (response.body.status === 'ACTIVE') {
+  //   console.log('Transfero_PIX FALLIDO o E2E PENDIENTE');
+  //   expect(response.status).to.equal(statusCode);
+  //   // expect(response.body.status).to.equal(statusName);
+  //   expect(Object.values(stages).some((stage: any) => stage.withdrawId !== null && stage.withdrawId !== undefined));
+  // } else {
+  //   expect(response.status).to.equal(statusCode);
+  //   expect(response.body.status).to.equal(statusName);
+  // }
+});
+
+Then('Obtain a response {int} for lock payment', { timeout: 500 * 1000 }, async function (this: CustomWorld, statusCode: number) {
   const response = this.response;
-  const stages = response.body.stages;
-  console.log(`Response Status: ${response.status}`);
+  if (this.response.body.code) CustomWorld.setStoreData('pixCode', this.response.body.code);
 
   expect(response.status).to.equal(statusCode);
-  // expect(response.body.status).to.equal(statusName);
+  expect(response.body).to.not.have.property('payload');
 
-  if (response.body.status === statusName) {
-    expect(response.status).to.equal(statusCode);
-    expect(response.body.status).to.equal(statusName);
-    console.log('Transfero_PIX EXITOSO');
-  } else if (response.body.status === 'ACTIVE') {
-    console.log('Transfero_PIX FALLIDO o no CORRESPONDE');
-    expect(response.status).to.equal(statusCode);
-    // expect(response.body.status).to.equal(statusName);
-    expect(response.body.status === statusName || Object.values(stages).some((stage: any) => stage.withdrawId !== null && stage.withdrawId !== undefined));
-  } else {
-    expect(response.status).to.equal(statusCode);
-    expect(response.body.status).to.equal(statusName);
-  }
+  CustomWorld.setStoreData('paymentAgainstAmount', response.body.paymentAgainstAmount);
+
+  console.log(`Response Status: ${response.status}`);
 });

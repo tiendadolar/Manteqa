@@ -68,17 +68,19 @@ Then('Se validan atributos para sintético ramp-on operado en no descubierto', a
   // expect(actualThreshold).to.equal(expectedThreshold);
 });
 
-Then('Wait for the processing of the {string} por {int} seconds', { timeout: 70000 }, async function (this: CustomWorld, stage: string, seconds: number) {
+Then('Wait for the processing of the {string} por {int} seconds', { timeout: 110000 }, async function (this: CustomWorld, stage: string, seconds: number) {
   console.log(`Esperando procesamiento de la etapa: ${stage}`);
   console.log(`Iniciando espera de ${seconds} seconds...`);
   await new Promise((resolve) => setTimeout(resolve, seconds * 1000));
   console.log(`Espera de ${seconds} seconds completada`);
 });
 
-Then('Obtain a response {int} y status COMPLETED', function (this: CustomWorld, statusCode: number) {
+Then('Obtain a response {int} y status {string}', function (this: CustomWorld, statusCode: number, statusName: string) {
   const response: any = this.response;
   const body: any = response.body;
 
   expect(this.response.status).to.equal(statusCode);
-  expect(body.status).to.equal('COMPLETED');
+  expect(body.status).to.equal(statusName);
+
+  if (body.hasOwnProperty('details')) CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
 });
