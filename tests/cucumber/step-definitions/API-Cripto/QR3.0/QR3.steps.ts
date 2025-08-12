@@ -39,13 +39,14 @@ Then('Obtain a response {int} y status {string} for payment synthetics', { timeo
   try {
     const response = this.response;
     const stages = response.body.stages;
+
+    if (response.body.status !== statusName) CustomWorld.clearStoreData();
+
     console.log(`Response Status: ${response.status}`);
     console.log(`Response Body Status: ${response.body.status}`);
 
     expect(response.status).to.equal(statusCode);
     expect(response.body.status).to.equal(statusName);
-
-    if (response.body.status !== statusName) CustomWorld.clearStoreData();
   } catch (error) {
     CustomWorld.clearStoreData();
   }

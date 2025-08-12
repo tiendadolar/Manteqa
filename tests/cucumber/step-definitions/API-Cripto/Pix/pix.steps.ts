@@ -14,7 +14,8 @@ import {
   inicialOnboardingApiCryptoV2,
   bankingOnboardingApiCrypto,
   fiatWithdrawApiCryptoV2,
-  withdrawLockApiCryptoV2
+  withdrawLockApiCryptoV2,
+  twoFAAuthApiCambio
 } from '../../../../support/utils/utils';
 
 const chainArray = ['WORLDCHAIN', 'BSC', 'ETHEREUM', 'POLYGON', 'BINANCE', 'BASE', 'ARBITRUM', 'OPTIMISM'];
@@ -116,6 +117,8 @@ When(
       } else if (endpoint === '/v2/onboarding-actions/add-bank-account') {
         this.userData = bankingOnboardingApiCrypto(this.userData);
       } else if (endpoint === '/v1/transaction/deposit') {
+        console.log('ENTRA al ENDPOINT');
+
         // Deposito cripto
         this.userData = criptoDepositApiCrypto(this.userData);
       } else if (endpoint === '/v1/fiat/deposit') {
@@ -155,11 +158,14 @@ When(
         console.log(CustomWorld.getStoreData('thresholdAmount'));
 
         this.userData = fiatDepositApiCambio(this.userData);
-      } else if (endpoint === 'v3/admin/auth/verifyLogin/{twoFaCode}') {
+      } else if (endpoint === '/v3/{twoFaCode}') {
         paramEndpoint = paramEndpoint.replace('{twoFaCode}', CustomWorld.getStoreData('redirectUrl') || '');
+        this.userData = twoFAAuthApiCambio(this.userData);
+        console.log(this.userData);
       }
 
       console.log('API payload:', JSON.stringify(this.userData, null, 2));
+      console.log(paramEndpoint);
 
       this.response = await request(this.urlBase)
         .post(paramEndpoint)

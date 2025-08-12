@@ -643,7 +643,7 @@ Feature: Sintéticos
         # Parte 2: Validar ejeccución del sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Wait for the processing of the "orden" por 60 seconds
+        When Wait for the processing of the "orden" por 10 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
@@ -651,9 +651,9 @@ Feature: Sintéticos
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
             # | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 5     |
-            | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
+            # | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
             | 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
-    # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 0     |
+            | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 0     |
     # | 100009688 | smoke-test-n | ETH   | ARS     | 0.01        | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 0     |
     # | 100009688 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 4     |
     # | 100009688 | smoke-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | POLYGON         | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 4     |

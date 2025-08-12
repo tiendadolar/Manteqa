@@ -6,18 +6,14 @@ Feature: Autorización API-Cambio
         When Assign the value "<email>" to the variable "email"
         And  Assign the value "<password>" to the variable "password"
         And Execute the POST method on the endpoint "/v3/admin/auth/login"
-        Then Obtain a response 428
+        Then Obtain a response 428 and twoFaCode url
+        And Send 2FA code
+
+        # When Execute the POST method on the endpoint "/v3/{twoFaCode}"
+        # Then Obtain a response 200
 
         Examples:
             | email                | password  |
             | andy@tiendadolar.com | !12345678 |
 
-    Scenario: Ingresar token de acceso
-        Given The urlBase is available "https://api-qa.tiendadolar.com.ar"
-        When Assign the value "<accessToken>" to the variable "token"
-        And Execute the POST method on the endpoint "/v3/admin/auth/verifyLogin/{twoFaCode}"
-        Then Obtain a response 200
 
-        Examples:
-            | accessToken |
-            | 911242      |

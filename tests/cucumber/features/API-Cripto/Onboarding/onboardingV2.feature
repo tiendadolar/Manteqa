@@ -36,7 +36,7 @@ Feature: Onboarding User - V2
 
         Examples:
             | externalId            | email                          | legalId   | exchange | name | surname         | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | Test-HotWalletChlWLD2 | testhotwalletchlwld2@gmail.com | 177096873 | CHILE    | Test | Hot Wallet WLD2 | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 1124001157  | Chile       | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | Test-HotWalletChlWLD3 | testhotwalletchlwld3@gmail.com | 132746095 | CHILE    | Test | Hot Wallet WLD3 | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 1124001158  | Chile       | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
     # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 

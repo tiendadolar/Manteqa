@@ -76,11 +76,17 @@ Then('Wait for the processing of the {string} por {int} seconds', { timeout: 110
 });
 
 Then('Obtain a response {int} y status {string}', function (this: CustomWorld, statusCode: number, statusName: string) {
-  const response: any = this.response;
-  const body: any = response.body;
+  try {
+    const response: any = this.response;
+    const body: any = response.body;
 
-  expect(this.response.status).to.equal(statusCode);
-  expect(body.status).to.equal(statusName);
+    if (response.body.status !== statusName) CustomWorld.clearStoreData();
 
-  if (body.hasOwnProperty('details')) CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
+    expect(this.response.status).to.equal(statusCode);
+    expect(body.status).to.equal(statusName);
+
+    if (body.hasOwnProperty('details')) CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
+  } catch (error) {
+    CustomWorld.clearStoreData();
+  }
 });

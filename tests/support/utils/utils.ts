@@ -1,6 +1,7 @@
 const request = require('supertest');
 const qr = require('qrcode');
-import md from '@md/math';
+const md = require('@md/math');
+const speakeasy = require('speakeasy');
 import { use } from 'chai';
 import { CustomWorld } from '../world';
 const gp = require('coingecko-api');
@@ -187,7 +188,7 @@ export const criptoDepositApiCrypto = (userData: any) => {
         from: userData.from || '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5',
         to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress,
         value: {
-          wei: userData.wei || userData.stages['1'].thresholdAmount * 1000000000000000000,
+          wei: userData.wei || md.toWei(userData.stages['1'].thresholdAmount),
           human: CustomWorld.getStoreData('thresholdAmount') || userData.human || userData.stages['1'].thresholdAmount
         },
         ticker: userData.ticker || userData.details.paymentAgainstAsset,
@@ -201,7 +202,7 @@ export const criptoDepositApiCrypto = (userData: any) => {
         from: userData.from || '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5',
         to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress,
         value: {
-          wei: (CustomWorld.getStoreData('thresholdAmount') * 1000000000000000000).toString() || userData.wei || userData.stages['1'].thresholdAmount * 1000000000000000000,
+          wei: md.toWei(CustomWorld.getStoreData('thresholdAmount')).toString() || userData.wei || md.toWei(userData.stages['1'].thresholdAmount),
           human: CustomWorld.getStoreData('thresholdAmount') || userData.human || userData.stages['1'].thresholdAmount
         },
         ticker: userData.ticker || userData.details.paymentAgainstAsset,
@@ -479,6 +480,45 @@ export const refundsPolling = async function (data: any, userData: any) {
 //-----API CRIPTO-----//
 //-----*********-----//
 //-----API CAMBIO-----//
+
+export const twoFAAuthApiCambio = (userData: any) => {
+  return {
+    token: CustomWorld.getStoreData('token2FA')
+  };
+};
+
+export const authApiCambio = async () => {
+  console.log('ENTRA A FX');
+
+  const urlBase = 'https://api-qa.tiendadolar.com.ar/v3';
+  const endpointLogin = '/admin/auth/login';
+  const secret = 'WRIYQ37BUTETGE3NWYLF4KGEPKIRSKX6';
+
+  const payloadLogin = {
+    email: 'andy@tiendadolar.com',
+    password: '!12345678'
+  };
+
+  let response = await request(urlBase).post(endpointLogin).set('User-Agent', 'PostmanRuntime/7.44.1').send(payloadLogin);
+  console.log(response);
+  const redirectUrl = response.redirectUrl;
+
+  const token2FA = speakeasy.totp({
+    secret: secret,
+    encoding: 'base32'
+  });
+
+  const payloadAuth = {
+    token: token2FA
+  };
+  console.log(redirectUrl);
+
+  response = await request(urlBase).post(redirectUrl).set('User-Agent', 'PostmanRuntime/7.44.1').send(payloadAuth);
+
+  CustomWorld.setStoreData('adminToken', response.body.accessToken);
+
+  console.log(CustomWorld.getStoreData('adminToken'));
+};
 
 // Onboarding inicial
 export const inicialOnboardingApiCambio = (userData: any) => {

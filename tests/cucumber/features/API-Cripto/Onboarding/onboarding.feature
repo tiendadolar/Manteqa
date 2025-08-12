@@ -176,7 +176,7 @@ Feature: Onboarding User - V1
 
     Examples:
       | name               | email                          | legalId     | phoneNumber   | country   | civilState | charge     | authority           | character |
-      | TestOnboardingV140 | boddeuquipure15081@yopmail.com | 20270270353 | 5492615859817 | Argentina | SOLTERO    | Secretario | Ministerio de Salud | Público   |
+      | TestOnboardingV140 | boddeuquipu5081@yopmail.com | 20270270353 | 5492615859817 | Argentina | SOLTERO    | Secretario | Ministerio de Salud | Público   |
 
   @OnboardingError
   Scenario Outline: Validar onboarding fallido con legalId repetido
