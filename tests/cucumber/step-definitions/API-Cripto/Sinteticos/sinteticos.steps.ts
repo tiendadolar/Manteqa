@@ -1,6 +1,7 @@
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
+import logger from '../../../../support/utils/logger';
 import { CustomWorld, UserData } from '../../../../support/world';
 
 Then('Se validan atributos para sintético ramp-on operado en no descubierto', async function (this: CustomWorld) {
@@ -76,17 +77,15 @@ Then('Wait for the processing of the {string} por {int} seconds', { timeout: 110
 });
 
 Then('Obtain a response {int} y status {string}', function (this: CustomWorld, statusCode: number, statusName: string) {
-  try {
-    const response: any = this.response;
-    const body: any = response.body;
+  const response: any = this.response;
+  const body: any = response.body;
 
-    if (response.body.status !== statusName) CustomWorld.clearStoreData();
+  if (body.status !== statusName) CustomWorld.clearStoreData();
 
-    expect(this.response.status).to.equal(statusCode);
-    expect(body.status).to.equal(statusName);
+  expect(this.response.status).to.equal(statusCode);
+  expect(body.status).to.equal(statusName);
 
-    if (body.hasOwnProperty('details')) CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
-  } catch (error) {
-    CustomWorld.clearStoreData();
-  }
+  if (body?.stages?.['1'].stageType === 'DEPOSIT') CustomWorld.setStoreData('depositStage', true);
+  if (body?.stages?.['1'].stageType !== 'DEPOSIT') CustomWorld.setStoreData('notDepositStage', true);
+  if (body.hasOwnProperty('details')) CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
 });

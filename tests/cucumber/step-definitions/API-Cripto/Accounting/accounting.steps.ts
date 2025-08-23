@@ -1,6 +1,7 @@
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
+import logger from '../../../../support/utils/logger';
 import { CustomWorld, UserData } from '../../../../support/world';
 
 Then('Obtain a company debt {string} balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {
@@ -8,15 +9,21 @@ Then('Obtain a company debt {string} balance', { timeout: 500 * 1000 }, async fu
   const coin: any = fiat.toUpperCase();
   let aquiredDebt: number = 0;
   let instantDebt: number = 0;
+  let thereIsDepositStage: Boolean = CustomWorld.getStoreData('depositStage') === undefined ? false : CustomWorld.getStoreData('depositStage');
 
   if (CustomWorld.getStoreData('againstAmountOperated') !== undefined || CustomWorld.getStoreData('paymentAgainstAmount') !== undefined) {
+    if (thereIsDepositStage) {
+      expect(parseFloat(response[coin])).to.be.closeTo(parseFloat(CustomWorld.getStoreData('companyAccountingInfo')), 0.02);
+      logger.info(`Expected Debt Balance: ${CustomWorld.getStoreData('companyAccountingInfo')}, Actual Debt Balance: ${response[coin]}`);
+      return;
+    }
+
     CustomWorld.getStoreData('againstAmountOperated') !== undefined
       ? (instantDebt = parseFloat(CustomWorld.getStoreData('againstAmountOperated')))
       : (instantDebt = parseFloat(CustomWorld.getStoreData('paymentAgainstAmount')));
 
     aquiredDebt = parseFloat(CustomWorld.getStoreData('companyAccountingInfo')) + instantDebt;
-    console.log(`Expected Debt Balance: ${aquiredDebt}, Actual Debt Balance: ${response[coin]}`);
-
+    logger.info(`Expected Debt Balance: ${aquiredDebt}, Payment Amount: ${instantDebt}, Actual Debt Balance: ${response[coin]}`);
     expect(parseFloat(response[coin])).to.be.closeTo(aquiredDebt, 0.02);
 
     CustomWorld.clearStoreData();
@@ -61,25 +68,27 @@ Then('Obtain a company debt {string} balance', { timeout: 500 * 1000 }, async fu
 Then('Obtain a user in {string} balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {
   const { balance } = this.response.body;
   const currency = fiat.toUpperCase();
-  const paymentAmount = CustomWorld.getStoreData('paymentAgainstAmount') === undefined ? CustomWorld.getStoreData('againstAmountOperated') : CustomWorld.getStoreData('paymentAgainstAmount');
   const isSpecialCurrency = currency === 'PEN'; // Add other special currencies if needed
-  console.log('ENTRAAA');
+  let notDepositStage: Boolean = CustomWorld.getStoreData('notDepositStage') === undefined ? false : CustomWorld.getStoreData('notDepositStage');
+  let paymentAmount = CustomWorld.getStoreData('paymentAgainstAmount') === undefined ? CustomWorld.getStoreData('againstAmountOperated') : CustomWorld.getStoreData('paymentAgainstAmount');
 
-  if (!(currency in balance)) CustomWorld.setStoreData('userBalance', String(0));
+  if (CustomWorld.getStoreData('userBalance') === undefined && paymentAmount !== undefined) paymentAmount = undefined;
 
-  console.log(paymentAmount);
+  if (!(currency in balance)) {
+    CustomWorld.setStoreData('userBalance', '0');
+    return;
+  }
 
   if (paymentAmount === undefined) {
     CustomWorld.setStoreData('userBalance', String(balance[currency]));
-    console.log(`User balance for ${currency}:`, CustomWorld.getStoreData('userBalance'));
-
+    logger.info(`User balance for ${currency}: ${CustomWorld.getStoreData('userBalance')}`);
     return;
   }
 
   const initialBalance = parseFloat(CustomWorld.getStoreData('userBalance') || 0);
   const currentBalance = parseFloat(String(balance[currency]));
-  const expectedBalance = isSpecialCurrency ? initialBalance - parseFloat(paymentAmount) : initialBalance;
-  console.log(`Initial Balance: ${initialBalance}, Payment Amount: ${paymentAmount}, Current Balance: ${currentBalance}, Expected Balance: ${expectedBalance}`);
+  const expectedBalance = isSpecialCurrency || notDepositStage ? initialBalance - parseFloat(paymentAmount) : initialBalance;
+  logger.info(`Initial Balance: ${initialBalance}, Payment Amount: ${paymentAmount}, Current Balance: ${currentBalance}, Expected Balance: ${expectedBalance}`);
   expect(currentBalance).to.be.equal(expectedBalance);
   CustomWorld.clearStoreData();
 

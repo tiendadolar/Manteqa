@@ -19,6 +19,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | BTC_ARS   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | BNB_ARS   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | DAI_ARS   |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_ARS   |
 
         @USD
         Examples:
@@ -31,6 +32,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | BTC_USD   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | BNB_USD   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | DAI_USD   |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_USD   |
 
         @CLP
         Examples:
@@ -39,6 +41,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_CLP   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_CLP  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_CLP |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_CLP   |
 
         @BRL
         Examples:
@@ -47,6 +50,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_BRL   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_BRL  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_BRL |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_BRL   |
 
         @COP
         Examples:
@@ -55,6 +59,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_COP   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_COP  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_COP |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_COP   |
 
         @CRC
         Examples:
@@ -63,6 +68,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_CRC   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_CRC  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_CRC |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_CRC   |
 
         @MXN
         Examples:
@@ -71,6 +77,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_MXN   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_MXN  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_MXN |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_MXN   |
 
         @PUSD
         Examples:
@@ -79,6 +86,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_PUSD   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_PUSD  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_PUSD |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_PUSD   |
 
         @PHP
         Examples:
@@ -87,6 +95,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_PHP   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_PHP  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_PHP |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | PHP       |
 
         @PEN
         Examples:
@@ -95,6 +104,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_PEN   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_PEN  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_PEN |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_PEN   |
 
         @BOB
         Examples:
@@ -103,6 +113,7 @@ Feature: Prices V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_BOB   |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_BOB  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_BOB |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_BOB   |
 
 
 

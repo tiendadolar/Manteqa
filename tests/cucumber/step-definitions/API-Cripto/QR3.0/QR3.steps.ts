@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 import { CustomWorld, UserData } from '../../../../support/world';
 import { refundPollingWithDeposit, refundsPolling } from '../../../../support/utils/utils';
+import logger from '../../../../support/utils/logger';
 
 Then('The attributes of the QR USDT synthetic are validated', async function (this: CustomWorld) {
   const response: any = this.response;
@@ -36,20 +37,17 @@ Then('Execute the refund synthetic {string}', { timeout: 500 * 1000 }, async fun
 });
 
 Then('Obtain a response {int} y status {string} for payment synthetics', { timeout: 500 * 1000 }, async function (this: CustomWorld, statusCode: number, statusName: string) {
-  try {
-    const response = this.response;
-    const stages = response.body.stages;
+  const response = this.response;
+  const stages = response.body.stages;
 
-    if (response.body.status !== statusName) CustomWorld.clearStoreData();
+  if (response.body.status !== statusName) CustomWorld.clearStoreData();
 
-    console.log(`Response Status: ${response.status}`);
-    console.log(`Response Body Status: ${response.body.status}`);
+  logger.debug(`Response Status: ${response.status}`);
+  logger.debug(`Response Body Status: ${response.body.status}`);
 
-    expect(response.status).to.equal(statusCode);
-    expect(response.body.status).to.equal(statusName);
-  } catch (error) {
-    CustomWorld.clearStoreData();
-  }
+  expect(response.status).to.equal(statusCode);
+  expect(response.body.status).to.equal(statusName);
+  expect(Object.values(stages).find((stage: any) => stage.stageType === 'WITHDRAW')).to.have.property('withdrawId');
 
   // if (response.body.status === statusName) {
   //   expect(response.status).to.equal(statusCode);
@@ -74,6 +72,5 @@ Then('Obtain a response {int} for lock payment', { timeout: 500 * 1000 }, async 
   expect(response.body).to.not.have.property('payload');
 
   CustomWorld.setStoreData('paymentAgainstAmount', response.body.paymentAgainstAmount);
-
-  console.log(`Response Status: ${response.status}`);
+  logger.debug(`Response Status: ${response.status}`);
 });

@@ -1,0 +1,54 @@
+[33mwarn[39m: COMPLETED
+[33mwarn[39m: COMPLETED
+[33mwarn[39m: class CustomWorld extends World {
+    constructor() {
+        super(...arguments);
+        this.apiKey = "";
+        this.apiSecret = "";
+        this.token = "";
+        this.urlBase = "";
+        this.userData = {};
+        this.response = null;
+    }
+    static getSessionId(value) {
+        this.sessionCounter++;
+        fs.writeFileSync(this.sessionCounterFile, this.sessionCounter.toString());
+        return `${value}-${this.sessionCounter}`;
+    }
+    static getHashCrypto() {
+        this.hashCrypto++;
+        fs.writeFileSync(this.hashCryptoFile, this.hashCrypto.toString());
+        return `automation-test-${this.hashCrypto}`;
+    }
+    static getNetworkId() {
+        this.networkId = uuidv4();
+        return this.networkId;
+    }
+    static setStoreData(key, value) {
+        _a.storeData[key] = value;
+    }
+    static getStoreData(key) {
+        return _a.storeData[key];
+    }
+    static clearStoreData() {
+        _a.storeData = {};
+    }
+    static getUserData(key) {
+        return _a.getUserData(key);
+    }
+    setUserData(key, value) {
+        if (!this.userData) {
+            this.userData = {};
+        }
+        this.userData[key] = value;
+    }
+    getUserData(key) {
+        var _b;
+        return (_b = this.userData) === null || _b === void 0 ? void 0 : _b[key];
+    }
+}
+[33mwarn[39m: COMPLETED
+[33mwarn[39m: undefined
+[33mwarn[39m: COMPLETED
+[33mwarn[39m: [object Object]
+[33mwarn[39m: 

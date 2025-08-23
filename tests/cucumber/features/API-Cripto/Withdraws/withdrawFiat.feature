@@ -1,9 +1,9 @@
 @Withdraw
 Feature: Retiros Fiat
 
-    @Fiat
+    @Fiattest
     Scenario Outline: Crear retiro fiat
-        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userId>" to the variable "userId"
         And Assign the value "<coin>" to the variable "coin"
@@ -13,7 +13,7 @@ Feature: Retiros Fiat
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 2 seconds
         And Execute the GET method on the endpoint "/v1/fiat/withdraw/{withdrawAnyId}"
@@ -22,16 +22,19 @@ Feature: Retiros Fiat
         # Solo ARS/USD se puede retirar a un cbu declarado en el user, las demas son por accountIndex
         Examples:
             | userId    | coin | cbu                    | amount |
-            | 100009791 | ARS  | 0070703130004000381667 | 1000   |
-            | 100009791 | BRL  | 0070703130004000381667 | 10     |
-            | 100009791 | CLP  | 0070703130004000381667 | 10000  |
-            | 100009791 | COP  | 3232145116             | 100    |
-            | 100009791 | GTQ  | 0070703130004000381667 | 100    |
-            | 100009791 | MXN  | 0070703130004000381667 | 100    |
-            | 100009791 | PHP  | 0070703130004000381667 | 100    |
-            | 100009791 | PUSD | 0070703130004000381667 | 100    |
-            | 100009791 | USD  | 0070703130004000381667 | 10     |
-            | 100009791 | CRC  | 0070703130004000381667 | 100    |
+            | 100011177 | ARS  | 1430001713039384360017 | 1000   |
+            | 100011177 | USD  | 1430001713039384360017 | 10     |
+            | 100011177 | CLP  | 1430001713039384360017 | 1000   |
+    # | 100009791 | ARS  | 0070703130004000381667 | 1000   |
+    # | 100009791 | BRL  | 0070703130004000381667 | 10     |
+    # | 100009791 | CLP  | 0070703130004000381667 | 10000  |
+    # | 100009791 | COP  | 3232145116             | 100    |
+    # | 100009791 | GTQ  | 0070703130004000381667 | 100    |
+    # | 100009791 | MXN  | 0070703130004000381667 | 100    |
+    # | 100009791 | PHP  | 0070703130004000381667 | 100    |
+    # | 100009791 | PUSD | 0070703130004000381667 | 100    |
+    # | 100009791 | USD  | 0070703130004000381667 | 10     |
+    # | 100009791 | CRC  | 0070703130004000381667 | 100    |
 
     @Smoke @Fiat @V1
     Scenario Outline: Crear retiro fiat user por country por V1

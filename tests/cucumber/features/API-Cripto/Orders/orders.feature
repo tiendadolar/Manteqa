@@ -266,7 +266,7 @@ Feature: Ordenes
 
         When Wait for the processing of the "orden" por 1 seconds
         And Execute the GET method on the endpoint "/v2/orders/{orderNumberId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
 
         @BuyByCountry @USDT
         Examples:

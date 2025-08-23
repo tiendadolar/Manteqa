@@ -6,7 +6,8 @@ export const COIN_MAPPINGS: Record<string, string> = {
   BTC: 'bitcoin',
   USDCB: 'usd-coin-wormhole-bnb',
   BNB: 'binancecoin',
-  DAI: 'dai'
+  DAI: 'dai',
+  TRX: 'tron'
 } as const;
 
 export type SupportedCoins = keyof typeof COIN_MAPPINGS;

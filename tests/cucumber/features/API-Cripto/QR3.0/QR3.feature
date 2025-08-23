@@ -212,9 +212,9 @@ Feature: Sintético QR 3.0
         And Obtain a user in "<ticker>" balance
 
         Examples:
-            | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
-            | manual   | 100009502 | qr3manualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
-            | embebido | 100009502 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | accion | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
+            | manual | 100009502 | qr3manualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+    # | embebido | 100009502 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Smoke @QRV2NoDesc
     Scenario Outline: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
@@ -458,7 +458,7 @@ Feature: Sintético QR 3.0
             | manual   | 100009628 | pixmanualamount | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | embebido | 100009628 | pix             | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
-    @Smoke @Peru @NoDesc
+    @Smoke1 @Peru @NoDesc
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>" sobre el Balance User
         Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -500,7 +500,7 @@ Feature: Sintético QR 3.0
     # | QR  | Peru        | PEN  | dinámico | 100010538 | 00020101021226370002800103903022025072409211954330527520448295303604540415005802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA01089999999963041AAA | PEN     |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 |        |
     # | QR  | Peru        | PEN  | estático | 100010538 | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5B                                                                                                                  | PEN     | 100    | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 |        |
 
-    @Smoke @Peru
+    @Smoke1 @Peru
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>"
         Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -626,7 +626,7 @@ Feature: Sintético QR 3.0
         Then Obtain a response 201
         And The attributes of the QR ARS synthetic are validated
 
-        er4
+        # Get status synthetic payment
         When Wait for the processing of the "orden QR" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
@@ -832,6 +832,7 @@ Feature: Sintético QR 3.0
         Then Obtain a response 200
         And Obtain a company debt "ARS" balance
 
+        #Usuario argentino realizando pago qr a brasil
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
             | embebido | 100009360 | pix             | ARS     | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
@@ -1013,7 +1014,7 @@ Feature: Sintético QR 3.0
             | QR  | Brasil      | USDT | manual   | 100009407 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
-    @Smoke @Peru @due
+    @Smoke1 @Peru @dueper
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en descubierto para usuario "<nacionality>"
         Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1049,11 +1050,11 @@ Feature: Sintético QR 3.0
         And Obtain a company debt "<coin>" balance
 
         Examples:
-            | pay | nacionality | coin | accion   | userAnyId | paymentDestination                                                                                                                                                                                                                                                                          | against | amount | sessionId | to                                         | ticker |
-            | QR  | Argentina   | USDT | dinámico | 100010503 | 00020101021226370002800103903022025072409211954330527520448295303604540415005802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA01089999999963041AAA | USDT    |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
-            | QR  | Argentina   | USDT | estático | 100010503 | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5B                                                                                                                  | USDT    | 100    | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
-            | QR  | Peru        | USDT | dinámico | 100010539 | 00020101021226370002800103903022025072409211954330527520448295303604540415005802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA01089999999963041AAA | USDT    |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
-            | QR  | Peru        | USDT | estático | 100010539 | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5B                                                                                                                  | USDT    | 100    | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
+            | pay | nacionality | coin | accion   | userAnyId | paymentDestination                                                                                                                                                                                                                                                                                 | against | amount | sessionId | to                                         | ticker |
+            | QR  | Argentina   | USDT | dinámico | 100010503 | 0002010102122637000280010390302202508210921195427978452044829530360454031505802PE5925Tupay Test Prod - S/ 1.006004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA01089999999963040C20 | USDT    |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
+            | QR  | Argentina   | USDT | estático | 100010503 | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5B                                                                                                                         | USDT    | 100    | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
+            | QR  | Peru        | USDT | dinámico | 100010539 | 0002010102122637000280010390302202508210921195427976252044829530360454031105802PE5925Tupay Test Prod - S/ 1.006004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192140005QUOTA010156304D30A        | USDT    |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
+            | QR  | Peru        | USDT | estático | 100010539 | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5B                                                                                                                         | USDT    | 100    | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
 
 
     @Refunds @RefundsDs

@@ -17,6 +17,7 @@ import {
   withdrawLockApiCryptoV2,
   twoFAAuthApiCambio
 } from '../../../../support/utils/utils';
+import logger from '../../../../support/utils/logger';
 
 const chainArray = ['WORLDCHAIN', 'BSC', 'ETHEREUM', 'POLYGON', 'BINANCE', 'BASE', 'ARBITRUM', 'OPTIMISM'];
 
@@ -171,7 +172,7 @@ When(
         .post(paramEndpoint)
         .set('md-api-key', this.apiKey)
         .set('x-api-secret', this.apiSecret)
-        .set('x-access-token', this.token)
+        .set('x-access-token', CustomWorld.getStoreData('JWT') ?? this.token)
         .set('User-Agent', 'PostmanRuntime/7.44.1')
         .send(this.userData);
 

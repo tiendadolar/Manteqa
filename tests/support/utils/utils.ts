@@ -48,7 +48,6 @@ export const getParPrices = async (coin: string): Promise<any> => {
 };
 
 export const delay = (ms: number): Promise<void> => {
-  console.log('EJECUTANDO DELAY');
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
