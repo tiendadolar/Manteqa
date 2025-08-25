@@ -57,6 +57,9 @@ jobs:
           echo "=== Configuración .npmrc ==="
           cat ~/.npmrc
 
+          # Limpiar variables sensibles
+          unset CODEARTIFACT_AUTH_TOKEN
+
       - name: Install dependencies
         run: npm install
 

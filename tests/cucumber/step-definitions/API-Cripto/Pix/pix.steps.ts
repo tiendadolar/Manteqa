@@ -21,8 +21,12 @@ import logger from '../../../../support/utils/logger';
 
 const chainArray = ['WORLDCHAIN', 'BSC', 'ETHEREUM', 'POLYGON', 'BINANCE', 'BASE', 'ARBITRUM', 'OPTIMISM'];
 
-Before({ tags: '@Pix' }, function () {
-  console.log('Ejecutando steps para pix');
+// Before({ tags: '@Pix' }, function () {
+//   console.log('Ejecutando steps para pix');
+// });
+
+Before(function (scenario: any) {
+  logger.warn(`Escenario: ${scenario.pickle.name}`);
 });
 
 Given('The API key is available {string}', function (this: CustomWorld, APIkey: string) {
@@ -118,8 +122,6 @@ When(
       } else if (endpoint === '/v2/onboarding-actions/add-bank-account') {
         this.userData = bankingOnboardingApiCrypto(this.userData);
       } else if (endpoint === '/v1/transaction/deposit') {
-        console.log('ENTRA al ENDPOINT');
-
         // Deposito cripto
         this.userData = criptoDepositApiCrypto(this.userData);
       } else if (endpoint === '/v1/fiat/deposit') {

@@ -69,9 +69,9 @@ Then('Se validan atributos para sintético ramp-on operado en no descubierto', a
   // expect(actualThreshold).to.equal(expectedThreshold);
 });
 
-Then('Wait for the processing of the {string} por {int} seconds', { timeout: 110000 }, async function (this: CustomWorld, stage: string, seconds: number) {
-  console.log(`Esperando procesamiento de la etapa: ${stage}`);
-  console.log(`Iniciando espera de ${seconds} seconds...`);
+Then('Wait for the processing of the {string} por {int} seconds', { timeout: 125000 }, async function (this: CustomWorld, stage: string, seconds: number) {
+  logger.info(`Waiting for the processing of the stage: ${stage}`);
+  logger.info(`Starting wait of ${seconds} seconds...`);
   await new Promise((resolve) => setTimeout(resolve, seconds * 1000));
   console.log(`Espera de ${seconds} seconds completada`);
 });

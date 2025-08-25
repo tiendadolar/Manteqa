@@ -38,9 +38,9 @@ Feature: Depositos
         @TRX
         Examples:
             | hash | from                               | to                                 | wei                  | human | ticker | chain |
-            | hash | TB32aawPahWHakN9YPCnshYXP5WXnByCPm | TK87U6EA5Fyq1zLZc9Q6NEeasHtTTRMaLu | 10000000000000000000 | 10    | TRX    | 9     |
+            | hash | TB32aawPahWHakN9YPCnshYXP5WXnByCPm | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | 10000000000000000000 | 10    | TRX    | 9     |
 
         @USDT
         Examples:
             | hash | from                               | to                                 | wei                  | human | ticker | chain |
-            | hash | TB32aawPahWHakN9YPCnshYXP5WXnByCPm | TK87U6EA5Fyq1zLZc9Q6NEeasHtTTRMaLu | 10000000000000000000 | 10    | USDT   | 9     |
+            | hash | TB32aawPahWHakN9YPCnshYXP5WXnByCPm | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | 10000000000000000000 | 10    | USDT   | 9     |

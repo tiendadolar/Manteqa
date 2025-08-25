@@ -6,3 +6,4 @@ cucumber-report.json
 cucumber-report.html
 cucumber-report.pdf
 test.yml
+errors.log

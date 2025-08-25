@@ -45,12 +45,11 @@ Feature: Sintético QR 3.0
     @Smoke @QRV1NoDesc
     Scenario Outline: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get user balance before execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<ticker>" balance
+        # Validate initial balance before execute qr payment
+        And Obtain "<ticker>" balance for "<userAnyId>" user
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -67,29 +66,15 @@ Feature: Sintético QR 3.0
         Then Obtain a response 201
 
         # Execute deposit
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
-        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
-        And Assign the value "<to>" to the variable "to"
-        And Assign the value "10000000000000000000" to the variable "wei"
-        And Assign the value "10" to the variable "human"
-        And Assign the value "<ticker>" to the variable "ticker"
-        And Assign the value 0 to the variable "chain"
-        And Execute the POST method on the endpoint "/v1/transaction/deposit"
-        Then Obtain a response 201
+        Given Execute crypto deposit
 
         # Get status synthetic payment
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden QR" por 20 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get user balance after execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<ticker>" balance
+        # Validate balance after execute qr payment
+        And Obtain "<ticker>" balance for "<userAnyId>" user
 
         Examples:
             | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
@@ -98,12 +83,10 @@ Feature: Sintético QR 3.0
     @Smoke @QRV1NoDesc @ARS
     Scenario Outline: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get user balance before execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -121,25 +104,14 @@ Feature: Sintético QR 3.0
         Then Obtain a response 201
 
         # Execute deposit
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "amount" to the variable "amount"
-        And Assign the value "coin" to the variable "coin"
-        And Execute the POST method on the endpoint "/v1/fiat/deposit"
-        Then Obtain a response 201
+        Given Execute fiat deposit
 
         # Get status synthetic payment
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden QR" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get user balance after execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
             | userAnyId | qrCode                                                                                                                                                                                                     | against | amount | sessionId      | to                                         | ticker |
@@ -164,12 +136,10 @@ Feature: Sintético QR 3.0
     @Smoke @QRV2NoDesc
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en no descubierto vía V2 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get user balance before execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<ticker>" balance
+        And Obtain "<ticker>" balance for "<userAnyId>" user
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -187,29 +157,14 @@ Feature: Sintético QR 3.0
         And The attributes of the QR USDT synthetic are validated
 
         # Execute deposit
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
-        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
-        And Assign the value "<to>" to the variable "to"
-        And Assign the value "10000000000000000000" to the variable "wei"
-        And Assign the value "10" to the variable "human"
-        And Assign the value "<ticker>" to the variable "ticker"
-        And Assign the value 0 to the variable "chain"
-        And Execute the POST method on the endpoint "/v1/transaction/deposit"
-        Then Obtain a response 201
+        Given Execute crypto deposit
 
         # Get status synthetic payment
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden QR" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get user balance after execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<ticker>" balance
+        And Obtain "<ticker>" balance for "<userAnyId>" user
 
         Examples:
             | accion | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
@@ -232,15 +187,13 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V1 ------
 
-    @Smoke @PixV1NoDesc
+    @Smoke @PixV1NoDesc @ct
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra USDT en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get user balance before execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<ticker>" balance
+        And Obtain "<ticker>" balance for "<userAnyId>" user
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -257,29 +210,14 @@ Feature: Sintético QR 3.0
         Then Obtain a response 201
 
         # Execute deposit
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
-        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
-        And Assign the value "<to>" to the variable "to"
-        And Assign the value "10000000000000000000" to the variable "wei"
-        And Assign the value "10" to the variable "human"
-        And Assign the value "<ticker>" to the variable "ticker"
-        And Assign the value 0 to the variable "chain"
-        And Execute the POST method on the endpoint "/v1/transaction/deposit"
-        Then Obtain a response 201
+        Given Execute crypto deposit
 
         # Get status synthetic payment
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get user balance after execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<ticker>" balance
+        And Obtain "<ticker>" balance for "<userAnyId>" user
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
@@ -289,12 +227,10 @@ Feature: Sintético QR 3.0
     @Smoke @PixV1NoDesc @ARS
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get user balance before execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -312,25 +248,14 @@ Feature: Sintético QR 3.0
         Then Obtain a response 201
 
         # Execute deposit
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "amount" to the variable "amount"
-        And Assign the value "coin" to the variable "coin"
-        And Execute the POST method on the endpoint "/v1/fiat/deposit"
-        Then Obtain a response 201
+        Given Execute fiat deposit
 
         # Get status synthetic payment
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get user balance after execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
@@ -353,69 +278,47 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V2 ------
 
-    @Smoke @PixV2NoDesc
+    @Smoke @PixV2NoDesc @last
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra USDT en no descubierto vía V2 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get user balance before execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<ticker>" balance
-
+        # Validate initial balance before execute qr payment
+        When Obtain "<ticker>" balance for "<userAnyId>" user
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<qrCode>" to the variable "qrCode"
         And Assign the value "<amount>" to the variable "amount"
         And Execute the POST method on the endpoint "/v2/payment-locks"
         Then Obtain a response 201 for lock payment
-
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
         Then Obtain a response 201
-
         # Execute deposit
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
-        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
-        And Assign the value "<to>" to the variable "to"
-        And Assign the value "10000000000000000000" to the variable "wei"
-        And Assign the value "10" to the variable "human"
-        And Assign the value "<ticker>" to the variable "ticker"
-        And Assign the value 0 to the variable "chain"
-        And Execute the POST method on the endpoint "/v1/transaction/deposit"
-        Then Obtain a response 201
-
+        When Execute crypto deposit
         # Get status synthetic payment
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
-        When Wait for the processing of the "orden PIX" por 15 seconds
+        And Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
-
-        # Get user balance after execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<ticker>" balance
+        # Validate balance after execute qr payment
+        And Obtain "<ticker>" balance for "<userAnyId>" user
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
             | manual   | 100009628 | pixmanualamount | 5      | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
             | embebido | 100009628 | pix             |        | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
 
-    @Smoke @PixV2NoDesc
+    @Smoke @PixV2NoDesc @testasd
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V2 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get user balance before execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -433,25 +336,14 @@ Feature: Sintético QR 3.0
         Then Obtain a response 201
 
         # Execute deposit
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "amount" to the variable "amount"
-        And Assign the value "coin" to the variable "coin"
-        And Execute the POST method on the endpoint "/v1/fiat/deposit"
-        Then Obtain a response 201
+        Given Execute fiat deposit
 
         # Get status synthetic payment
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         When Wait for the processing of the "orden PIX" por 15 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get user balance after execute qr payment
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId                 | to                                         | ticker |
@@ -503,6 +395,7 @@ Feature: Sintético QR 3.0
     @Smoke1 @Peru
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>"
         Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
+        And The API secret is available "vH2W199pE1re5ZR4Z7"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
         # Get user balance before execute qr payment
@@ -526,22 +419,9 @@ Feature: Sintético QR 3.0
         Then Obtain a response 201
 
         # Execute deposit
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "vH2W199pE1re5ZR4Z7"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
-        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
-        And Assign the value "<to>" to the variable "to"
-        And Assign the value "10000000000000000000" to the variable "wei"
-        And Assign the value "10" to the variable "human"
-        And Assign the value "<ticker>" to the variable "ticker"
-        And Assign the value 0 to the variable "chain"
-        And Execute the POST method on the endpoint "/v1/transaction/deposit"
-        Then Obtain a response 201
+        Given Execute crypto deposit
 
         # Get status synthetic payment
-        Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden PIX" por 60 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
@@ -566,10 +446,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "USDT" balance
+        And Obtain a company debt "<ticker>" balance
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -591,10 +468,7 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "USDT" balance
+        And Obtain a company debt "<ticker>" balance
 
         Examples:
             | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId    | to                                         | ticker |
@@ -605,10 +479,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "ARS" balance
+        And Obtain a company debt "<against>" balance
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -631,10 +502,7 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "ARS" balance
+        And Obtain a company debt "<against>" balance
 
         Examples:
             | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | against | sessionId    | to                                         | ticker |
@@ -647,10 +515,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "USDT" balance
+        And Obtain a company debt "<ticker>" balance
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -672,10 +537,7 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "USDT" balance
+        And Obtain a company debt "<ticker>" balance
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
@@ -763,10 +625,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "USDT" balance
+        And Obtain a company debt "<ticker>" balance
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -787,10 +646,7 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "USDT" balance
+        And Obtain a company debt "<ticker>" balance
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
@@ -802,10 +658,7 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "ARS" balance
+        And Obtain a company debt "<against>" balance
 
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -827,10 +680,7 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "ARS" balance
+        And Obtain a company debt "<against>" balance
 
         #Usuario argentino realizando pago qr a brasil
         Examples:
@@ -845,9 +695,6 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<ticker>" balance
 
         # Request de lock payment
@@ -869,9 +716,6 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<ticker>" balance
 
         Examples:
@@ -884,9 +728,6 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<against>" balance
 
         # Request de lock payment
@@ -909,9 +750,6 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<against>" balance
 
         Examples:
@@ -926,9 +764,6 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<coin>" balance
 
         # Request de lock payment
@@ -951,9 +786,6 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<coin>" balance
 
         Examples:
@@ -967,18 +799,15 @@ Feature: Sintético QR 3.0
             | QR  | Brasil      | USDT | manual   | 100009407 | pixmanualamount    | USDT    | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | pix                | USDT    | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
-    @Smoke @BybitPixkeyb
+    @Smoke @BybitPixkeyb @asd
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" hacia PixKey en descubierto para usuario "<nacionality>" vía ByBit endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        # Get company due before charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "<coin>" balance
+        When Obtain a company debt "<coin>" balance
 
         # Request de lock payment
-        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<paymentDestination>" to the variable "paymentDestination"
         And Assign the value "<against>" to the variable "against"
         And Assign the value "<amount>" to the variable "amount"
@@ -997,9 +826,6 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<coin>" balance
 
         # User ARG no funciona todavia por eso se comentó
@@ -1018,6 +844,8 @@ Feature: Sintético QR 3.0
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en descubierto para usuario "<nacionality>"
         Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        When Obtain a company debt "<coin>" balance
 
         # Get company due before charge qr payment
         When Execute the GET method on the endpoint "/v2/accounting/debt"
@@ -1044,9 +872,6 @@ Feature: Sintético QR 3.0
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED" for payment synthetics
 
-        # Get company due after charge qr payment
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<coin>" balance
 
         Examples:
@@ -1062,11 +887,9 @@ Feature: Sintético QR 3.0
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/accounting/credit"
-        Then Obtain a response 200
-        And Obtain a company debt "<against>" balance
+        When Obtain a company debt "<against>" balance
 
-        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<paymentDestination>" to the variable "paymentDestination"
         And Assign the value "<against>" to the variable "against"
         And Assign the value "<amount>" to the variable "amount"
@@ -1074,9 +897,7 @@ Feature: Sintético QR 3.0
         Then Execute the refund synthetic "descubierto"
         And Obtain a response 200 y status "CANCELLED"
 
-        When Execute the GET method on the endpoint "/v2/accounting/credit"
-        Then Obtain a response 200
-        And Obtain refund on company cred "<against>" balance
+        And Obtain a company debt "<against>" balance
 
         Examples:
             | userAnyId | paymentDestination      | against | amount | sessionId     |

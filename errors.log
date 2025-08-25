@@ -52,3 +52,19 @@
 [33mwarn[39m: COMPLETED
 [33mwarn[39m: [object Object]
 [33mwarn[39m: 
+[33mwarn[39m: Response Body: {"numberId":"6502","coin":"ARS","status":0,"userId":"684b935a017d29431c2cab66","companyId":"684b2f25dcca16d5557fd8b2","amount":"1519.10","cuit":"20406620000","bank":"BIND","newSystem":false,"_id":"68aa869a48dff39f8d802c74","creationTime":"2025-08-24T03:27:22.789Z","updatedAt":"2025-08-24T03:27:22.789Z","__v":0,"id":"68aa869a48dff39f8d802c74"}
+[33mwarn[39m: ▶ Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
+[33mwarn[39m: ▶ Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "WLD" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"

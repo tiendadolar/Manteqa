@@ -441,9 +441,7 @@ Feature: Sintéticos
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "ARS" balance
+        And Obtain a company debt "<against>" balance
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -460,9 +458,7 @@ Feature: Sintéticos
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
-        And Obtain a company debt "ARS" balance
+        And Obtain a company debt "<against>" balance
 
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
@@ -474,10 +470,9 @@ Feature: Sintéticos
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed con deposito "<asset>" contra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        And The API secret is available "tNYgnM4sZR2ypkEDnU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<against>" balance
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -492,22 +487,13 @@ Feature: Sintéticos
         Then Obtain a response 201
 
         # Parte 2: Generar depósito
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "tNYgnM4sZR2ypkEDnU"
-        When Assign the value "userId" to the variable "userId"
-        And Assign the value "amount" to the variable "amount"
-        And Assign the value "coin" to the variable "coin"
-        And Execute the POST method on the endpoint "/v1/fiat/deposit"
-        Then Obtain a response 201
+        Given Execute fiat deposit
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<against>" balance
 
         Examples:
@@ -520,9 +506,7 @@ Feature: Sintéticos
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -539,13 +523,42 @@ Feature: Sintéticos
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                            | withdrawNetwork |
             | 100009788 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+
+    @Smoke @E2EFlow @RampOnDesc @TRON
+    Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "<asset>" contra "<against>"
+
+        # Parte 1: Creación de sintético
+        Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        And Obtain a company debt "<against>" balance
+
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
+        And Execute the POST method on the endpoint "/v2/synthetics/ramp-on"
+        Then Obtain a response 201
+
+        # Parte 2: Validar ejeccución del sintético
+        When Wait for the processing of the "orden" por 120 seconds
+        And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
+        Then Obtain a response 200 y status "COMPLETED"
+
+        And Obtain a company debt "<against>" balance
+
+        Examples:
+            | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                    | withdrawNetwork |
+            | 100009780 | smoke-rampOn-DESC-test-n | TRX   | ARS     | 3           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 3           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
 
     # Se ejecuta solo el stage de orden
     @Smoke @E2EFlow @PartialRampOnDesc
@@ -554,8 +567,6 @@ Feature: Sintéticos
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<against>" balance
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -573,8 +584,6 @@ Feature: Sintéticos
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<against>" balance
 
         Examples:
@@ -591,8 +600,6 @@ Feature: Sintéticos
         Given The API key is available "XW0SRXM-TEGM71S-KS8B5MA-ZF1Z79F"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<against>" balance
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -610,8 +617,6 @@ Feature: Sintéticos
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/accounting/debt"
-        Then Obtain a response 200
         And Obtain a company debt "<against>" balance
 
         Examples:
@@ -626,9 +631,7 @@ Feature: Sintéticos
         Given The API key is available "XW0SRXM-TEGM71S-KS8B5MA-ZF1Z79F"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -646,9 +649,7 @@ Feature: Sintéticos
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                            | withdrawNetwork |
@@ -660,11 +661,10 @@ Feature: Sintéticos
     Scenario Outline: Flujo E2E Ramp-On no descubierto "<asset>" constra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "<apiKEY>"
+        And The API secret is available "6RcTZScYUFb2bq9qWq"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -678,24 +678,14 @@ Feature: Sintéticos
         # And Se validan atributos para sintético ramp-on operado en no descubierto
 
         # Parte 2: Generar depósito
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "6RcTZScYUFb2bq9qWq"
-        When Assign the value "100008214" to the variable "userId"
-        And Assign the value "amount" to the variable "amount"
-        And Assign the value "coin" to the variable "coin"
-        And Execute the POST method on the endpoint "/v1/fiat/deposit"
-        Then Obtain a response 201
+        Given Execute fiat deposit
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "<apiKEY>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 45 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
@@ -703,15 +693,48 @@ Feature: Sintéticos
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
 
-    @Smoke @E2EFlow @RampOn
+    @Smoke @E2EFlow @RampOn @Tron
+    Scenario Outline: Flujo E2E Ramp-On no descubierto "<asset>" contra "<against>"
+        # Parte 1: Creación de sintético
+        Given The API key is available "<apiKEY>"
+        And The API secret is available "6RcTZScYUFb2bq9qWq"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        And Obtain "<against>" balance for "<userAnyId>" user
+
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
+        And Execute the POST method on the endpoint "/v1/synthetics/ramp-on"
+        Then Obtain a response 201
+        # And Se validan atributos para sintético ramp-on operado en no descubierto
+
+        # Parte 2: Generar depósito
+        Given Execute fiat deposit
+
+        # Parte 2: Validar ejeccución del sintético
+        When Wait for the processing of the "orden" por 120 seconds
+        And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
+        Then Obtain a response 200 y status "COMPLETED"
+
+        And Obtain "<against>" balance for "<userAnyId>" user
+
+        Examples:
+            | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                    | withdrawNetwork |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100011193 | smoke-test-n | TRX   | ARS     | 5           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100011193 | smoke-test-n | USDT  | ARS     | 5           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
+
+    @Smoke @E2EFlow @RampOn @testr
     Scenario Outline: Flujo E2E Ramp-On no descubierto operando desde el user balance "<asset>" contra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -729,18 +752,17 @@ Feature: Sintéticos
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | skipDeposit | withdrawAddress                            | withdrawNetwork |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 3           | true        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
     @Smoke @E2EFlow @RampOff
-    Scenario Outline: Flujo E2E Ramp-Off no descubierto
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
+        And The API secret is available "6RcTZScYUFb2bq9qWq"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -755,22 +777,10 @@ Feature: Sintéticos
         # And Se validan atributos para sintético ramp-on operado en no descubierto
 
         # Parte 2: Generar depósito
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "6RcTZScYUFb2bq9qWq"
-        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
-        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
-        And Assign the value "<to>" to the variable "to"
-        And Assign the value "10000000000000000000" to the variable "wei"
-        And Assign the value "10" to the variable "human"
-        And Assign the value "<ticker>" to the variable "ticker"
-        And Assign the value <chain> to the variable "chain"
-        And Execute the POST method on the endpoint "/v1/transaction/deposit"
-        Then Obtain a response 201
+        Given Execute crypto deposit
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Wait for the processing of the "orden" por 10 seconds
+        When Wait for the processing of the "orden" por 20 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
@@ -780,15 +790,45 @@ Feature: Sintéticos
             | 100009688 | smoke-test-n | USDT  | ARS     | 3           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
             | 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
 
+    @Smoke @E2EFlow @RampOff @Tron
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
+        # Parte 1: Creación de sintético
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The API secret is available "mZJ5r9KCdRjnWCdPJg"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
+        And Execute the POST method on the endpoint "/v1/synthetics/ramp-off"
+        Then Obtain a response 201
+        # And Se validan atributos para sintético ramp-on operado en no descubierto
+
+        # Parte 2: Generar depósito
+        Given Execute crypto deposit
+
+        # Parte 2: Validar ejeccución del sintético
+        When Wait for the processing of the "orden" por 45 seconds
+        And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
+        Then Obtain a response 200 y status "COMPLETED"
+
+        Examples:
+            | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                 | ticker | chain |
+            | 100011193 | smoke-test-n | TRX   | ARS     | 3           | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | TRX    | 9     |
+            | 100011193 | smoke-test-n | USDT  | ARS     | 3           | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | USDT   | 9     |
+
     @Smoke @E2EFlow @PartialRampOn @testb
     Scenario Outline: Flujo E2E Partial-Ramp-On no descubierto
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
+        And The API secret is available "6RcTZScYUFb2bq9qWq"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -802,24 +842,14 @@ Feature: Sintéticos
         # And Se validan atributos para sintético ramp-on operado en no descubierto
 
         # Parte 2: Generar depósito
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "6RcTZScYUFb2bq9qWq"
-        When Assign the value "userId" to the variable "userId"
-        And Assign the value "amount" to the variable "amount"
-        And Assign the value "coin" to the variable "coin"
-        And Execute the POST method on the endpoint "/v1/fiat/deposit"
-        Then Obtain a response 201
+        Given Execute fiat deposit
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 10 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
+        And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
             | userAnyId | sessionId                  | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
@@ -831,6 +861,7 @@ Feature: Sintéticos
     Scenario Outline: Flujo E2E Partial-Ramp-Off no descubierto
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
+        And The API secret is available "6RcTZScYUFb2bq9qWq"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -845,21 +876,9 @@ Feature: Sintéticos
         # And Se validan atributos para sintético ramp-on operado en no descubierto
 
         # Parte 2: Generar depósito
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "6RcTZScYUFb2bq9qWq"
-        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
-        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
-        And Assign the value "<to>" to the variable "to"
-        And Assign the value "10000000000000000000" to the variable "wei"
-        And Assign the value "10" to the variable "human"
-        And Assign the value "<ticker>" to the variable "ticker"
-        And Assign the value <chain> to the variable "chain"
-        And Execute the POST method on the endpoint "/v1/transaction/deposit"
-        Then Obtain a response 201
+        Given Execute crypto deposit
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/synthetics/{syntheticId}"
         Then Obtain a response 200 y status "COMPLETED"
