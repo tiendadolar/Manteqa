@@ -35,8 +35,8 @@ Feature: Onboarding User - V2
         Then Obtain a response 201
 
         Examples:
-            | externalId | email                | legalId     | exchange | name | surname    | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | PeruPhone1 | peruphone1@gmail.com | 44062484803 | BRAZIL   | Test | Peru Phone | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400129   | Peru        | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | externalId | email                | legalId     | exchange  | name | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | TestBorrar | testBorrar@gmail.com | 27323197607 | ARGENTINA | Test | Borrar  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400129   | Peru        | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
     # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 
@@ -481,4 +481,8 @@ Feature: Onboarding User - V2
             | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 126      | DEBIT       |
             | Mexico  | 100009608 | 9966326477         | MXN      | BANCO       | 126      | CHECKING    |
 
+    # E2E
 
+    Scenario: Onboarding inicial de usuario
+        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"

@@ -518,7 +518,7 @@ Feature: Sintéticos
             | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                            | withdrawNetwork |
             | 100009788 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
-    @Smoke @E2EFlow @RampOnDesc @TRON
+    @Smoke @E2EFlow @RampOnDesc @Tron
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "<asset>" contra "<against>"
 
         # Parte 1: Creación de sintético
@@ -536,13 +536,13 @@ Feature: Sintéticos
         And Execute the POST method on the endpoint "/v2/synthetics/ramp-on"
         Then Obtain a response 201
         # Parte 2: Validar ejeccución del sintético
-        Then Obtain a response 200 and status "COMPLETED" for "tron ramp" synthetic"
+        Then Obtain a response 200 and status "COMPLETED" for "tron ramp" synthetic
         And Obtain a company debt "<against>" balance
 
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                    | withdrawNetwork |
             | 100009780 | smoke-rampOn-DESC-test-n | TRX   | ARS     | 3           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 3           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
+            | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
 
     # Se ejecuta solo el stage de orden
     @Smoke @E2EFlow @PartialRampOnDesc
@@ -685,7 +685,7 @@ Feature: Sintéticos
         Examples:
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                    | withdrawNetwork |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100011193 | smoke-test-n | TRX   | ARS     | 5           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100011193 | smoke-test-n | USDT  | ARS     | 5           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100011193 | smoke-test-n | USDT  | ARS     | 10          | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
 
     @Smoke @E2EFlow @RampOn
     Scenario Outline: Flujo E2E Ramp-On no descubierto operando desde el user balance "<asset>" contra "<against>"
@@ -766,7 +766,7 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                 | ticker | chain |
             | 100011193 | smoke-test-n | TRX   | ARS     | 3           | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | TRX    | 9     |
-            | 100011193 | smoke-test-n | USDT  | ARS     | 3           | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | USDT   | 9     |
+            | 100011193 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | USDT   | 9     |
 
     @Smoke @E2EFlow @PartialRampOn
     Scenario Outline: Flujo E2E Partial-Ramp-On no descubierto

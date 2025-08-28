@@ -30,6 +30,20 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Prepare clean installation
+        run: |
+          echo "Limpiando solo archivos locales del proyecto..."
+          rm -rf node_modules
+          rm -f package-lock.json
+
+          echo "Verificando conectividad con CodeArtifact..."
+          aws codeartifact describe-repository \
+            --domain td \
+            --repository backend-shared-libs \
+            --region ${{ secrets.AWS_REGION }} \
+            --query 'repository.name' \
+            --output text
+
       - name: Configure CodeArtifact authentication
         run: |
           # Obtener token de CodeArtifact
@@ -38,7 +52,7 @@ jobs:
             --region ${{ secrets.AWS_REGION }} \
             --query authorizationToken \
             --output text)
-          
+
           # Obtener URL del repositorio
           CODEARTIFACT_REGISTRY=$(aws codeartifact get-repository-endpoint \
             --domain td \
@@ -47,12 +61,18 @@ jobs:
             --region ${{ secrets.AWS_REGION }} \
             --query repositoryEndpoint \
             --output text)
-          
-          # Configurar .npmrc
+
+          # Configurar .npmrc con configuraciones adicionales para evitar problemas de integridad
           echo "registry=${CODEARTIFACT_REGISTRY}" > ~/.npmrc
           echo "${CODEARTIFACT_REGISTRY#https:}:_authToken=${CODEARTIFACT_AUTH_TOKEN}" >> ~/.npmrc
           echo "@md:registry=${CODEARTIFACT_REGISTRY}" >> ~/.npmrc
-          
+
+          # Configuraciones adicionales para evitar problemas de integridad
+          echo "fetch-retries=5" >> ~/.npmrc
+          echo "fetch-retry-mintimeout=10000" >> ~/.npmrc
+          echo "fetch-retry-maxtimeout=60000" >> ~/.npmrc
+          echo "fetch-timeout=300000" >> ~/.npmrc
+
           # Verificar configuración
           echo "=== Configuración .npmrc ==="
           cat ~/.npmrc
@@ -60,8 +80,50 @@ jobs:
           # Limpiar variables sensibles
           unset CODEARTIFACT_AUTH_TOKEN
 
-      - name: Install dependencies
-        run: npm install
+      - name: Smart dependency installation
+        run: |
+          echo "=== Método 1: Instalación estándar ==="
+          if npm install --fetch-retries=5 --fetch-retry-mintimeout=10000; then
+            echo "✅ Instalación exitosa con método estándar"
+            exit 0
+          fi
+
+          echo "=== Método 2: Reinstalación desde cero ==="
+          rm -rf node_modules
+          rm -f package-lock.json
+
+          if npm install --fetch-retries=5 --fetch-retry-mintimeout=10000; then
+            echo "✅ Instalación exitosa con reinstalación"
+            exit 0
+          fi
+
+          echo "=== Método 3: Manejo específico del paquete problemático ==="
+          # Solo si dunder-proto es el problema, intentar instalarlo por separado
+          if npm info dunder-proto@1.0.1; then
+            echo "El paquete existe en el registro, reintentando..."
+            npm install dunder-proto@1.0.1 --fetch-retries=5
+            npm install --fetch-retries=5
+            
+            if [ $? -eq 0 ]; then
+              echo "✅ Instalación exitosa con manejo específico"
+              exit 0
+            fi
+          fi
+
+          echo "=== Método 4: Último recurso con cache bypass ==="
+          rm -rf node_modules
+          rm -f package-lock.json
+
+          if npm install --no-cache --fetch-retries=5; then
+            echo "✅ Instalación exitosa sin cache"
+          else
+            echo "❌ Todos los métodos fallaron"
+            echo "Información de diagnóstico:"
+            npm --version
+            node --version
+            ls -la
+            exit 1
+          fi
 
       - name: Run Cucumber tests by tag
         continue-on-error: true
@@ -75,9 +137,9 @@ jobs:
            npx cucumber-js --tags "$TAGS" --format json:cucumber-report.json
            node reporter.js
 
-      # 🆕 CREAR RESUMEN PERSONALIZADO DE TESTS
-      - name: Generate Test Summary
+      - name: Generate Test Summary and Prepare Email
         if: always()
+        id: test-summary
         run: |
           echo "## 🧪 Resumen de Tests" >> $GITHUB_STEP_SUMMARY
 
@@ -147,7 +209,7 @@ jobs:
               const duration = Math.round(totalDuration / 1000000); // nanosegundos a ms
               const successRate = totalScenarios > 0 ? Math.round((passedScenarios / totalScenarios) * 100) : 0;
               
-              // Generar tabla de resumen
+              // Generar tabla de resumen para GitHub
               console.log('| Métrica | Valor |');
               console.log('|---------|-------|');
               console.log(`| 📊 **Escenarios Totales** | ${totalScenarios} |`);
@@ -171,18 +233,83 @@ jobs:
                 console.log('### 🎉 ¡Todos los tests pasaron exitosamente!');
               }
               
-              // Generar archivo de estado para GitHub
-              fs.writeFileSync('test-status.txt', failedScenarios > 0 ? 'FAILED' : 'PASSED');
+              // Generar datos para email
+              const emailData = {
+                status: failedScenarios > 0 ? 'FAILED' : 'PASSED',
+                totalScenarios,
+                passedScenarios,
+                failedScenarios,
+                successRate,
+                totalSteps,
+                duration,
+                failedTests,
+                timestamp: new Date().toLocaleString('es-ES', { timeZone: 'America/Argentina/Mendoza' })
+              };
+              
+              fs.writeFileSync('test-results.json', JSON.stringify(emailData, null, 2));
+              
+              // Crear variables de entorno para GitHub
+              console.log(`TEST_STATUS=${emailData.status}`);
+              console.log(`TOTAL_SCENARIOS=${totalScenarios}`);
+              console.log(`PASSED_SCENARIOS=${passedScenarios}`);
+              console.log(`FAILED_SCENARIOS=${failedScenarios}`);
+              console.log(`SUCCESS_RATE=${successRate}`);
               
             } catch (error) {
               console.log('❌ Error analizando resultados:', error.message);
+              const errorData = {
+                status: 'ERROR',
+                error: error.message,
+                timestamp: new Date().toLocaleString('es-ES', { timeZone: 'America/Argentina/Mendoza' })
+              };
+              require('fs').writeFileSync('test-results.json', JSON.stringify(errorData, null, 2));
+              console.log('TEST_STATUS=ERROR');
             }
           EOF
 
             node analyze-results.js >> $GITHUB_STEP_SUMMARY
+            
+            # Leer resultados y establecer outputs
+            if [ -f test-results.json ]; then
+              TEST_STATUS=$(node -e "console.log(JSON.parse(require('fs').readFileSync('test-results.json', 'utf8')).status)")
+              echo "test_status=${TEST_STATUS}" >> $GITHUB_OUTPUT
+            fi
           else
             echo "❌ No se encontró cucumber-report.json" >> $GITHUB_STEP_SUMMARY
+            echo '{"status":"NO_REPORT","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
+            echo "test_status=NO_REPORT" >> $GITHUB_OUTPUT
           fi
+
+      - name: Send Email Notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          from: ${{ secrets.EMAIL_USERNAME }}
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          subject: "🧪 Tests ${{ github.repository }} - [${{ steps.test-summary.outputs.test_status || 'UNKNOWN' }}]"
+          body: |
+            Hola!
+
+            Se ejecutaron los tests en el repositorio ${{ github.repository }}
+
+            📋 Detalles de la ejecución:
+            • Repositorio: ${{ github.repository }}
+            • Branch: ${{ github.ref_name }}
+            • Ejecutado por: ${{ github.actor }}
+            • Estado: ${{ steps.test-summary.outputs.test_status || 'DESCONOCIDO' }}
+            • Fecha: ${{ github.event.head_commit.timestamp }}
+
+            🔗 Ver resultados completos:
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            📊 Resumen disponible en la pestaña "Summary" del workflow.
+
+            ---
+            Generado automáticamente por GitHub Actions
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
@@ -193,3 +320,4 @@ jobs:
             cucumber-report.html
             reports/
             cucumber-report.json
+            test-results.json
