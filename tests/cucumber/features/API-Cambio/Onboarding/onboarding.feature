@@ -1,9 +1,8 @@
 @OnboardingApiCambio
 Feature: Onboarding API-Cambio
 
-    @InitialOnboarding
     Scenario: Onboarding inicial de usuario
-        Given The API key is available "2f96-0dcb-175b-9e8a-3197-e714-0813-a924-04894ac9"
+        Given The API key is available "bd69-f82c-c372-5bb6-3248-45e9-99f5-5035-7581106d"
         And The urlBase is available "https://api-qa.tiendadolar.com.ar"
         When Assign the value "<email>" to the variable "email"
         And Assign the value "<legalId>" to the variable "legalId"
@@ -28,11 +27,11 @@ Feature: Onboarding API-Cambio
         And The user is created
 
         Examples:
-            | email                 | legalId     | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | isUif | phoneNumber | nationality | ARScbu                 | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | testcvu13@yopmail.com | 20270001409 | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | false | 1124001116  | Argentina   | 0000003100086679972343 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | email                   | legalId     | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | isUif | phoneNumber | nationality | ARScbu                 | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | testretiro1@yopmail.com | 20460224641 | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | false | 1124002020  | Argentina   | 0000003100086679972343 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
 
     Scenario: Obtener S3 url para carga de DNI FRONT
-        Given The API key is available "2f96-0dcb-175b-9e8a-3197-e714-0813-a924-04894ac9"
+        Given The API key is available "bd69-f82c-c372-5bb6-3248-45e9-99f5-5035-7581106d"
         And The urlBase is available "https://api-qa.tiendadolar.com.ar"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "FRONT" to the variable "side"
@@ -45,7 +44,7 @@ Feature: Onboarding API-Cambio
         Then Obtain a response 200
 
     Scenario: Obtener S3 url para carga de DNI BACK
-        Given The API key is available "2f96-0dcb-175b-9e8a-3197-e714-0813-a924-04894ac9"
+        Given The API key is available "bd69-f82c-c372-5bb6-3248-45e9-99f5-5035-7581106d"
         And The urlBase is available "https://api-qa.tiendadolar.com.ar"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "BACK" to the variable "side"
@@ -58,7 +57,7 @@ Feature: Onboarding API-Cambio
         Then Obtain a response 200
 
     Scenario: Obtener S3 url para carga de selfie
-        Given The API key is available "2f96-0dcb-175b-9e8a-3197-e714-0813-a924-04894ac9"
+        Given The API key is available "bd69-f82c-c372-5bb6-3248-45e9-99f5-5035-7581106d"
         And The urlBase is available "https://api-qa.tiendadolar.com.ar"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "selfie.jpg" to the variable "fileName"
@@ -70,7 +69,7 @@ Feature: Onboarding API-Cambio
         Then Obtain a response 200
 
     Scenario: Obtener S3 url para subir documento UIF
-        Given The API key is available "2f96-0dcb-175b-9e8a-3197-e714-0813-a924-04894ac9"
+        Given The API key is available "bd69-f82c-c372-5bb6-3248-45e9-99f5-5035-7581106d"
         And The urlBase is available "https://api-qa.tiendadolar.com.ar"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "example-uif-documentation.jpg" to the variable "fileName"
@@ -83,7 +82,7 @@ Feature: Onboarding API-Cambio
 
 
     Scenario: Agregar cuenta bancaria
-        Given The API key is available "2f96-0dcb-175b-9e8a-3197-e714-0813-a924-04894ac9"
+        Given The API key is available "bd69-f82c-c372-5bb6-3248-45e9-99f5-5035-7581106d"
         And The urlBase is available "https://sandbox.manteca.dev/cambio"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "1430001713018822310016" to the variable "address"

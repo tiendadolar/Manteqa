@@ -16,4 +16,11 @@ Feature: Autorización API-Cambio
             | email                | password  |
             | andy@tiendadolar.com | !12345678 |
 
+    @Cambio
+    Scenario: Auth
+        Given login user admin "<credential>"
+
+        Examples:
+            | credential           |
+            | andy@tiendadolar.com |
 

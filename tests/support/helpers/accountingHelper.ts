@@ -9,6 +9,7 @@ const getInicialDebtBalance = (response: any, coin: string) => {
   } else {
     CustomWorld.setStoreData('companyAccountingInfo', '0');
   }
+  logger.info(`Initial Company Debt Balance for ${coin}: ${CustomWorld.getStoreData('companyAccountingInfo')}`);
 };
 
 const compareDebtBalance = (thereIsDepositStage: Boolean, response: any, coin: string, againstAmountOperated: string, paymentAgainstAmount: string) => {

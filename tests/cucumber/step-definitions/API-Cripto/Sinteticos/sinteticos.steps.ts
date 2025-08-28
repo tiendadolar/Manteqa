@@ -1,7 +1,9 @@
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
+import { getSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
 import logger from '../../../../support/utils/logger';
+import { delay } from '../../../../support/utils/utils';
 import { CustomWorld, UserData } from '../../../../support/world';
 
 Then('Se validan atributos para sintético ramp-on operado en no descubierto', async function (this: CustomWorld) {
@@ -88,4 +90,14 @@ Then('Obtain a response {int} y status {string}', function (this: CustomWorld, s
   if (body?.stages?.['1'].stageType === 'DEPOSIT') CustomWorld.setStoreData('depositStage', true);
   if (body?.stages?.['1'].stageType !== 'DEPOSIT') CustomWorld.setStoreData('notDepositStage', true);
   if (body.hasOwnProperty('details')) CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
+});
+
+Then('Obtain a response {int} and status {string} for {string} synthetic', { timeout: 125000 }, async function (this: CustomWorld, statusCode: number, statusName: string, syntheticType: string) {
+  const urlBase = this.urlBase;
+  const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
+  const apiKEY = this.apiKey;
+  const ms = syntheticType === 'tron ramp' ? 120000 : 45000;
+
+  await delay(ms);
+  await getSyntheticStatus(urlBase, endpoint, apiKEY, statusCode, statusName);
 });

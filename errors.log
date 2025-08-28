@@ -68,3 +68,173 @@
 [33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
 [33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
 [33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "ARS" en descubierto para usuario "Argentina" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Argentina" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Peru" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina" con deposito
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru" con deposito
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "ARS" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "ARS" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Argentina" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Peru" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina" con deposito
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru" con deposito
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" no descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" no descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Generar deposito Fiat
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "DAI" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de WLD mediante WORLDCHAIN para user ARG por V1
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de WLD mediante OPTIMISM para user ARG por V1
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante POLYGON para user ARG por V1
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante ETHEREUM para user ARG por V1
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDC mediante POLYGON para user ARG por V1
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDC mediante BASE para user ARG por V1
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "ARS" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "ARS" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Argentina" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Peru" sobre el Balance User
+[33mwarn[39m: Escenario: Generar deposito Fiat
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Argentina" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Peru" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" no descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" no descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Argentina" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Peru" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Argentina" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "PEN" en descubierto para usuario "Peru" sobre el Balance User
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" no descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "ARS" no descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" no descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Obtener S3 url para subir documento UIF
+[33mwarn[39m: Escenario: Subir documento UIF
+[33mwarn[39m: Escenario: Agregar cuenta bancaria
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Obtener S3 url para subir documento UIF
+[33mwarn[39m: Escenario: Subir documento UIF
+[33mwarn[39m: Escenario: Agregar cuenta bancaria
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Auth
+[33mwarn[39m: Escenario: Auth
+[33mwarn[39m: Escenario: Creación de sintético Ramp-On
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "WLD" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "DAI" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed con deposito "WLD" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed operando desde userBalance "WLD" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "TRX" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING TAKENOS
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING MERU
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "WLD" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "DAI" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"

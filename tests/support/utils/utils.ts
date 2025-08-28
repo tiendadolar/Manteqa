@@ -4,6 +4,7 @@ const md = require('@md/math');
 const speakeasy = require('speakeasy');
 import { use } from 'chai';
 import { CustomWorld } from '../world';
+import logger from './logger';
 const gp = require('coingecko-api');
 
 const gpClient = new gp();
@@ -48,6 +49,7 @@ export const getParPrices = async (coin: string): Promise<any> => {
 };
 
 export const delay = (ms: number): Promise<void> => {
+  logger.info(`Waiting for synthetic processing...`);
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
