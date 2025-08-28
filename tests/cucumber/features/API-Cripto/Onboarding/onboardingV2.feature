@@ -35,8 +35,8 @@ Feature: Onboarding User - V2
         Then Obtain a response 201
 
         Examples:
-            | externalId | email                | legalId     | exchange  | name | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | TestBorrar | testBorrar@gmail.com | 27323197607 | ARGENTINA | Test | Borrar  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400129   | Peru        | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | externalId | email               | legalId     | exchange | name | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | ProdBRLA1  | prodbrla1@gmail.com | 13987766700 | BRAZIL   | Test | Borrar  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Brasil      | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
     # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 
@@ -486,3 +486,4 @@ Feature: Onboarding User - V2
     Scenario: Onboarding inicial de usuario
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+

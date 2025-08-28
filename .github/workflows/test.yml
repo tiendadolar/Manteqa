@@ -297,11 +297,15 @@ jobs:
             Se ejecutaron los tests en el repositorio ${{ github.repository }}
 
             📋 Detalles de la ejecución:
-            • Repositorio: ${{ github.repository }}
-            • Branch: ${{ github.ref_name }}
-            • Ejecutado por: ${{ github.actor }}
-            • Estado: ${{ steps.test-summary.outputs.test_status || 'DESCONOCIDO' }}
-            • Fecha: ${{ github.event.head_commit.timestamp }}
+              console.log('| Métrica | Valor |');
+              console.log('|---------|-------|');
+              console.log(`| 📊 **Escenarios Totales** | ${totalScenarios} |`);
+              console.log(`| ✅ **Escenarios Exitosos** | ${passedScenarios} |`);
+              console.log(`| ❌ **Escenarios Fallidos** | ${failedScenarios} |`);
+              console.log(`| 📈 **Tasa de Éxito** | ${successRate}% |`);
+              console.log(`| 🔧 **Steps Totales** | ${totalSteps} |`);
+              console.log(`| ⏱️ **Duración Total** | ${duration}ms |`);
+              console.log('');
 
             🔗 Ver resultados completos:
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
