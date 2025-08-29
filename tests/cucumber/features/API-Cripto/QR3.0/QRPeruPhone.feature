@@ -128,9 +128,9 @@ Feature: QR 3.0 Peru Mobile Payment
         @conco
         Examples:
             | pay | nacionality | coin | accion                  | userAnyId | paymentDestination | against | amount | sessionId      | to                                         | ticker |
-            | QR  | Brasil      | BRL  | pago a teléfono celular | 2400618   | +5511949227612     | BRL     | 0.1    | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
+            | QR  | Brasil      | BRL  | pago a teléfono celular | 2401716   | +5511949227612     | BRL     | 3      | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
 
         @sinco
         Examples:
             | pay | nacionality | coin | accion                  | userAnyId | paymentDestination | against | amount | sessionId      | to                                         | ticker |
-            | QR  | Brasil      | BRL  | pago a teléfono celular | 2400618   | +5511949227612     | BRL     | 0.1    | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
+            | QR  | Brasil      | BRL  | pago a teléfono celular | 2401716   | +5511949227612     | BRL     | 3      | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
