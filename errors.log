@@ -271,3 +271,97 @@
 [33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
 [33mwarn[39m: Escenario: Subir imagen selfie
 [33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "pago a teléfono celular" contra "BRL" en descubierto para usuario "Brasil"
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario

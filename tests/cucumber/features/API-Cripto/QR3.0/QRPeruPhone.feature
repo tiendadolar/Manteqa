@@ -98,6 +98,7 @@ Feature: QR 3.0 Peru Mobile Payment
             | QR  | Argentina   | USDT | pago a teléfono celular | 100010488 | +51987365083       | USDT    | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
             | QR  | Peru        | USDT | pago a teléfono celular | 100010538 | +51987365083       | USDT    | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
 
+    #BORRAR
     @BRLA
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<against>" en descubierto para usuario "<nacionality>"
         Given The API key is available "M6WGHFR-DG24ABS-JDTGGRF-F3YJCW2"
@@ -127,9 +128,9 @@ Feature: QR 3.0 Peru Mobile Payment
         @conco
         Examples:
             | pay | nacionality | coin | accion                  | userAnyId | paymentDestination | against | amount | sessionId      | to                                         | ticker |
-            | QR  | Brasil      | BRL  | pago a teléfono celular | 2399998   | +5511949227612     | BRL     | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
+            | QR  | Brasil      | BRL  | pago a teléfono celular | 2400618   | +5511949227612     | BRL     | 0.1    | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
 
         @sinco
         Examples:
             | pay | nacionality | coin | accion                  | userAnyId | paymentDestination | against | amount | sessionId      | to                                         | ticker |
-            | QR  | Brasil      | BRL  | pago a teléfono celular | 2399998   | +5511949227612     | BRL     | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
+            | QR  | Brasil      | BRL  | pago a teléfono celular | 2400618   | +5511949227612     | BRL     | 0.1    | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |

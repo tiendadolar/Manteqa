@@ -1,84 +1,73 @@
-const { Given, When, Then, Before } = require("@cucumber/cucumber");
-const { expect } = require("chai");
-const request = require("supertest");
-const fs = require("fs");
-const path = require("path");
-import { pepInfoCrypto } from "../../../../support/utils/utils";
-import { CustomWorld, UserData } from "../../../../support/world";
+const { Given, When, Then, Before } = require('@cucumber/cucumber');
+const { expect } = require('chai');
+const request = require('supertest');
+const fs = require('fs');
+const path = require('path');
+import { onboardingHelper, uploadImages } from '../../../../support/helpers/onboardingHelper';
+import logger from '../../../../support/utils/logger';
+import { pepInfoCrypto } from '../../../../support/utils/utils';
+import { CustomWorld, UserData } from '../../../../support/world';
 
-Before({ tags: "@Onboarding" }, function () {
-  console.log("Ejecutando steps para onboarding");
+Before({ tags: '@Onboarding' }, function () {
+  console.log('Ejecutando steps para onboarding');
 });
 
-Then(
-  "Execute the PUT method on the endpoint",
-  { timeout: 50 * 1000 },
-  async function (this: CustomWorld) {
-    const imagePath = path.join(__dirname, "../../../../../images/pic2.png");
-    const imageBuffer = fs.readFileSync(imagePath);
-    let url = "";
+Then('Execute the PUT method on the endpoint', { timeout: 50 * 1000 }, async function (this: CustomWorld) {
+  const imagePath = path.join(__dirname, '../../../../../images/pic2.png');
+  const imageBuffer = fs.readFileSync(imagePath);
+  let url = '';
 
-    if (CustomWorld.getStoreData("awsUrl") !== undefined) {
-      url = CustomWorld.getStoreData("awsUrl") || "";
-    }
-
-    try {
-      this.response = await request(url)
-        .put("")
-        .set("Content-Type", "image/png")
-        // .send(this.userData)
-        .send(imageBuffer);
-    } catch (error: unknown) {
-      const err = error as { response?: any };
-      this.response = err.response || {
-        status: 500,
-        body: { message: "Error desconocido" },
-      };
-      console.error("Error en GET:", this.response.body);
-      throw error;
-    }
+  if (CustomWorld.getStoreData('awsUrl') !== undefined) {
+    url = CustomWorld.getStoreData('awsUrl') || '';
   }
-);
 
-Then(
-  "Execute the PUT method on the endpoint {string}",
-  async function (this: CustomWorld, endpoint: string) {
-    let paramEndpoint = endpoint;
-
-    if (
-      CustomWorld.getStoreData("userId") !== undefined &&
-      endpoint === "/v1/documentation/{userId}/pep"
-    ) {
-      paramEndpoint = paramEndpoint.replace(
-        "{userId}",
-        CustomWorld.getStoreData("userId") || ""
-      );
-      // this.userData = {};
-      this.userData = pepInfoCrypto(this.userData);
-    }
-
-    try {
-      console.log(paramEndpoint);
-
-      console.log("User Data:", this.userData);
-      this.response = await request(this.urlBase)
-        .put(paramEndpoint)
-        .set("md-api-key", this.apiKey)
-        // .set("x-api-secret", this.apiSecret)
-        // .set("x-access-token", this.token)
-        .send(this.userData);
-      console.log("API response:", this.response.body);
-    } catch (error: unknown) {
-      const err = error as { response?: any };
-      this.response = err.response || {
-        status: 500,
-        body: { message: "Error desconocido" },
-      };
-      console.error("Error en GET:", this.response.body);
-      throw error;
-    }
+  try {
+    this.response = await request(url)
+      .put('')
+      .set('Content-Type', 'image/png')
+      // .send(this.userData)
+      .send(imageBuffer);
+  } catch (error: unknown) {
+    const err = error as { response?: any };
+    this.response = err.response || {
+      status: 500,
+      body: { message: 'Error desconocido' }
+    };
+    console.error('Error en GET:', this.response.body);
+    throw error;
   }
-);
+});
+
+Then('Execute the PUT method on the endpoint {string}', async function (this: CustomWorld, endpoint: string) {
+  let paramEndpoint = endpoint;
+
+  if (CustomWorld.getStoreData('userId') !== undefined && endpoint === '/v1/documentation/{userId}/pep') {
+    paramEndpoint = paramEndpoint.replace('{userId}', CustomWorld.getStoreData('userId') || '');
+    // this.userData = {};
+    this.userData = pepInfoCrypto(this.userData);
+  }
+
+  try {
+    console.log(paramEndpoint);
+
+    console.log('User Data:', this.userData);
+    this.response = await request(this.urlBase)
+      .put(paramEndpoint)
+      .set('md-api-key', this.apiKey)
+      // .set("x-api-secret", this.apiSecret)
+      // .set("x-access-token", this.token)
+      .send(this.userData);
+    console.log('API response:', this.response.body);
+  } catch (error: unknown) {
+    const err = error as { response?: any };
+    this.response = err.response || {
+      status: 500,
+      body: { message: 'Error desconocido' }
+    };
+    console.error('Error en GET:', this.response.body);
+    throw error;
+  }
+});
 
 // Then(
 //   "Obtain a response {int} y el userId",
@@ -92,69 +81,51 @@ Then(
 //   }
 // );
 
-Then("The user is created", function (this: CustomWorld) {
+Then('The user is created', function (this: CustomWorld) {
   const response: any = this.response;
   const body: any = response.body;
-  const expectedCurrencies = [
-    "ARS",
-    "USD",
-    "CLP",
-    "COP",
-    "BRL",
-    "GTQ",
-    "CRC",
-    "PUSD",
-    "MXN",
-    "PHP",
-  ];
+  const expectedCurrencies = ['ARS', 'USD', 'CLP', 'COP', 'BRL', 'GTQ', 'CRC', 'PUSD', 'MXN', 'PHP'];
   const actualCurrencies = Object.keys(body.bankAccounts);
 
-  expect(this.response.body).to.be.an("object");
+  expect(this.response.body).to.be.an('object');
 
-  expect(body.numberId).to.be.a("string").and.not.empty;
+  expect(body.numberId).to.be.a('string').and.not.empty;
 
-  expect(body.email).to.be.a("string").and.not.empty;
+  expect(body.email).to.be.a('string').and.not.empty;
   expect(body.email).to.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
 
-  expect(body.cuit).to.be.a("string").and.not.empty;
+  expect(body.cuit).to.be.a('string').and.not.empty;
   expect(body.cuit).to.have.lengthOf(11);
   expect(body.cuit).to.match(/^\d{11}$/);
 
-  expect(body.country).to.be.a("string").and.not.empty;
+  expect(body.country).to.be.a('string').and.not.empty;
 
-  expect(body.phoneNumber).to.be.a("string").and.not.empty;
+  expect(body.phoneNumber).to.be.a('string').and.not.empty;
   expect(body.phoneNumber).to.match(/^\d+$/);
 
-  expect(body.civilState).to.be.a("string").and.not.empty;
-  expect(body.civilState).to.be.oneOf([
-    "soltero",
-    "casado",
-    "divorciado",
-    "viudo",
-  ]);
+  expect(body.civilState).to.be.a('string').and.not.empty;
+  expect(body.civilState).to.be.oneOf(['soltero', 'casado', 'divorciado', 'viudo']);
 
-  expect(body.name).to.be.a("string").and.not.empty;
+  expect(body.name).to.be.a('string').and.not.empty;
 
-  expect(body.creationTime).to.be.a("string").and.not.empty;
-  expect(body.creationTime).to.match(
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/
-  );
+  expect(body.creationTime).to.be.a('string').and.not.empty;
+  expect(body.creationTime).to.match(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/);
 
-  expect(body.bankAccounts).to.be.an("object").and.not.empty;
+  expect(body.bankAccounts).to.be.an('object').and.not.empty;
 
   expect(actualCurrencies).to.have.members(expectedCurrencies);
 
-  expect(body.balance).to.be.an("object").and.not.empty;
+  expect(body.balance).to.be.an('object').and.not.empty;
 
-  expect(body.balance && body.lockedBalance).to.have.property("fiat");
-  expect(body.balance && body.lockedBalance).to.have.property("crypto");
-  expect(Object.keys(body.balance)).to.have.members(["fiat", "crypto"]);
+  expect(body.balance && body.lockedBalance).to.have.property('fiat');
+  expect(body.balance && body.lockedBalance).to.have.property('crypto');
+  expect(Object.keys(body.balance)).to.have.members(['fiat', 'crypto']);
   expect(Object.keys(body.balance)).to.have.lengthOf(2);
-  expect(Object.keys(body.lockedBalance)).to.have.members(["fiat", "crypto"]);
+  expect(Object.keys(body.lockedBalance)).to.have.members(['fiat', 'crypto']);
   expect(Object.keys(body.lockedBalance)).to.have.lengthOf(2);
 
-  expect(body.balance.fiat).to.be.an("object");
-  expect(body.balance.crypto).to.be.an("object");
+  expect(body.balance.fiat).to.be.an('object');
+  expect(body.balance.crypto).to.be.an('object');
 
   // expect(body.addresses).to.be.an("object").and.not.empty;
 
@@ -175,23 +146,33 @@ Then("The user is created", function (this: CustomWorld) {
   // }
 });
 
-Then("The bank account is added", function (this: CustomWorld) {
-  expect(this.response.body).to.be.an("object");
+Then('The bank account is added', function (this: CustomWorld) {
+  expect(this.response.body).to.be.an('object');
 });
 
-Then(
-  "The error is received {string}",
-  async function (this: CustomWorld, value: string) {
-    this.userData["mensaje"] = value;
-    const response: any = this.response;
-    const body: any = response.body;
+Then('The error is received {string}', async function (this: CustomWorld, value: string) {
+  this.userData['mensaje'] = value;
+  const response: any = this.response;
+  const body: any = response.body;
 
-    expect(response.status).to.equal(400);
+  expect(response.status).to.equal(400);
 
-    expect(body.internalStatus).to.be.equal("BAD_REQUEST").and.not.empty;
-    expect(body.message).to.be.a("string").and.not.empty;
-    expect(body.errors).to.be.an("array").and.not.empty;
-    expect(body.errors[0]).to.be.a("string").and.not.empty;
-    console.log(this.userData["mensaje"]);
-  }
-);
+  expect(body.internalStatus).to.be.equal('BAD_REQUEST').and.not.empty;
+  expect(body.message).to.be.a('string').and.not.empty;
+  expect(body.errors).to.be.an('array').and.not.empty;
+  expect(body.errors[0]).to.be.a('string').and.not.empty;
+  console.log(this.userData['mensaje']);
+});
+
+Given('Validate existing user {string}', async function (this: CustomWorld, legalId: string) {
+  await onboardingHelper(this.urlBase, this.apiKey, legalId);
+});
+
+When('Upload {string} image', async function (this: CustomWorld, imageType: string) {
+  const userAnyId: string = CustomWorld.getStoreData('userId');
+  logger.debug(userAnyId);
+  const endpoint = imageType === 'selfie' ? '/v2/onboarding-actions/upload-selfie-image' : '/v2/onboarding-actions/upload-identity-image';
+  const side = imageType === 'FRONT ID' ? 'FRONT' : 'BACK';
+  const fileName = imageType === 'FRONT ID' ? 'pic2.png' : 'pic1.png';
+  await uploadImages(this.urlBase, endpoint, this.apiKey, userAnyId, side, fileName);
+});
