@@ -1,0 +1,61 @@
+{
+  "COLOMBIA": {
+    "currency": "COP",
+    "cbu": "3511234567",
+    "description": "Cuenta de ahorros",
+    "code": "1507",
+    "accountType": "SAVINGS"
+  },
+  "CHILE": {
+    "currency": "CLP",
+    "cbu": "16778957",
+    "description": "Cuenta de ahorros",
+    "code": "317",
+    "accountType": "RUT"
+  },
+  "PANAMA": {
+    "currency": "PUSD",
+    "cbu": "0472018417951",
+    "description": "Cuenta de ahorros",
+    "code": "0013",
+    "accountType": "CHECKING"
+  },
+  "GUATEMALA": {
+    "currency": "GTQ",
+    "cbu": "1234567",
+    "description": "Cuenta de ahorros",
+    "code": "001",
+    "accountType": "CHECKING"
+  },
+  "COSTA_RICA": {
+    "currency": "CRC",
+    "cbu": "CR88010404046620113218",
+    "description": "Cuenta de ahorros",
+    "code": "0102",
+    "accountType": "CHECKING"
+  },
+  "MEXICO": {
+    "currency": "MXN",
+    "cbu": "156356784125789654",
+    "description": "Cuenta de ahorros",
+    "code": "002",
+    "accountType": "CHECKING"
+  },
+  "PHILIPPINES": {
+    "currency": "PHP",
+    "cbu": "09300164750",
+    "description": "Cuenta de ahorros",
+    "code": "shopeepay",
+    "accountType": "CHECKING"
+  },
+  "ARGENTINA": {
+    "currency": "ARS",
+    "cbu": "4530000800015017168564",
+    "description": "Cuenta de ahorros"
+  },
+  "BRAZIL": {
+    "currency": "BRL",
+    "cbu": "07185653711",
+    "description": "Cuenta de ahorros"
+  }
+}

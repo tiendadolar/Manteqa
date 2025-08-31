@@ -1,6 +1,7 @@
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
+import { timeoutsBySynthetic } from '../../../../support/constants/constants.timeouts';
 import { getSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
 import logger from '../../../../support/utils/logger';
 import { delay } from '../../../../support/utils/utils';
@@ -96,7 +97,7 @@ Then('Obtain a response {int} and status {string} for {string} synthetic', { tim
   const urlBase = this.urlBase;
   const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
   const apiKEY = this.apiKey;
-  const ms = syntheticType === 'tron ramp' ? 120000 : 45000;
+  const ms = timeoutsBySynthetic[syntheticType] ?? timeoutsBySynthetic['default'];
 
   await delay(ms);
   await getSyntheticStatus(urlBase, endpoint, apiKEY, statusCode, statusName);

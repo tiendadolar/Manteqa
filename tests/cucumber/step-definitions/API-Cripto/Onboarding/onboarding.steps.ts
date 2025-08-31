@@ -3,7 +3,8 @@ const { expect } = require('chai');
 const request = require('supertest');
 const fs = require('fs');
 const path = require('path');
-import { onboardingHelper, uploadImages } from '../../../../support/helpers/onboardingHelper';
+import { addBankAccountHelper, onboardingHelper, uploadImagesHelper } from '../../../../support/helpers/onboardingHelper';
+import { validateRes } from '../../../../support/helpers/requestHelper';
 import logger from '../../../../support/utils/logger';
 import { pepInfoCrypto } from '../../../../support/utils/utils';
 import { CustomWorld, UserData } from '../../../../support/world';
@@ -170,9 +171,17 @@ Given('Validate existing user {string}', async function (this: CustomWorld, lega
 
 When('Upload {string} image', async function (this: CustomWorld, imageType: string) {
   const userAnyId: string = CustomWorld.getStoreData('userId');
-  logger.debug(userAnyId);
   const endpoint = imageType === 'selfie' ? '/v2/onboarding-actions/upload-selfie-image' : '/v2/onboarding-actions/upload-identity-image';
   const side = imageType === 'FRONT ID' ? 'FRONT' : 'BACK';
   const fileName = imageType === 'FRONT ID' ? 'pic2.png' : 'pic1.png';
-  await uploadImages(this.urlBase, endpoint, this.apiKey, userAnyId, side, fileName);
+
+  await uploadImagesHelper(this.urlBase, endpoint, this.apiKey, userAnyId, side, fileName);
+});
+
+When('Add {string} bank account', async function (this: CustomWorld, exchange: string) {
+  const userAnyId: string = CustomWorld.getStoreData('userId');
+  const endpoint = '/v2/onboarding-actions/add-bank-account';
+
+  const response = await addBankAccountHelper(this.urlBase, endpoint, this.apiKey, userAnyId, exchange);
+  validateRes(response, 204);
 });

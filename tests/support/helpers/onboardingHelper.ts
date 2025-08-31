@@ -2,8 +2,10 @@ const request = require('supertest');
 const { expect } = require('chai');
 const fs = require('fs');
 const path = require('path');
+const exchangeData = require('../data/accountData.json');
 import logger from '../utils/logger';
 import { CustomWorld } from '../world';
+import { apiRequest } from './requestHelper';
 
 const getUserId = async (urlBase: string, apiKey: string, legalId: string) => {
   const endpoint: string = `/v2/users?legalId=${legalId}`;
@@ -18,7 +20,6 @@ const deleteUser = async (userNumberId: string) => {
   const urlBase: string = `https://api-qa.tiendacrypto.com`;
   const endpoint: string = `/v1/admin/user`;
   const token: string = CustomWorld.getStoreData('JWT');
-  logger.debug(`Token obtenido: ${token}`);
 
   const payload = {
     numberId: userNumberId
@@ -43,7 +44,7 @@ export const onboardingHelper = async (urlBase: string, apiKEY: string, legalId:
   logger.info(`Usuario con legalId ${legalId} y numberId ${numberId} eliminado correctamente`);
 };
 
-export const uploadImages = async (urlBase: string, endpoint: string, apiKey: string, userAnyId: string, side: string, fileName: string): Promise<any> => {
+export const uploadImagesHelper = async (urlBase: string, endpoint: string, apiKey: string, userAnyId: string, side: string, fileName: string): Promise<any> => {
   // logger.debug('ENTRAAAAA');
   // const userAnyId: string = await getUserId(urlBase, apiKey, legalId);
   // logger.debug(userAnyId);
@@ -55,8 +56,35 @@ export const uploadImages = async (urlBase: string, endpoint: string, apiKey: st
   };
 
   const response = await request(urlBase).post(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKey).send(payload);
-  logger.debug(JSON.stringify(response.body));
   const awsUrl: string = response.body.url;
   await putAwsUrl(awsUrl);
-  logger.info(`Imagen ${fileName} subida correctamente`);
+  logger.info(`Image uploading completed`);
+};
+
+export const addBankAccountHelper = async (urlBase: string, endpoint: string, apiKey: string, userAnyId: string, exchange: string): Promise<any> => {
+  const argPayload = {
+    userAnyId: userAnyId,
+    currency: exchangeData[exchange].currency,
+    cbu: exchangeData[exchange].cbu,
+    description: `Cuenta ${exchange} automatizada`
+  };
+
+  const noArgPayload = {
+    userAnyId: userAnyId,
+    currency: exchangeData[exchange].currency,
+    cbu: exchangeData[exchange].cbu,
+    description: exchangeData[exchange].description,
+    bank: {
+      code: exchangeData[exchange].code
+    },
+    accountType: exchangeData[exchange].accountType
+  };
+
+  const payload = exchange === 'ARGENTINA' || exchange === 'BRAZIL' ? argPayload : noArgPayload;
+  logger.debug(JSON.stringify(payload));
+
+  const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, body: payload });
+
+  logger.info(`Bank account added for exchange: ${exchange}`);
+  return response;
 };

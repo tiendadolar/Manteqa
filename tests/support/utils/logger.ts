@@ -18,8 +18,8 @@ const customLevel: { levels: CustomLogLevels; colors: Record<keyof CustomLogLeve
     debug: 4
   },
   colors: {
-    fatal: 'red',
-    error: 'magenta',
+    fatal: 'magenta',
+    error: 'red',
     warn: 'yellow',
     info: 'blue',
     debug: 'cyan'
