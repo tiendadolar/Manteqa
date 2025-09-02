@@ -632,3 +632,7 @@
 [33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
 [33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
 [33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
