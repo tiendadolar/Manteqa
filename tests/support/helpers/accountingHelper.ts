@@ -20,6 +20,7 @@ const compareDebtBalance = (thereIsDepositStage: Boolean, response: any, coin: s
   if (thereIsDepositStage) {
     expect(parseFloat(response[coin])).to.be.closeTo(parseFloat(CustomWorld.getStoreData('companyAccountingInfo')), 0.02);
     logger.info(`Expected Debt Balance: ${CustomWorld.getStoreData('companyAccountingInfo')}, Actual Debt Balance: ${response[coin]}`);
+    CustomWorld.clearStoreData();
     return;
   }
 
@@ -73,6 +74,7 @@ export const getUserDebtBalance = async (
   if (paymentAmount === undefined) {
     CustomWorld.setStoreData('userBalance', String(balance[currency]));
     logger.info(`User balance for ${currency}: ${CustomWorld.getStoreData('userBalance')}`);
+    CustomWorld.clearStoreData();
     return;
   }
 

@@ -11,7 +11,7 @@ const validateSyntheticStatus = (body: any, httpStatus: number, statusCode: numb
 
   if (body?.stages?.['1'].stageType === 'DEPOSIT') CustomWorld.setStoreData('depositStage', true);
   if (body?.stages?.['1'].stageType !== 'DEPOSIT') CustomWorld.setStoreData('notDepositStage', true);
-  if (body.hasOwnProperty('details')) CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
+  if (body.hasOwnProperty('details') && body.details.paymentAgainst !== 'USDT') CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
 };
 
 export const getSyntheticStatus = async (urlBase: string, endpoint: string, apiKEY: string, statusCode: number, statusName: string): Promise<any> => {
