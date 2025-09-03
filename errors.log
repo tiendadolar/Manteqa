@@ -636,3 +636,49 @@
 [33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
 [33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
 [33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "WLD" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Ramp-Off no descubierto
+[33mwarn[39m: Escenario: Ramp-Off no descubierto
+[33mwarn[39m: Escenario: Ramp-Off no descubierto
+[33mwarn[39m: Escenario: Ramp-Off no descubierto
+[33mwarn[39m: Escenario: Ramp-Off no descubierto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto

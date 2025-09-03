@@ -15,7 +15,8 @@ import {
   bankingOnboardingApiCrypto,
   fiatWithdrawApiCryptoV2,
   withdrawLockApiCryptoV2,
-  twoFAAuthApiCambio
+  twoFAAuthApiCambio,
+  rampOffExchange
 } from '../../../../support/utils/utils';
 import logger from '../../../../support/utils/logger';
 
@@ -102,7 +103,7 @@ When('Assign the value to the variable', function (this: CustomWorld, dataTable:
 When(
   'Execute the POST method on the endpoint {string}',
   {
-    timeout: 50 * 1000
+    timeout: 70 * 1000
   },
   async function (this: CustomWorld, endpoint: string) {
     let paramEndpoint = endpoint;
@@ -131,6 +132,8 @@ When(
         this.userData = fiatWithdrawApiCrypto(this.userData);
       } else if (endpoint === '/v1/synthetics/ramp-on' || endpoint === '/v2/payment-locks' || endpoint === '/v2/synthetics/qr-payment') {
         this.userData.userAnyId = this.userData.userAnyId ?? CustomWorld.getStoreData('userId');
+      } else if (endpoint === '/v1/synthetics/ramp-off' && this.userData.against !== 'ARS') {
+        this.userData = rampOffExchange(this.userData);
       } else if (endpoint === '/v1/fiat/withdraw' && this.userData.coin === 'CRC') {
         // V2
         this.userData.cbu = '';

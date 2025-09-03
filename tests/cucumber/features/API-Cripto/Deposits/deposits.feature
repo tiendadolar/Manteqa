@@ -18,7 +18,7 @@ Feature: Depositos
 
         Examples:
             | hash | from                                       | to                                         | wei                  | human | ticker | chain |
-            | hash | 0x9bD31d82B6212dd60a9328CCe7277161e5975fB5 | 0x450f1DC0C7Bfcf3bA321B7d6cb57cEC2D73a22eC | 10000000000000000000 | 10    | USDT   | 0     |
+            | hash | 0x9bD31d82B6212dd60a9328CCe7277161e5975fB5 | 0xBDb5F90E12794072BDA10652E45C524F32C13736 | 10000000000000000000 | 10    | USDCB  | 0     |
 
     @Tron
     Scenario: Generar deposito Crypto by Tron chain

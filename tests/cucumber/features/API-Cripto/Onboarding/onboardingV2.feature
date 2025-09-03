@@ -7,8 +7,8 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Onboarding inicial de usuario
-        Given The API key is available "M6WGHFR-DG24ABS-JDTGGRF-F3YJCW2"
-        And The urlBase is available "https://api.manteca.dev/crypto"
+        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<email>" to the variable "email"
         And Assign the value "<legalId>" to the variable "legalId"
@@ -35,15 +35,15 @@ Feature: Onboarding User - V2
         Then Obtain a response 201
 
         Examples:
-            | externalId | email               | legalId     | exchange | name       | surname           | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | brlatest1  | brlatest1@gmail.com | 43813879100 | BRAZIL   | DENIO LUIZ | FERNANDES CAIXETA | M   | empleado | 1970-12-12 | Soltero       | false | false | false   | 112400135   | Brasil      | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | externalId | email                | legalId     | exchange | name          | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | rampoffBrl | rampoffbrl@gmail.com | 14209831484 | BRAZIL   | Test Ramp Off | NoDesc  | M   | empleado | 1970-12-12 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
     # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 
     @test
     Scenario: Obtener S3 url para carga de DNI FRONT
-        Given The API key is available "M6WGHFR-DG24ABS-JDTGGRF-F3YJCW2"
-        And The urlBase is available "https://api.manteca.dev/crypto"
+        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "FRONT" to the variable "side"
         And Assign the value "dni-front.jpg" to the variable "fileName"
@@ -57,8 +57,8 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de DNI BACK
-        Given The API key is available "M6WGHFR-DG24ABS-JDTGGRF-F3YJCW2"
-        And The urlBase is available "https://api.manteca.dev/crypto"
+        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "BACK" to the variable "side"
         And Assign the value "dni-back.jpg" to the variable "fileName"
@@ -72,8 +72,8 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de selfie
-        Given The API key is available "M6WGHFR-DG24ABS-JDTGGRF-F3YJCW2"
-        And The urlBase is available "https://api.manteca.dev/crypto"
+        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "selfie.jpg" to the variable "fileName"
         And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-selfie-image"

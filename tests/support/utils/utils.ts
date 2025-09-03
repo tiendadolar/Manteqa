@@ -2,6 +2,7 @@ const request = require('supertest');
 const qr = require('qrcode');
 const md = require('@md/math');
 const speakeasy = require('speakeasy');
+const network = require('../data/networksData.json');
 import { use } from 'chai';
 import { CustomWorld } from '../world';
 import logger from './logger';
@@ -476,6 +477,20 @@ export const refundsPolling = async function (data: any, userData: any) {
 
     attempsCounter++;
   }
+};
+
+export const rampOffExchange = (userData: any) => {
+  return {
+    sessionId: CustomWorld.getSessionId(userData.sessionId),
+    userAnyId: userData.userAnyId,
+    asset: userData.asset,
+    against: userData.against,
+    assetAmount: userData.assetAmount,
+    destination: {
+      address: userData.withdrawAddress,
+      network: network[userData.against].network
+    }
+  };
 };
 
 //-----API CRIPTO-----//

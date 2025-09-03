@@ -626,6 +626,8 @@ Feature: Sintéticos
             | 100011129 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
             | 100011129 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
 
+
+
     # ----- No Descubierto -----
 
     @Smoke @E2EFlow @RampOn
@@ -824,3 +826,26 @@ Feature: Sintéticos
             | 100009774 | smoke-partialRampOff-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | WLD    | 6     |
             | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 0     |
             | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 5     |
+
+    @exchange @ToBeAutomated
+    Scenario Outline: Ramp-Off no descubierto
+        Given The API key is available "<apiKEY>"
+        And The API secret is available "6RcTZScYUFb2bq9qWq"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Execute the POST method on the endpoint "/v1/synthetics/ramp-off"
+        Then Obtain a response 201
+        # Parte 2: Generar depósito
+        And Execute crypto deposit
+        # Parte 2: Validar ejeccución del sintético
+        Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
+
+        Examples:
+            | apiKEY                          | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress | withdrawNetwork | to                                         | ticker | chain |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 10          | 53724491875     | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 0     |
