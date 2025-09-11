@@ -1,13 +1,9 @@
 @OnboardingV2
 Feature: Onboarding User - V2
 
-    # Background:
-    #     Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-    #     And The urlBase is available "https://sandbox.manteca.dev/crypto/v2"
-
     @test
     Scenario: Onboarding inicial de usuario
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        Given The API key is available "C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<email>" to the variable "email"
@@ -35,14 +31,14 @@ Feature: Onboarding User - V2
         Then Obtain a response 201
 
         Examples:
-            | externalId | email                | legalId     | exchange | name          | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | rampoffBrl | rampoffbrl@gmail.com | 14209831484 | BRAZIL   | Test Ramp Off | NoDesc  | M   | empleado | 1970-12-12 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
+            | externalId                | email                     | legalId     | exchange  | name | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
+            | TestPpalAccount-argentina | testppalaccount@gmail.com | 20260566394 | ARGENTINA | Ppal | Account | M   | empleado | 1970-12-12 | Soltero       | false | false | false   | 112400137   | Argentina   | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
     # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
 
 
     @test
     Scenario: Obtener S3 url para carga de DNI FRONT
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        Given The API key is available "C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "FRONT" to the variable "side"
@@ -57,7 +53,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de DNI BACK
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        Given The API key is available "C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "BACK" to the variable "side"
@@ -72,7 +68,7 @@ Feature: Onboarding User - V2
 
     @test
     Scenario: Obtener S3 url para carga de selfie
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        Given The API key is available "C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "userAnyId" to the variable "userAnyId"
         And Assign the value "selfie.jpg" to the variable "fileName"
@@ -84,95 +80,10 @@ Feature: Onboarding User - V2
         When Execute the PUT method on the endpoint
         Then Obtain a response 200
 
-    @OnbV2Smoke
-    Scenario Outline: Onboarding de un usuario de "<nationality>" mediante API V2
-        Given The API key is available "NQ6PJXJ-40VMYVK-NFXSKXG-RC7NDWF"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "<email>" to the variable "email"
-        And Assign the value "<legalId>" to the variable "legalId"
-        And Assign the value "<exchange>" to the variable "exchange"
-        And Assign the value "<name>" to the variable "name"
-        And Assign the value "<surname>" to the variable "surname"
-        And Assign the value "<sex>" to the variable "sex"
-        And Assign the value "<work>" to the variable "work"
-        And Assign the value "<birthDate>" to the variable "birthDate"
-        And Assign the value "<maritalStatus>" to the variable "maritalStatus"
-        And Assign the value "<isPep>" to the variable "isPep"
-        And Assign the value "<isFep>" to the variable "isFep"
-        And Assign the value "<isFatca>" to the variable "isFatca"
-        And Assign the value "<phoneNumber>" to the variable "phoneNumber"
-        And Assign the value "<nationality>" to the variable "nationality"
-        And Assign the value "<street>" to the variable "street"
-        And Assign the value "<ARScbu>" to the variable "ARScbu"
-        And Assign the value "<ARScurrency>" to the variable "ARScurrency"
-        And Assign the value "<ARSdescription>" to the variable "ARSdescription"
-        And Assign the value "<bankCode>" to the variable "bankCode"
-        And Assign the value "<accountType>" to the variable "accountType"
-        And Assign the value "<USDcbu>" to the variable "USDcbu"
-        And Assign the value "<USDcurrency>" to the variable "USDcurrency"
-        And Assign the value "<USDdescription>" to the variable "USDdescription"
-        And Execute the POST method on the endpoint "/v2/onboarding-actions/initial"
-        Then Obtain a response 201
-
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "FRONT" to the variable "side"
-        And Assign the value "dni-front.jpg" to the variable "fileName"
-        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-identity-image"
-        Then Obtain a response 200
-
-        When Execute the PUT method on the endpoint
-        Then Obtain a response 200
-
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "BACK" to the variable "side"
-        And Assign the value "dni-back.jpg" to the variable "fileName"
-        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-identity-image"
-        Then Obtain a response 200
-
-        When Execute the PUT method on the endpoint
-        Then Obtain a response 200
-
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "selfie.jpg" to the variable "fileName"
-        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-selfie-image"
-        Then Obtain a response 200
-
-        When Execute the PUT method on the endpoint
-        Then Obtain a response 200
-
-        Examples:
-            | email                                | legalId  | exchange | name | surname    | sex | work             | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | street         | nationality | ARScbu        | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription | bankCode | accountType |
-            # | TestOnboardingV2arg-001@yopmail.com  | 27225605144        | ARGENTINA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001115  | Av. Libertador | Argentina   | 0000003100086679972343 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |           |             |
-            # | TestOnboardingV2c-001@yopmail.com    | 46625832847        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 05671773350            | BRL         | HSBC           | 07338896895            | BRL         | CHASE          |           |             |
-            # # | TestOnboardingV2b-032@yopmail.com   | 05671773350        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | TestOnboardingV2b-032@yopmail.com    | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
-            # # | TestOnboardingV2b-033@yopmail.com   | 14085386875        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 5522978963214                        | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
-            # # | TestOnboardingV2b-034@yopmail.com   | 37753057855        | BRAZIL      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Brasil      | 3f6d0eeb-9837-493a-8f02-b0d1cbb5e5f4 | BRL         | HSBC           | 0000003100000341514293 | BRL         | CHASE          |           |             |
-            # | TestOnboardingV2chic-001@yopmail.com | 214918021          | CHILE       | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 164408116              | CLP         | HSBC           |                        |             |                | 317       | RUT         |
-            # # | TestOnboardingV2chi-032@yopmail.com | 193774601          | CHILE       | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 19377460                             | CLP         | HSBC           | 0000003100000341514293 | CLP         | CHASE          | 323       | RUT         |
-            # # | TestOnboardingV2chi-033@yopmail.com | 130888550          | CHILE       | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Chile       | 13088855                             | CLP         | HSBC           | 0000003100000341514293 | CLP         | CHASE          | 318       | RUT         |
-            #         | TestOnboardingV2colc-002@yopmail.com | 1018479359 | COLOMBIA | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 3004442949 | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1507     | PHONE       |
-            # # | TestOnboardingV2c-032@yopmail.com   | 1012352927         | COLOMBIA    | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 03206981788                          | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1007      | CHECKING    |
-            # # | TestOnboardingV2c-033@yopmail.com   | 1046340371         | COLOMBIA    | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Colombia    | 3013203754                           | COP         | HSBC           | 0000003100000341514293 | COP         | CHASE          | 1007      | SAVINGS     |
-            # | TestOnboardingV2crc-001@yopmail.com  | 701370085          | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR18010402840511853818 | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 102       | CHECKING    |
-            # # | TestOnboardingV2cr-032@yopmail.com  | 503850450          | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR43015120820012587874               | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 120       | CHECKING    |
-            # # | TestOnboardingV2cr-033@yopmail.com  | 112400167533       | COSTA_RICA  | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Costa Rica  | CR68010200009182613229               | CRC         | HSBC           | 0000003100000341514293 | CRC         | CHASE          | 152       | PHONE       |
-            # | TestOnboardingV2guac-001@yopmail.com | 2617555360116      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 4739056173             | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 001       | SAVINGS     |
-            # # | TestOnboardingV2gua-032@yopmail.com | 2387558511221      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 02995010406234                       | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 016       | CHECKING    |
-            # # | TestOnboardingV2gua-033@yopmail.com | 3710425930101      | GUATEMALA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Guatemala   | 5010406234                           | GTQ         | HSBC           | 0000003100000341514293 | GTQ         | CHASE          | 016       | CHECKING    |
-            # | TestOnboardingV2mexc-001@yopmail.com | aafl881004mdfllr01 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 4741745703581930       | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 610       | DEBIT       |
-            # # | TestOnboardingV2mex-031@yopmail.com | paae860828hdflvr08 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 5703581930                           | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 614       | PHONE       |
-            # # | TestOnboardingV2mex-032@yopmail.com | namg880219mmcvrd02 | MEXICO      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | México      | 638180010183866948                   | MXN         | HSBC           | 0000003100000341514293 | MXN         | CHASE          | 615       | SAVINGS     |
-            | TestOnboardingV2panc-002@yopmail.com | 88351072 | PANAMA   | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Panamá      | 0472962071284 | PUSD        | HSBC           | 0000003100000341514293 | PUSD        | CHASE          | 0013     | CHECKING    |
-    # # | TestOnboardingV2pan-032@yopmail.com | 8222955            | PANAMA      | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Panamá      | 0472018417970                        | PUSD        | HSBC           | 0000003100000341514293 | PUSD        | CHASE          | 0013      | SAVINGS     |
-    # | TestOnboardingV2phic-001@yopmail.com | 2193480756459814   | PHILIPPINES | TEST | AUTOMATION | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001116  | Av. Libertador | Filipinas   | 09694243149            | PHP         | HSBC           | 0000003100000341514293 | PHP         | CHASE          | shopeepay | SAVINGS     |
-
-
-
-
     # Validar en DB, para realizar nuevamente el test eliminar bankAccounts en DB
     # No tocar datos de userAnyId, en caso de reutilizar elimnar datos de banking en DB. Maximo 15 banks por user
-    #* Para volver a realizar test se debe limpiar el bankAddress de la DB de casa user
-    @testBankingCHL
+    #* Para volver a realizar test se debe limpiar el bankAddress de la DB de cada user
+    @Regression @testBankingCHL
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -230,7 +141,7 @@ Feature: Onboarding User - V2
             | Chile   | 100009512 | 01710280153 | CLP      | BANCO       | 311      | CHECKING    |
             | Chile   | 100009512 | 01710280154 | CLP      | BANCO       | 311      | SAVINGS     |
 
-    @testBankingPAN
+    @Regression @testBankingPAN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -289,7 +200,7 @@ Feature: Onboarding User - V2
             | Panama  | 100009523 | 0472018417969 | PUSD     | BANCO       | 1397     | CHECKING    |
             | Panama  | 100009523 | 0472018417950 | PUSD     | BANCO       | 1397     | SAVINGS     |
 
-    @testBankingCOL
+    @Regression @testBankingCOL
     Scenario: Agregar cuenta bancaria a usuario de "<country>" con tipo de cuenta <accountType>
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -338,7 +249,7 @@ Feature: Onboarding User - V2
             | Colombia | 100009525 | 0472018417999   | COP      | BANCO       | 1292     | CHECKING    |
             | Colombia | 100009525 | 0472018417960   | COP      | BANCO       | 1292     | SAVINGS     |
 
-    @testBankingGUA
+    @Regression @testBankingGUA
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -385,7 +296,7 @@ Feature: Onboarding User - V2
             | Guatemala | 100009544 | 099999991799   | GTQ      | BANCO       | 048      | CHECKING    |
             | Guatemala | 100009544 | 099999915999   | GTQ      | BANCO       | 048      | SAVINGS     |
 
-    @testBankingCTR
+    @Regression @testBankingCTR
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -434,7 +345,7 @@ Feature: Onboarding User - V2
             | Costa Rica | 100009604 | CR123456789123776789   | CRC      | BANCO       | 0312     | CHECKING    |
             | Costa Rica | 100009604 | CR123456789123451189   | CRC      | BANCO       | 0312     | SAVINGS     |
 
-    @testBankingMXN
+    @Regression @testBankingMXN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -482,7 +393,7 @@ Feature: Onboarding User - V2
             | Mexico  | 100009608 | 9966326477         | MXN      | BANCO       | 126      | CHECKING    |
 
     # E2E
-    @E2E
+    @Smoke @E2E
     Scenario: Onboarding inicial de usuario
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -528,7 +439,7 @@ Feature: Onboarding User - V2
             | andresperalta@manteca.dev | testOnbE2EMex | onbe2emex@gmail.com | rina990109mocspd06 | MEXICO     | TestMex | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |
             | andresperalta@manteca.dev | testOnbE2EPan | onbe2epan@gmail.com | 8934513            | PANAMA     | TestPan | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400134   | Panama      | SAMUEL PIRES DE MELO |
             | andresperalta@manteca.dev | testOnbE2EBra | onbe2ebra@gmail.com | 07185653711        | BRAZIL     | TestBra | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EFil6 | onbe2efil6@gmail.com | 9674152135063897 | PHILIPPINES | TestPhi | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400135   | Filipinas   | SAMUEL PIRES DE MELO |
+# | andresperalta@manteca.dev | testOnbE2EFil6 | onbe2efil6@gmail.com | 9674152135063897   | PHILIPPINES | TestPhi | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400135   | Filipinas   | SAMUEL PIRES DE MELO |
 
 
 

@@ -16,7 +16,8 @@ import {
   fiatWithdrawApiCryptoV2,
   withdrawLockApiCryptoV2,
   twoFAAuthApiCambio,
-  rampOffExchange
+  rampOffExchange,
+  senderPaymentSynthetic
 } from '../../../../support/utils/utils';
 import logger from '../../../../support/utils/logger';
 
@@ -131,6 +132,8 @@ When(
       } else if (endpoint === '/v1/transaction/withdraw') {
         this.userData = fiatWithdrawApiCrypto(this.userData);
       } else if (endpoint === '/v1/synthetics/ramp-on' || endpoint === '/v2/payment-locks' || endpoint === '/v2/synthetics/qr-payment') {
+        logger.debug(this.userData.exchange);
+        if (this.userData.exchange) this.userData = senderPaymentSynthetic(this.userData);
         this.userData.userAnyId = this.userData.userAnyId ?? CustomWorld.getStoreData('userId');
       } else if (endpoint === '/v1/synthetics/ramp-off' && this.userData.against !== 'ARS') {
         this.userData = rampOffExchange(this.userData);

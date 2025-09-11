@@ -4,6 +4,8 @@ const request = require('supertest');
 import { CustomWorld, UserData } from '../../../../support/world';
 import { refundPollingWithDeposit, refundsPolling } from '../../../../support/utils/utils';
 import logger from '../../../../support/utils/logger';
+import { adminRefundHelper, getSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
+import { validateRes } from '../../../../support/helpers/requestHelper';
 
 Then('The attributes of the QR USDT synthetic are validated', async function (this: CustomWorld) {
   const response: any = this.response;
@@ -73,4 +75,18 @@ Then('Obtain a response {int} for lock payment', { timeout: 500 * 1000 }, async 
 
   CustomWorld.setStoreData('paymentAgainstAmount', response.body.paymentAgainstAmount);
   logger.debug(`Response Status: ${response.status}`);
+});
+
+Then('Execute admin refund', { timeout: 500 * 1000 }, async function (this: CustomWorld) {
+  const response = this.response.body;
+  const apiKEY = this.apiKey;
+  const urlBase = `https://api-qa.tiendacrypto.com`;
+  const endpoint = `/v1/admin/synthetics/${response.id}/refund`;
+  const token = CustomWorld.getStoreData('JWT');
+  const refundReason = `Manual Refund ${CustomWorld.getSessionId('-')}`;
+  const amount = response.details.paymentAgainstAmount;
+
+  const result = await adminRefundHelper(urlBase, endpoint, token, refundReason, amount);
+  validateRes(result, 204);
+  // await getSyntheticStatus(urlBase, endpoint, apiKEY, 200, 'CANCELLED');
 });

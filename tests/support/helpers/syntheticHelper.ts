@@ -2,6 +2,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 import logger from '../utils/logger';
 import { CustomWorld } from '../world';
+import { apiRequest } from './requestHelper';
 
 const validateSyntheticStatus = (body: any, httpStatus: number, statusCode: number, statusName: string) => {
   if (body.status !== statusName) CustomWorld.clearStoreData();
@@ -14,8 +15,10 @@ const validateSyntheticStatus = (body: any, httpStatus: number, statusCode: numb
   if (body.hasOwnProperty('details') && body.details.paymentAgainst !== 'USDT') CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
 };
 
-export const getSyntheticStatus = async (urlBase: string, endpoint: string, apiKEY: string, statusCode: number, statusName: string): Promise<any> => {
-  const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY);
+export const getSyntheticStatus = async (urlBase: string, endpoint: string, apiKey: string, statusCode: number, statusName: string): Promise<any> => {
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  logger.debug(JSON.stringify(response.body, null, 2));
+  // const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY);
   const body: any = response.body;
   const httpStatus: number = response.status;
 
@@ -23,4 +26,13 @@ export const getSyntheticStatus = async (urlBase: string, endpoint: string, apiK
   logger.info(JSON.stringify(body, null, 2));
 
   validateSyntheticStatus(body, httpStatus, statusCode, statusName);
+};
+
+export const adminRefundHelper = async (urlBase: string, endpoint: string, token: string, refundReason: string, amount: string): Promise<any> => {
+  const payload = {
+    refundReason,
+    amount
+  };
+  const response = await apiRequest({ urlBase, endpoint, method: 'post', token, body: payload });
+  return response;
 };

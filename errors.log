@@ -682,3 +682,311 @@
 [33mwarn[39m: Escenario: Onboarding inicial de usuario
 [33mwarn[39m: Escenario: Onboarding inicial de usuario
 [33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[31merror[39m: 204
+[31merror[39m: {}
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "WLD" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Flujo E2E Ramp-Off no descubierto "WLD" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-Off no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-Off no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR PIX estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "embebido" contra USDT en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" "manual" contra "USDT" en descubierto para usuario "Argentina" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" "embebido" contra "USDT" en descubierto para usuario "Argentina" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" en descubierto para usuario "Argentina" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" en descubierto para usuario "Argentina" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" hacia PixKey en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" hacia PixKey en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" hacia PixKey en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" hacia PixKey en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 400
+[31merror[39m: {"internalStatus":"INVALID_PARAMS","message":"Invalid parameters."}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 400
+[31merror[39m: {"internalStatus":"INVALID_PARAMS","message":"Invalid parameters."}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 400
+[31merror[39m: {"internalStatus":"INVALID_PARAMS","message":"Invalid parameters."}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 400
+[31merror[39m: {"internalStatus":"INVALID_PARAMS","message":"Invalid parameters."}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 400
+[31merror[39m: {"internalStatus":"INVALID_PARAMS","message":"Invalid parameters."}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 400
+[31merror[39m: {"internalStatus":"INVALID_PARAMS","message":"Invalid parameters."}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 400
+[31merror[39m: {"internalStatus":"INVALID_PARAMS","message":"Invalid parameters."}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 204
+[31merror[39m: {}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[31merror[39m: 400
+[31merror[39m: {"internalStatus":"INVALID_PARAMS","message":"Invalid parameters."}
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI FRONT
+[33mwarn[39m: Escenario: Subir DNI FRONT
+[33mwarn[39m: Escenario: Obtener S3 url para carga de DNI BACK
+[33mwarn[39m: Escenario: Subir DNI BACK
+[33mwarn[39m: Escenario: Obtener S3 url para carga de selfie
+[33mwarn[39m: Escenario: Subir imagen selfie
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de WLD mediante WORLDCHAIN para user ARG haciendo lock price por V2
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de WLD mediante WORLDCHAIN para user ARG haciendo lock price por V2
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de WLD mediante WORLDCHAIN para user ARG haciendo lock price por V2
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de WLD mediante WORLDCHAIN para user ARG haciendo lock price por V2
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "<coin>" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "<coin>" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "<coin>" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "<coin>" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "dinámico" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "dinámico" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR PIX estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Validar Clean Code al ejecutar lock de QR PIX estático sin enviar amount vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en no descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "manual" contra USDT en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR "embebido" contra USDT en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra USDT en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra USDT en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "manual" contra ARS en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago PIX "embebido" contra ARS en descubierto vía V2 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" "manual" contra "USDT" en descubierto para usuario "Argentina" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" "embebido" contra "USDT" en descubierto para usuario "Argentina" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" en descubierto para usuario "Argentina" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" en descubierto para usuario "Argentina" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" hacia PixKey en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" hacia PixKey en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "manual" contra "USDT" hacia PixKey en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "embebido" contra "USDT" hacia PixKey en descubierto para usuario "Brasil" vía ByBit endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "PIX" contra "ARS" enviando sender info
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "dinámico" contra "USDT" en descubierto para usuario "Argentina"
+[33mwarn[39m: Escenario: Ejecutar sintético de pago "QR" "dinámico" contra "USDT" en descubierto para usuario "Peru"
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto

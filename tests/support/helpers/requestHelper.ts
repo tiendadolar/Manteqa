@@ -13,13 +13,17 @@ export const apiRequest = async ({
   endpoint,
   method = 'get',
   apiKey,
+  token,
+  apiSecret,
   body = {},
   headers = {}
 }: {
   urlBase: string;
-  endpoint: string;
-  method?: 'get' | 'post' | 'put' | 'delete' | 'patch';
+  endpoint?: string;
+  method: 'get' | 'post' | 'put' | 'delete' | 'patch';
   apiKey?: string;
+  token?: string;
+  apiSecret?: string;
   body?: any;
   headers?: Record<string, string>;
 }) => {
@@ -34,11 +38,19 @@ export const apiRequest = async ({
     req = req.set('x-api-key', apiKey);
   }
 
+  if (token) {
+    req = req.set('x-access-token', token);
+  }
+
+  if (apiSecret) {
+    req = req.set('md-api-secret', apiSecret);
+  }
+
   if (finalHeaders) {
     req = req.set(finalHeaders);
   }
 
-  if (['post', 'put', 'patch'].includes(method) && body) {
+  if (['post', 'put', 'patch', 'delete'].includes(method) && body) {
     req = req.send(body);
   }
 

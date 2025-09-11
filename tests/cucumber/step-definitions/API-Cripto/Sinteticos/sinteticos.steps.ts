@@ -102,3 +102,10 @@ Then('Obtain a response {int} and status {string} for {string} synthetic', { tim
   await delay(ms);
   await getSyntheticStatus(urlBase, endpoint, apiKEY, statusCode, statusName);
 });
+
+Then('Validate sender info', { timeout: 125000 }, async function (this: CustomWorld) {
+  const response = this.response.body;
+
+  expect(response.details).to.have.property('sender');
+  expect(response.details.sender).to.include.all.keys('exchange', 'legalId', 'name');
+});

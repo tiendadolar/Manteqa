@@ -990,7 +990,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @Smoke
+    @Smoke @Lock
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> haciendo lock price por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

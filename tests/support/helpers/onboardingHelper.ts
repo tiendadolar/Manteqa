@@ -5,14 +5,14 @@ const path = require('path');
 const exchangeData = require('../data/accountData.json');
 import logger from '../utils/logger';
 import { CustomWorld } from '../world';
-import { apiRequest } from './requestHelper';
+import { apiRequest, validateRes } from './requestHelper';
 
 const getUserId = async (urlBase: string, apiKey: string, legalId: string) => {
   const endpoint: string = `/v2/users?legalId=${legalId}`;
-  const response: any = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKey);
-  logger.debug(JSON.stringify(response.body.data[0]?.numberId));
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
   const numberId: string = response.body.data[0]?.numberId;
 
+  validateRes(response, 200);
   return numberId;
 };
 
@@ -25,14 +25,17 @@ const deleteUser = async (userNumberId: string) => {
     numberId: userNumberId
   };
 
-  const response = await request(urlBase).delete(endpoint).set('x-access-token', token).send(payload);
+  const response = await apiRequest({ urlBase, endpoint, method: 'delete', token, body: payload });
+  validateRes(response, 204);
 };
 
 const putAwsUrl = async (awsUrl: string) => {
   const imagePath = path.join(__dirname, '../../../images/pic2.png');
   const imageBuffer = fs.readFileSync(imagePath);
+  const urlBase = awsUrl;
 
-  const response = await request(awsUrl).put('').set('User-Agent', 'PostmanRuntime/7.44.1').set('Content-Type', 'image/png').send(imageBuffer);
+  // const response = await request(awsUrl).put('').set('User-Agent', 'PostmanRuntime/7.44.1').set('Content-Type', 'image/png').send(imageBuffer);
+  const response = await apiRequest({ urlBase, method: 'put', endpoint: '', headers: { 'Content-Type': 'image/png' }, body: imageBuffer });
 };
 
 export const onboardingHelper = async (urlBase: string, apiKEY: string, legalId: string): Promise<any> => {
@@ -45,17 +48,13 @@ export const onboardingHelper = async (urlBase: string, apiKEY: string, legalId:
 };
 
 export const uploadImagesHelper = async (urlBase: string, endpoint: string, apiKey: string, userAnyId: string, side: string, fileName: string): Promise<any> => {
-  // logger.debug('ENTRAAAAA');
-  // const userAnyId: string = await getUserId(urlBase, apiKey, legalId);
-  // logger.debug(userAnyId);
-
   const payload = {
     userAnyId: userAnyId,
     side: side,
     fileName: fileName
   };
-
-  const response = await request(urlBase).post(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKey).send(payload);
+  const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, body: payload });
+  validateRes(response, 200);
   const awsUrl: string = response.body.url;
   await putAwsUrl(awsUrl);
   logger.info(`Image uploading completed`);
@@ -81,10 +80,8 @@ export const addBankAccountHelper = async (urlBase: string, endpoint: string, ap
   };
 
   const payload = exchange === 'ARGENTINA' || exchange === 'BRAZIL' ? argPayload : noArgPayload;
-  logger.debug(JSON.stringify(payload));
 
   const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, body: payload });
-
   logger.info(`Bank account added for exchange: ${exchange}`);
   return response;
 };

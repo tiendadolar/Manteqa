@@ -49,8 +49,9 @@ export const getParPrices = async (coin: string): Promise<any> => {
   }
 };
 
-export const delay = (ms: number): Promise<void> => {
-  logger.info(`Waiting for synthetic processing...`);
+export const delay = (ms: number, msg?: string): Promise<void> => {
+  if (msg === undefined) logger.info(`Waiting for synthetic processing...`);
+  logger.info(msg);
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
@@ -212,6 +213,21 @@ export const criptoDepositApiCrypto = (userData: any) => {
       }
     };
   }
+};
+
+export const senderPaymentSynthetic = (userData: any) => {
+  return {
+    userAnyId: userData.userAnyId,
+    paymentDestination: userData.paymentDestination,
+    amount: userData.amount,
+    against: userData.against,
+    sender: {
+      exchange: userData.exchange,
+      legalId: userData.legalId,
+      name: userData.name,
+      surname: userData.surname
+    }
+  };
 };
 
 // Deposito fiat
@@ -465,10 +481,12 @@ export const refundsPolling = async function (data: any, userData: any) {
 
     userData.response = await request(data.urlBase).post(endpointPayment).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1').send(payloadPayment);
 
+    console.log(userData.response.body);
+
     let syntheticId = userData.response.body.id;
     endpointGetSynthetic = `/v1/synthetics/${syntheticId}`;
-
-    await delay(30000);
+    logger.debug(endpointGetSynthetic);
+    await delay(60000);
 
     userData.response = await request(data.urlBase).get(endpointGetSynthetic).set('md-api-key', data.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1');
     console.log('API response GET:', userData.response.body);

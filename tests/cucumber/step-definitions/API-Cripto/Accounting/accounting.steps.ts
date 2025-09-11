@@ -2,6 +2,7 @@ const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
 import { getCompanyDebtBalance, getUserDebtBalance } from '../../../../support/helpers/accountingHelper';
+import { validateRes } from '../../../../support/helpers/requestHelper';
 import logger from '../../../../support/utils/logger';
 import { CustomWorld, UserData } from '../../../../support/world';
 
@@ -14,7 +15,8 @@ Then('Obtain a company debt {string} balance', { timeout: 500 * 1000 }, async fu
   const paymentAgainstAmount = CustomWorld.getStoreData('paymentAgainstAmount');
   let thereIsDepositStage: Boolean = CustomWorld.getStoreData('depositStage') === undefined ? false : CustomWorld.getStoreData('depositStage');
 
-  await getCompanyDebtBalance(urlBase, endpoint, apiKEY, againstAmountOperated, paymentAgainstAmount, thereIsDepositStage, coin);
+  const response = await getCompanyDebtBalance(urlBase, endpoint, apiKEY, againstAmountOperated, paymentAgainstAmount, thereIsDepositStage, coin);
+  validateRes(response, 200);
 });
 
 Then('Obtain {string} balance for {string} user', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, userAnyId: string) {
@@ -26,7 +28,8 @@ Then('Obtain {string} balance for {string} user', { timeout: 500 * 1000 }, async
   let notDepositStage: Boolean = CustomWorld.getStoreData('notDepositStage') === undefined ? false : CustomWorld.getStoreData('notDepositStage');
   let paymentAmount = CustomWorld.getStoreData('paymentAgainstAmount') === undefined ? CustomWorld.getStoreData('againstAmountOperated') : CustomWorld.getStoreData('paymentAgainstAmount');
 
-  await getUserDebtBalance(urlBase, endpoint, apiKEY, paymentAmount, currency, isSpecialCurrency, notDepositStage);
+  const response = await getUserDebtBalance(urlBase, endpoint, apiKEY, paymentAmount, currency, isSpecialCurrency, notDepositStage);
+  validateRes(response, 200);
 });
 
 Then('Obtain refund on user in {string} balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {

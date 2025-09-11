@@ -40,6 +40,6 @@ export const authHelper = async (urlBase: string, endpoint: string, email: strin
   try {
     const response = await request(urlBase).post(loginEndpoint).set('User-Agent', 'PostmanRuntime/7.44.1').send(loginPayload);
     const token = await TwoFAHelper(urlBase, response.body.redirectUrl, secret);
-    CustomWorld.setStoreData('JWT', token);
+    CustomWorld.setStoreData('JWT', token, true);
   } catch (error) {}
 };

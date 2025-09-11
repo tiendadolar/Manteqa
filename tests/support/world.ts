@@ -1,7 +1,7 @@
-const fs = require("fs");
-const path = require("path");
-const { setWorldConstructor, World } = require("@cucumber/cucumber");
-const { v4: uuidv4 } = require("uuid");
+const fs = require('fs');
+const path = require('path');
+const { setWorldConstructor, World } = require('@cucumber/cucumber');
+const { v4: uuidv4 } = require('uuid');
 
 export interface UserData {
   userAnyId?: string;
@@ -10,16 +10,19 @@ export interface UserData {
 }
 
 export class CustomWorld extends World {
-  apiKey: string = "";
-  apiSecret: string = "";
-  token: string = "";
-  urlBase: string = "";
+  apiKey: string = '';
+  apiSecret: string = '';
+  token: string = '';
+  urlBase: string = '';
   userData: UserData = {} as UserData;
   response: any = null;
 
-  private static storeData: { [key: string]: any } = {};
-  private static sessionCounterFile = path.join(__dirname, ".sessionCounter");
-  private static hashCryptoFile = path.join(__dirname, ".hashCrypto");
+  private static storeData: {
+    session: { [key: string]: any };
+    persistent: { [key: string]: any };
+  } = { session: {}, persistent: {} };
+  private static sessionCounterFile = path.join(__dirname, '.sessionCounter');
+  private static hashCryptoFile = path.join(__dirname, '.hashCrypto');
   private static sessionCounter: number = 0;
   private static hashCrypto: number = 0;
   private static networkId: string = uuidv4();
@@ -27,24 +30,20 @@ export class CustomWorld extends World {
   static {
     try {
       if (fs.existsSync(this.sessionCounterFile)) {
-        this.sessionCounter = parseInt(
-          fs.readFileSync(this.sessionCounterFile, "utf-8") || 0
-        );
+        this.sessionCounter = parseInt(fs.readFileSync(this.sessionCounterFile, 'utf-8') || 0);
       }
     } catch (error) {
-      console.error("Error loading session counter:", error);
+      console.error('Error loading session counter:', error);
     }
   }
 
   static {
     try {
       if (fs.existsSync(this.hashCryptoFile)) {
-        this.hashCrypto = parseInt(
-          fs.readFileSync(this.hashCryptoFile, "utf-8") || 0
-        );
+        this.hashCrypto = parseInt(fs.readFileSync(this.hashCryptoFile, 'utf-8') || 0);
       }
     } catch (error) {
-      console.error("Error loading hashCrypto counter:", error);
+      console.error('Error loading hashCrypto counter:', error);
     }
   }
 
@@ -65,16 +64,20 @@ export class CustomWorld extends World {
     return this.networkId;
   }
 
-  static setStoreData(key: string, value: any) {
-    CustomWorld.storeData[key] = value;
+  static setStoreData(key: string, value: any, persistent = false) {
+    if (persistent) {
+      CustomWorld.storeData.persistent[key] = value;
+    } else {
+      CustomWorld.storeData.session[key] = value;
+    }
   }
 
   static getStoreData(key: string): any {
-    return CustomWorld.storeData[key];
+    return CustomWorld.storeData.session[key] ?? CustomWorld.storeData.persistent[key];
   }
 
   static clearStoreData() {
-    CustomWorld.storeData = {};
+    CustomWorld.storeData.session = {};
   }
 
   static getUserData(key: string): any {

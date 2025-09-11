@@ -2,6 +2,7 @@ const request = require('supertest');
 const { expect } = require('chai');
 import logger from '../utils/logger';
 import { CustomWorld } from '../world';
+import { apiRequest } from './requestHelper';
 
 const getInicialDebtBalance = (response: any, coin: string) => {
   if (response.hasOwnProperty(coin)) {
@@ -36,32 +37,35 @@ const compareDebtBalance = (thereIsDepositStage: Boolean, response: any, coin: s
 export const getCompanyDebtBalance = async (
   urlBase: string,
   endpoint: string,
-  apiKEY: string,
+  apiKey: string,
   againstAmountOperated: string,
   paymentAgainstAmount: string,
   thereIsDepositStage: Boolean,
   coin: string
 ): Promise<any> => {
-  const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY);
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  // const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKey);
 
   if (againstAmountOperated !== undefined || paymentAgainstAmount !== undefined) {
     await compareDebtBalance(thereIsDepositStage, response.body, coin, againstAmountOperated, paymentAgainstAmount);
-    return;
+    return response;
   } else {
     await getInicialDebtBalance(response.body, coin);
   }
+  return response;
 };
 
 export const getUserDebtBalance = async (
   urlBase: string,
   endpoint: string,
-  apiKEY: string,
+  apiKey: string,
   paymentAmount: any,
   currency: string,
   isSpecialCurrency: Boolean,
   notDepositStage: Boolean
 ): Promise<any> => {
-  const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY);
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  // const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY);
   const { balance } = response.body;
 
   if (CustomWorld.getStoreData('userBalance') === undefined && paymentAmount !== undefined) paymentAmount = undefined;
@@ -75,7 +79,7 @@ export const getUserDebtBalance = async (
     CustomWorld.setStoreData('userBalance', String(balance[currency]));
     logger.info(`User balance for ${currency}: ${CustomWorld.getStoreData('userBalance')}`);
     CustomWorld.clearStoreData();
-    return;
+    return response;
   }
 
   const initialBalance = parseFloat(CustomWorld.getStoreData('userBalance') || 0);
@@ -84,4 +88,5 @@ export const getUserDebtBalance = async (
   logger.info(`Initial Balance: ${initialBalance}, Payment Amount: ${paymentAmount}, Current Balance: ${currentBalance}, Expected Balance: ${expectedBalance}`);
   expect(currentBalance).to.be.closeTo(expectedBalance, 0.02);
   CustomWorld.clearStoreData();
+  return response;
 };
