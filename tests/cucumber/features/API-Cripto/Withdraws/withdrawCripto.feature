@@ -591,13 +591,14 @@ Feature: Retiros Crypto
             | apiKEY                             | type   | asset | userAnyId | country | network | amount | address                            |
             | TK87U6EA5Fyq1zLZc9Q6NEeasHtTTRMaLu | crypto | USDT  | 100011214 | ARG     | TRON    | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
 
-    # Examples:
-    #     | type   | asset | userAnyId | country | network    | amount | address                                    |
-    #     | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | BNB   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | BTC   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDT  | 100009873 | ARG     | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+        @Test
+        Examples:
+            | apiKEY                          | type   | asset | userAnyId | country | network | amount | address                                    |
+            #     | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            #     | crypto | BNB   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            #     | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            #     | crypto | BTC   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | BINANCE | 12     | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -1041,7 +1042,7 @@ Feature: Retiros Crypto
             | apiKEY                          | credential                | userId    | chain | coin | amount | address                                    |
             # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 4     | USDC | 3      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
             # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 1     | USDT | 3      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
-            | 0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P | andresperalta@manteca.dev | 100011238 | 1     | USDT | 3      | 0x6fBf278Bf9cd0cF2897A66fB1FFc8C1320Ec70C1 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | andresperalta@manteca.dev | 100009873 | 1     | USDT | 3      | 0x6fBf278Bf9cd0cF2897A66fB1FFc8C1320Ec70C1 |
 
 
 

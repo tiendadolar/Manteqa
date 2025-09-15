@@ -20,11 +20,11 @@ Feature: Sintéticos
     @Syn @RampOn @DepoBOB
     Scenario: Generar deposito Fiat
         Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "vH2W199pE1Re5ZR4Z7"
+        And The API secret is available "mZJ5r9KCdRjnWCdPJg"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "100010488" to the variable "userId"
+        When Assign the value "100012006" to the variable "userId"
         And Assign the value "13150" to the variable "amount"
-        And Assign the value "PEN" to the variable "coin"
+        And Assign the value "BOB" to the variable "coin"
         # And Assign the value "10000000000000000000" to the variable "bank" opcional (LOCALPAYMENT por ejemplo)
         And Execute the POST method on the endpoint "/v1/fiat/deposit"
         Then Obtain a response 201
@@ -715,7 +715,7 @@ Feature: Sintéticos
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | skipDeposit | withdrawAddress                            | withdrawNetwork |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 3           | true        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
-    @Smoke @E2EFlow @RampOff @NoDesc
+    @Smoke @E2EFlow @RampOff @NoDesc @rtest
     Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"

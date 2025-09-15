@@ -990,3 +990,24 @@
 [33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
 [33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
 [33mwarn[39m: Escenario: Validar refund para usuario operando en descubierto
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "WLD" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDT" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "USDC" contra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-Off no descubierto "WLD" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-Off no descubierto "USDT" constra "ARS"
+[33mwarn[39m: Escenario: Flujo E2E Ramp-Off no descubierto "USDC" constra "ARS"
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Generar deposito Crypto
+[33mwarn[39m: Escenario: Validar refund manual desde admin para usuario operando en no descubierto contra ARS
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
+[33mwarn[39m: Escenario: Validar que los retiros para un user exchange <exchange> se realicen por la Hot Wallet <wallet>
+[33mwarn[39m: Escenario: Validar que los retiros para un user exchange <exchange> se realicen por la Hot Wallet <wallet>
+[33mwarn[39m: Escenario: Validar que los retiros para un user exchange <exchange> se realicen por la Hot Wallet <wallet>
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
+[33mwarn[39m: Escenario: Generar deposito Fiat
