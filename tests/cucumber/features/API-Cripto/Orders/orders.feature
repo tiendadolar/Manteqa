@@ -161,7 +161,7 @@ Feature: Ordenes
             | order-qaa-n | venta | USDC_MXN  | SELL      | 100009051 | 5      | MXN     |
             | order-qaa-n | venta | USDC_PHP  | SELL      | 100009089 | 5      | PHP     |
 
-    @BuyByCountry
+    @BuyByCountry @V1
     Scenario Outline: Ejecutar ordenes de <trade> de <coin> contra <against> V1
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -184,7 +184,7 @@ Feature: Ordenes
 
         When Wait for the processing of the "orden" por 1 seconds
         And Execute the GET method on the endpoint "/v1/order/{orderNumberId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
 
         @BuyByCountry @USDT
         Examples:

@@ -20,6 +20,7 @@ import {
   senderPaymentSynthetic
 } from '../../../../support/utils/utils';
 import logger from '../../../../support/utils/logger';
+import { EndpointHandlerFactory } from '../../../../support/factory/endpointHandlerFactory';
 
 const chainArray = ['WORLDCHAIN', 'BSC', 'ETHEREUM', 'POLYGON', 'BINANCE', 'BASE', 'ARBITRUM', 'OPTIMISM'];
 
@@ -107,70 +108,79 @@ When(
     timeout: 70 * 1000
   },
   async function (this: CustomWorld, endpoint: string) {
-    let paramEndpoint = endpoint;
-
     try {
-      if (CustomWorld.getStoreData('userId') !== undefined && endpoint !== '/v3/api/onboarding-actions/upload-identity-image') {
-        paramEndpoint = paramEndpoint.replace('{userId}', CustomWorld.getStoreData('userId') || '');
-        // CustomWorld.setStoreData("userId", "");
-      }
-      // API-Cripto
-      if (endpoint === '/onboarding-actions/initial') {
-        // Onboarding inicial V1
-        this.userData = inicialOnboardingApiCrypto(this.userData);
-      } else if (endpoint === '/v2/onboarding-actions/initial') {
-        // Onboarding inicial V2
-        this.userData = inicialOnboardingApiCryptoV2(this.userData);
-      } else if (endpoint === '/v2/onboarding-actions/add-bank-account') {
-        this.userData = bankingOnboardingApiCrypto(this.userData);
-      } else if (endpoint === '/v1/transaction/deposit') {
-        // Deposito cripto
-        this.userData = criptoDepositApiCrypto(this.userData);
-      } else if (endpoint === '/v1/fiat/deposit') {
-        // Deposito fiat
-        this.userData = fiatDepositApiCrypto(this.userData);
-      } else if (endpoint === '/v1/transaction/withdraw') {
-        this.userData = fiatWithdrawApiCrypto(this.userData);
-      } else if (endpoint === '/v1/synthetics/ramp-on' || endpoint === '/v2/payment-locks' || endpoint === '/v2/synthetics/qr-payment') {
-        logger.debug(this.userData.exchange);
-        if (this.userData.exchange) this.userData = senderPaymentSynthetic(this.userData);
-        this.userData.userAnyId = this.userData.userAnyId ?? CustomWorld.getStoreData('userId');
-      } else if (endpoint === '/v1/synthetics/ramp-off' && this.userData.against !== 'ARS') {
-        this.userData = rampOffExchange(this.userData);
-      } else if (endpoint === '/v1/fiat/withdraw' && this.userData.coin === 'CRC') {
-        // V2
-        this.userData.cbu = '';
-      } else if (endpoint === '/v2/withdraws') {
-        this.userData = fiatWithdrawApiCryptoV2(this.userData);
-      } else if (endpoint === '/v2/withdraw-locks') {
-        this.userData = withdrawLockApiCryptoV2(this.userData);
-        // API-Cambio
-      } else if (endpoint === '/v3/api/onboarding-actions/initial') {
-        // Onboarding inicial
-        this.userData = inicialOnboardingApiCambio(this.userData);
-      } else if (
-        endpoint === '/v3/api/onboarding-actions/upload-identity-image' ||
-        endpoint === '/v3/api/onboarding-actions/upload-selfie-image' ||
-        endpoint === '/v3/api/onboarding-actions/upload-pep-documentation' ||
-        endpoint === '/onboarding-actions/upload-identity-image' ||
-        endpoint === '/onboarding-actions/upload-selfie-image' ||
-        endpoint === '/v2/onboarding-actions/upload-identity-image' ||
-        endpoint === '/v2/onboarding-actions/upload-selfie-image'
-      ) {
-        // Onboarding Docs Validate
-        this.userData = validateOnboardingApiCambio(this.userData);
-      } else if (endpoint === '/v3/onboarding-actions/add-bank-account') {
-        // Onboarding Add Bank Account
-        this.userData = bankingOnboardingApiCambio(this.userData);
-      } else if (endpoint === '/v3/admin/banking/deposit') {
-        // Deposito fiat API-Cambio
-        console.log(CustomWorld.getStoreData('thresholdAmount'));
+      // if (CustomWorld.getStoreData('userId') !== undefined && endpoint !== '/v3/api/onboarding-actions/upload-identity-image') {
+      //   paramEndpoint = paramEndpoint.replace('{userId}', CustomWorld.getStoreData('userId') || '');
+      //   // CustomWorld.setStoreData("userId", "");
+      // }
+      // // API-Cripto
+      // if (endpoint === '/onboarding-actions/initial') {
+      //   // Onboarding inicial V1
+      //   this.userData = inicialOnboardingApiCrypto(this.userData);
+      // } else if (endpoint === '/v2/onboarding-actions/initial') {
+      //   // Onboarding inicial V2
+      //   this.userData = inicialOnboardingApiCryptoV2(this.userData);
+      // } else if (endpoint === '/v2/onboarding-actions/add-bank-account') {
+      //   this.userData = bankingOnboardingApiCrypto(this.userData);
+      // } else if (endpoint === '/v1/transaction/deposit') {
+      //   // Deposito cripto
+      //   this.userData = criptoDepositApiCrypto(this.userData);
+      // } else if (endpoint === '/v1/fiat/deposit') {
+      //   // Deposito fiat
+      //   this.userData = fiatDepositApiCrypto(this.userData);
+      // } else if (endpoint === '/v1/transaction/withdraw') {
+      //   this.userData = fiatWithdrawApiCrypto(this.userData);
+      // } else if (endpoint === '/v1/synthetics/ramp-on' || endpoint === '/v2/payment-locks' || endpoint === '/v2/synthetics/qr-payment') {
+      //   logger.debug(this.userData.exchange);
+      //   if (this.userData.exchange) this.userData = senderPaymentSynthetic(this.userData);
+      //   this.userData.userAnyId = this.userData.userAnyId ?? CustomWorld.getStoreData('userId');
+      // } else if (endpoint === '/v1/synthetics/ramp-off' && this.userData.against !== 'ARS') {
+      //   this.userData = rampOffExchange(this.userData);
+      // } else if (endpoint === '/v1/fiat/withdraw' && this.userData.coin === 'CRC') {
+      //   // V2
+      //   this.userData.cbu = '';
+      // } else if (endpoint === '/v2/withdraws') {
+      //   this.userData = fiatWithdrawApiCryptoV2(this.userData);
+      // } else if (endpoint === '/v2/withdraw-locks') {
+      //   this.userData = withdrawLockApiCryptoV2(this.userData);
+      //   // API-Cambio
+      // } else if (endpoint === '/v3/api/onboarding-actions/initial') {
+      //   // Onboarding inicial
+      //   this.userData = inicialOnboardingApiCambio(this.userData);
+      // } else if (
+      //   endpoint === '/v3/api/onboarding-actions/upload-identity-image' ||
+      //   endpoint === '/v3/api/onboarding-actions/upload-selfie-image' ||
+      //   endpoint === '/v3/api/onboarding-actions/upload-pep-documentation' ||
+      //   endpoint === '/onboarding-actions/upload-identity-image' ||
+      //   endpoint === '/onboarding-actions/upload-selfie-image' ||
+      //   endpoint === '/v2/onboarding-actions/upload-identity-image' ||
+      //   endpoint === '/v2/onboarding-actions/upload-selfie-image'
+      // ) {
+      //   // Onboarding Docs Validate
+      //   this.userData = validateOnboardingApiCambio(this.userData);
+      // } else if (endpoint === '/v3/onboarding-actions/add-bank-account') {
+      //   // Onboarding Add Bank Account
+      //   this.userData = bankingOnboardingApiCambio(this.userData);
+      // } else if (endpoint === '/v3/admin/banking/deposit') {
+      //   // Deposito fiat API-Cambio
+      //   console.log(CustomWorld.getStoreData('thresholdAmount'));
 
-        this.userData = fiatDepositApiCambio(this.userData);
-      } else if (endpoint === '/v3/{twoFaCode}') {
-        paramEndpoint = paramEndpoint.replace('{twoFaCode}', CustomWorld.getStoreData('redirectUrl') || '');
-        this.userData = twoFAAuthApiCambio(this.userData);
-        console.log(this.userData);
+      //   this.userData = fiatDepositApiCambio(this.userData);
+      // } else if (endpoint === '/v3/{twoFaCode}') {
+      //   paramEndpoint = paramEndpoint.replace('{twoFaCode}', CustomWorld.getStoreData('redirectUrl') || '');
+      //   this.userData = twoFAAuthApiCambio(this.userData);
+      //   console.log(this.userData);
+      // }
+
+      let paramEndpoint = endpoint;
+      const factory = new EndpointHandlerFactory();
+      const handlers = factory.getHandlers(endpoint, this.userData);
+
+      for (const handler of handlers) {
+        if (handler.modifyEndpoint) {
+          paramEndpoint = handler.modifyEndpoint(paramEndpoint, this);
+        }
+        this.userData = handler.handle(this.userData, this);
       }
 
       console.log('API payload:', JSON.stringify(this.userData, null, 2));

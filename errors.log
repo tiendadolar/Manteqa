@@ -1011,3 +1011,50 @@
 [33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
 [33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
 [33mwarn[39m: Escenario: Generar deposito Fiat
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Onboarding inicial de usuario
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_ARS contra ARS V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_USD contra USD V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_CLP contra CLP V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_COP contra COP V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_BRL contra BRL V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_GTQ contra GTQ V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_CRC contra CRC V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_PUSD contra PUSD V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_MXN contra MXN V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_PHP contra PHP V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_ARS contra ARS V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_USD contra USD V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_CLP contra CLP V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_COP contra COP V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_BRL contra BRL V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_GTQ contra GTQ V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_CRC contra CRC V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_PUSD contra PUSD V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_MXN contra MXN V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_PHP contra PHP V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de compra de USDT_ARS contra ARS V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_ARS contra ARS V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_USD contra USD V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_CLP contra CLP V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_COP contra COP V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_BRL contra BRL V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_GTQ contra GTQ V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_CRC contra CRC V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_PUSD contra PUSD V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_MXN contra MXN V1
+[33mwarn[39m: Escenario: Ejecutar ordenes de venta de USDT_PHP contra PHP V1
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+[33mwarn[39m: Escenario: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "WLD" contra "ARS"
+[33mwarn[39m: Escenario: Ejecutar retiro crypto de USDT mediante BINANCE para user ARG por V2
