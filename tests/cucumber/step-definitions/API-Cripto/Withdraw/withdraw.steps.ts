@@ -41,7 +41,11 @@ Then('Obtain a response {int} and status EXECUTED for fiat withdraw', function (
   const body: any = response.body;
 
   expect(this.response.status).to.equal(statusCode);
-  expect(body.status).to.be.oneOf(['EXECUTED', 'PENDING']);
+  if (body.asset === 'ARS' || body.asset === 'USD' || body.asset === 'BRL') {
+    expect(body.status).to.be.equal('EXECUTED');
+  } else {
+    expect(body.status).to.be.oneOf(['EXECUTED', 'PENDING']);
+  }
 });
 
 Then('Obtain a response {int} for admin withdraw', function (this: CustomWorld, statusCode: number) {
