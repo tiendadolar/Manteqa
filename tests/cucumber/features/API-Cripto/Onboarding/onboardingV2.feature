@@ -1,85 +1,6 @@
 @OnboardingV2
 Feature: Onboarding User - V2
 
-    @test
-    Scenario: Onboarding inicial de usuario
-        Given The API key is available "C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "<externalId>" to the variable "externalId"
-        And Assign the value "<email>" to the variable "email"
-        And Assign the value "<legalId>" to the variable "legalId"
-        And Assign the value "<exchange>" to the variable "exchange"
-        And Assign the value "<name>" to the variable "name"
-        And Assign the value "<surname>" to the variable "surname"
-        And Assign the value "<sex>" to the variable "sex"
-        And Assign the value "<work>" to the variable "work"
-        And Assign the value "<birthDate>" to the variable "birthDate"
-        And Assign the value "<maritalStatus>" to the variable "maritalStatus"
-        And Assign the value "<isPep>" to the variable "isPep"
-        And Assign the value "<isFep>" to the variable "isFep"
-        And Assign the value "<isFatca>" to the variable "isFatca"
-        And Assign the value "<phoneNumber>" to the variable "phoneNumber"
-        And Assign the value "<nationality>" to the variable "nationality"
-        And Assign the value "<street>" to the variable "street"
-        And Assign the value "<ARScbu>" to the variable "ARScbu"
-        And Assign the value "<ARScurrency>" to the variable "ARScurrency"
-        And Assign the value "<ARSdescription>" to the variable "ARSdescription"
-        And Assign the value "<USDcbu>" to the variable "USDcbu"
-        And Assign the value "<USDcurrency>" to the variable "USDcurrency"
-        And Assign the value "<USDdescription>" to the variable "USDdescription"
-        And Execute the POST method on the endpoint "/v2/onboarding-actions/initial"
-        Then Obtain a response 201
-
-        Examples:
-            | externalId                | email                     | legalId     | exchange  | name | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | ARScbu       | ARScurrency | ARSdescription | USDcbu                 | USDcurrency | USDdescription |
-            | TestPpalAccount-argentina | testppalaccount@gmail.com | 20260566394 | ARGENTINA | Ppal | Account | M   | empleado | 1970-12-12 | Soltero       | false | false | false   | 112400137   | Argentina   | SAMUEL PIRES DE MELO | 777921280526 | ARS         | HSBC           | 0000003100000341514293 | USD         | CHASE          |
-    # | TestOnboardingV2test-005@yopmail.com | 164408116 | CHILE     | PAOLA | BARRIOS | M   | CULTIVO DE ARROZ | 1999-05-15 | Soltero       | false | false | false   | 1124001128  | Chile       | Cochabamba | 21939624     | ARS         | HSBC           |                        |             |                |
-
-
-    @test
-    Scenario: Obtener S3 url para carga de DNI FRONT
-        Given The API key is available "C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "FRONT" to the variable "side"
-        And Assign the value "dni-front.jpg" to the variable "fileName"
-        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-identity-image"
-        Then Obtain a response 200
-
-    @test
-    Scenario: Subir DNI FRONT
-        When Execute the PUT method on the endpoint
-        Then Obtain a response 200
-
-    @test
-    Scenario: Obtener S3 url para carga de DNI BACK
-        Given The API key is available "C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "BACK" to the variable "side"
-        And Assign the value "dni-back.jpg" to the variable "fileName"
-        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-identity-image"
-        Then Obtain a response 200
-
-    @test
-    Scenario: Subir DNI BACK
-        When Execute the PUT method on the endpoint
-        Then Obtain a response 200
-
-    @test
-    Scenario: Obtener S3 url para carga de selfie
-        Given The API key is available "C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "userAnyId" to the variable "userAnyId"
-        And Assign the value "selfie.jpg" to the variable "fileName"
-        And Execute the POST method on the endpoint "/v2/onboarding-actions/upload-selfie-image"
-        Then Obtain a response 200
-
-    @test
-    Scenario: Subir imagen selfie
-        When Execute the PUT method on the endpoint
-        Then Obtain a response 200
-
     # Validar en DB, para realizar nuevamente el test eliminar bankAccounts en DB
     # No tocar datos de userAnyId, en caso de reutilizar elimnar datos de banking en DB. Maximo 15 banks por user
     #* Para volver a realizar test se debe limpiar el bankAddress de la DB de cada user
@@ -430,17 +351,21 @@ Feature: Onboarding User - V2
 
         # Do not change data
         Examples:
-            | credential                | externalId    | email               | legalId     | exchange  | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | andresperalta@manteca.dev | testOnbE2EArg | onbe2earg@gmail.com | 23452216604 | ARGENTINA | TestArg | OnbE2E  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2ECol | onbe2ecol@gmail.com | 1044988289         | COLOMBIA   | TestCol | OnbE2E  | X   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400131   | Colombia    | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EChi | onbe2echi@gmail.com | 167789579          | CHILE      | TestChi | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Chile       | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2ECtr | onbe2ectr@gmail.com | 402440293          | COSTA_RICA | TestCtr | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Costa Rica  | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EGua | onbe2egua@gmail.com | 2126219200101      | GUATEMALA  | TestGua | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Guatemala   | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EMex | onbe2emex@gmail.com | rina990109mocspd06 | MEXICO     | TestMex | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EPan | onbe2epan@gmail.com | 8934513            | PANAMA     | TestPan | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400134   | Panama      | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EBra | onbe2ebra@gmail.com | 07185653711        | BRAZIL     | TestBra | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO |
+            | credential                | externalId    | email               | legalId   | exchange   | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            # | andresperalta@manteca.dev | testOnbE2EArg    | onbe2earg@gmail.com    | 23452216604        | ARGENTINA  | TestArg    | OnbE2E  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |
+            # | andresperalta@manteca.dev | testOnbE2ECol    | onbe2ecol@gmail.com    | 1044988289         | COLOMBIA   | TestCol    | OnbE2E  | X   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400131   | Colombia    | SAMUEL PIRES DE MELO |
+            # | andresperalta@manteca.dev | testOnbE2EChi    | onbe2echi@gmail.com    | 167789579          | CHILE      | TestChi    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Chile       | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2ECtr | onbe2ectr@gmail.com | 402440293 | COSTA_RICA | TestCtr | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Costa Rica  | SAMUEL PIRES DE MELO |
+# | andresperalta@manteca.dev | testOnbE2EGua    | onbe2egua@gmail.com    | 2126219200101      | GUATEMALA  | TestGua    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Guatemala   | SAMUEL PIRES DE MELO |
+# | andresperalta@manteca.dev | testOnbE2EMex    | onbe2emex@gmail.com    | luca860831mdfjrr08 | MEXICO     | TestMex    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |
+# | andresperalta@manteca.dev | testOnbE2EMexRFC | onbe2emexrfc@gmail.com | coza760507p86      | MEXICO     | TestMexRFC | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |
+# | andresperalta@manteca.dev | testOnbE2EPan    | onbe2epan@gmail.com    | 8934513            | PANAMA     | TestPan    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400134   | Panama      | SAMUEL PIRES DE MELO |
+# | andresperalta@manteca.dev | testOnbE2EBra    | onbe2ebra@gmail.com    | 07185653711        | BRAZIL     | TestBra    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO |
 # | andresperalta@manteca.dev | testOnbE2EFil6 | onbe2efil6@gmail.com | 9674152135063897   | PHILIPPINES | TestPhi | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400135   | Filipinas   | SAMUEL PIRES DE MELO |
 
-
+# @test
+# Examples:
+#     | credential                | externalId    | email               | legalId     | exchange  | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+#     | andresperalta@manteca.dev | testOnbE2EArg | onbe2earg@gmail.com | 23452216604 | ARGENTINA | TestArg | OnbE2E  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |
 
 

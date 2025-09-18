@@ -49,15 +49,14 @@ Then('Execute the PUT method on the endpoint {string}', async function (this: Cu
   }
 
   try {
-    console.log(paramEndpoint);
-
+    logger.debug(this.urlBase);
+    logger.debug(paramEndpoint);
+    logger.debug(this.apiKey);
     console.log('User Data:', this.userData);
-    this.response = await request(this.urlBase)
-      .put(paramEndpoint)
-      .set('md-api-key', this.apiKey)
-      // .set("x-api-secret", this.apiSecret)
-      // .set("x-access-token", this.token)
-      .send(this.userData);
+    this.response = await request(this.urlBase).put(paramEndpoint).set('md-api-key', this.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1').send(this.userData);
+    // .set("x-api-secret", this.apiSecret)
+    // .set("x-access-token", this.token)
+
     console.log('API response:', this.response.body);
   } catch (error: unknown) {
     const err = error as { response?: any };
