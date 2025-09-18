@@ -1,42 +1,7 @@
 @Withdraw
 Feature: Retiros Fiat
 
-    @Fiattest
-    Scenario Outline: Crear retiro fiat
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "<userId>" to the variable "userId"
-        And Assign the value "<coin>" to the variable "coin"
-        And Assign the value "<cbu>" to the variable "cbu"
-        And Assign the value "<amount>" to the variable "amount"
-        And Execute the POST method on the endpoint "/v1/fiat/withdraw"
-        Then Obtain a response 200
-
-        # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Wait for the processing of the "orden" por 2 seconds
-        And Execute the GET method on the endpoint "/v1/fiat/withdraw/{withdrawAnyId}"
-        Then Obtain a response 200 and status EXECUTED for fiat withdraw
-
-        # Solo ARS/USD se puede retirar a un cbu declarado en el user, las demas son por accountIndex
-        Examples:
-            | userId    | coin | cbu                    | amount |
-            | 100011177 | ARS  | 1430001713039384360017 | 1000   |
-            | 100011177 | USD  | 1430001713039384360017 | 10     |
-            | 100011177 | CLP  | 1430001713039384360017 | 1000   |
-    # | 100009791 | ARS  | 0070703130004000381667 | 1000   |
-    # | 100009791 | BRL  | 0070703130004000381667 | 10     |
-    # | 100009791 | CLP  | 0070703130004000381667 | 10000  |
-    # | 100009791 | COP  | 3232145116             | 100    |
-    # | 100009791 | GTQ  | 0070703130004000381667 | 100    |
-    # | 100009791 | MXN  | 0070703130004000381667 | 100    |
-    # | 100009791 | PHP  | 0070703130004000381667 | 100    |
-    # | 100009791 | PUSD | 0070703130004000381667 | 100    |
-    # | 100009791 | USD  | 0070703130004000381667 | 10     |
-    # | 100009791 | CRC  | 0070703130004000381667 | 100    |
-
-    @Smoke @Fiat @V1
+    @Smoke @Fiat @V1 @Automated
     Scenario Outline: Crear retiro fiat user por country por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -69,7 +34,7 @@ Feature: Retiros Fiat
             | 100009893 | ARS  | 1430001713039384360017 | 1000   |              |
 
 
-    @Smoke @Fiat @V2
+    @Smoke @Fiat @V2 @Automated
     Scenario Outline: Crear retiro fiat user por country por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -104,7 +69,7 @@ Feature: Retiros Fiat
             | 100009873 | USD   | 1430001714039384360025 | 10     |           |             |
             | 100009873 | ARS   | 1430001713039384360017 | 1000   |           |             |
 
-    @Smoke @Fiat @pendingAdmin
+    @Regression @Fiat @pendingAdmin
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -140,7 +105,7 @@ Feature: Retiros Fiat
             | 100009873 | ARS   | 1430001713039384360017 | 12000000 |           |             |
             | 100009991 | ARS   | 1430001713039384360017 | 12000000 |           |             |
 
-    @Smoke @Fiat @coinag
+    @Regression @Fiat @coinag
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING TAKENOS
         Given The API key is available "4J05H32-N4JM9ZB-QYQRNH1-3E6V8ZN"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -166,7 +131,7 @@ Feature: Retiros Fiat
             | userAnyId | asset | address                | amount   | bankCode | accountType |
             | 100009991 | ARS   | 1430001713039384360017 | 12000000 |          |             |
 
-    @Smoke @Fiat @coinag @others
+    @Regression @Fiat @coinag @others
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -193,7 +158,7 @@ Feature: Retiros Fiat
             | 1TP79KS-KPX4QYG-J0T505E-Z8PT3CC | 100009997 | ARS   | 1430001713039384360017 | 12000000 |          |             |
     # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100008501 | ARS   | 0140420703690150418728 | 9200000 |          |             |
 
-    @Smoke @Fiat @coinag
+    @Regression @Fiat @coinag
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING MERU
         Given The API key is available "JHD27DA-1KNMGS7-KZS2V9R-963H29E"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

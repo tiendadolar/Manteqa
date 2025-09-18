@@ -351,21 +351,21 @@ Feature: Onboarding User - V2
 
         # Do not change data
         Examples:
-            | credential                | externalId    | email               | legalId   | exchange   | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            # | andresperalta@manteca.dev | testOnbE2EArg    | onbe2earg@gmail.com    | 23452216604        | ARGENTINA  | TestArg    | OnbE2E  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |
-            # | andresperalta@manteca.dev | testOnbE2ECol    | onbe2ecol@gmail.com    | 1044988289         | COLOMBIA   | TestCol    | OnbE2E  | X   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400131   | Colombia    | SAMUEL PIRES DE MELO |
-            # | andresperalta@manteca.dev | testOnbE2EChi    | onbe2echi@gmail.com    | 167789579          | CHILE      | TestChi    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Chile       | SAMUEL PIRES DE MELO |
-            | andresperalta@manteca.dev | testOnbE2ECtr | onbe2ectr@gmail.com | 402440293 | COSTA_RICA | TestCtr | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Costa Rica  | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EGua    | onbe2egua@gmail.com    | 2126219200101      | GUATEMALA  | TestGua    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Guatemala   | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EMex    | onbe2emex@gmail.com    | luca860831mdfjrr08 | MEXICO     | TestMex    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EMexRFC | onbe2emexrfc@gmail.com | coza760507p86      | MEXICO     | TestMexRFC | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EPan    | onbe2epan@gmail.com    | 8934513            | PANAMA     | TestPan    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400134   | Panama      | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EBra    | onbe2ebra@gmail.com    | 07185653711        | BRAZIL     | TestBra    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO |
-# | andresperalta@manteca.dev | testOnbE2EFil6 | onbe2efil6@gmail.com | 9674152135063897   | PHILIPPINES | TestPhi | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400135   | Filipinas   | SAMUEL PIRES DE MELO |
+            | credential                | externalId       | email                  | legalId            | exchange   | name       | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | andresperalta@manteca.dev | testOnbE2EArg    | onbe2earg@gmail.com    | 23452216604        | ARGENTINA  | TestArg    | OnbE2E  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2ECol    | onbe2ecol@gmail.com    | 1044988289         | COLOMBIA   | TestCol    | OnbE2E  | X   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400131   | Colombia    | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2EChi    | onbe2echi@gmail.com    | 167789579          | CHILE      | TestChi    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Chile       | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2ECtr    | onbe2ectr@gmail.com    | 402440293          | COSTA_RICA | TestCtr    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Costa Rica  | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2EGua    | onbe2egua@gmail.com    | 2126219200101      | GUATEMALA  | TestGua    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Guatemala   | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2EMex    | onbe2emex@gmail.com    | luca860831mdfjrr08 | MEXICO     | TestMex    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2EMexRFC | onbe2emexrfc@gmail.com | coza760507p86      | MEXICO     | TestMexRFC | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2EPan    | onbe2epan@gmail.com    | 8934513            | PANAMA     | TestPan    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400134   | Panama      | SAMUEL PIRES DE MELO |
+            | andresperalta@manteca.dev | testOnbE2EBra    | onbe2ebra@gmail.com    | 07185653711        | BRAZIL     | TestBra    | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO |
+        # | andresperalta@manteca.dev | testOnbE2EFil6 | onbe2efil6@gmail.com | 9674152135063897   | PHILIPPINES | TestPhi | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400135   | Filipinas   | SAMUEL PIRES DE MELO |
 
-# @test
-# Examples:
-#     | credential                | externalId    | email               | legalId     | exchange  | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-#     | andresperalta@manteca.dev | testOnbE2EArg | onbe2earg@gmail.com | 23452216604 | ARGENTINA | TestArg | OnbE2E  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |
+        @test
+        Examples:
+            | credential                | externalId | email           | legalId     | exchange  | name  | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | andresperalta@manteca.dev | test1      | test1@gmail.com | 27443382092 | ARGENTINA | Maria | Peréz   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400131   | Argentina   | SAMUEL PIRES DE MELO |
 
 
