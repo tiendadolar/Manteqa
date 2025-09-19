@@ -3,7 +3,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const fs = require('fs');
 const path = require('path');
-import { addBankAccountHelper, onboardingHelper, uploadImagesHelper } from '../../../../support/helpers/onboardingHelper';
+import { addBankAccountHelper, addFEPInfo, addPEPInfo, onboardingHelper, uploadImagesHelper } from '../../../../support/helpers/onboardingHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import logger from '../../../../support/utils/logger';
 import { pepInfoCrypto } from '../../../../support/utils/utils';
@@ -174,7 +174,8 @@ When('Upload {string} image', async function (this: CustomWorld, imageType: stri
   const side = imageType === 'FRONT ID' ? 'FRONT' : 'BACK';
   const fileName = imageType === 'FRONT ID' ? 'pic2.png' : 'pic1.png';
 
-  await uploadImagesHelper(this.urlBase, endpoint, this.apiKey, userAnyId, side, fileName);
+  const response = await uploadImagesHelper(this.urlBase, endpoint, this.apiKey, userAnyId, side, fileName);
+  // validateRes(response, 200);
 });
 
 When('Add {string} bank account', async function (this: CustomWorld, exchange: string) {
@@ -183,4 +184,20 @@ When('Add {string} bank account', async function (this: CustomWorld, exchange: s
 
   const response = await addBankAccountHelper(this.urlBase, endpoint, this.apiKey, userAnyId, exchange);
   validateRes(response, 204);
+});
+
+When('Add PEP info', async function (this: CustomWorld) {
+  const userAnyId: string = CustomWorld.getStoreData('userId');
+  const endpoint = '/v2/onboarding-actions/upload-pep-documentation';
+
+  const response = await addPEPInfo(this.urlBase, endpoint, this.apiKey, userAnyId);
+  // validateRes(response, 200);
+});
+
+When('Add FEP info', async function (this: CustomWorld) {
+  const userAnyId: string = CustomWorld.getStoreData('userId');
+  const endpoint = '/v2/onboarding-actions/upload-fep-documentation';
+
+  const response = await addFEPInfo(this.urlBase, endpoint, this.apiKey, userAnyId);
+  // validateRes(response, 200);
 });

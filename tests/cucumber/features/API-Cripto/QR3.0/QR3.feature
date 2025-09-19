@@ -72,7 +72,7 @@ Feature: Sintético QR 3.0
         # First QR is implemented to skip microoperations blocked
         Examples:
             | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
-            | 100009352 | pixmanualamount                                                                                                                                                                                            | 1000   | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | 100009352 | pixmanualamount                                                                                                                                                                                            | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
             | 100009352 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
     @Smoke @QRV1NoDesc @Automated
@@ -151,7 +151,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | credential                | accion | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
-            | andresperalta@manteca.dev | manual | 100009502 | qr3manualamount | 150000 | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | andresperalta@manteca.dev | manual | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
     # | embebido | 100009502 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Smoke @QRV2NoDesc @Automated
@@ -198,7 +198,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009624 | pixmanualamount | 1000   | PIX-manual-V1-NO-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | manual   | 100009624 | pixmanualamount | 10     | PIX-manual-V1-NO-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
             | embebido | 100009624 | pix             | 10     | PIX-embebido-V1-NO-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
 
     @Smoke @PixV1NoDesc @Automated
@@ -230,8 +230,8 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
-            | embebido | 100009624 | pix             | ARS     | 1000   | PIX-embebido-V1-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
-            | manual   | 100009624 | pixmanualamount | ARS     | 100    | PIX-manual-V1-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | embebido | 100009624 | pix             | ARS     | 10     | PIX-embebido-V1-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | manual   | 100009624 | pixmanualamount | ARS     | 10     | PIX-manual-V1-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
 
     @Smoke @PixV1NoDesc @Automated
     Scenario Outline: Validar Clean Code al ejecutar lock de QR PIX estático sin enviar amount vía V2 endpoints
@@ -277,7 +277,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009628 | pixmanualamount | 1000   | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
+            | manual   | 100009628 | pixmanualamount | 10     | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
             | embebido | 100009628 | pix             |        | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
 
     @Smoke @PixV2NoDesc @Automated
@@ -309,7 +309,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009628 | pixmanualamount | ARS     | 50     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | manual   | 100009628 | pixmanualamount | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | embebido | 100009628 | pix             | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
     @Peru @NoDesc @ToBeAutomated
@@ -530,7 +530,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
-            | manual   | 100009359 | qr3manualamount | 200000 | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | manual   | 100009359 | qr3manualamount | 2000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | embebido | 100009359 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @NoSupportYet
@@ -635,7 +635,7 @@ Feature: Sintético QR 3.0
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
             | embebido | 100009360 | pix             | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
-            | manual   | 100009360 | pixmanualamount | 1000   | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+            | manual   | 100009360 | pixmanualamount | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
 
     @Smoke @PixV1Desc @Automated
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra ARS en descubierto vía V1 endpoints
@@ -665,7 +665,7 @@ Feature: Sintético QR 3.0
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
             | embebido | 100009360 | pix             | ARS     | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
-            | manual   | 100009360 | pixmanualamount | ARS     | 50     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+            | manual   | 100009360 | pixmanualamount | ARS     | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
 
     # ------ PIX V2 ------
 
@@ -694,7 +694,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
-            | manual   | 100009361 | pixmanualamount | 1100   | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | manual   | 100009361 | pixmanualamount | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | embebido | 100009361 | pix             | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
     @Smoke @PixV2Desc @Automated
@@ -723,8 +723,8 @@ Feature: Sintético QR 3.0
 
         Examples:
             | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
-            | manual   | 100009361 | pixmanualamount | ARS     | 1000   | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | embebido | 100009361 | pix             | ARS     | 1000   | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | manual   | 100009361 | pixmanualamount | ARS     | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | embebido | 100009361 | pix             | ARS     | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
     # ------ PaymentDestinarion ------
 
@@ -754,11 +754,11 @@ Feature: Sintético QR 3.0
 
         Examples:
             | pay | nacionality | coin | accion   | userAnyId | paymentDestination | against | amount | sessionId                    | to                                         | ticker |
-            | PIX | Argentina   | USDT | manual   | 100009406 | pixmanualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | PIX | Argentina   | USDT | manual   | 100009406 | pixmanualamount    |         | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | PIX | Argentina   | USDT | embebido | 100009406 | pix                |         | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Argentina   | USDT | manual   | 100009406 | qr3manualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Argentina   | USDT | embebido | 100009406 | qr3                |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | manual   | 100009407 | pixmanualamount    | USDT    | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | QR  | Brasil      | USDT | manual   | 100009407 | pixmanualamount    | USDT    | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | qr3                |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | pix                | USDT    | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
@@ -794,7 +794,7 @@ Feature: Sintético QR 3.0
             # | PIX | Argentina   | USDT | embebido | 100009406 | renancamargo19@gmail.com             |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             # | PIX | Argentina   | USDT | manual   | 100009406 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             # | PIX | Argentina   | USDT | embebido | 100009406 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | manual   | 100009407 | martin@gmail.com                     |         | 500    | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | QR  | Brasil      | USDT | manual   | 100009407 | martin@gmail.com                     |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | renancamargo19@gmail.com             |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | manual   | 100009407 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |

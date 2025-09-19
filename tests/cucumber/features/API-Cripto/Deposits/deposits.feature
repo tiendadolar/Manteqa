@@ -18,7 +18,7 @@ Feature: Depositos
 
         Examples:
             | hash | from                                       | to                                         | wei                   | human | ticker | chain |
-            | hash | 0x9bD31d82B6212dd60a9328CCe7277161e5975fB5 | 0x646841976222cc237F8430fF16BD683e6C15643e | 100000000000000000000 | 100   | USDT   | 4     |
+            | hash | 0x9bD31d82B6212dd60a9328CCe7277161e5975fB5 | 0x5B3A241e1516239923a93E9390CfD137F6274b13 | 100000000000000000000 | 1     | USDT   | 4     |
 
     @CryptoAdmin
     Scenario: Generar deposito Crypto vía admin

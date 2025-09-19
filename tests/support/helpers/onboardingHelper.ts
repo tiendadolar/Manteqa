@@ -85,3 +85,33 @@ export const addBankAccountHelper = async (urlBase: string, endpoint: string, ap
   logger.info(`Bank account added for exchange: ${exchange}`);
   return response;
 };
+
+export const addPEPInfo = async (urlBase: string, endpoint: string, apiKey: string, userAnyId: string): Promise<any> => {
+  const payload = {
+    userAnyId: userAnyId,
+    fileName: 'example-pep-documentation.jpg'
+  };
+
+  const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, body: payload });
+  validateRes(response, 200);
+
+  const awsUrl: string = response.body.url;
+  await putAwsUrl(awsUrl);
+  logger.info(`PEP Info uploaded`);
+  return response;
+};
+
+export const addFEPInfo = async (urlBase: string, endpoint: string, apiKey: string, userAnyId: string): Promise<any> => {
+  const payload = {
+    userAnyId: userAnyId,
+    fileName: 'example-fep-documentation.jpg'
+  };
+
+  const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, body: payload });
+  validateRes(response, 200);
+
+  const awsUrl: string = response.body.url;
+  await putAwsUrl(awsUrl);
+  logger.info(`FEP Info uploaded`);
+  return response;
+};
