@@ -395,11 +395,12 @@ Feature: Sintéticos
             | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 0     |
             | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 5     |
 
-    @exchange @ToBeAutomated
-    Scenario Outline: Ramp-Off no descubierto
+    @Smoke @RampOff @Exchange @Automated
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
         Given The API key is available "<apiKEY>"
         And The API secret is available "6RcTZScYUFb2bq9qWq"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # And Obtain "<against>" balance for "<userAnyId>" user
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -413,7 +414,48 @@ Feature: Sintéticos
         And Execute crypto deposit
         # Parte 2: Validar ejeccución del sintético
         Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
+        # And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
-            | apiKEY                          | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress | withdrawNetwork | to                                         | ticker | chain |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 10          | 53724491875     | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | ETH    | 0     |
+            | apiKEY                          | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress        | withdrawNetwork |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 3           | 53724491875            | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012259 | smoke-rampoff-n | USDT  | CLP     | 3           | 16778957               | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 3           | 1234567                | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 3           | CR88010404046620113218 | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654     | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012267 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        |
+
+    @Smoke @RampOn @Exchange @Automated
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
+        Given The API key is available "<apiKEY>"
+        And The API secret is available "6RcTZScYUFb2bq9qWq"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # And Obtain "<against>" balance for "<userAnyId>" user
+
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
+        And Execute the POST method on the endpoint "/v1/synthetics/ramp-on"
+        Then Obtain a response 201
+        # Parte 2: Generar depósito
+        And Execute fiat deposit
+        # Parte 2: Validar ejeccución del sintético
+        Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
+        # And Obtain "<against>" balance for "<userAnyId>" user
+
+        Examples:
+            | apiKEY                          | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012259 | smoke-rampoff-n | USDT  | CLP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012267 | smoke-rampoff-n | USDT  | COP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |

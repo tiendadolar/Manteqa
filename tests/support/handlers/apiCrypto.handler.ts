@@ -1,4 +1,5 @@
 import { EndpointHandler } from '../factory/endpointHandler.interface';
+import logger from '../utils/logger';
 import {
   bankingOnboardingApiCrypto,
   criptoDepositApiCrypto,
@@ -8,6 +9,7 @@ import {
   inicialOnboardingApiCrypto,
   inicialOnboardingApiCryptoV2,
   rampOffExchange,
+  rampOnExchange,
   senderPaymentSynthetic,
   withdrawLockApiCryptoV2
 } from '../utils/utils';
@@ -109,9 +111,9 @@ export class SyntheticOnHandler implements EndpointHandler {
   }
 
   handle(userData: any, world?: any) {
-    if (userData.exchange) {
-      userData = senderPaymentSynthetic(userData);
-    }
+    if (userData.exchange) userData = senderPaymentSynthetic(userData);
+    if (userData.against != 'ARS') userData = rampOnExchange(userData);
+
     userData.userAnyId = userData.userAnyId ?? world.getStoreData('userId');
     return userData;
   }

@@ -3,6 +3,7 @@ const qr = require('qrcode');
 const md = require('@md/math');
 const speakeasy = require('speakeasy');
 const network = require('../data/networksData.json');
+const exchangeData = require('../data/accountData.json');
 import { use } from 'chai';
 import { CustomWorld } from '../world';
 import logger from './logger';
@@ -17,6 +18,35 @@ const getUserByLegalId = async (legalId: string, url: string, token: string) => 
 
   const response = await request(urlBase).get(endpoint).set('x-access-token', token).set('User-Agent', 'PostmanRuntime/7.44.1');
   return response.body.users.numberId;
+};
+
+const validateExchange = (asset: string) => {
+  switch (asset) {
+    case 'ARS':
+      return 'ARGENTINA';
+    case 'BRL':
+      return 'BRAZIL';
+    case 'CLP':
+      return 'CHILE';
+    case 'COP':
+      return 'COLOMBIA';
+    case 'BOB':
+      return 'BOLIVIA';
+    case 'PEN':
+      return 'PERU';
+    case 'GTQ':
+      return 'GUATEMALA';
+    case 'MXN':
+      return 'MEXICO';
+    case 'PUSD':
+      return 'PANAMA';
+    case 'CRC':
+      return 'COSTA_RICA';
+    case 'PHP':
+      return 'PHILIPPINES';
+    default:
+      throw new Error(`No exchange definido para asset ${asset}`);
+  }
 };
 
 // Not Implemented
@@ -498,6 +528,34 @@ export const refundsPolling = async function (data: any, userData: any) {
 };
 
 export const rampOffExchange = (userData: any) => {
+  if (userData.against === 'BRL') {
+    return {
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      asset: userData.asset,
+      against: userData.against,
+      assetAmount: userData.assetAmount,
+      destination: {
+        address: userData.withdrawAddress
+      }
+    };
+  } else {
+    return {
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      asset: userData.asset,
+      against: userData.against,
+      assetAmount: userData.assetAmount,
+      destination: {
+        address: userData.withdrawAddress,
+        bankCode: exchangeData[validateExchange(userData.against)].code,
+        accountType: exchangeData[validateExchange(userData.against)].accountType
+      }
+    };
+  }
+};
+
+export const rampOnExchange = (userData: any) => {
   return {
     sessionId: CustomWorld.getSessionId(userData.sessionId),
     userAnyId: userData.userAnyId,
@@ -506,7 +564,7 @@ export const rampOffExchange = (userData: any) => {
     assetAmount: userData.assetAmount,
     destination: {
       address: userData.withdrawAddress,
-      network: network[userData.against].network
+      network: userData.withdrawNetwork
     }
   };
 };
