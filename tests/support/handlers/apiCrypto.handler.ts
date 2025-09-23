@@ -107,12 +107,24 @@ export class WithdrawLockV2Handler implements EndpointHandler {
 
 export class SyntheticOnHandler implements EndpointHandler {
   canHandle(endpoint: string): boolean {
-    return ['/v1/synthetics/ramp-on', '/v2/payment-locks', '/v2/synthetics/qr-payment'].includes(endpoint);
+    return ['/v1/synthetics/ramp-on'].includes(endpoint);
+  }
+
+  handle(userData: any, world?: any) {
+    if (userData.against != 'ARS') userData = rampOnExchange(userData);
+
+    userData.userAnyId = userData.userAnyId ?? world.getStoreData('userId');
+    return userData;
+  }
+}
+
+export class SyntheticPaymentHandler implements EndpointHandler {
+  canHandle(endpoint: string): boolean {
+    return ['/v2/payment-locks', '/v2/synthetics/qr-payment'].includes(endpoint);
   }
 
   handle(userData: any, world?: any) {
     if (userData.exchange) userData = senderPaymentSynthetic(userData);
-    if (userData.against != 'ARS') userData = rampOnExchange(userData);
 
     userData.userAnyId = userData.userAnyId ?? world.getStoreData('userId');
     return userData;

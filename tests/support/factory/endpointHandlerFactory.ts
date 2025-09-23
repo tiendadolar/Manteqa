@@ -7,7 +7,7 @@ import {
   OnboardingInitialV1Handler,
   OnboardingInitialV2Handler,
   SyntheticOffHandler,
-  SyntheticOnHandler,
+  SyntheticPaymentHandler,
   WithdrawFiatV1Handler,
   WithdrawFiatV2Handler,
   WithdrawLockV2Handler
@@ -28,7 +28,7 @@ export class EndpointHandlerFactory {
       new CbuCRCHandler(),
       new WithdrawFiatV2Handler(),
       new WithdrawLockV2Handler(),
-      new SyntheticOnHandler(),
+      new SyntheticPaymentHandler(),
       new SyntheticOffHandler(),
       new OnboardingInitialHandler(),
       new OnboardingValidateDocHandler(),

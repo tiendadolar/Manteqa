@@ -34,7 +34,7 @@ const loggerOptions: LoggerOptions = {
   transports: [
     new winston.transports.Console({ level: 'debug' }),
     new winston.transports.File({
-      level: 'warn',
+      level: 'fatal',
       filename: './errors.log'
     })
   ]
