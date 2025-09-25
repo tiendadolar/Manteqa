@@ -43,7 +43,7 @@ Feature: Sintético QR 3.0
     # ------ NO DESCUBIERTOS -------
     # ------ QR V1 ------
 
-    @Smoke @QRV1NoDesc @Automated @ct
+    @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"

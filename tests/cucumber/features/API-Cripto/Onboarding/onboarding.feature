@@ -5,7 +5,7 @@ Feature: Onboarding User - V1
     Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
     And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-  @Smoke
+  @Smoke @Automated
   Scenario Outline: Validar onboarding exitoso de usuario por V1
     And login user admin "<credential>"
     And Validate existing user '<legalId>'

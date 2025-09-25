@@ -352,7 +352,7 @@ Feature: Onboarding User - V2
         And Add FEP info
 
         # Do not change data
-        @true
+        @Automated
         Examples:
             | apiKEY                          | credential                | externalId       | email                  | legalId            | exchange   | name       | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EArg    | onbe2earg@gmail.com    | 23452216604        | ARGENTINA  | TestArg    | OnbE2E  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |
@@ -368,7 +368,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId        | email                | legalId       | exchange    | name     | surname   | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | testrampoffexhphi | testexhphi@gmail.com | N03-16-018093 | PHILIPPINES | Ramp Off | exhphilip | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400138   | Filipinas   | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId         | email                 | legalId  | exchange | name     | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | testrampoffexhcol2 | testexhcol2@gmail.com | 53089087 | COLOMBIA | Ramp Off | exhcol2 | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400138   | Colombia    | SAMUEL PIRES DE MELO |
 
 

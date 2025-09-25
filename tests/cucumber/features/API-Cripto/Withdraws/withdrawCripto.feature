@@ -876,7 +876,7 @@ Feature: Retiros Crypto
             | type   | asset | userAnyId | country | network    | amount | address                                    |
             | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @auth
+    @auth @Automated
     Scenario Outline: Validar que los retiros para un user exchange <exchange> se realicen por la Hot Wallet <wallet>
         Given The API key is available "<apiKEY>"
         And login user admin "<credential>"

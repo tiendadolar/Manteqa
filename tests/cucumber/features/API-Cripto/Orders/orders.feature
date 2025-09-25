@@ -186,7 +186,7 @@ Feature: Ordenes
         And Execute the GET method on the endpoint "/v1/order/{orderNumberId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        @BuyByCountry @USDT
+        @BuyByCountry @USDT  @Automated
         Examples:
             | sessionId   | trade  | coin      | operation | userId    | amount | against |
             | order-qaa-n | compra | USDT_ARS  | BUY       | 100010451 | 5      | ARS     |
@@ -214,7 +214,7 @@ Feature: Ordenes
             | order-qaa-n | compra | USDC_MXN  | BUY       | 100009051 | 5      | MXN     |
             | order-qaa-n | compra | USDC_PHP  | BUY       | 100009089 | 5      | PHP     |
 
-        @SellByCountry @USDT
+        @SellByCountry @USDT @Automated
         Examples:
             | sessionId   | trade | coin      | operation | userId    | amount | against |
             | order-qaa-n | venta | USDT_ARS  | SELL      | 100010451 | 5      | ARS     |
@@ -268,7 +268,7 @@ Feature: Ordenes
         And Execute the GET method on the endpoint "/v2/orders/{orderNumberId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        @BuyByCountry @USDT
+        @BuyByCountry @USDT @Automated
         Examples:
             | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
             | order-qaa-n | compra | USDT  | BUY  | 100008501 | 5           | ARS     |
@@ -313,7 +313,7 @@ Feature: Ordenes
             | order-qaa-n | compra | WLD   | BUY  | 100009089 | 5           | PHP     |
             | order-qaa-n | compra | WLD   | BUY  | 100010879 | 5           | BOB     |
 
-        @SellByCountry @USDT
+        @SellByCountry @USDT @Automated
         Examples:
             | sessionId   | trade | asset | side | userAnyId | assetAmount | against |
             | order-qaa-n | venta | USDT  | SELL | 100008501 | 5           | ARS     |

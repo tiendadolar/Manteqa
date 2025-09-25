@@ -424,11 +424,11 @@ Feature: Sintéticos
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 3           | CR88010404046620113218 | ETHEREUM        |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654     | ETHEREUM        |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012267 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012389 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        |
 
     @Smoke @RampOn @Exchange @Automated
-    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
+    Scenario Outline: Flujo E2E Ramp-On no descubierto para usuario exchange <against>
         Given The API key is available "<apiKEY>"
         And The API secret is available "6RcTZScYUFb2bq9qWq"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
