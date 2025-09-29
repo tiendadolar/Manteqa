@@ -9,11 +9,16 @@ on:
         default: '@Smoke and @Automated'
         type: choice
         options:
-          - '@QR and @Smoke'
-          - '@Smoke'
-          - '@Desc'
-          - '@QR and @Desc'
-          - '(@QR and @Smoke) or (@Sintetico and @Smoke)'
+          - '@Smoke and @Automated'
+          - '@Onboarding and @Smoke and @Automated'
+          - '@OnboardingV2 and @Smoke and @Automated'
+          - '@Orders and @Smoke and @V1 and @Automated'
+          - '@Orders and @Smoke and @V2 and @Automated'
+          - '@QR and @Smoke and @Automated'
+          - '@QR and @Refunds and @Automated'
+          - '@Sintetico and @Smoke and @Automated'
+          - '@Withdraw and @Smoke and @Fiat and @V1 and @Automated'
+          - '@Withdraw and @Smoke and @Fiat and @V2 and @Automated'
   # schedule:
   #   - cron: "0 1 * * 1,3"
 

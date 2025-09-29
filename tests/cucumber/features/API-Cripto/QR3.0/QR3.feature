@@ -43,7 +43,7 @@ Feature: Sintético QR 3.0
     # ------ NO DESCUBIERTOS -------
     # ------ QR V1 ------
 
-    @Smoke @QRV1NoDesc @Automated2
+    @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -899,7 +899,7 @@ Feature: Sintético QR 3.0
             | QR  | Argentina   | USDT | pago a teléfono celular | 100010503 | +51987365083       | USDT    | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
             | QR  | Peru        | USDT | pago a teléfono celular | 100010539 | +51987365083       | USDT    | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
 
-    @Refunds @RefundsDs
+    @Refunds @RefundsDs @Automated
     Scenario Outline: Validar refund para usuario operando en descubierto
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -922,7 +922,7 @@ Feature: Sintético QR 3.0
     # Cuando marto incluya +5511949227612 como siempre falla para reverse, borrar qr3manualamount
     # Falta caso en against ARS en el que se toma deuda en ARS pero no hay order reversal
 
-    @Refunds @RefundsNDt
+    @Refunds @RefundsNDt @Automated
     Scenario Outline: Validar refund para usuario operando en no descubierto contra <against>
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -949,7 +949,7 @@ Feature: Sintético QR 3.0
             | userAnyId | paymentDestination      | against | amount | sessionId        | apiKeyDeposit                   |
             | 100009417 | failuremartin@gmail.com | ARS     | 1000   | refund-NO-DESC-n | C10XB2Z-AG243CS-G42KB2M-4085WTF |
 
-    @Refunds @manualRefund
+    @Refunds @manualRefund @Automated
     Scenario Outline: Validar refund manual desde admin para usuario operando en no descubierto contra <against>
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"

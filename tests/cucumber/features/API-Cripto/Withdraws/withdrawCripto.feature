@@ -410,7 +410,7 @@ Feature: Retiros Crypto
 
     # ------------- V2 ---------------
 
-    @Smoke @Crypto @ARGv2 @V2 @Automatedtest
+    @Smoke @Crypto @ARGv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
