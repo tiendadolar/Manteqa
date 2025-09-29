@@ -163,7 +163,7 @@ Feature: Ordenes
 
     @Smoke @V1
     Scenario Outline: Ejecutar ordenes de <trade> de <coin> contra <against> V1
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<operation>" to the variable "operation"
@@ -188,17 +188,17 @@ Feature: Ordenes
 
         @BuyByCountry @USDT  @Automated
         Examples:
-            | sessionId   | trade  | coin      | operation | userId    | amount | against |
-            | order-qaa-n | compra | USDT_ARS  | BUY       | 100010451 | 5      | ARS     |
-            | order-qaa-n | compra | USDT_USD  | BUY       | 100010451 | 5      | USD     |
-            | order-qaa-n | compra | USDT_CLP  | BUY       | 100009020 | 5      | CLP     |
-            | order-qaa-n | compra | USDT_COP  | BUY       | 100009042 | 5      | COP     |
-            | order-qaa-n | compra | USDT_BRL  | BUY       | 100008848 | 5      | BRL     |
-            | order-qaa-n | compra | USDT_GTQ  | BUY       | 100009413 | 5      | GTQ     |
-            | order-qaa-n | compra | USDT_CRC  | BUY       | 100009603 | 5      | CRC     |
-            | order-qaa-n | compra | USDT_PUSD | BUY       | 100009508 | 5      | PUSD    |
-            | order-qaa-n | compra | USDT_MXN  | BUY       | 100009051 | 5      | MXN     |
-            | order-qaa-n | compra | USDT_PHP  | BUY       | 100009089 | 5      | PHP     |
+            | apiKEY                          | sessionId   | trade  | coin      | operation | userId    | amount | against |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | order-qaa-n | compra | USDT_ARS  | BUY       | 100010451 | 5      | ARS     |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | order-qaa-n | compra | USDT_USD  | BUY       | 100010451 | 5      | USD     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT_CLP  | BUY       | 100009020 | 5      | CLP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT_COP  | BUY       | 100009042 | 5      | COP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT_BRL  | BUY       | 100008848 | 5      | BRL     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT_GTQ  | BUY       | 100009413 | 5      | GTQ     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT_CRC  | BUY       | 100009603 | 5      | CRC     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT_PUSD | BUY       | 100009508 | 5      | PUSD    |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT_MXN  | BUY       | 100009051 | 5      | MXN     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT_PHP  | BUY       | 100009089 | 5      | PHP     |
 
         @BuyByCountry @USDC
         Examples:
@@ -216,17 +216,17 @@ Feature: Ordenes
 
         @SellByCountry @USDT @Automated
         Examples:
-            | sessionId   | trade | coin      | operation | userId    | amount | against |
-            | order-qaa-n | venta | USDT_ARS  | SELL      | 100010451 | 5      | ARS     |
-            | order-qaa-n | venta | USDT_USD  | SELL      | 100010451 | 5      | USD     |
-            | order-qaa-n | venta | USDT_CLP  | SELL      | 100009020 | 5      | CLP     |
-            | order-qaa-n | venta | USDT_COP  | SELL      | 100009042 | 5      | COP     |
-            | order-qaa-n | venta | USDT_BRL  | SELL      | 100008848 | 5      | BRL     |
-            | order-qaa-n | venta | USDT_GTQ  | SELL      | 100009413 | 5      | GTQ     |
-            | order-qaa-n | venta | USDT_CRC  | SELL      | 100009603 | 5      | CRC     |
-            | order-qaa-n | venta | USDT_PUSD | SELL      | 100009508 | 5      | PUSD    |
-            | order-qaa-n | venta | USDT_MXN  | SELL      | 100009051 | 5      | MXN     |
-            | order-qaa-n | venta | USDT_PHP  | SELL      | 100009089 | 5      | PHP     |
+            | apiKEY                          | sessionId   | trade | coin      | operation | userId    | amount | against |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | order-qaa-n | venta | USDT_ARS  | SELL      | 100010451 | 5      | ARS     |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | order-qaa-n | venta | USDT_USD  | SELL      | 100010451 | 5      | USD     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT_CLP  | SELL      | 100009020 | 5      | CLP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT_COP  | SELL      | 100009042 | 5      | COP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT_BRL  | SELL      | 100008848 | 5      | BRL     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT_GTQ  | SELL      | 100009413 | 5      | GTQ     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT_CRC  | SELL      | 100009603 | 5      | CRC     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT_PUSD | SELL      | 100009508 | 5      | PUSD    |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT_MXN  | SELL      | 100009051 | 5      | MXN     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT_PHP  | SELL      | 100009089 | 5      | PHP     |
 
         @SellByCountry @USDC
         Examples:
@@ -251,7 +251,7 @@ Feature: Ordenes
 
     @Smoke @V2
     Scenario Outline: Ejecutar ordenes de <trade> de <coin> contra <against> V2
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -270,18 +270,18 @@ Feature: Ordenes
 
         @BuyByCountry @USDT @Automated
         Examples:
-            | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-            | order-qaa-n | compra | USDT  | BUY  | 100008501 | 5           | ARS     |
-            | order-qaa-n | compra | USDT  | BUY  | 100008501 | 5           | USD     |
-            | order-qaa-n | compra | USDT  | BUY  | 100009020 | 5           | CLP     |
-            | order-qaa-n | compra | USDT  | BUY  | 100009042 | 5           | COP     |
-            | order-qaa-n | compra | USDT  | BUY  | 100008848 | 5           | BRL     |
-            | order-qaa-n | compra | USDT  | BUY  | 100009413 | 5           | GTQ     |
-            | order-qaa-n | compra | USDT  | BUY  | 100009603 | 5           | CRC     |
-            | order-qaa-n | compra | USDT  | BUY  | 100009508 | 5           | PUSD    |
-            | order-qaa-n | compra | USDT  | BUY  | 100009051 | 5           | MXN     |
-            | order-qaa-n | compra | USDT  | BUY  | 100009089 | 5           | PHP     |
-            | order-qaa-n | compra | USDT  | BUY  | 100010879 | 5           | BOB     |
+            | apiKEY                          | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100008501 | 5           | ARS     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100008501 | 5           | USD     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100009020 | 5           | CLP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100009042 | 5           | COP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100008848 | 5           | BRL     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100009413 | 5           | GTQ     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100009603 | 5           | CRC     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100009508 | 5           | PUSD    |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100009051 | 5           | MXN     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100009089 | 5           | PHP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | compra | USDT  | BUY  | 100010879 | 5           | BOB     |
 
         @BuyByCountry @USDC
         Examples:
@@ -315,17 +315,17 @@ Feature: Ordenes
 
         @SellByCountry @USDT @Automated
         Examples:
-            | sessionId   | trade | asset | side | userAnyId | assetAmount | against |
-            | order-qaa-n | venta | USDT  | SELL | 100008501 | 5           | ARS     |
-            | order-qaa-n | venta | USDT  | SELL | 100008501 | 5           | USD     |
-            | order-qaa-n | venta | USDT  | SELL | 100009020 | 5           | CLP     |
-            | order-qaa-n | venta | USDT  | SELL | 100009042 | 5           | COP     |
-            | order-qaa-n | venta | USDT  | SELL | 100008848 | 5           | BRL     |
-            | order-qaa-n | venta | USDT  | SELL | 100009413 | 5           | GTQ     |
-            | order-qaa-n | venta | USDT  | SELL | 100009603 | 5           | CRC     |
-            | order-qaa-n | venta | USDT  | SELL | 100009508 | 5           | PUSD    |
-            | order-qaa-n | venta | USDT  | SELL | 100009051 | 5           | MXN     |
-            | order-qaa-n | venta | USDT  | SELL | 100009089 | 5           | PHP     |
+            | apiKEY                          | sessionId   | trade | asset | side | userAnyId | assetAmount | against |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100008501 | 5           | ARS     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100008501 | 5           | USD     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100009020 | 5           | CLP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100009042 | 5           | COP     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100008848 | 5           | BRL     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100009413 | 5           | GTQ     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100009603 | 5           | CRC     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100009508 | 5           | PUSD    |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100009051 | 5           | MXN     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | order-qaa-n | venta | USDT  | SELL | 100009089 | 5           | PHP     |
 
         @SellByCountry @USDC
         Examples:

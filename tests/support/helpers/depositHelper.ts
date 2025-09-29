@@ -29,7 +29,7 @@ export const cryptoDepositHelper = async (
       chain: chain
     }
   };
-
+  logger.info(`Crypto deposit payload: ${JSON.stringify(payload)}`);
   const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, apiSecret, body: payload });
   // const response = await request(urlBase).post(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY).set('md-api-secret', apiSecret).send(payload);
 };

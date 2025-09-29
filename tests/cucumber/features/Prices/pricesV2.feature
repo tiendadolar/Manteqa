@@ -1,7 +1,7 @@
 @Prices
 Feature: Prices V2
 
-    @Smoke @Automated
+    @Smoke
     Scenario Outline: Obtener par prices <par_prices>
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

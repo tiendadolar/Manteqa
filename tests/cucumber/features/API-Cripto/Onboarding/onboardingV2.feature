@@ -315,7 +315,7 @@ Feature: Onboarding User - V2
 
     # E2E
     @Smoke @E2E
-    Scenario: Onboarding inicial de usuario
+    Scenario: Onboarding de usuario de "<exchange>"
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"

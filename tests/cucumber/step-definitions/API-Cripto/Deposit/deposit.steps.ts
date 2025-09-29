@@ -2,12 +2,14 @@ const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
 const md = require('@md/math');
+import { NETWORKS_MAPPINGS } from '../../../../support/constants/constantsNetworks';
 import { cryptoDepositHelper, cryptoDepositHelper2, fiatDepositHelper } from '../../../../support/helpers/depositHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import logger from '../../../../support/utils/logger';
 import { CustomWorld, UserData } from '../../../../support/world';
 
 Then('Execute crypto deposit', { timeout: 500 * 1000 }, async function (this: CustomWorld) {
+  const withdrawNetwork = CustomWorld.getStoreData('withdrawNetwork');
   const response = this.response.body;
   const isTron = Object.keys(response.details.depositAddresses).length === 1 && response.details.depositAddresses.hasOwnProperty('TRON');
   const urlBase: string = this.urlBase;
@@ -19,7 +21,7 @@ Then('Execute crypto deposit', { timeout: 500 * 1000 }, async function (this: Cu
   const wei: string = this.wei || md.toWei(response.stages['1'].thresholdAmount);
   const human: string = CustomWorld.getStoreData('thresholdAmount') || this.human || response.stages['1'].thresholdAmount;
   const ticker: string = this.ticker || response.details.paymentAgainstAsset || response.details.paymentAgainst || response.stages['1'].asset;
-  const chain: any = isTron ? 9 : this.chain || 0;
+  const chain: any = isTron ? 9 : NETWORKS_MAPPINGS[withdrawNetwork] || 0;
 
   logger.info('Executing crypto deposit for synthetic payment...');
   await cryptoDepositHelper(urlBase, endpoint, apiKEY, apiSecret, from, to, wei, human, ticker, chain);

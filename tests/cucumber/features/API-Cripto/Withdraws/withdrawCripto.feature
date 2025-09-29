@@ -115,7 +115,7 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009893 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009893 | BSC      | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009893 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT | 100009893 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDC | 100009893 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
@@ -158,7 +158,7 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009892 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009892 | BSC      | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009892 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT | 100009892 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDC | 100009892 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
@@ -199,7 +199,7 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009891 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009891 | BSC      | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009891 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT | 100009891 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDC | 100009891 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
@@ -240,7 +240,7 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009889 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009889 | BSC      | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009889 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT | 100009889 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDC | 100009889 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
@@ -281,7 +281,7 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009887 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009887 | BSC      | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009887 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT | 100009887 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDC | 100009887 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
@@ -322,7 +322,7 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009886 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009886 | BSC      | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009886 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT | 100009886 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDC | 100009886 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
@@ -363,7 +363,7 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009885 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009885 | BSC      | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009885 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT | 100009885 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDC | 100009885 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
@@ -404,13 +404,13 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
             | USDT | 100009884 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009884 | BSC      | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009884 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDT | 100009884 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             | USDC | 100009884 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
     # ------------- V2 ---------------
 
-    @Smoke @Crypto @ARGv2 @V2 @Automated
+    @Smoke @Crypto @ARGv2 @V2 @Automatedtest
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -443,14 +443,14 @@ Feature: Retiros Crypto
         Examples:
             | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | BSC      | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 7      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @TRON
         Examples:
-            | apiKEY                             | type   | asset | userAnyId | country | network | amount | address                            |
-            | TK87U6EA5Fyq1zLZc9Q6NEeasHtTTRMaLu | crypto | USDT  | 100011214 | ARG     | TRON    | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
+            | apiKEY                          | type   | asset | userAnyId | country | network | amount | address                            |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | TRON    | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
 
         @Test
         Examples:
@@ -489,16 +489,16 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100011214 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100011214 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | WLD   | 100011214 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | WLD   | 100011214 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100011214 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100011214 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100011214 | ARG     | BSC      | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100011214 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDC  | 100011214 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @TRON
         Examples:
@@ -549,7 +549,7 @@ Feature: Retiros Crypto
             | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009875 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009875 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009875 | ARG     | BSC      | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009875 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009875 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
@@ -596,7 +596,7 @@ Feature: Retiros Crypto
             | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009876 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009876 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009876 | ARG     | BSC      | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009876 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009876 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -642,7 +642,7 @@ Feature: Retiros Crypto
             | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009877 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009877 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009877 | ARG     | BSC      | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009877 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009877 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
@@ -689,7 +689,7 @@ Feature: Retiros Crypto
             | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009878 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009878 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009878 | ARG     | BSC      | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009878 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009878 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
@@ -736,7 +736,7 @@ Feature: Retiros Crypto
             | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009879 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009879 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009879 | ARG     | BSC      | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009879 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009879 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:

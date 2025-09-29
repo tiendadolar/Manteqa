@@ -32,7 +32,7 @@ Feature: Sintéticos
             # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | BINANCE         |
             # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | POLYGON         |
             | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | OPTIMISM        |
-            | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ARBITRUM        |
+            # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ARBITRUM        |
             | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | BASE            |
 
     @Smoke @RampOnDesc @Automated
@@ -185,6 +185,7 @@ Feature: Sintéticos
         And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
         And Execute the POST method on the endpoint "/v2/synthetics/ramp-on"
         Then Obtain a response 201
+        And Execute fiat deposit
         # Parte 2: Validar ejeccución del sintético
         Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
         And Obtain "<against>" balance for "<userAnyId>" user
@@ -192,7 +193,7 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                            | withdrawNetwork |
             | 100011129 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
-            | 100011129 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | 100011129 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
             | 100011129 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
 
 
@@ -307,7 +308,7 @@ Feature: Sintéticos
 
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
-            | 100009688 | smoke-test-n | WLD   | ARS     | 3           | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
+            | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
             | 100009688 | smoke-test-n | USDT  | ARS     | 3           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
             # | 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
             | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |

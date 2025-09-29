@@ -69,6 +69,7 @@ When('Assign the value {string} to the variable {string}', function (this: Custo
     this.userData[variable] = CustomWorld.getStoreData('pixCode') || '';
   } else {
     this.userData[variable] = value;
+    CustomWorld.setStoreData(variable, value);
   }
 });
 
