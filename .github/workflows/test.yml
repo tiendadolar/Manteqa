@@ -4,9 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Etiqueta de los escenarios a correr (ej: @QR)'
-        required: false
-        default: '@QR and @Desc'
+        description: 'Etiqueta de los escenarios a correr'
+        required: true
+        default: '@Smoke and @Automated'
+        type: choice
+        options:
+          - '@QR and @Smoke'
+          - '@Smoke'
+          - '@Desc'
+          - '@QR and @Desc'
+          - '(@QR and @Smoke) or (@Sintetico and @Smoke)'
   # schedule:
   #   - cron: "0 1 * * 1,3"
 
