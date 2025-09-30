@@ -2,7 +2,7 @@
 Feature: Retiros Fiat
 
     @Smoke @Fiat @V1 @Automated
-    Scenario Outline: Crear retiro fiat user por country por V1
+    Scenario Outline: Crear retiro fiat user por country por V1 "<coin>"
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userId>" to the variable "userId"
@@ -35,7 +35,7 @@ Feature: Retiros Fiat
 
 
     @Smoke @Fiat @V2 @Automated
-    Scenario Outline: Crear retiro fiat user por country por V2
+    Scenario Outline: Crear retiro fiat user por country por V2 "<asset>"
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
@@ -70,7 +70,7 @@ Feature: Retiros Fiat
             | 100009873 | ARS   | 1430001713039384360017 | 1000   |           |             |
 
     @Smoke @Remesas @Automated
-    Scenario Outline: Crear retiro fiat user por country por V2
+    Scenario Outline: Crear retiro fiat user por country por V2 "<asset>"
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
@@ -112,7 +112,7 @@ Feature: Retiros Fiat
 
 
     @Regression @Fiat @pendingAdmin
-    Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING
+    Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING "<asset>"
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
