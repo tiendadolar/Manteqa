@@ -260,14 +260,7 @@ jobs:
               };
               
               fs.writeFileSync('test-results.json', JSON.stringify(emailData, null, 2));
-              
-              // Crear variables de entorno para GitHub
-              console.log(`TEST_STATUS=${emailData.status}`);
-              console.log(`TOTAL_SCENARIOS=${totalScenarios}`);
-              console.log(`PASSED_SCENARIOS=${passedScenarios}`);
-              console.log(`FAILED_SCENARIOS=${failedScenarios}`);
-              console.log(`SUCCESS_RATE=${successRate}`);
-              
+                            
             } catch (error) {
               console.log('❌ Error analizando resultados:', error.message);
               const errorData = {
