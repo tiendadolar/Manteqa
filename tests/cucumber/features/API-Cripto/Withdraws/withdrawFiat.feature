@@ -69,7 +69,7 @@ Feature: Retiros Fiat
             | 100009873 | USD   | 1430001714039384360025 | 10     |           |             |
             | 100009873 | ARS   | 1430001713039384360017 | 1000   |           |             |
 
-    @Smoke @Fiat  @V2 @Remesas @Automated
+    @Smoke @Remesas @Automated
     Scenario Outline: Crear retiro fiat user por country por V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

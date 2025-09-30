@@ -3,7 +3,7 @@ Feature: Sintéticos
 
     # ----- Descubierto -----
     # ----- LooselyManagedAssets -----
-    @Smoke @RampOnDesc @Automated
+    @Smoke @RampOnDesc @Automatedtest
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "<asset>" contra "<against>"
 
         # Parte 1: Creación de sintético

@@ -6,10 +6,11 @@ Es un proyecto de automatización para "Manteca".
 
 - ### **API-CRYPTO:**
 
-* **Onboarding** '@Onboarding'
-* **PIX** '@Pix'
-* **QR** 3.0 '@QR'
-* **Orders USDT** '@USDTOrders'
+* **Onboarding V1 y V2**
+* **Sintéticos de Pago (QR, PIX y PERU)**
+* **Orders V1 y V2**
+* **Sintéticos de Rampa**
+* **Retiros V1 y V2**
 
 - ### **API-CAMBIO:**
 
@@ -60,6 +61,20 @@ Correr run con reporte utilizando Tags (Ver tags) desde consola:
 ```bash
 npm run test:tag '@tag'
 ```
+
+### Tags disponibles por funcionalidad
+
+- **Smoke Tests** → `@Smoke and @Automated`
+- **Onboarding (V1)** → `@Onboarding and @Smoke and @Automated`
+- **Onboarding (V2)** → `@OnboardingV2 and @Smoke and @Automated`
+- **Orders USDT (V1)** → `@Orders and @Smoke and @V1 and @Automated`
+- **Orders USDT (V2)** → `@Orders and @Smoke and @V2 and @Automated`
+- **QR 3.0** → `@QR and @Smoke and @Automated`
+- **QR Refunds** → `@QR and @Refunds and @Automated`
+- **Sintético** → `@Sintetico and @Smoke and @Automated`
+- **Withdraw Fiat (V1)** → `@Withdraw and @Smoke and @Fiat and @V1 and @Automated`
+- **Withdraw Fiat (V2)** → `@Withdraw and @Smoke and @Fiat and @V2 and @Automated`
+- **Withdraw Remesas (V2)** → `@Withdraw and @Smoke and @Fiat and @V2 and @Remesas and @Automated`
 
 ## 🤝 Contribución
 
