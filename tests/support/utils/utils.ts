@@ -394,6 +394,31 @@ export const withdrawLockApiCryptoV2 = (userData: any) => {
   };
 };
 
+export const remittances = (userData: any) => {
+  return {
+    userAnyId: userData.userAnyId,
+    asset: userData.asset,
+    amount: userData.amount,
+    destination: {
+      address: userData.address,
+      ...(userData.bankCode && { bankCode: userData.bankCode }),
+      ...(userData.accountType && { accountType: userData.accountType })
+    },
+    sender: {
+      exchange: userData.senderExchange,
+      legalId: userData.senderLegalId,
+      name: userData.senderName,
+      surname: userData.senderSurname
+    },
+    recipient: {
+      exchange: userData.recipientExchange,
+      legalId: userData.recipientLegalId,
+      name: userData.recipientName,
+      surname: userData.recipientSurname
+    }
+  };
+};
+
 export const refundPollingWithDeposit = async function (data: any, userData: any) {
   const maxAttemps: number = 15;
   let attempsCounter: number = 0;

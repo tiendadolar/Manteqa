@@ -905,3 +905,4 @@ Feature: Retiros Crypto
             # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011236 | 9     | TRX  | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv         |
             | 0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P | andresperalta@manteca.dev | 100011236 | 9     | USDT | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
             | 0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P | andresperalta@manteca.dev | 100011236 | 9     | TRX  | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
+

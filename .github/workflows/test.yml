@@ -19,6 +19,7 @@ on:
           - '@Sintetico and @Smoke and @Automated'
           - '@Withdraw and @Smoke and @Fiat and @V1 and @Automated'
           - '@Withdraw and @Smoke and @Fiat and @V2 and @Automated'
+          - '@Withdraw and @Smoke and @Fiat and @V2 and @Remesas and @Automated'
   # schedule:
   #   - cron: "0 1 * * 1,3"
 

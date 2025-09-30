@@ -10,6 +10,7 @@ import {
   inicialOnboardingApiCryptoV2,
   rampOffExchange,
   rampOnExchange,
+  remittances,
   senderPaymentSynthetic,
   withdrawLockApiCryptoV2
 } from '../utils/utils';
@@ -91,6 +92,7 @@ export class WithdrawFiatV2Handler implements EndpointHandler {
   }
 
   handle(userData: any, world?: any) {
+    if (userData.senderExchange && userData.recipientExchange) return remittances(userData);
     return fiatWithdrawApiCryptoV2(userData);
   }
 }
