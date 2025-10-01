@@ -248,7 +248,7 @@ jobs:
               
               // Generar datos para email
               const emailData = {
-                status: failedScenarios > 0 ? 'FAILED' : 'PASSED',
+                testStatus: failedScenarios > 0 ? 'TESTS_FAILED' : 'TESTS_PASSED',
                 totalScenarios,
                 passedScenarios,
                 failedScenarios,
@@ -264,27 +264,38 @@ jobs:
             } catch (error) {
               console.log('❌ Error analizando resultados:', error.message);
               const errorData = {
-                status: 'ERROR',
+                testStatus: 'ANALYSIS_ERROR',
                 error: error.message,
                 timestamp: new Date().toLocaleString('es-ES', { timeZone: 'America/Argentina/Mendoza' })
               };
               require('fs').writeFileSync('test-results.json', JSON.stringify(errorData, null, 2));
-              console.log('TEST_STATUS=ERROR');
             }
           EOF
 
             node analyze-results.js >> $GITHUB_STEP_SUMMARY
-            
-            # Leer resultados y establecer outputs
-            if [ -f test-results.json ]; then
-              TEST_STATUS=$(node -e "console.log(JSON.parse(require('fs').readFileSync('test-results.json', 'utf8')).status)")
-              echo "test_status=${TEST_STATUS}" >> $GITHUB_OUTPUT
-            fi
           else
             echo "❌ No se encontró cucumber-report.json" >> $GITHUB_STEP_SUMMARY
-            echo '{"status":"NO_REPORT","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
-            echo "test_status=NO_REPORT" >> $GITHUB_OUTPUT
+            echo '{"testStatus":"NO_REPORT","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
           fi
+
+      - name: Determine Workflow Status
+        if: always()
+        id: workflow-status
+        run: |
+          # Determinar el estado del workflow basado en los pasos anteriores
+          # Si algún paso falló (excepto "Run Cucumber tests" que tiene continue-on-error), el workflow está fallido
+
+          WORKFLOW_STATUS="SUCCESS"
+
+          # Verificar si hay resultados de tests
+          if [ ! -f test-results.json ]; then
+            WORKFLOW_STATUS="FAILED"
+            echo "⚠️ No se generaron resultados de tests"
+          fi
+
+          # El workflow solo falla si falló la infraestructura, no los tests
+          echo "workflow_status=${WORKFLOW_STATUS}" >> $GITHUB_OUTPUT
+          echo "📊 Estado del Workflow: ${WORKFLOW_STATUS}"
 
       - name: Send Email Notification
         if: always()
@@ -296,16 +307,20 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           from: ${{ secrets.EMAIL_USERNAME }}
           to: ${{ secrets.NOTIFICATION_EMAIL }}
-          subject: "🧪 Tests ${{ github.repository }} - [${{ steps.test-summary.outputs.test_status || 'UNKNOWN' }}]"
+          subject: "🧪 Tests ${{ github.repository }} - Workflow [${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}]"
           body: |
             Hola!
 
-            Se ejecutaron los tests en el repositorio ${{ github.repository }}           
+            Se ejecutaron los tests en el repositorio ${{ github.repository }}
+
+            📊 Estado del Workflow: ${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}
+
+            El workflow de GitHub Actions ${{ steps.workflow-status.outputs.workflow_status == 'SUCCESS' && 'se completó exitosamente' || 'falló durante la ejecución' }}.
 
             🔗 Ver resultados completos:
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-            📊 Resumen disponible en la pestaña "Summary" del workflow.
+            📊 Resumen de tests disponible en la pestaña "Summary" del workflow.
 
             ---
             Generado automáticamente por GitHub Actions
