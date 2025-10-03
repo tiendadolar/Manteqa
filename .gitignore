@@ -7,3 +7,5 @@ cucumber-report.html
 cucumber-report.pdf
 errors.log
 Deprecated
+qr.png
+qrstringgenerator.js
