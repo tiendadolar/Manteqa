@@ -369,6 +369,6 @@ Feature: Onboarding User - V2
         @test
         Examples:
             | apiKEY                          | credential                | externalId         | email                 | legalId  | exchange | name     | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | testrampoffexhcol2 | testexhcol2@gmail.com | 53089087 | COLOMBIA | Ramp Off | exhcol2 | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400138   | Colombia    | SAMUEL PIRES DE MELO |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | testrampoffexhcol3 | testexhcol3@gmail.com | 43158237 | COLOMBIA | Ramp Off | exhcol3 | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400139   | Colombia    | SAMUEL PIRES DE MELO |
 
 
