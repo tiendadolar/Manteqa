@@ -38,5 +38,25 @@
       "amount": "10",
       "against": "BRL"
     }
+  },
+  "PIXKEY": {
+    "ARS_BRL": {
+      "userAnyId": "100009359",
+      "paymentDestination": "+5511949227612",
+      "amount": "10",
+      "against": "ARS"
+    },
+    "USDT_BRL": {
+      "userAnyId": "100009359",
+      "paymentDestination": "+5511949227612",
+      "amount": "10",
+      "against": "USDT"
+    },
+    "BRL_ARS": {
+      "userAnyId": "100009359",
+      "paymentDestination": "+5511949227612",
+      "amount": "10",
+      "against": "BRL"
+    }
   }
 }
