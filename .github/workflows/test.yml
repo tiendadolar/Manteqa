@@ -52,7 +52,7 @@ jobs:
               TAGS="@QR and @Smoke and @Automated"
               ;;
             "Refunds")
-              TAGS="@QR and @Refunds and @Automated"
+              TAGS="@Refunds and @Manual and @Automated"
               ;;
             "Sintéticos")
               TAGS="@Sintetico and @Smoke and @Automated"
