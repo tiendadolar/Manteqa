@@ -368,7 +368,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId         | email                 | legalId  | exchange | name     | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | testrampoffexhcol3 | testexhcol3@gmail.com | 43158237 | COLOMBIA | Ramp Off | exhcol3 | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400139   | Colombia    | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId             | email                           | legalId     | exchange | name         | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | andresperalta@manteca.dev | TestPpalAccount-brazil | testppalaccountbrazil@gmail.com | 38753993829 | BRAZIL   | LUAN DOURADO | MOURA   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400146   | Brasil      | SAMUEL PIRES DE MELO |
 
 

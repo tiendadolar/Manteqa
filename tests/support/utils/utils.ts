@@ -594,6 +594,15 @@ export const rampOnExchange = (userData: any) => {
   };
 };
 
+export const manualRefund = (userData: any, world: any) => {
+  let amount = world.response.body.details.paymentAssetAmount;
+  return {
+    amount: amount,
+    refundReason: userData.refundReason,
+    refundAsset: userData.refundAsset
+  };
+};
+
 //-----API CRIPTO-----//
 //-----*********-----//
 //-----API CAMBIO-----//

@@ -1,6 +1,7 @@
 const request = require('supertest');
 const { expect } = require('chai');
 import logger from '../utils/logger';
+import { compareBalanceFlowValidator, compareBalanceTypeValidator, thereIsBalanceCurrencyValidator, thereIsFinalBalanceCurrencyValidator } from '../validators/userBalanceValidators';
 import { CustomWorld } from '../world';
 import { apiRequest } from './requestHelper';
 
@@ -89,4 +90,54 @@ export const getUserDebtBalance = async (
   expect(currentBalance).to.be.closeTo(expectedBalance, 0.02);
   CustomWorld.clearStoreData();
   return response;
+};
+
+export const getCompanyCreditBalanceHelper = async (urlBase: string, endpoint: string, apiKey: string, currency: string) => {
+  // call API endpoint to get company debt balance
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  // take only balance property from response
+  const balance = response.body;
+
+  // validate if we have inicial balance stored and set final balance accordingly
+  thereIsFinalBalanceCurrencyValidator(balance, currency, 'inicialCreditBalance', 'finalCreditBalance');
+
+  // validate if currency exists in balance object and set userBalance accordingly
+  thereIsBalanceCurrencyValidator(balance, currency, 'inicialCreditBalance', 'finalCreditBalance');
+
+  return response;
+};
+
+export const getCompanyDebtBalanceHelper = async (urlBase: string, endpoint: string, apiKey: string, currency: string) => {
+  // call API endpoint to get company debt balance
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  // take only balance property from response
+  const balance = response.body;
+
+  // validate if we have inicial balance stored and set final balance accordingly
+  thereIsFinalBalanceCurrencyValidator(balance, currency, 'inicialDebtBalance', 'finalDebtBalance');
+
+  // validate if currency exists in balance object and set userBalance accordingly
+  thereIsBalanceCurrencyValidator(balance, currency, 'inicialDebtBalance', 'finalDebtBalance');
+
+  return response;
+};
+
+export const getUserBalanceHelper = async (urlBase: string, endpoint: string, apiKey: string, currency: string): Promise<any> => {
+  // call API endpoint to get user balance
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  // take only balance property from response
+  const { balance } = response.body;
+
+  // validate if we have inicial balance stored and set final balance accordingly
+  thereIsFinalBalanceCurrencyValidator(balance, currency, 'inicialUserBalance', 'finalUserBalance');
+
+  // validate if currency exists in balance object and set userBalance accordingly
+  thereIsBalanceCurrencyValidator(balance, currency, 'inicialUserBalance', 'finalUserBalance');
+
+  return response;
+};
+
+export const analizeBalances = (charge?: string, inicial?: string, final?: string): any => {
+  const balances = compareBalanceTypeValidator(charge, inicial, final);
+  compareBalanceFlowValidator(balances.inicialBalance, balances.finalBalance);
 };

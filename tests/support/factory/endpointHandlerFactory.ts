@@ -4,6 +4,7 @@ import {
   CbuCRCHandler,
   DepositCryptoHandler,
   DepositFiatHandler,
+  manualRefundHandler,
   OnboardingInitialV1Handler,
   OnboardingInitialV2Handler,
   SyntheticOffHandler,
@@ -35,7 +36,8 @@ export class EndpointHandlerFactory {
       new AddBankAccountCambioHandler(),
       new FiatDepositAdminCambioHandler(),
       new AuthTF2Handler(),
-      new ParamReplaceHandler()
+      new ParamReplaceHandler(),
+      new manualRefundHandler()
     ];
   }
 

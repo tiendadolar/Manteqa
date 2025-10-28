@@ -1,7 +1,14 @@
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
-import { getCompanyDebtBalance, getUserDebtBalance } from '../../../../support/helpers/accountingHelper';
+import {
+  analizeBalances,
+  getCompanyCreditBalanceHelper,
+  getCompanyDebtBalance,
+  getCompanyDebtBalanceHelper,
+  getUserBalanceHelper,
+  getUserDebtBalance
+} from '../../../../support/helpers/accountingHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import logger from '../../../../support/utils/logger';
 import { CustomWorld, UserData } from '../../../../support/world';
@@ -30,6 +37,47 @@ Then('Obtain {string} balance for {string} user', { timeout: 500 * 1000 }, async
 
   const response = await getUserDebtBalance(urlBase, endpoint, apiKEY, paymentAmount, currency, isSpecialCurrency, notDepositStage);
   validateRes(response, 200);
+});
+
+// New accounting flow for manual refunds
+Then('Obtain {string} balance for {string} user over {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, userAnyId: string, charge: string) {
+  const urlBase = this.urlBase;
+  const endpoint = `/v2/user-balances/${userAnyId}`;
+  const apiKEY = this.apiKey;
+  const currency: any = fiat.toUpperCase();
+  const chargeType: string = charge.toLowerCase();
+
+  const response = await getUserBalanceHelper(urlBase, endpoint, apiKEY, currency);
+  validateRes(response, 200);
+  analizeBalances(chargeType, 'inicialUserBalance', 'finalUserBalance');
+});
+
+// New accounting flow for manual refunds
+Then('Obtain {string} debt balance {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, charge: string) {
+  const urlBase = this.urlBase;
+  const endpoint = `/v2/accounting/debt`;
+  const apiKEY = this.apiKey;
+  const currency: any = fiat.toUpperCase();
+  // Set this flag to identify that we are working with company debt and operate company debt validations
+  charge !== 'balance' ? CustomWorld.setStoreData('isCompanyDebt', true, true) : undefined;
+
+  const response = await getCompanyDebtBalanceHelper(urlBase, endpoint, apiKEY, currency);
+  validateRes(response, 200);
+  analizeBalances(undefined, 'inicialDebtBalance', 'finalDebtBalance');
+});
+
+// New accounting flow for manual refunds
+Then('Obtain {string} credit balance {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, charge: string) {
+  const urlBase = this.urlBase;
+  const endpoint = `/v2/accounting/credit`;
+  const apiKEY = this.apiKey;
+  const currency: any = fiat.toUpperCase();
+  // Set this flag to identify that we are working with company debt and operate company debt validations
+  charge !== 'balance' ? CustomWorld.setStoreData('isCompanyDebt', true, true) : undefined;
+
+  const response = await getCompanyCreditBalanceHelper(urlBase, endpoint, apiKEY, currency);
+  validateRes(response, 200);
+  analizeBalances(undefined, 'inicialCreditBalance', 'finalCreditBalance');
 });
 
 Then('Obtain refund on user in {string} balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {

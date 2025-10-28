@@ -1,0 +1,42 @@
+{
+  "QR": {
+    "ARS_ARS": {
+      "userAnyId": "100009359",
+      "paymentDestination": "qr3manualamount",
+      "amount": "1000",
+      "against": "ARS"
+    },
+    "USDT_ARS": {
+      "userAnyId": "100009359",
+      "paymentDestination": "qr3manualamount",
+      "amount": "1000",
+      "against": "USDT"
+    },
+    "BRL_ARS": {
+      "userAnyId": "100011657",
+      "paymentDestination": "qr3manualamount",
+      "amount": "1000",
+      "against": "BRL"
+    }
+  },
+  "PIX": {
+    "ARS_BRL": {
+      "userAnyId": "100009359",
+      "paymentDestination": "pixmanualamount",
+      "amount": "10",
+      "against": "ARS"
+    },
+    "USDT_BRL": {
+      "userAnyId": "100009359",
+      "paymentDestination": "pixmanualamount",
+      "amount": "10",
+      "against": "USDT"
+    },
+    "BRL_BRL": {
+      "userAnyId": "100009359",
+      "paymentDestination": "pixmanualamount",
+      "amount": "10",
+      "against": "BRL"
+    }
+  }
+}

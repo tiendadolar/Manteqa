@@ -2,10 +2,20 @@ const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
 import { timeoutsBySynthetic } from '../../../../support/constants/constants.timeouts';
-import { getSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
+import { getSyntheticStatus, lockPaymentHelper, syntheticPaymentHelper, validateSyntheticRefundStage, validateSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
 import logger from '../../../../support/utils/logger';
 import { delay } from '../../../../support/utils/utils';
 import { CustomWorld, UserData } from '../../../../support/world';
+
+const payType: Record<string, string> = {
+  ARS: 'ARS_ARS',
+  USDT: 'USDT_ARS',
+  BRL: 'BRL_ARS',
+  ARS_BRL: 'ARS_BRL',
+  USDT_BRL: 'USDT_BRL',
+  BRL_BRL: 'BRL_BRL',
+  uBRL_BRL: 'uBRL_BRL'
+};
 
 Then('Se validan atributos para sintético ramp-on operado en no descubierto', async function (this: CustomWorld) {
   const response: any = this.response;
@@ -100,7 +110,8 @@ Then('Obtain a response {int} and status {string} for {string} synthetic', { tim
   const ms = timeoutsBySynthetic[syntheticType] ?? timeoutsBySynthetic['default'];
 
   await delay(ms);
-  await getSyntheticStatus(urlBase, endpoint, apiKEY, statusCode, statusName);
+  const response = await getSyntheticStatus(urlBase, endpoint, apiKEY, statusCode, statusName);
+  validateSyntheticStatus(response.body, response.status, statusCode, statusName);
 });
 
 Then('Validate sender info', { timeout: 125000 }, async function (this: CustomWorld) {
@@ -108,4 +119,37 @@ Then('Validate sender info', { timeout: 125000 }, async function (this: CustomWo
 
   expect(response.details).to.have.property('sender');
   expect(response.details.sender).to.include.all.keys('exchange', 'legalId', 'name');
+});
+
+Then('Execute overdrawn {string} synthetic lock against {string} for user {string}', { timeout: 125000 }, async function (this: CustomWorld, type: string, against: string, userAnyId: string) {
+  const urlBase: string = 'https://sandbox.manteca.dev/crypto';
+  const apiKEY: string = 'F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ';
+  const apiSecret: string = '1RpvdT7Vc7ukKeGKdU';
+  const endpointLock: string = '/v2/payment-locks';
+  const par: string = payType[against];
+
+  this.response = await lockPaymentHelper(urlBase, apiKEY, endpointLock, type, par, userAnyId);
+});
+
+Then('Execute overdrawn synthetic payment', { timeout: 125000 }, async function (this: CustomWorld) {
+  const userAnyId: string = this.response.body.userNumberId;
+  const qrCode = this.response.body.code;
+  const urlBase: string = 'https://sandbox.manteca.dev/crypto';
+  const apiKEY: string = 'F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ';
+  const endpointPayment: string = '/v2/synthetics/qr-payment';
+
+  this.response = await syntheticPaymentHelper(urlBase, apiKEY, endpointPayment, qrCode, userAnyId);
+  await delay(10000);
+});
+
+Then('Validate refund stages', { timeout: 125000 }, async function (this: CustomWorld) {
+  const urlBase = this.urlBase;
+  const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
+  const apiKEY = this.apiKey;
+  const ms = 5000;
+
+  await delay(ms);
+  const response = await getSyntheticStatus(urlBase, endpoint, apiKEY);
+  validateSyntheticStatus(response.body, response.status, 200, 'CANCELLED');
+  validateSyntheticRefundStage(response.body);
 });

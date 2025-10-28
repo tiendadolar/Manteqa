@@ -1,0 +1,20 @@
+config:
+  target: 'https://sandbox.manteca.dev/crypto'
+  phases:
+    - duration: 5
+      arrivalRate: 10
+  processor: './processors.js'
+
+scenarios:
+  - name: Carga de prueba con lockCode
+    beforeScenario: beforeScenario
+    flow:
+      - post:
+          url: '/v2/synthetics/qr-payment'
+          headers:
+            md-api-key: 'F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ'
+            Content-Type: 'application/json'
+            User-Agent: 'PostmanRuntime/7.45.0'
+          json:
+            userAnyId: '100009359'
+            pixCode: '{{ lockCode }}'

@@ -8,12 +8,14 @@ import {
   fiatWithdrawApiCryptoV2,
   inicialOnboardingApiCrypto,
   inicialOnboardingApiCryptoV2,
+  manualRefund,
   rampOffExchange,
   rampOnExchange,
   remittances,
   senderPaymentSynthetic,
   withdrawLockApiCryptoV2
 } from '../utils/utils';
+import { CustomWorld } from '../world';
 
 export class OnboardingInitialV1Handler implements EndpointHandler {
   canHandle(endpoint: string): boolean {
@@ -140,5 +142,19 @@ export class SyntheticOffHandler implements EndpointHandler {
 
   handle(userData: any, world?: any) {
     return rampOffExchange(userData);
+  }
+}
+
+export class manualRefundHandler implements EndpointHandler {
+  canHandle(endpoint: string, userData: any): boolean {
+    return endpoint === '/v1/admin/synthetics/{syntheticId}/refund';
+  }
+
+  modifyEndpoint(endpoint: string, world: any): string {
+    return endpoint.replace('{syntheticId}', CustomWorld.getStoreData('syntheticId'));
+  }
+
+  handle(userData: any, world?: any) {
+    return manualRefund(userData, world);
   }
 }

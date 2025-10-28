@@ -3,25 +3,23 @@ name: Run Tagged Tests
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: 'Etiqueta de los escenarios a correr'
+      test_suite:
+        description: 'Suite de tests a ejecutar'
         required: true
-        default: '@Smoke and @Automated'
+        default: 'Smoke General'
         type: choice
         options:
-          - '@Smoke and @Automated'
-          - '@Onboarding and @Smoke and @Automated'
-          - '@OnboardingV2 and @Smoke and @Automated'
-          - '@Orders and @Smoke and @V1 and @Automated'
-          - '@Orders and @Smoke and @V2 and @Automated'
-          - '@QR and @Smoke and @Automated'
-          - '@QR and @Refunds and @Automated'
-          - '@Sintetico and @Smoke and @Automated'
-          - '@Withdraw and @Smoke and @Fiat and @V1 and @Automated'
-          - '@Withdraw and @Smoke and @Fiat and @V2 and @Automated'
-          - '@Withdraw and @Smoke and @Remesas and @Automated'
-  # schedule:
-  #   - cron: "0 1 * * 1,3"
+          - 'Smoke General'
+          - 'Onboarding v1'
+          - 'Onboarding v2'
+          - 'Orders v1'
+          - 'Orders v2'
+          - 'Pagos'
+          - 'Refunds'
+          - 'Sintéticos'
+          - 'Withdraw Fiat v1'
+          - 'Withdraw Fiat v2'
+          - 'Remesas'
 
 jobs:
   test:
@@ -30,6 +28,52 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Map test suite to tags
+        id: map-tags
+        run: |
+          case "${{ github.event.inputs.test_suite }}" in
+            "Smoke General")
+              TAGS="@Smoke and @Automated"
+              ;;
+            "Onboarding v1")
+              TAGS="@Onboarding and @Smoke and @Automated"
+              ;;
+            "Onboarding v2")
+              TAGS="@OnboardingV2 and @Smoke and @Automated"
+              ;;
+            "Orders v1")
+              TAGS="@Orders and @Smoke and @V1 and @Automated"
+              ;;
+            "Orders v2")
+              TAGS="@Orders and @Smoke and @V2 and @Automated"
+              ;;
+            "Pagos")
+              TAGS="@QR and @Smoke and @Automated"
+              ;;
+            "Refunds")
+              TAGS="@QR and @Refunds and @Automated"
+              ;;
+            "Sintéticos")
+              TAGS="@Sintetico and @Smoke and @Automated"
+              ;;
+            "Withdraw Fiat v1")
+              TAGS="@Withdraw and @Smoke and @Fiat and @V1 and @Automated"
+              ;;
+            "Withdraw Fiat v2")
+              TAGS="@Withdraw and @Smoke and @Fiat and @V2 and @Automated"
+              ;;
+            "Remesas")
+              TAGS="@Withdraw and @Smoke and @Remesas and @Automated"
+              ;;
+            *)
+              TAGS="@Smoke and @Automated"
+              ;;
+          esac
+
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+          echo "🏷️ Suite seleccionada: ${{ github.event.inputs.test_suite }}"
+          echo "📋 Tags a ejecutar: ${TAGS}"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -59,14 +103,12 @@ jobs:
 
       - name: Configure CodeArtifact authentication
         run: |
-          # Obtener token de CodeArtifact
           CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
             --domain td \
             --region ${{ secrets.AWS_REGION }} \
             --query authorizationToken \
             --output text)
 
-          # Obtener URL del repositorio
           CODEARTIFACT_REGISTRY=$(aws codeartifact get-repository-endpoint \
             --domain td \
             --repository backend-shared-libs \
@@ -75,22 +117,17 @@ jobs:
             --query repositoryEndpoint \
             --output text)
 
-          # Configurar .npmrc con configuraciones adicionales para evitar problemas de integridad
           echo "registry=${CODEARTIFACT_REGISTRY}" > ~/.npmrc
           echo "${CODEARTIFACT_REGISTRY#https:}:_authToken=${CODEARTIFACT_AUTH_TOKEN}" >> ~/.npmrc
           echo "@md:registry=${CODEARTIFACT_REGISTRY}" >> ~/.npmrc
-
-          # Configuraciones adicionales para evitar problemas de integridad
           echo "fetch-retries=5" >> ~/.npmrc
           echo "fetch-retry-mintimeout=10000" >> ~/.npmrc
           echo "fetch-retry-maxtimeout=60000" >> ~/.npmrc
           echo "fetch-timeout=300000" >> ~/.npmrc
 
-          # Verificar configuración
           echo "=== Configuración .npmrc ==="
           cat ~/.npmrc
 
-          # Limpiar variables sensibles
           unset CODEARTIFACT_AUTH_TOKEN
 
       - name: Smart dependency installation
@@ -111,7 +148,6 @@ jobs:
           fi
 
           echo "=== Método 3: Manejo específico del paquete problemático ==="
-          # Solo si dunder-proto es el problema, intentar instalarlo por separado
           if npm info dunder-proto@1.0.1; then
             echo "El paquete existe en el registro, reintentando..."
             npm install dunder-proto@1.0.1 --fetch-retries=5
@@ -138,26 +174,24 @@ jobs:
             exit 1
           fi
 
-      - name: Run Cucumber tests by tag
+      - name: Run Cucumber tests - ${{ github.event.inputs.test_suite }}
         continue-on-error: true
         run: |
-          TAGS="${{ github.event.inputs.tag }}"
-           if [ -z "$TAGS" ]; then
-             TAGS="(@QR and @Smoke) or (@Sintetico and @Smoke)"
-           fi
+          TAGS="${{ steps.map-tags.outputs.tags }}"
 
-           echo "Running scenarios with tags: $TAGS"
-           npx cucumber-js --tags "$TAGS" --format json:cucumber-report.json
-           node reporter.js
+          echo "🏷️ Suite: ${{ github.event.inputs.test_suite }}"
+          echo "📋 Ejecutando tests con tags: $TAGS"
+
+          npx cucumber-js --tags "$TAGS" --format json:cucumber-report.json
+          node reporter.js
 
       - name: Generate Test Summary and Prepare Email
         if: always()
         id: test-summary
         run: |
-          echo "## 🧪 Resumen de Tests" >> $GITHUB_STEP_SUMMARY
+          echo "## 🧪 Resumen de Tests - ${{ github.event.inputs.test_suite }}" >> $GITHUB_STEP_SUMMARY
 
           if [ -f cucumber-report.json ]; then
-            # Analizar resultados con Node.js
             cat > analyze-results.js << 'EOF'
             const fs = require('fs');
             
@@ -219,10 +253,9 @@ jobs:
                 }
               });
               
-              const duration = Math.round(totalDuration / 1000000); // nanosegundos a ms
+              const duration = Math.round(totalDuration / 1000000);
               const successRate = totalScenarios > 0 ? Math.round((passedScenarios / totalScenarios) * 100) : 0;
               
-              // Generar tabla de resumen para GitHub
               console.log('| Métrica | Valor |');
               console.log('|---------|-------|');
               console.log(`| 📊 **Escenarios Totales** | ${totalScenarios} |`);
@@ -246,9 +279,9 @@ jobs:
                 console.log('### 🎉 ¡Todos los tests pasaron exitosamente!');
               }
               
-              // Generar datos para email
               const emailData = {
                 testStatus: failedScenarios > 0 ? 'TESTS_FAILED' : 'TESTS_PASSED',
+                testSuite: process.env.TEST_SUITE || 'Unknown',
                 totalScenarios,
                 passedScenarios,
                 failedScenarios,
@@ -265,6 +298,7 @@ jobs:
               console.log('❌ Error analizando resultados:', error.message);
               const errorData = {
                 testStatus: 'ANALYSIS_ERROR',
+                testSuite: process.env.TEST_SUITE || 'Unknown',
                 error: error.message,
                 timestamp: new Date().toLocaleString('es-ES', { timeZone: 'America/Argentina/Mendoza' })
               };
@@ -272,28 +306,23 @@ jobs:
             }
           EOF
 
-            node analyze-results.js >> $GITHUB_STEP_SUMMARY
+            TEST_SUITE="${{ github.event.inputs.test_suite }}" node analyze-results.js >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ No se encontró cucumber-report.json" >> $GITHUB_STEP_SUMMARY
-            echo '{"testStatus":"NO_REPORT","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
+            echo '{"testStatus":"NO_REPORT","testSuite":"${{ github.event.inputs.test_suite }}","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
           fi
 
       - name: Determine Workflow Status
         if: always()
         id: workflow-status
         run: |
-          # Determinar el estado del workflow basado en los pasos anteriores
-          # Si algún paso falló (excepto "Run Cucumber tests" que tiene continue-on-error), el workflow está fallido
-
           WORKFLOW_STATUS="SUCCESS"
 
-          # Verificar si hay resultados de tests
           if [ ! -f test-results.json ]; then
             WORKFLOW_STATUS="FAILED"
             echo "⚠️ No se generaron resultados de tests"
           fi
 
-          # El workflow solo falla si falló la infraestructura, no los tests
           echo "workflow_status=${WORKFLOW_STATUS}" >> $GITHUB_OUTPUT
           echo "📊 Estado del Workflow: ${WORKFLOW_STATUS}"
 
@@ -307,13 +336,15 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           from: ${{ secrets.EMAIL_USERNAME }}
           to: ${{ secrets.NOTIFICATION_EMAIL }}
-          subject: "🧪 Tests ${{ github.repository }} - Workflow [${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}]"
+          subject: "🧪 Tests ${{ github.event.inputs.test_suite }} - ${{ github.repository }} [${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}]"
           body: |
             Hola!
 
-            Se ejecutaron los tests en el repositorio ${{ github.repository }}
+            Se ejecutaron los tests de la suite "${{ github.event.inputs.test_suite }}" en el repositorio ${{ github.repository }}
 
             📊 Estado del Workflow: ${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}
+            🏷️ Suite ejecutada: ${{ github.event.inputs.test_suite }}
+            📋 Tags utilizados: ${{ steps.map-tags.outputs.tags }}
 
             El workflow de GitHub Actions ${{ steps.workflow-status.outputs.workflow_status == 'SUCCESS' && 'se completó exitosamente' || 'falló durante la ejecución' }}.
 
@@ -329,7 +360,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cucumber-html-report
+          name: cucumber-html-report-${{ github.event.inputs.test_suite }}
           path: |
             cucumber-report.html
             reports/

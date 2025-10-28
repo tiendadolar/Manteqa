@@ -177,7 +177,8 @@ When(
       }
 
       console.log('API payload:', JSON.stringify(this.userData, null, 2));
-      console.log(paramEndpoint);
+
+      if (/admin/.test(endpoint)) this.urlBase = 'https://api-qa.tiendacrypto.com';
 
       this.response = await request(this.urlBase)
         .post(paramEndpoint)
@@ -190,6 +191,7 @@ When(
       console.log(this.response.status);
       console.log('API response:', this.response.body);
       this.userData = {};
+      this.urlBase = 'https://sandbox.manteca.dev/crypto';
     } catch (error: any) {
       //   if (error.response) {
       //     // this.attach(`API Error Response: ${JSON.stringify(error.response.body || error.response.text || {}, null, 2)}`, 'text/plain');
