@@ -147,7 +147,7 @@ Feature: Retiros Fiat
             | 100009873 | ARS   | 1430001713039384360017 | 12000000 |           |             |
             | 100009991 | ARS   | 1430001713039384360017 | 12000000 |           |             |
 
-    @Regression @Fiat @coinag
+    @Regression @Fiat @coinag @Takenos
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING TAKENOS
         Given The API key is available "4J05H32-N4JM9ZB-QYQRNH1-3E6V8ZN"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -170,8 +170,8 @@ Feature: Retiros Fiat
         Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         Examples:
-            | userAnyId | asset | address                | amount   | bankCode | accountType |
-            | 100009991 | ARS   | 1430001713039384360017 | 12000000 |          |             |
+            | userAnyId | asset | address                | amount    | bankCode | accountType |
+            | 100009991 | ARS   | 1430001713039384360017 | 120000000 |          |             |
 
     @Regression @Fiat @coinag @others
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING WALLBIT

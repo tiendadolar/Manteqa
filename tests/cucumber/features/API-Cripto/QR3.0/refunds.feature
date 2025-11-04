@@ -238,5 +238,3 @@ Feature: Synthetic Refunds
         Examples:
             | credential                | amount  | refundReason  | refundAsset | type   | against  | userAnyId | charge  | balance |
             | andresperalta@manteca.dev | dynamic | Manual refund | BRL         | PIXKEY | USDT_BRL | 100011657 | company | USDT    |
-
-#FALTA CONTRA PIXKEY

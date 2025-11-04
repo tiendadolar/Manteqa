@@ -190,6 +190,7 @@ When(
 
       console.log(this.response.status);
       console.log('API response:', this.response.body);
+
       this.userData = {};
       this.urlBase = 'https://sandbox.manteca.dev/crypto';
     } catch (error: any) {
@@ -216,8 +217,12 @@ When(
     try {
       console.log('API endpoint:', paramEndpoint);
 
-      this.response = await request(this.urlBase).get(paramEndpoint).set('md-api-key', this.apiKey).set('User-Agent', 'PostmanRuntime/7.44.1');
-      console.log('API response:', JSON.stringify(this.response.body, null, 2));
+      this.response = await request(this.urlBase)
+        .get(paramEndpoint)
+        .set('md-api-key', this.apiKey)
+        .set('x-access-token', CustomWorld.getStoreData('JWT') ?? this.token)
+        .set('User-Agent', 'PostmanRuntime/7.44.1');
+      // console.log('API response:', JSON.stringify(this.response.body, null, 2));
     } catch (error: unknown) {
       const err = error as {
         response?: any;

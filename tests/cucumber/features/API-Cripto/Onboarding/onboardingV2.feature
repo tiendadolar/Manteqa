@@ -368,7 +368,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId             | email                           | legalId     | exchange | name         | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | andresperalta@manteca.dev | TestPpalAccount-brazil | testppalaccountbrazil@gmail.com | 38753993829 | BRAZIL   | LUAN DOURADO | MOURA   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400146   | Brasil      | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId       | email                   | legalId | exchange | name    | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ | andresperalta@manteca.dev | test-qr-bob-desc | testqrbobdesc@gmail.com | 7931389 | BOLIVIA  | Test QR | BOB DESC | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400147   | Bolivia     | SAMUEL PIRES DE MELO |
 
 

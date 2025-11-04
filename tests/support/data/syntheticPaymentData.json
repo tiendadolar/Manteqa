@@ -2,7 +2,7 @@
   "QR": {
     "ARS_ARS": {
       "userAnyId": "100009359",
-      "paymentDestination": "qr3manualamount",
+      "paymentDestination": "00020101021243430010ar.com.pvs010527524981130598910045990115015001123244825664520454115303032540530.205802AR5911HOMO prisma6008La Plata80980010ar.com.pvs0302030445SupplierItemID.99999989.CodCliente.476771111105062712210606271231070510.20811800141111111111111163041A2B",
       "amount": "1000",
       "against": "ARS"
     },
@@ -33,8 +33,8 @@
       "against": "USDT"
     },
     "BRL_BRL": {
-      "userAnyId": "100009359",
-      "paymentDestination": "pixmanualamount",
+      "userAnyId": "100011657",
+      "paymentDestination": "00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8",
       "amount": "10",
       "against": "BRL"
     }
