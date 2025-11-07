@@ -368,7 +368,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId       | email                   | legalId | exchange | name    | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ | andresperalta@manteca.dev | test-qr-bob-desc | testqrbobdesc@gmail.com | 7931389 | BOLIVIA  | Test QR | BOB DESC | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400147   | Bolivia     | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId | email               | legalId | exchange | name            | surname        | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | user-col   | cuevasnic@gmail.com | 249105  | COLOMBIA | NICOLAS RODRIGO | VASQUEZ CUEVAS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400148   | Colombia    | SAMUEL PIRES DE MELO |
 
 

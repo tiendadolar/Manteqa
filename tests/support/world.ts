@@ -76,8 +76,11 @@ export class CustomWorld extends World {
     return CustomWorld.storeData.session[key] ?? CustomWorld.storeData.persistent[key];
   }
 
-  static clearStoreData() {
+  static clearStoreData(clearPersistent = false) {
     CustomWorld.storeData.session = {};
+    if (clearPersistent) {
+      CustomWorld.storeData.persistent = {};
+    }
   }
 
   static getUserData(key: string): any {

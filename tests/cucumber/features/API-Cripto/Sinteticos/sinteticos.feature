@@ -425,7 +425,7 @@ Feature: Sintéticos
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 3           | CR88010404046620113218 | ETHEREUM        |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654     | ETHEREUM        |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012389 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100013985 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        |
 
     @Smoke @RampOn @Exchange @Automated @test
@@ -452,11 +452,11 @@ Feature: Sintéticos
 
         Examples:
             | apiKEY                          | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012259 | smoke-rampoff-n | USDT  | CLP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012267 | smoke-rampoff-n | USDT  | COP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100013985 | smoke-rampoff-n | USDT  | COP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |

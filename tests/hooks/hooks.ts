@@ -7,6 +7,6 @@ Before(function (scenario: any) {
 });
 
 After(function () {
-  CustomWorld.clearStoreData();
+  CustomWorld.clearStoreData(true);
   logger.info('🧹Isolating stage...');
 });
