@@ -22,6 +22,10 @@ on:
           - 'Withdraw Fiat v2'
           - 'Remesas'
 
+  # Ejecución automática de Providers los viernes a las 01:30 AM hora Argentina (04:30 UTC)
+  schedule:
+    - cron: '45 4 * * 5'
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -30,10 +34,22 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Set test suite for scheduled run
+        id: set-suite
+        run: |
+          if [ "${{ github.event_name }}" == "schedule" ]; then
+            TEST_SUITE="Providers"
+            echo "🕐 Ejecución programada - Suite: Providers"
+          else
+            TEST_SUITE="${{ github.event.inputs.test_suite }}"
+            echo "👤 Ejecución manual - Suite: $TEST_SUITE"
+          fi
+          echo "test_suite=${TEST_SUITE}" >> $GITHUB_OUTPUT
+
       - name: Map test suite to tags
         id: map-tags
         run: |
-          case "${{ github.event.inputs.test_suite }}" in
+          case "${{ steps.set-suite.outputs.test_suite }}" in
             "Smoke General")
               TAGS="@Smoke and @Automated"
               ;;
@@ -76,7 +92,7 @@ jobs:
           esac
 
           echo "tags=${TAGS}" >> $GITHUB_OUTPUT
-          echo "🏷️ Suite seleccionada: ${{ github.event.inputs.test_suite }}"
+          echo "🏷️ Suite seleccionada: ${{ steps.set-suite.outputs.test_suite }}"
           echo "📋 Tags a ejecutar: ${TAGS}"
 
       - name: Configure AWS credentials
@@ -178,12 +194,12 @@ jobs:
             exit 1
           fi
 
-      - name: Run Cucumber tests - ${{ github.event.inputs.test_suite }}
+      - name: Run Cucumber tests - ${{ steps.set-suite.outputs.test_suite }}
         continue-on-error: true
         run: |
           TAGS="${{ steps.map-tags.outputs.tags }}"
 
-          echo "🏷️ Suite: ${{ github.event.inputs.test_suite }}"
+          echo "🏷️ Suite: ${{ steps.set-suite.outputs.test_suite }}"
           echo "📋 Ejecutando tests con tags: $TAGS"
 
           npx cucumber-js --tags "$TAGS" --format json:cucumber-report.json
@@ -193,7 +209,7 @@ jobs:
         if: always()
         id: test-summary
         run: |
-          echo "## 🧪 Resumen de Tests - ${{ github.event.inputs.test_suite }}" >> $GITHUB_STEP_SUMMARY
+          echo "## 🧪 Resumen de Tests - ${{ steps.set-suite.outputs.test_suite }}" >> $GITHUB_STEP_SUMMARY
 
           if [ -f cucumber-report.json ]; then
             cat > analyze-results.js << 'EOF'
@@ -310,10 +326,10 @@ jobs:
             }
           EOF
 
-            TEST_SUITE="${{ github.event.inputs.test_suite }}" node analyze-results.js >> $GITHUB_STEP_SUMMARY
+            TEST_SUITE="${{ steps.set-suite.outputs.test_suite }}" node analyze-results.js >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ No se encontró cucumber-report.json" >> $GITHUB_STEP_SUMMARY
-            echo '{"testStatus":"NO_REPORT","testSuite":"${{ github.event.inputs.test_suite }}","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
+            echo '{"testStatus":"NO_REPORT","testSuite":"${{ steps.set-suite.outputs.test_suite }}","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
           fi
 
       - name: Determine Workflow Status
@@ -340,14 +356,15 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           from: ${{ secrets.EMAIL_USERNAME }}
           to: ${{ secrets.NOTIFICATION_EMAIL }}
-          subject: "🧪 Tests ${{ github.event.inputs.test_suite }} - ${{ github.repository }} [${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}]"
+          subject: "🧪 Tests ${{ steps.set-suite.outputs.test_suite }} - ${{ github.repository }} [${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}] ${{ github.event_name == 'schedule' && '🕐 [PROGRAMADO]' || '' }}"
           body: |
             Hola!
 
-            Se ejecutaron los tests de la suite "${{ github.event.inputs.test_suite }}" en el repositorio ${{ github.repository }}
+            Se ejecutaron los tests de la suite "${{ steps.set-suite.outputs.test_suite }}" en el repositorio ${{ github.repository }}
 
+            ${{ github.event_name == 'schedule' && '🕐 Tipo de ejecución: PROGRAMADA (Viernes 01:30 AM Argentina)' || '👤 Tipo de ejecución: MANUAL' }}
             📊 Estado del Workflow: ${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}
-            🏷️ Suite ejecutada: ${{ github.event.inputs.test_suite }}
+            🏷️ Suite ejecutada: ${{ steps.set-suite.outputs.test_suite }}
             📋 Tags utilizados: ${{ steps.map-tags.outputs.tags }}
 
             El workflow de GitHub Actions ${{ steps.workflow-status.outputs.workflow_status == 'SUCCESS' && 'se completó exitosamente' || 'falló durante la ejecución' }}.
@@ -364,7 +381,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cucumber-html-report-${{ github.event.inputs.test_suite }}
+          name: cucumber-html-report-${{ steps.set-suite.outputs.test_suite }}-${{ github.run_number }}
           path: |
             cucumber-report.html
             reports/

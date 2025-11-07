@@ -218,7 +218,7 @@ Feature: Synthetic Refunds
             | andresperalta@manteca.dev | dynamic | Manual refund | BRL         | PIXKEY | BRL     | 100011657 | balance | BRL     |
 
     # User exchange BRL opereted a PIXKEY against USDT
-    @Manual @Automated
+    @Failure @Automated
     Scenario Outline: Refund manual de sintetico de pago PIXKey contra USDT (Sobre Company Balance Brazil)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -238,3 +238,26 @@ Feature: Synthetic Refunds
         Examples:
             | credential                | amount  | refundReason  | refundAsset | type   | against  | userAnyId | charge  | balance |
             | andresperalta@manteca.dev | dynamic | Manual refund | BRL         | PIXKEY | USDT_BRL | 100011657 | company | USDT    |
+
+
+    # --------------- FAILURE
+
+    # User exchange ARG opereted a QR3.0 against ARS
+    @Failure @Automated
+    Scenario Outline: Refund automatico de sintetico de pago QR3.0 contra ARS por fallo de network (Sobre User Argentino Balance)
+        Given The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And login user admin "<credential>"
+        And Obtain "<against>" balance for "<userAnyId>" user over "<charge>"
+        And Execute overdrawn "<type>" synthetic lock against "<against>" for user "<userAnyId>"
+        And Execute overdrawn synthetic payment
+        # When Assign the value "<amount>" to the variable "amount"
+        # And Assign the value "<refundReason>" to the variable "refundReason"
+        # And Assign the value "<refundAsset>" to the variable "refundAsset"
+        # And Execute the POST method on the endpoint "/v1/admin/synthetics/{syntheticId}/refund"
+        # Then Obtain a response 204
+        And Validate refund stages
+        And Obtain "<against>" balance for "<userAnyId>" user over "<charge>"
+
+        Examples:
+            | credential                | amount  | refundReason  | refundAsset | type    | against | userAnyId | charge  |
+            | andresperalta@manteca.dev | dynamic | Manual refund | ARS         | FAILURE | ARS     | 100009359 | balance |

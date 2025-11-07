@@ -137,7 +137,7 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId                       | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 3           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
-            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 7           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
             | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
     # ----- PartiallyManagedAssets -----
@@ -164,7 +164,7 @@ Feature: Sintéticos
 
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 100011129 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 5           | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ETHEREUM        |
+            | 100011129 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 7           | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ETHEREUM        |
 
 
     @Smoke @RampOnDesc @Automated
@@ -309,7 +309,7 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
-            | 100009688 | smoke-test-n | USDT  | ARS     | 3           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
+            | 100009688 | smoke-test-n | USDT  | ARS     | 7           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
     # | 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
     # | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |
 
@@ -366,7 +366,7 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId                  | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100009719 | smoke-partialRampOn-test-n | WLD   | ARS     | 3           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
-            | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 2           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
+            | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 7           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
             | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 4           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
     @Smoke @PartialRampOff @Automated

@@ -58,5 +58,13 @@
       "amount": "10",
       "against": "BRL"
     }
+  },
+  "FAILURE": {
+    "ARS_ARS": {
+      "userAnyId": "100009359",
+      "paymentDestination": "qr3manualamountfailure",
+      "amount": "1000",
+      "against": "ARS"
+    }
   }
 }

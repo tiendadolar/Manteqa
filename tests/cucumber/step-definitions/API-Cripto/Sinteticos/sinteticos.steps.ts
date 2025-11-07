@@ -146,7 +146,7 @@ Then('Validate refund stages', { timeout: 125000 }, async function (this: Custom
   const urlBase = this.urlBase;
   const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
   const apiKEY = this.apiKey;
-  const ms = 5000;
+  const ms = 25000;
 
   await delay(ms);
   const response = await getSyntheticStatus(urlBase, endpoint, apiKEY);

@@ -368,7 +368,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId | email               | legalId | exchange | name            | surname        | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | user-col   | cuevasnic@gmail.com | 249105  | COLOMBIA | NICOLAS RODRIGO | VASQUEZ CUEVAS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400148   | Colombia    | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId              | email                 | legalId | exchange | name    | surname           | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | andresperalta@manteca.dev | TestPpalAccount-bolivia | testppalbob@gmail.com | 6450820 | BOLIVIA  | WILLIAN | VILLARROEL QUISPE | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400148   | Bolivia     | SAMUEL PIRES DE MELO |
 
 

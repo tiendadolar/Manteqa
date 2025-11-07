@@ -7,8 +7,6 @@ const payments = require('../data/syntheticPaymentData.json');
 
 export const validateSyntheticRefundStage = (body: any) => {
   if (body.stages['1'].stageType === 'WITHDRAW') {
-    console.log('entr');
-
     const refundStage = Object.values(body.stages).find((stage: any) => stage.stageType === 'REFUND');
 
     expect(refundStage).to.have.property('partial').that.is.a('boolean');
