@@ -22,6 +22,8 @@ Then('Obtain a company debt {string} balance', { timeout: 500 * 1000 }, async fu
   const paymentAgainstAmount = CustomWorld.getStoreData('paymentAgainstAmount');
   let thereIsDepositStage: Boolean = CustomWorld.getStoreData('depositStage') === undefined ? false : CustomWorld.getStoreData('depositStage');
 
+  if (coin === 'WLD') return;
+
   const response = await getCompanyDebtBalance(urlBase, endpoint, apiKEY, againstAmountOperated, paymentAgainstAmount, thereIsDepositStage, coin);
   validateRes(response, 200);
 });

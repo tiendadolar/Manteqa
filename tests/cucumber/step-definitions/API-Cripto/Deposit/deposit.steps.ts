@@ -22,6 +22,7 @@ Then('Execute crypto deposit', { timeout: 500 * 1000 }, async function (this: Cu
   const human: string = CustomWorld.getStoreData('thresholdAmount') || this.human || response.stages['1'].thresholdAmount;
   const ticker: string = this.ticker || response.details.paymentAgainstAsset || response.details.paymentAgainst || response.stages['1'].asset;
   const chain: any = isTron ? 9 : NETWORKS_MAPPINGS[withdrawNetwork] || 0;
+  logger.warn(chain);
 
   logger.info('Executing crypto deposit for synthetic payment...');
   await cryptoDepositHelper(urlBase, endpoint, apiKEY, apiSecret, from, to, wei, human, ticker, chain);

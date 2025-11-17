@@ -4,7 +4,7 @@ Feature: Depositos
     @Crypto
     Scenario: Generar deposito Crypto vía API admin
         Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "mZJ5r9KCdRjnWCdPJg"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<hash>" to the variable "hash"
         And Assign the value "<from>" to the variable "from"
@@ -17,8 +17,8 @@ Feature: Depositos
         Then Obtain a response 201
 
         Examples:
-            | hash | from                                       | to                                         | wei                  | human       | ticker | chain |
-            | hash | 0x9bD31d82B6212dd60a9328CCe7277161e5975fB5 | 0x9702196840AD57AA81a44062d9EC53E3537911F6 | 15540015540000000000 | 15.54001554 | USDT   | 1     |
+            | hash | from                                       | to                                         | wei                 | human      | ticker | chain |
+            | hash | 0x9bD31d82B6212dd60a9328CCe7277161e5975fB5 | 0x7921319332714EBea5c1219439c34309e600DF54 | 1792350250000000000 | 1.79235025 | WLD    | 6     |
 
     @CryptoAdmin
     Scenario: Generar deposito Crypto vía admin

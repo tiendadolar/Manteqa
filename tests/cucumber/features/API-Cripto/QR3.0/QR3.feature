@@ -44,7 +44,7 @@ Feature: Sintético QR 3.0
     # ------ QR V1 ------
 
     @Smoke @QRV1NoDesc @Automated
-    Scenario Outline: Ejecutar sintético de pago QR embebido contra USDT en no descubierto vía V1 endpoints
+    Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <ticker> en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -71,12 +71,12 @@ Feature: Sintético QR 3.0
 
         # First QR is implemented to skip microoperations blocked
         Examples:
-            | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
-            | 100009352 | pixmanualamount                                                                                                                                                                                            | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
-            | 100009352 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | userAnyId | type     | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
+            | 100009352 | estático | pixmanualamount                                                                                                                                                                                            | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | 100009352 | embebido | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
     @Smoke @QRV1NoDesc @Automated
-    Scenario Outline: Ejecutar sintético de pago QR embebido contra ARS en no descubierto vía V1 endpoints
+    Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <against> en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -103,8 +103,9 @@ Feature: Sintético QR 3.0
         And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
-            | userAnyId | qrCode                                                                                                                                                                                                     | against | amount | sessionId      | to                                         | ticker |
-            | 100009352 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | userAnyId | type     | qrCode                                                                                                                                                                                                     | against | amount | sessionId      | to                                         |
+            | 100009352 | embebido | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
+            | 100009352 | estático | pixmanualamount                                                                                                                                                                                            | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
 
     @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
@@ -122,8 +123,8 @@ Feature: Sintético QR 3.0
 
     # ------ QR V2 ------
 
-    @Smoke @QRV2NoDesc @Automated
-    Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en no descubierto vía V2 endpoints
+    @Smoke @QRV2NoDesc @Automated2
+    Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints against default
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -141,7 +142,7 @@ Feature: Sintético QR 3.0
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
         Then Obtain a response 201
-        And The attributes of the QR USDT synthetic are validated
+        And The attributes of the QR "<ticker>" synthetic are validated
         # Execute deposit
         And Execute crypto deposit
         # Get status synthetic payment
@@ -150,9 +151,49 @@ Feature: Sintético QR 3.0
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
         Examples:
-            | credential                | accion | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
-            | andresperalta@manteca.dev | manual | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
-    # | embebido | 100009502 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
+            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+
+    @Smoke @QRV2NoDesc @Automated
+    Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints
+        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
+        # Validate initial balance before execute qr payment
+        And Obtain "<ticker>" balance for "<userAnyId>" user
+        # Request de lock payment
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<qrCode>" to the variable "qrCode"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<ticker>" to the variable "against"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        And The attributes of the QR "<ticker>" synthetic are validated
+        # Execute deposit
+        And Execute crypto deposit
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        # Validate balance after execute qr payment
+        And Obtain "<ticker>" balance for "<userAnyId>" user
+
+        Examples:
+            | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
+            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | andresperalta@manteca.dev | embebido | 100009502 | qr3             | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+
+        @WLD
+        Examples:
+            | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
+            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    |
+            | andresperalta@manteca.dev | embebido | 100009502 | qr3             | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    |
+
 
     @Smoke @QRV2NoDesc @Automated
     Scenario Outline: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V2 endpoints
@@ -465,7 +506,7 @@ Feature: Sintético QR 3.0
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/pix-payment"
         Then Obtain a response 201
-        And The attributes of the QR USDT synthetic are validated
+        And The attributes of the QR "<ticker>" synthetic are validated
         # Get status synthetic payment
         And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
         # Get company balance after execute qr payment
@@ -494,7 +535,7 @@ Feature: Sintético QR 3.0
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/pix-payment"
         Then Obtain a response 201
-        And The attributes of the QR ARS synthetic are validated
+        And The attributes of the QR "<against>" synthetic are validated
         # Get status synthetic payment
         And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
         # Get company balance after execute qr payment
@@ -507,7 +548,7 @@ Feature: Sintético QR 3.0
     # ------ QR V2 ------
 
     @Smoke @Desc @QRV2Desc @Automated
-    Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V2 endpoints
+    Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V2 endpoints con against default
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         # Get company balance before execute qr payment
@@ -524,7 +565,7 @@ Feature: Sintético QR 3.0
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
         Then Obtain a response 201
-        And The attributes of the QR USDT synthetic are validated
+        And The attributes of the QR "<ticker>" synthetic are validated
         # Get status synthetic payment
         And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
         # Get company balance after execute qr payment
@@ -534,6 +575,42 @@ Feature: Sintético QR 3.0
             | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
             | manual   | 100009359 | qr3manualamount | 2000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | embebido | 100009359 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+
+    @Smoke @Desc @QRV2Desc @Automated
+    Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V2 endpoints
+        Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Get company balance before execute qr payment
+        # And Obtain a company debt "<ticker>" balance
+        # Request de lock payment
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<qrCode>" to the variable "qrCode"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<ticker>" to the variable "against"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        And The attributes of the QR "<ticker>" synthetic are validated
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        # Get company balance after execute qr payment
+        # And Obtain a company debt "<ticker>" balance
+
+        Examples:
+            | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
+            | manual   | 100009359 | qr3manualamount | 2000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | embebido | 100009359 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+
+        @WLD
+        Examples:
+            | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
+            | estatico | 100009359 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    |
+            | embebido | 100009359 | qr3             | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    |
 
     @NoSupportYet
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra ARS en descubierto vía V2 endpoints
@@ -551,7 +628,7 @@ Feature: Sintético QR 3.0
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
         Then Obtain a response 201
-        And The attributes of the QR ARS synthetic are validated
+        And The attributes of the QR "<against>" synthetic are validated
 
         When Wait for the processing of the "orden QR" por 5 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
@@ -578,7 +655,7 @@ Feature: Sintético QR 3.0
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
         Then Obtain a response 201
-        And The attributes of the QR ARS synthetic are validated
+        And The attributes of the QR "<against>" synthetic are validated
 
         When Wait for the processing of the "orden QR" por 5 seconds
         And Execute the GET method on the endpoint "/v1/synthetics/{syntheticId}"
@@ -903,8 +980,11 @@ Feature: Sintético QR 3.0
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX     | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | pixmanualamount                                                                                                                                                                                                                                                                            | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | qr3manualamount                                                                                                                                                                                                                                                                            | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | qr3manualamount                                                                                                                                                                                                                                                                            | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | qr3manualamount                                                                                                                                                                                                                                                                            | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | qr3manualamount                                                                                                                                                                                                                                                                            | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+
 
         @BRA
         Examples:
@@ -924,6 +1004,7 @@ Feature: Sintético QR 3.0
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | pixmanualamount    | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013202 | qr3manualamount    | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | qr3manualamount    | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+
 
 
     # Sender ----------------------------------------------------------------------------------------

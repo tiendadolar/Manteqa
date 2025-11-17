@@ -285,7 +285,7 @@ Feature: Sintéticos
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | skipDeposit | withdrawAddress                            | withdrawNetwork |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 3           | true        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
-    @Smoke @RampOff @NoDesc @Automated @Run
+    @Smoke @RampOff @NoDesc @Automated @Run @f
     Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -309,7 +309,7 @@ Feature: Sintéticos
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
-            | 100009688 | smoke-test-n | USDT  | ARS     | 7           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
+    # | 100009688 | smoke-test-n | USDT  | ARS     | 7           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
     # | 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
     # | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |
 

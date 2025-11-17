@@ -7,23 +7,24 @@ import logger from '../../../../support/utils/logger';
 import { adminRefundHelper, getSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 
-Then('The attributes of the QR USDT synthetic are validated', async function (this: CustomWorld) {
+Then('The attributes of the QR {string} synthetic are validated', async function (this: CustomWorld, coin: string) {
   const response: any = this.response;
   const body: any = response.body;
   const details: any = response.body.details;
+  if (details.paymentAgainst === 'WLD') CustomWorld.setStoreData('withdrawNetwork', 'WORLDCHAIN');
 
-  expect(details.paymentAgainst).equal('USDT');
+  expect(details.paymentAgainst).equal(coin);
   // expect(body.stages).lengthOf;
 });
 
-Then('The attributes of the QR ARS synthetic are validated', async function (this: CustomWorld) {
-  const response: any = this.response;
-  const body: any = response.body;
-  const details: any = response.body.details;
+// Then('The attributes of the QR ARS synthetic are validated', async function (this: CustomWorld) {
+//   const response: any = this.response;
+//   const body: any = response.body;
+//   const details: any = response.body.details;
 
-  expect(details.paymentAgainst).equal('ARS');
-  // expect(body.currentStage).equal(1);
-});
+//   expect(details.paymentAgainst).equal('ARS');
+//   // expect(body.currentStage).equal(1);
+// });
 
 Then('Execute the refund synthetic {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, flag: string) {
   try {

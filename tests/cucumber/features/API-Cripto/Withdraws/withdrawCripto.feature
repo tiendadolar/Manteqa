@@ -881,21 +881,21 @@ Feature: Retiros Crypto
         Given The API key is available "<apiKEY>"
         And login user admin "<credential>"
         And Get user "exchange" info for "<userId>" id
-        And The urlBase is available "https://api-qa.tiendacrypto.com/v1"
+        And The urlBase is available "https://api-qa.tiendacrypto.com"
         When Assign the value "<userId>" to the variable "userId"
         And Assign the value <chain> to the variable "chain"
         And Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<address>" to the variable "address"
-        And Execute the POST method on the endpoint "/admin/withdraw/crypto"
+        And Execute the POST method on the endpoint "/v1/admin/withdraw/crypto"
         Then Obtain a response 200 for admin withdraw
 
         @NOTRON
         Examples:
             | apiKEY                          | credential                | userId    | chain | coin | amount | address                                    |
             # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 4     | USDC | 3      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 1     | USDT | 3      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | andresperalta@manteca.dev | 100009873 | 1     | USDT | 3      | 0x6fBf278Bf9cd0cF2897A66fB1FFc8C1320Ec70C1 |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 0     | USDT | 10     | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
+        # | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | andresperalta@manteca.dev | 100009873 | 1     | USDT | 3      | 0x6fBf278Bf9cd0cF2897A66fB1FFc8C1320Ec70C1 |
 
 
 

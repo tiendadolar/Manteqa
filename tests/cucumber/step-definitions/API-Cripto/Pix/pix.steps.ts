@@ -179,6 +179,8 @@ When(
       console.log('API payload:', JSON.stringify(this.userData, null, 2));
 
       if (/admin/.test(endpoint)) this.urlBase = 'https://api-qa.tiendacrypto.com';
+      console.log(this.urlBase);
+      console.log(paramEndpoint);
 
       this.response = await request(this.urlBase)
         .post(paramEndpoint)
