@@ -66,5 +66,13 @@
       "amount": "1000",
       "against": "ARS"
     }
+  },
+  "REFUND": {
+    "ARS_ARS": {
+      "userAnyId": "100009359",
+      "paymentDestination": "qr3manualamountrefund",
+      "amount": "1000",
+      "against": "ARS"
+    }
   }
 }

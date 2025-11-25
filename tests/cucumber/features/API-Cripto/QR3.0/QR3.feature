@@ -123,7 +123,7 @@ Feature: Sintético QR 3.0
 
     # ------ QR V2 ------
 
-    @Smoke @QRV2NoDesc @Automated2
+    @Smoke @QRV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints against default
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -154,6 +154,7 @@ Feature: Sintético QR 3.0
             | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
             | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | andresperalta@manteca.dev | estatico | 100013787 | qr3BOB          | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Smoke @QRV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints
@@ -352,6 +353,7 @@ Feature: Sintético QR 3.0
             | accion   | userAnyId | qrCode          | against | amount | sessionId                 | to                                         | ticker |
             | manual   | 100009628 | pixmanualamount | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | embebido | 100009628 | pix             | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | estatico | 100013787 | qr3BOB          | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Peru @NoDesc @ToBeAutomated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>" sobre el Balance User
@@ -575,6 +577,7 @@ Feature: Sintético QR 3.0
             | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
             | manual   | 100009359 | qr3manualamount | 2000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | embebido | 100009359 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | embebido | 100013788 | qr3BOB          | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Smoke @Desc @QRV2Desc @Automated
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V2 endpoints
@@ -944,8 +947,8 @@ Feature: Sintético QR 3.0
 
     # Sender ----------------------------------------------------------------------------------------
 
-    @Smoke @Desc @Sender @Automated
-    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc>
+    @Smoke @Desc @Sender @Ignore
+    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc> por BIND_PAGOS
         Given The API key is available "<apyKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         # Get company balance before execute qr payment
@@ -973,37 +976,100 @@ Feature: Sintético QR 3.0
         # Get company balance after execute qr payment
         And Obtain a company debt "<against>" balance
 
+        #No admitido yet pagos desde principal accounts NO PERU. Por el momento solo desde ppal acc PERU
         @ARG
         Examples:
-            | apyKEY                          | pay     | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                                                                                                                                                                         | against | amount | sessionId                      | accountExc |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX     | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | pixmanualamount                                                                                                                                                                                                                                                                            | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX     | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | pixmanualamount                                                                                                                                                                                                                                                                            | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | qr3manualamount                                                                                                                                                                                                                                                                            | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | qr3manualamount                                                                                                                                                                                                                                                                            | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | qr3manualamount                                                                                                                                                                                                                                                                            | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | qr3manualamount                                                                                                                                                                                                                                                                            | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | apyKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
 
 
         @BRA
         Examples:
-            | apyKEY                          | pay     | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                                                                                                                                                                         | against | amount | sessionId                      | accountExc |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX     | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013250 | pixmanualamount                                                                                                                                                                                                                                                                            | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX     | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | pixmanualamount                                                                                                                                                                                                                                                                            | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013250 | qr3manualamount                                                                                                                                                                                                                                                                            | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR      | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | qr3manualamount                                                                                                                                                                                                                                                                            | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+            | apyKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013250 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013250 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
 
         #Completar con peru. Falla pagos a QR peru por sender y no sender
         @PER
         Examples:
-            | apyKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination | against | amount | sessionId                      | accountExc |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013202 | pixmanualamount    | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | pixmanualamount    | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013202 | qr3manualamount    | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | qr3manualamount    | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | apyKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013202 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013202 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+
+    @Smoke @Desc @Sender @Automated
+    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc> por PLUS_PAGOS
+        Given The API key is available "<apyKEY>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Get company balance before execute qr payment
+        When Obtain a company debt "<against>" balance
+        # Request de lock payment
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<name>" to the variable "name"
+        And Assign the value "<surname>" to the variable "surname"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        And Validate sender info
+        # Get company balance after execute qr payment
+        And Obtain a company debt "<against>" balance
+
+        #No admitido yet pagos desde principal accounts NO PERU. Por el momento solo desde ppal acc PERU
+        @ARG
+        Examples:
+            | apyKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014295 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014295 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014295 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014295 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014295 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014295 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
+
+
+        @BRA
+        Examples:
+            | apyKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014296 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014296 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
+
+        #Completar con peru. Falla pagos a QR peru por sender y no sender
+        @PER
+        Examples:
+            | apyKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014302 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014302 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014302 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014302 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
 
 
 

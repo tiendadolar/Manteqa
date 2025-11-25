@@ -368,7 +368,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId                  | email                    | legalId     | exchange | name    | surname           | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | andresperalta@manteca.dev | Company Ppal Account-brazil | ppalaccountarg@gmail.com | 20128018639 | BRAZIL   | WILLIAN | VILLARROEL QUISPE | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400148   | Brasil      | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId | email                | legalId     | exchange  | name            | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev |            | geraldinan@gmail.com | 27320225251 | ARGENTINA | Geraldina Ivone | Mazzarol | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400148   | Argentina   | SAMUEL PIRES DE MELO |
 
 

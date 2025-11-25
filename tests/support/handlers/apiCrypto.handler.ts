@@ -131,6 +131,9 @@ export class SyntheticPaymentHandler implements EndpointHandler {
     if (userData.exchange) userData = senderPaymentSynthetic(userData);
 
     userData.userAnyId = userData.userAnyId ?? world.getStoreData('userId');
+    if (userData.qrCode === 'qr3BOB')
+      userData.qrCode =
+        'tki9OsLQqpdAJJkvNS5gs3u1B2FvCP3mgZ4ASmhss6QDnBuaKryo9oAkXFXBqCV05Lf24Isk1NBKUICYYigtAOpfSr/bztjfbAhAQB5fK7SG53PXlXEHBrj2UXsckdPnXGO0WkI8QqfaxfWtuLmUVz5ay5N6FnBt88iNJaoMOLJLdIDCaIL1CDVjxyKaVBdY+eUwBZmAB04V0dF3q1wsywSEcpNuxel4agJq6dWfhwHxltjDfjIG2tNrMkPv02jL72LJiRNKDBy8ECzrlh3JwmyvmlE8T2i70g0WBS3UsOPuaAHjeQGSsZqCSNbXyY5IxDI2as+tFPE6iK8/biUuZA==|1c8618ba4382fb49';
     return userData;
   }
 }

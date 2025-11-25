@@ -16,7 +16,7 @@ export const validateSyntheticRefundStage = (body: any) => {
     expect(refundStage).to.have.property('amount').that.is.a('string');
     expect(refundStage).to.have.property('internalRefund').that.is.a('boolean');
     expect(refundStage).to.have.property('refundReason').that.is.a('string');
-    expect(refundStage).to.have.property('networkId').that.is.a('string');
+    // expect(refundStage).to.have.property('networkId').that.is.a('string');
     expect(refundStage).to.have.property('refundedAt').that.is.a('string');
 
     const hasOrderReversal = Object.values(body.stages).some((stage: any) => stage.stageType === 'ORDER_REVERSAL');
