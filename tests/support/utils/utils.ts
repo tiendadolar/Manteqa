@@ -79,8 +79,9 @@ export const getParPrices = async (coin: string): Promise<any> => {
   }
 };
 
-export const delay = (ms: number, msg?: string): Promise<void> => {
+export const delay = (ms: number, msg?: string, exchange?: string): Promise<void> => {
   if (msg === undefined) logger.info(`Waiting for synthetic processing...`);
+  if (exchange === 'COLOMBIA') ms = 180000;
   logger.info(msg);
   return new Promise((resolve) => setTimeout(resolve, ms));
 };

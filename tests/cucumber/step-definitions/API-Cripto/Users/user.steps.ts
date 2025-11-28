@@ -11,9 +11,12 @@ Then('Get user {string} info for {string} id', async function (this: CustomWorld
   await getUserInfoHelper(this.apiKey, data, userAnyId);
 });
 
-Then('Validate user status', { timeout: 25000 }, async function (this: CustomWorld) {
+Then('Validate user status', { timeout: 200000 }, async function (this: CustomWorld) {
   const userAnyId = CustomWorld.getStoreData('userId');
-  await delay(10000, 'Validating user identity');
+  const exchange = this.response.body.user.exchange;
+  console.log(exchange);
+
+  await delay(10000, 'Validating user identity', exchange);
   const response = await getUserInfoHelper(this.apiKey, undefined, userAnyId);
 
   logger.info(`User Status: ${response.body.status}`);

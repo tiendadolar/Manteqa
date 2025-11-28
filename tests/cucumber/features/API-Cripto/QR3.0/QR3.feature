@@ -492,7 +492,7 @@ Feature: Sintético QR 3.0
     # !------ USERBALANCES -------
     # ------ QR V1 ------
 
-    @Smoke @QRV1NUserBalance @Automated
+    @Smoke @UserBalance @QRV1NUserBalance @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <ticker> operando desde el user balance vía V1 endpoints
         Given The API key is available "0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P"
         And The API secret is available "9MrwHA3SZP33Z7gUmb"
@@ -508,6 +508,7 @@ Feature: Sintético QR 3.0
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "true" to the variable "skipDeposit"
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/pix-payment"
         Then Obtain a response 201
@@ -523,7 +524,7 @@ Feature: Sintético QR 3.0
 
     # ------ QR V2 ------
 
-    @Smoke @QRV2UserBalance @Automated
+    @Smoke @UserBalance @QRV2UserBalance @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> operando desde el user balance vía V2 endpoints
         Given The API key is available "0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -540,6 +541,7 @@ Feature: Sintético QR 3.0
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "true" to the variable "skipDeposit"
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
         Then Obtain a response 201
@@ -557,8 +559,8 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V1 ------
 
-    @Smoke @PixV1UserBalance @Automated
-    Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra USDT en no descubierto vía V1 endpoints
+    @Smoke @UserBalance @PixV1UserBalance @Automated
+    Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra USDT operando desde el user balance vía V1 endpoints
         Given The API key is available "0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P"
         And The API secret is available "9MrwHA3SZP33Z7gUmb"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -573,6 +575,7 @@ Feature: Sintético QR 3.0
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "true" to the variable "skipDeposit"
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/pix-payment"
         Then Obtain a response 201
@@ -588,8 +591,8 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V2 ------
 
-    @Smoke @PixV2UserBalance @Automated
-    Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra USDT en no descubierto vía V2 endpoints
+    @Smoke @UserBalance @PixV2UserBalance @Automated
+    Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra USDT operando desde el user balance vía V2 endpoints
         Given The API key is available "0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P"
         And The API secret is available "9MrwHA3SZP33Z7gUmb"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -604,6 +607,7 @@ Feature: Sintético QR 3.0
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "true" to the variable "skipDeposit"
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
         Then Obtain a response 201
