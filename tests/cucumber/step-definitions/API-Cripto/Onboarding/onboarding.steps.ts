@@ -6,7 +6,7 @@ const path = require('path');
 import { addBankAccountHelper, addFEPInfo, addPEPInfo, onboardingHelper, uploadImagesHelper } from '../../../../support/helpers/onboardingHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import logger from '../../../../support/utils/logger';
-import { pepInfoCrypto } from '../../../../support/utils/utils';
+import { delay, pepInfoCrypto } from '../../../../support/utils/utils';
 import { CustomWorld, UserData } from '../../../../support/world';
 
 Before({ tags: '@Onboarding' }, function () {
@@ -201,3 +201,13 @@ When('Add FEP info', async function (this: CustomWorld) {
   const response = await addFEPInfo(this.urlBase, endpoint, this.apiKey, userAnyId);
   // validateRes(response, 200);
 });
+
+// When('Validate user status', async function (this: CustomWorld) {
+//   const userAnyId: string = CustomWorld.getStoreData('userId');
+//   const endpoint = `/v2/users/${userAnyId}`;
+
+//   delay(10000);
+
+//   const response = await getUser(this.urlBase, endpoint, this.apiKey);
+//   logger.debug(response);
+// });

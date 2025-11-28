@@ -350,6 +350,7 @@ Feature: Onboarding User - V2
         And Add "<exchange>" bank account
         And Add PEP info
         And Add FEP info
+        And Validate user status
 
         # Do not change data
         @Automated
@@ -368,7 +369,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId | email                | legalId     | exchange  | name            | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev |            | geraldinan@gmail.com | 27320225251 | ARGENTINA | Geraldina Ivone | Mazzarol | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400148   | Argentina   | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId | email            | legalId       | exchange  | name   | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev |            | borrar@gmail.com | 27-37247975-8 | ARGENTINA | borrar | BEVERINI | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Argentina   | SAMUEL PIRES DE MELO |
 
 

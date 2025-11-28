@@ -7,7 +7,7 @@ import logger from '../utils/logger';
 import { CustomWorld } from '../world';
 import { apiRequest, validateRes } from './requestHelper';
 
-const getUserId = async (urlBase: string, apiKey: string, legalId: string) => {
+const getUserNumberId = async (urlBase: string, apiKey: string, legalId: string) => {
   const endpoint: string = `/v2/users?legalId=${legalId}`;
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
   const numberId: string = response.body.data[0]?.numberId;
@@ -39,7 +39,7 @@ const putAwsUrl = async (awsUrl: string) => {
 };
 
 export const onboardingHelper = async (urlBase: string, apiKEY: string, legalId: string): Promise<any> => {
-  const numberId: string = await getUserId(urlBase, apiKEY, legalId);
+  const numberId: string = await getUserNumberId(urlBase, apiKEY, legalId);
 
   if (!numberId) return;
 
@@ -115,3 +115,10 @@ export const addFEPInfo = async (urlBase: string, endpoint: string, apiKey: stri
   logger.info(`FEP Info uploaded`);
   return response;
 };
+
+// export const getUser = async (urlBase: string, endpoint: string, apiKey: string): Promise<any> => {
+//   const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey });
+//   validateRes(response, 200);
+
+//   return response;
+// };

@@ -1,6 +1,7 @@
 name: Run Tagged Tests
 
 on:
+  # Trigger manual
   workflow_dispatch:
     inputs:
       test_suite:
@@ -22,6 +23,11 @@ on:
           - 'Withdraw Fiat v2'
           - 'Remesas'
 
+  # Ejecución automática en cada push
+  push:
+    branches:
+      - '**' # Se ejecuta en todas las ramas, o especifica ramas específicas como: main, develop, etc.
+
   # Ejecución automática de Providers los viernes a las 01:30 AM hora Argentina (04:30 UTC)
   schedule:
     - cron: '45 4 * * 5'
@@ -40,6 +46,9 @@ jobs:
           if [ "${{ github.event_name }}" == "schedule" ]; then
             TEST_SUITE="Providers"
             echo "🕐 Ejecución programada - Suite: Providers"
+          elif [ "${{ github.event_name }}" == "push" ]; then
+            TEST_SUITE="Onboarding v2"
+            echo "🚀 Ejecución por push - Suite: Onboarding v2"
           else
             TEST_SUITE="${{ github.event.inputs.test_suite }}"
             echo "👤 Ejecución manual - Suite: $TEST_SUITE"
@@ -356,16 +365,18 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           from: ${{ secrets.EMAIL_USERNAME }}
           to: ${{ secrets.NOTIFICATION_EMAIL }}
-          subject: "🧪 Tests ${{ steps.set-suite.outputs.test_suite }} - ${{ github.repository }} [${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}] ${{ github.event_name == 'schedule' && '🕐 [PROGRAMADO]' || '' }}"
+          subject: "🧪 Tests ${{ steps.set-suite.outputs.test_suite }} - ${{ github.repository }} [${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}] ${{ github.event_name == 'schedule' && '🕐 [PROGRAMADO]' || github.event_name == 'push' && '🚀 [PUSH]' || '' }}"
           body: |
             Hola!
 
             Se ejecutaron los tests de la suite "${{ steps.set-suite.outputs.test_suite }}" en el repositorio ${{ github.repository }}
 
-            ${{ github.event_name == 'schedule' && '🕐 Tipo de ejecución: PROGRAMADA (Viernes 01:30 AM Argentina)' || '👤 Tipo de ejecución: MANUAL' }}
+            ${{ github.event_name == 'schedule' && '🕐 Tipo de ejecución: PROGRAMADA (Viernes 01:30 AM Argentina)' || github.event_name == 'push' && '🚀 Tipo de ejecución: AUTOMÁTICA (Push al repositorio)' || '👤 Tipo de ejecución: MANUAL' }}
             📊 Estado del Workflow: ${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}
             🏷️ Suite ejecutada: ${{ steps.set-suite.outputs.test_suite }}
             📋 Tags utilizados: ${{ steps.map-tags.outputs.tags }}
+            ${{ github.event_name == 'push' && format('🌿 Rama: {0}', github.ref_name) || '' }}
+            ${{ github.event_name == 'push' && format('👤 Autor: {0}', github.actor) || '' }}
 
             El workflow de GitHub Actions ${{ steps.workflow-status.outputs.workflow_status == 'SUCCESS' && 'se completó exitosamente' || 'falló durante la ejecución' }}.
 

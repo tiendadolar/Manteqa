@@ -14,5 +14,9 @@ Then('Get user {string} info for {string} id', async function (this: CustomWorld
 Then('Validate user status', { timeout: 25000 }, async function (this: CustomWorld) {
   const userAnyId = CustomWorld.getStoreData('userId');
   await delay(10000, 'Validating user identity');
-  await getUserInfoHelper(this.apiKey, undefined, userAnyId);
+  const response = await getUserInfoHelper(this.apiKey, undefined, userAnyId);
+
+  logger.info(`User Status: ${response.body.status}`);
+
+  expect(response.body.status).to.equal('ACTIVE');
 });

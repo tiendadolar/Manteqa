@@ -16,5 +16,5 @@ export const getUserInfoHelper = async (apiKey: string, key?: string, userAnyId?
     return;
   }
 
-  expect(response.body.status).to.equal('ACTIVE');
+  return response;
 };
