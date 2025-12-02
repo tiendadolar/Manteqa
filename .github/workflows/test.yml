@@ -341,6 +341,51 @@ jobs:
             echo '{"testStatus":"NO_REPORT","testSuite":"${{ steps.set-suite.outputs.test_suite }}","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
           fi
 
+      - name: Create Slack-friendly summary
+        if: always()
+        id: slack-summary
+        run: |
+          if [ -f test-results.json ]; then
+            cat > create-slack-summary.js << 'EOF'
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('test-results.json', 'utf8'));
+            
+            let summary = `*📊 Resultados de Tests*\\n\\n`;
+            
+            if (results.testStatus === 'TESTS_PASSED' || results.testStatus === 'TESTS_FAILED') {
+              summary += `✅ *Exitosos:* ${results.passedScenarios}/${results.totalScenarios}\\n`;
+              summary += `❌ *Fallidos:* ${results.failedScenarios}\\n`;
+              summary += `📈 *Tasa de éxito:* ${results.successRate}%\\n`;
+              summary += `⏱️ *Duración:* ${results.duration}ms\\n\\n`;
+              
+              if (results.failedTests && results.failedTests.length > 0) {
+                summary += `*❌ Tests Fallidos:*\\n`;
+                results.failedTests.slice(0, 5).forEach(test => {
+                  summary += `• ${test.scenario}\\n`;
+                });
+                if (results.failedTests.length > 5) {
+                  summary += `... y ${results.failedTests.length - 5} más\\n`;
+                }
+              } else {
+                summary += `*🎉 ¡Todos los tests pasaron exitosamente!*\\n`;
+              }
+            } else {
+              summary += `⚠️ ${results.error || 'Error al analizar resultados'}\\n`;
+            }
+            
+            summary += `\\n_Timestamp: ${results.timestamp}_`;
+            
+            console.log(summary);
+          EOF
+            
+            SUMMARY=$(node create-slack-summary.js)
+            echo "summary<<EOF" >> $GITHUB_OUTPUT
+            echo "$SUMMARY" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          else
+            echo "summary=⚠️ No se generaron resultados de tests" >> $GITHUB_OUTPUT
+          fi
+
       - name: Determine Workflow Status
         if: always()
         id: workflow-status
@@ -350,10 +395,77 @@ jobs:
           if [ ! -f test-results.json ]; then
             WORKFLOW_STATUS="FAILED"
             echo "⚠️ No se generaron resultados de tests"
+          else
+            TEST_STATUS=$(cat test-results.json | grep -o '"testStatus":"[^"]*' | cut -d'"' -f4)
+            if [ "$TEST_STATUS" == "TESTS_FAILED" ] || [ "$TEST_STATUS" == "ANALYSIS_ERROR" ] || [ "$TEST_STATUS" == "NO_REPORT" ]; then
+              WORKFLOW_STATUS="FAILED"
+            fi
           fi
 
           echo "workflow_status=${WORKFLOW_STATUS}" >> $GITHUB_OUTPUT
           echo "📊 Estado del Workflow: ${WORKFLOW_STATUS}"
+
+      - name: Send Slack Notification
+        if: always()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "${{ steps.workflow-status.outputs.workflow_status == 'SUCCESS' && '✅' || '❌' }} Tests ${{ steps.set-suite.outputs.test_suite }}",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "${{ steps.workflow-status.outputs.workflow_status == 'SUCCESS' && '✅' || '❌' }} Tests: ${{ steps.set-suite.outputs.test_suite }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Suite:*\n${{ steps.set-suite.outputs.test_suite }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Estado:*\n${{ steps.workflow-status.outputs.workflow_status }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Tipo:*\n${{ github.event_name == 'schedule' && '🕐 Programado' || github.event_name == 'push' && '🚀 Push' || '👤 Manual' }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Ejecutado por:*\n${{ github.actor }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "${{ steps.slack-summary.outputs.summary || '⚠️ Sin resumen disponible' }}"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "📊 Ver Detalles Completos"
+                      },
+                      "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                      "style": "${{ steps.workflow-status.outputs.workflow_status == 'SUCCESS' && 'primary' || 'danger' }}"
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
       - name: Send Email Notification
         if: always()

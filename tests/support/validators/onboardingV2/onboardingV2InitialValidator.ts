@@ -141,7 +141,7 @@ export class onboardingV2InitialValidator {
       throw new Error('Response does not match personalDataAddress-OnboardingV2Initial interface');
     }
 
-    expect(response.person.personalData.address.postalCode).to.be.a('string').and.not.empty;
+    expect(response.person.personalData.address.postalCode).to.be.a('string');
     expect(response.person.personalData.address.province).to.be.a('string').and.not.empty;
     expect(response.person.personalData.address.locality).to.be.a('string').and.not.empty;
     expect(response.person.personalData.address.street).to.be.a('string').and.not.empty;

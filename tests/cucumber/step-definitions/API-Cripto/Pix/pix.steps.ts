@@ -58,6 +58,25 @@ When('Assign the value {string} to the variable {string}', function (this: Custo
     return;
   }
 
+  if (variable === 'externalId') {
+    if (value === 'externalIdRepeat') {
+      this.userData[variable] = 'externalIdRepeat';
+      return;
+    }
+    if (value === '') {
+      this.userData[variable] = '123';
+      return;
+    }
+    if (value === 'true') {
+      this.userData[variable] = true;
+      return;
+    }
+
+    this.userData[variable] = CustomWorld.getExternalId(value);
+    CustomWorld.setStoreData(variable, this.userData[variable]);
+    return;
+  }
+
   if (variable === 'networkId') {
     this.userData[variable] = CustomWorld.getNetworkId();
     return;
@@ -191,7 +210,7 @@ When(
         .send(this.userData);
 
       console.log(this.response.status);
-      console.log('API response:', this.response.body);
+      console.log('API response:', JSON.stringify(this.response.body, null, 2));
 
       this.userData = {};
       this.urlBase = 'https://sandbox.manteca.dev/crypto';

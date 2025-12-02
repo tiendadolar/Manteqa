@@ -365,6 +365,10 @@ Feature: Onboarding User - V2
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EPan    | onbe2epan@gmail.com    | 8934513            | PANAMA     | TestPan    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400134   | Panama      | SAMUEL PIRES DE MELO |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EBra    | onbe2ebra@gmail.com    | 07185653711        | BRAZIL     | TestBra    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2ECol    | onbe2ecol@gmail.com    | 478806             | COLOMBIA   | OMAR       | MARTINEZ AGUILERA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400131   | Colombia    | SAMUEL PIRES DE MELO |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2Ebob-n  | onbe2ebob@gmail.com    | 3910113            | BOLIVIA    | WILDER     | ZAMBRANA          | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112132      | Bolivia     | SAMUEL PIRES DE MELO |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2Eper-n  | onbe2eper@gmail.com    | 47346108           | PERU       | ADRIANO    | PALACIOS  SANCHEZ | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400171   | Peru        | SAMUEL PIRES DE MELO |
+        #Peru falta validador de bank account, da error
+
         # | andresperalta@manteca.dev | testOnbE2EFil6 | onbe2efil6@gmail.com | 9674152135063897   | PHILIPPINES | TestPhi | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400135   | Filipinas   | SAMUEL PIRES DE MELO |
 
         @test

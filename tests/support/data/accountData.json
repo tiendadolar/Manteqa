@@ -57,5 +57,17 @@
     "currency": "BRL",
     "cbu": "07185653711",
     "description": "Cuenta de ahorros"
+  },
+  "BOLIVIA": {
+    "currency": "BOB",
+    "cbu": "1566987425",
+    "description": "Cuenta de ahorros",
+    "code": "001",
+    "accountType": "SAVINGS"
+  },
+  "PERU": {
+    "currency": "PEN",
+    "cbu": "00230005123456789021",
+    "description": "Cuenta de ahorros"
   }
 }

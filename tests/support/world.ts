@@ -21,10 +21,13 @@ export class CustomWorld extends World {
     session: { [key: string]: any };
     persistent: { [key: string]: any };
   } = { session: {}, persistent: {} };
+
   private static sessionCounterFile = path.join(__dirname, '.sessionCounter');
   private static hashCryptoFile = path.join(__dirname, '.hashCrypto');
+  private static externalIdFile = path.join(__dirname, '.externalId');
   private static sessionCounter: number = 0;
   private static hashCrypto: number = 0;
+  private static extIdCounter: number = 0;
   private static networkId: string = uuidv4();
 
   static {
@@ -47,6 +50,16 @@ export class CustomWorld extends World {
     }
   }
 
+  static {
+    try {
+      if (fs.existsSync(this.externalIdFile)) {
+        this.extIdCounter = parseInt(fs.readFileSync(this.externalIdFile, 'utf-8') || 0);
+      }
+    } catch (error) {
+      console.error('Error loading externalId counter:', error);
+    }
+  }
+
   static getSessionId(value: string): string {
     this.sessionCounter++;
     fs.writeFileSync(this.sessionCounterFile, this.sessionCounter.toString());
@@ -57,6 +70,12 @@ export class CustomWorld extends World {
     this.hashCrypto++;
     fs.writeFileSync(this.hashCryptoFile, this.hashCrypto.toString());
     return `automation-test-${this.hashCrypto}`;
+  }
+
+  static getExternalId(value: string): string {
+    this.extIdCounter++;
+    fs.writeFileSync(this.externalIdFile, this.extIdCounter.toString());
+    return `${value}-${this.extIdCounter}`;
   }
 
   static getNetworkId(): string {

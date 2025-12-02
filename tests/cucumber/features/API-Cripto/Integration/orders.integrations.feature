@@ -17,12 +17,12 @@ Feature: Orders Integrations
         And Assign the value "pixCode" to the variable "code"
         And Execute the POST method on the endpoint "/v2/orders"
         Then Obtain a response 201
-        And Validate response attributes
+        And Validate order response attributes
 
         Examples:
             | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 5           | ARS     |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | SELL | 100008501 | 5           | ARS     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | venta  | USDT  | SELL | 100008501 | 5           | ARS     |
 
     @HappyPath
     Scenario Outline: Validate success order response sending againstAmount
@@ -37,12 +37,12 @@ Feature: Orders Integrations
         And Assign the value "pixCode" to the variable "code"
         And Execute the POST method on the endpoint "/v2/orders"
         Then Obtain a response 201
-        And Validate response attributes
+        And Validate order response attributes
 
         Examples:
             | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | againstAmount | against |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 5000          | ARS     |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | SELL | 100008501 | 5000          | ARS     |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | venta  | USDT  | SELL | 100008501 | 5000          | ARS     |
 
     # ------------------------------- Error Path -------------------------------
 
@@ -155,5 +155,25 @@ Feature: Orders Integrations
         And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>" and error: "<errors>"
 
         Examples:
-            | case                | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | againstAmount | assetAmount | against | statusCode | internalStatus | message      | errors                                                                                           |
-            | againstAmountAmount | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10            | 20          | ARS     | 400        | BAD_REQUEST    | Bad request. | Only one field is allowed between [assetAmount, againstAmount]. Please provide only one of them. |
+            | case                | apiKEY                          | externalId | sessionId            | trade  | asset | side | userAnyId | againstAmount | assetAmount | against | statusCode | internalStatus | message      | errors                                                                                           |
+            | againstAmountAmount | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integration-orders-n | compra | USDT  | BUY  | 100008501 | 10            | 20          | ARS     | 400        | BAD_REQUEST    | Bad request. | Only one field is allowed between [assetAmount, againstAmount]. Please provide only one of them. |
+
+    @testing
+    Scenario Outline: Validate error order response sending exist <case>
+        Given The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And The API key is available "<apiKEY>"
+        When Assign the value "<externalId>" to the variable "externalId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<side>" to the variable "side"
+        And Assign the value "pixCode" to the variable "code"
+        And Execute the POST method on the endpoint "/v2/orders"
+        Then Obtain a response <statusCode>
+        And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>"
+
+        Examples:
+            | case       | apiKEY                          | externalId       | sessionId            | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message                                           |
+            | externalId | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | externalIdRepeat | integration-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 409        | ORDER_EXISTS   | An order with the same external id already exists |
