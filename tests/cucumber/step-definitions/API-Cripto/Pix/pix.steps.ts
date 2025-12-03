@@ -210,7 +210,8 @@ When(
         .send(this.userData);
 
       console.log(this.response.status);
-      console.log('API response:', JSON.stringify(this.response.body, null, 2));
+      // console.log('API response:', JSON.stringify(this.response.body, null, 2));
+      console.log(this.response.body);
 
       this.userData = {};
       this.urlBase = 'https://sandbox.manteca.dev/crypto';

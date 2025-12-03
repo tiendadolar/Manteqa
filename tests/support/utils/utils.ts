@@ -246,19 +246,39 @@ export const criptoDepositApiCrypto = (userData: any) => {
   }
 };
 
-export const senderPaymentSynthetic = (userData: any) => {
-  return {
-    userAnyId: userData.userAnyId,
-    paymentDestination: userData.paymentDestination,
-    amount: userData.amount,
-    against: userData.against,
-    sender: {
-      exchange: userData.exchange,
-      legalId: userData.legalId,
-      name: userData.name,
-      surname: userData.surname
-    }
-  };
+export const senderPaymentSynthetic = (userData: any, flag?: string) => {
+  logger.debug(flag);
+  if (flag !== undefined) {
+    return {
+      userAnyId: userData.userAnyId,
+      paymentDestination: userData.paymentDestination,
+      amount: userData.amount,
+      against: userData.against,
+      sender: {
+        exchange: userData.exchange,
+        legalId: userData.legalId,
+        name: userData.name,
+        surname: userData.surname,
+        work: userData.work,
+        email: userData.email,
+        phoneNumber: userData.phoneNumber,
+        gender: userData.gender
+      }
+    };
+  } else {
+    return {
+      userAnyId: userData.userAnyId,
+      paymentDestination: userData.paymentDestination,
+      amount: userData.amount,
+      against: userData.against,
+      sender: {
+        exchange: userData.exchange,
+        legalId: userData.legalId,
+        name: userData.name,
+        surname: userData.surname
+      }
+    };
+  }
 };
 
 // Deposito fiat
