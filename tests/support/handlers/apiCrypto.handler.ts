@@ -128,7 +128,7 @@ export class SyntheticPaymentHandler implements EndpointHandler {
   }
 
   handle(userData: any, world?: any) {
-    if (userData.exchange) userData = senderPaymentSynthetic(userData, userData.gender);
+    if (userData.exchange) userData = senderPaymentSynthetic(userData, userData.gender, userData.street);
 
     userData.userAnyId = userData.userAnyId ?? world.getStoreData('userId');
     if (userData.qrCode === 'qr3BOB')

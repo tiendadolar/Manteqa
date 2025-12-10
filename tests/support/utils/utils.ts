@@ -246,9 +246,30 @@ export const criptoDepositApiCrypto = (userData: any) => {
   }
 };
 
-export const senderPaymentSynthetic = (userData: any, flag?: string) => {
-  logger.debug(flag);
+export const senderPaymentSynthetic = (userData: any, flag?: string, flag2?: string) => {
   if (flag !== undefined) {
+    if (flag2 !== undefined) {
+      return {
+        userAnyId: userData.userAnyId,
+        paymentDestination: userData.paymentDestination,
+        amount: userData.amount,
+        against: userData.against,
+        sender: {
+          exchange: userData.exchange,
+          legalId: userData.legalId,
+          name: userData.name,
+          surname: userData.surname,
+          work: userData.work,
+          email: userData.email,
+          phoneNumber: userData.phoneNumber,
+          gender: userData.gender,
+          birthDate: userData.birthDate,
+          address: {
+            street: userData.street
+          }
+        }
+      };
+    }
     return {
       userAnyId: userData.userAnyId,
       paymentDestination: userData.paymentDestination,

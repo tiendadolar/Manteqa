@@ -68,6 +68,7 @@ Feature: Retiros Fiat
             | 100009878 | PUSD  | 117353318              | 100    | 0026      | SAVINGS     |
             | 100009873 | USD   | 1430001714039384360025 | 10     |           |             |
             | 100009873 | ARS   | 1430001713039384360017 | 1000   |           |             |
+            | 100036551 | PEN   | 00219400342961406492   | 1000   | 002       | SAVINGS     |
 
     @Smoke @Remesas @Automated
     Scenario Outline: Crear retiro fiat user por country por V2 "<asset>"

@@ -46,7 +46,7 @@ Feature: Orders Integrations
 
     # ------------------------------- Error Path -------------------------------
 
-    @testing
+    @ErrorPath
     Scenario Outline: Validate error order response sending <case>
         Given The API key is available "<apiKEY>"
         When Assign the value "<externalId>" to the variable "externalId"
@@ -70,8 +70,7 @@ Feature: Orders Integrations
             | invalid pixCode   | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100014663 | 10          | ARS     |                                      | 400        | NO_FUNDS       | Insufficient funds.                                                                                     |
             | min assetAmount   | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100014663 | 0           | ARS     |                                      | 400        | MIN_SIZE       | Invalid order size (min).                                                                               |
 
-
-    @testing
+    @ErrorPath
     Scenario Outline: Validate error order response sending wrong <case>
         Given The urlBase is available "https://api.manteca.dev/crypto"
         And The API key is available "<apiKEY>"
@@ -91,7 +90,7 @@ Feature: Orders Integrations
             | case               | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message                                                                                                 |
             | enviroment api-KEY | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 403        | FORBIDDEN      | You do not have enough permissions to access the resource with the provided authentication credentials. |
 
-    @UnhappyPath
+    @ErrorPath1
     Scenario Outline: Validate error order response sending empty <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And The API key is available "<apiKEY>"
@@ -112,11 +111,11 @@ Feature: Orders Integrations
             | userAnyId         | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  |           | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | userAnyId is missing.                                                                                                                                                                                  |
             | assetAmount       | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 |             | ARS     | 400        | BAD_REQUEST    | Bad request. | One of these fields needs to be provided [assetAmount, againstAmount].                                                                                                                                 |
             | asset coin        | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra |       | BUY  | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | asset has wrong value . Possible values are DAI,USDT,BUSD,USDC,USDCB,ETH,BNB,ARB,POL,TRX,UST,AUST,BTC,LUNA,LUNA2,SOL,MATIC,NUARS,WLD,USDL,SDAI,AXS,MANA,ENJ,SAND,PSG,ATM,BAR,CITY,EURS,WETH,WBTC,WARS. |
-            | against coin      | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          |         | 400        | BAD_REQUEST    | Bad request. | against has wrong value . Possible values are ARS,USD,CLP,COP,BRL,GTQ,CRC,PUSD,MXN,PHP,PEN,BOB,EUR,DAI,USDT,BUSD,USDC,USDCB.                                                                           |
+            | against coin      | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          |         | 400        | BAD_REQUEST    | Bad request. | against has wrong value . Possible values are ARS,USD,CLP,COP,BRL,GTQ,CRC,PUSD,MXN,PHP,PEN,BOB,EUR,USDCCL,DAI,USDT,BUSD,USDC,USDCB.                                                                    |
             | side              | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  |      | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | side has wrong value . Possible values are BUY,SELL.                                                                                                                                                   |
-            | number externalId | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 122        | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | externalId has wrong value 123. Value should be a string different than a 24 character hex string and different than an integer number.                                                                |
+            | number externalId | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV |            | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | externalId has wrong value 123. Value should be a string different than a 24 character hex string and different than an integer number.                                                                |
 
-    @testing
+    @ErrorPath
     Scenario Outline: Validate error order response sending empty <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And The API key is available "<apiKEY>"
@@ -137,7 +136,7 @@ Feature: Orders Integrations
             | againstAmountAmount   | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 |               | ARS     | 400        | BAD_REQUEST    | Bad request.              | One of these fields needs to be provided [assetAmount, againstAmount]. |
             | againstAmountAmount 0 | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 0             | ARS     | 400        | MIN_SIZE       | Invalid order size (min). |                                                                        |
 
-    @testing
+    @ErrorPath
     Scenario Outline: Validate error order response sending both <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And The API key is available "<apiKEY>"
@@ -158,7 +157,7 @@ Feature: Orders Integrations
             | case                | apiKEY                          | externalId | sessionId            | trade  | asset | side | userAnyId | againstAmount | assetAmount | against | statusCode | internalStatus | message      | errors                                                                                           |
             | againstAmountAmount | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integration-orders-n | compra | USDT  | BUY  | 100008501 | 10            | 20          | ARS     | 400        | BAD_REQUEST    | Bad request. | Only one field is allowed between [assetAmount, againstAmount]. Please provide only one of them. |
 
-    @testing
+    @ErrorPath
     Scenario Outline: Validate error order response sending exist <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And The API key is available "<apiKEY>"
