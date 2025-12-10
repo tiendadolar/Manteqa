@@ -9,8 +9,12 @@ import { CustomWorld } from '../../../../support/world';
 
 Then('Validate initial onboarding response attributes', { timeout: 50 * 1000 }, async function (this: CustomWorld) {
   const res = this.response;
+  console.log('AQUI');
+
+  console.log(JSON.stringify(res.body, null, 2));
 
   const validateInitialOnbV2: OnboardingV2InitialResponse = validateResponse(res.body);
+
   logger.debug(res.body.user.legalId);
   await onboardingHelper(this.urlBase, this.apiKey, res.body.user.legalId);
 });
