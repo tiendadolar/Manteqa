@@ -83,7 +83,7 @@ export class CustomWorld extends World {
     return this.networkId;
   }
 
-  static setStoreData(key: string, value: any, persistent = false) {
+  static setStoreData(key: string, value: any, persistent = false): void {
     if (persistent) {
       CustomWorld.storeData.persistent[key] = value;
     } else {
@@ -95,16 +95,16 @@ export class CustomWorld extends World {
     return CustomWorld.storeData.session[key] ?? CustomWorld.storeData.persistent[key];
   }
 
-  static clearStoreData(clearPersistent = false) {
+  static clearStoreData(clearPersistent = false): void {
     CustomWorld.storeData.session = {};
     if (clearPersistent) {
       CustomWorld.storeData.persistent = {};
     }
   }
 
-  static getUserData(key: string): any {
-    return CustomWorld.getUserData(key);
-  }
+  // static getUserData(key: string): any {
+  //   return CustomWorld.getUserData(key);
+  // }
 
   setUserData(key: keyof UserData | string, value: any): void {
     if (!this.userData) {

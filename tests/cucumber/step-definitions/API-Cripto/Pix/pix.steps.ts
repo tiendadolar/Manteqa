@@ -82,6 +82,11 @@ When('Assign the value {string} to the variable {string}', function (this: Custo
     return;
   }
 
+  if (variable === 'billId') {
+    this.userData[variable] = CustomWorld.getStoreData('billId');
+    return;
+  }
+
   // Se utiliza pixCode tambien para lockCode
   if (value === 'pixCode') {
     // console.log(CustomWorld.getStoreData("pixCode"));
@@ -208,6 +213,8 @@ When(
         .set('x-access-token', CustomWorld.getStoreData('JWT') ?? this.token)
         .set('User-Agent', 'PostmanRuntime/7.44.1')
         .send(this.userData);
+
+      CustomWorld.setStoreData('responseBDD', this.response.body);
 
       console.log(this.response.status);
       // console.log('API response:', JSON.stringify(this.response.body, null, 2));

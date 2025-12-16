@@ -1,6 +1,7 @@
 import { AddBankAccountCambioHandler, AuthTF2Handler, FiatDepositAdminCambioHandler, OnboardingInitialHandler, OnboardingValidateDocHandler, ParamReplaceHandler } from '../handlers/apiCambio.handler';
 import {
   AddBankAccountV2Handler,
+  BillingPaymentHandler,
   CbuCRCHandler,
   DepositCryptoHandler,
   DepositFiatHandler,
@@ -37,7 +38,8 @@ export class EndpointHandlerFactory {
       new FiatDepositAdminCambioHandler(),
       new AuthTF2Handler(),
       new ParamReplaceHandler(),
-      new manualRefundHandler()
+      new manualRefundHandler(),
+      new BillingPaymentHandler()
     ];
   }
 

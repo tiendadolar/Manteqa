@@ -38,6 +38,7 @@ export const thereIsFinalBalanceCurrencyValidator = (balance: any, currency: str
 };
 
 export const compareBalanceTypeValidator = (charge?: string, inicial?: string, final?: string): any => {
+  // Obtain data from World and assign to variable
   if (charge === 'balance') {
     const inicialBalance = CustomWorld.getStoreData(`${inicial}`);
     const finalBalance = CustomWorld.getStoreData(`${final}`);
@@ -49,9 +50,13 @@ export const compareBalanceTypeValidator = (charge?: string, inicial?: string, f
 };
 
 export const compareBalanceFlowValidator = (inicialAmount: string, finalAmount: string): void => {
-  const isRefund = CustomWorld.getStoreData('isRefund');
-  const isCompanyDebt = CustomWorld.getStoreData('isCompanyDebt');
+  const response: any = CustomWorld.getStoreData('responseBDD');
+  const isRefund: boolean = CustomWorld.getStoreData('isRefund');
+  const isCompanyDebt: boolean = CustomWorld.getStoreData('isCompanyDebt');
+  let coin: string = '';
+  let assetAmountOperated: string = '';
 
+  // If is a refund synthetic and take debt company
   if (isRefund && isCompanyDebt) {
     const finalDebt = parseFloat(inicialAmount) + parseFloat(CustomWorld.getStoreData('paymentAgainstAmount'));
 
@@ -62,11 +67,31 @@ export const compareBalanceFlowValidator = (inicialAmount: string, finalAmount: 
     return;
   }
 
+  // If is just a refund, take balance funds
   if (isRefund) {
     expect(parseFloat(inicialAmount)).to.be.closeTo(parseFloat(finalAmount), 0.02);
 
     logger.info(`In this case we operated onto user balance, so both of them should be equal`);
     logger.info(`Balance after refund is correct: Inicial Balance ${inicialAmount}, Final Balance ${finalAmount}`);
     return;
+  }
+
+  if (response !== undefined && isCompanyDebt) {
+    coin = response.stages['1'].asset;
+    logger.warn(coin);
+    if (coin === 'USDT' || coin === 'USDC') {
+      assetAmountOperated = response.stages['1'].assetAmount;
+      logger.warn(assetAmountOperated);
+
+      const finalDebt = parseFloat(inicialAmount) + parseFloat(assetAmountOperated);
+      expect(finalDebt).to.be.closeTo(parseFloat(finalAmount), 0.02);
+
+      logger.info(`In this case we operated onto company balance, so the final should be increased`);
+      logger.info(`Balance after refund is correct: Inicial Balance ${inicialAmount}, Final Balance ${finalDebt}`);
+      return;
+    }
+
+    if (coin === 'ARS') {
+    }
   }
 };

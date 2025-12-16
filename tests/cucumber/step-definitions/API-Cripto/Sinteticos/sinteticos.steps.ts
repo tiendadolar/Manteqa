@@ -2,6 +2,7 @@ const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
 import { timeoutsBySynthetic } from '../../../../support/constants/constants.timeouts';
+import { validateRes } from '../../../../support/helpers/requestHelper';
 import { getSyntheticStatus, lockPaymentHelper, syntheticPaymentHelper, validateSyntheticRefundStage, validateSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
 import logger from '../../../../support/utils/logger';
 import { delay } from '../../../../support/utils/utils';
@@ -111,6 +112,7 @@ Then('Obtain a response {int} and status {string} for {string} synthetic', { tim
 
   await delay(ms);
   const response = await getSyntheticStatus(urlBase, endpoint, apiKEY, statusCode, statusName);
+  validateRes(response, 200);
   validateSyntheticStatus(response.body, response.status, statusCode, statusName);
 });
 

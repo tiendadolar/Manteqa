@@ -26,6 +26,9 @@ const compareDebtBalance = (thereIsDepositStage: Boolean, response: any, coin: s
     return;
   }
 
+  logger.warn(paymentAgainstAmount);
+  logger.warn(againstAmountOperated);
+
   againstAmountOperated !== undefined ? (instantDebt = parseFloat(againstAmountOperated)) : (instantDebt = parseFloat(paymentAgainstAmount));
 
   aquiredDebt = parseFloat(companyAccountingInfo) + instantDebt;

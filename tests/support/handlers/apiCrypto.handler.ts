@@ -2,6 +2,7 @@ import { EndpointHandler } from '../factory/endpointHandler.interface';
 import logger from '../utils/logger';
 import {
   bankingOnboardingApiCrypto,
+  billingPaymentSynthetic,
   criptoDepositApiCrypto,
   fiatDepositApiCrypto,
   fiatWithdrawApiCrypto,
@@ -135,6 +136,16 @@ export class SyntheticPaymentHandler implements EndpointHandler {
       userData.qrCode =
         'tki9OsLQqpdAJJkvNS5gs3u1B2FvCP3mgZ4ASmhss6QDnBuaKryo9oAkXFXBqCV05Lf24Isk1NBKUICYYigtAOpfSr/bztjfbAhAQB5fK7SG53PXlXEHBrj2UXsckdPnXGO0WkI8QqfaxfWtuLmUVz5ay5N6FnBt88iNJaoMOLJLdIDCaIL1CDVjxyKaVBdY+eUwBZmAB04V0dF3q1wsywSEcpNuxel4agJq6dWfhwHxltjDfjIG2tNrMkPv02jL72LJiRNKDBy8ECzrlh3JwmyvmlE8T2i70g0WBS3UsOPuaAHjeQGSsZqCSNbXyY5IxDI2as+tFPE6iK8/biUuZA==|1c8618ba4382fb49';
     return userData;
+  }
+}
+
+export class BillingPaymentHandler implements EndpointHandler {
+  canHandle(endpoint: string, userData: any): boolean {
+    return ['/v2/bill-locks'].includes(endpoint);
+  }
+
+  handle(userData: any, world?: any) {
+    return billingPaymentSynthetic(userData);
   }
 }
 

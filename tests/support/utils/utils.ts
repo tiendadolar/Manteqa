@@ -220,7 +220,7 @@ export const criptoDepositApiCrypto = (userData: any) => {
       tx: {
         hash: CustomWorld.getNetworkId(),
         from: userData.from || '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5',
-        to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress,
+        to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress || userData.details.depositAddresses.ETHEREUM.address,
         value: {
           wei: userData.wei || md.toWei(userData.stages['1'].thresholdAmount),
           human: CustomWorld.getStoreData('thresholdAmount') || userData.human || userData.stages['1'].thresholdAmount
@@ -234,7 +234,7 @@ export const criptoDepositApiCrypto = (userData: any) => {
       tx: {
         hash: CustomWorld.getNetworkId(),
         from: userData.from || '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5',
-        to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress,
+        to: CustomWorld.getStoreData('depositAddress') || userData.to || userData.details.depositAddress || userData.details.depositAddresses.ETHEREUM.address,
         value: {
           wei: md.toWei(CustomWorld.getStoreData('thresholdAmount')).toString() || userData.wei || md.toWei(userData.stages['1'].thresholdAmount),
           human: CustomWorld.getStoreData('thresholdAmount') || userData.human || userData.stages['1'].thresholdAmount
@@ -244,6 +244,20 @@ export const criptoDepositApiCrypto = (userData: any) => {
       }
     };
   }
+};
+
+export const billingPaymentSynthetic = (userData: any, flag?: string) => {
+  return {
+    userAnyId: userData.userAnyId,
+    billId: userData.billId,
+    against: userData.against,
+    amount: userData.amount,
+    sender: {
+      exchange: userData.exchange,
+      legalId: userData.legalId,
+      name: userData.name
+    }
+  };
 };
 
 export const senderPaymentSynthetic = (userData: any, flag?: string, flag2?: string) => {

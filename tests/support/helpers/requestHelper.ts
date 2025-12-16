@@ -1,6 +1,7 @@
 const request = require('supertest');
 const { expect } = require('chai');
 import logger from '../utils/logger';
+import { CustomWorld } from '../world';
 
 const errorRequest = (response: any) => {
   logger.error(response.status);
@@ -60,6 +61,7 @@ export const apiRequest = async ({
 export const validateRes = (response: any, expectedStatus: number) => {
   try {
     expect(response.status).to.equal(expectedStatus);
+    CustomWorld.setStoreData('responseHelper', response.body);
   } catch (error) {
     errorRequest(response);
   }

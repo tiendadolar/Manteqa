@@ -56,6 +56,7 @@ Then('Obtain {string} balance for {string} user over {string}', { timeout: 500 *
 
 // New accounting flow for manual refunds
 Then('Obtain {string} debt balance {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, charge: string) {
+  if (fiat === 'USDC') fiat = 'USDT';
   const urlBase = this.urlBase;
   const endpoint = `/v2/accounting/debt`;
   const apiKEY = this.apiKey;
