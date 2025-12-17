@@ -97,10 +97,12 @@ Feature: Lock Payment Integrations
         And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>" and error: "<errors>"
 
         Examples:
-            | case               | apiKEY                          | pay | userAnyId | paymentDestination | against | amount | statusCode | internalStatus | message      | errors                         |
-            | paymentDestination | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | 100014296 |                    | USDT    | 10     | 400        | BAD_REQUEST    | Bad request. | paymentDestination is missing. |
+            | case               | apiKEY                          | pay | userAnyId | paymentDestination | against | amount | statusCode | internalStatus | message        | errors                         |
+            | paymentDestination | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | 100014296 |                    | USDT    | 10     | 400        | BAD_REQUEST    | Bad request.   | paymentDestination is missing. |
+            | userAnyId          | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | PIX |           | qr3manualamount    | USDT    | 10     | 404        | USER_NF        | User not found |                                |
 
-    @ErrorPath1
+
+    @ErrorPath
     Scenario Outline: Validate error lock payment with sender response sending invalid <case>
         Given The API key is available "<apiKEY>"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -121,3 +123,19 @@ Feature: Lock Payment Integrations
             | legalId  | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL   |             | DARIO AUGUSTO | DA SILVA | 100014295 | qr3manualamount    | USDT    | 10     | ARGENTINA  | 400        | BAD_REQUEST    | Bad request. | sender.legalId has wrong value . Value should be a generic legal id defined as some combination of letters, numbers, dashes and dots like 1234.5678-a.                                                                                                                                                                |
             | name     | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL   | 40842073817 |               | DA SILVA | 100014295 | qr3manualamount    | USDT    | 10     | ARGENTINA  | 400        | BAD_REQUEST    | Bad request. | sender.name is missing.                                                                                                                                                                                                                                                                                               |
             | surname  | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL   | 40842073817 | DARIO AUGUSTO |          | 100014295 | qr3manualamount    | USDT    | 10     | ARGENTINA  | 400        | BAD_REQUEST    | Bad request. | sender.surname is missing.                                                                                                                                                                                                                                                                                            |
+
+    @ErrorPath
+    Scenario Outline: Validate error lock payment response sending invalid enviroment
+        Given The urlBase is available "https://api.manteca.dev/crypto"
+        And The API key is available "<apiKEY>"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response <statusCode>
+        And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>" and error: "<errors>"
+
+        Examples:
+            | apiKEY                          | pay | userAnyId | paymentDestination | against | amount | statusCode | internalStatus | message                                                                                                 | errors |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | 100014296 |                    | USDT    | 10     | 403        | FORBIDDEN      | You do not have enough permissions to access the resource with the provided authentication credentials. |        |
