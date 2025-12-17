@@ -152,10 +152,10 @@ Feature: Sintético QR 3.0
 
         #QR BOB monto nuy bajo, falla contra USDT
         Examples:
-            | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
-            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
-            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
-    # | andresperalta@manteca.dev | estatico | 100013787 | qr3BOB          | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | credential                | accion   | userAnyId | qrCode             | amount | sessionId    | to                                         | ticker |
+            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount    | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount    | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | andresperalta@manteca.dev | estatico | 100013787 | qr3BOBmanualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Smoke @QRV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints
@@ -352,10 +352,10 @@ Feature: Sintético QR 3.0
         And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
-            | accion   | userAnyId | qrCode          | against | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009628 | pixmanualamount | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | embebido | 100009628 | pix             | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | estatico | 100013787 | qr3BOB          | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | accion   | userAnyId | qrCode             | against | amount | sessionId                 | to                                         | ticker |
+            | manual   | 100009628 | pixmanualamount    | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | embebido | 100009628 | pix                | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | estatico | 100013787 | qr3BOBmanualamount | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Peru @NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>" sobre el Balance User
@@ -703,10 +703,10 @@ Feature: Sintético QR 3.0
 
         # QR BOB monto muy bajo, falla contra USDT
         Examples:
-            | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
-            | manual   | 100009359 | qr3manualamount | 2000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
-            | embebido | 100009359 | qr3             | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
-    # | embebido | 100013788 | qr3BOB          | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | accion   | userAnyId | qrCode             | amount | sessionId    | to                                         | ticker |
+            | manual   | 100009359 | qr3manualamount    | 2000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | embebido | 100009359 | qr3                | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | embebido | 100013788 | qr3BOBmanualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Smoke @Desc @QRV2Desc @Automated
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V2 endpoints

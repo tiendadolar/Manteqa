@@ -132,9 +132,9 @@ export class SyntheticPaymentHandler implements EndpointHandler {
     if (userData.exchange) userData = senderPaymentSynthetic(userData, userData.gender, userData.street);
 
     userData.userAnyId = userData.userAnyId ?? world.getStoreData('userId');
-    if (userData.qrCode === 'qr3BOB')
+    if (userData.qrCode === 'qr3BOBmanualamount')
       userData.qrCode =
-        'tki9OsLQqpdAJJkvNS5gs3u1B2FvCP3mgZ4ASmhss6QDnBuaKryo9oAkXFXBqCV05Lf24Isk1NBKUICYYigtAOpfSr/bztjfbAhAQB5fK7SG53PXlXEHBrj2UXsckdPnXGO0WkI8QqfaxfWtuLmUVz5ay5N6FnBt88iNJaoMOLJLdIDCaIL1CDVjxyKaVBdY+eUwBZmAB04V0dF3q1wsywSEcpNuxel4agJq6dWfhwHxltjDfjIG2tNrMkPv02jL72LJiRNKDBy8ECzrlh3JwmyvmlE8T2i70g0WBS3UsOPuaAHjeQGSsZqCSNbXyY5IxDI2as+tFPE6iK8/biUuZA==|1c8618ba4382fb49';
+        'Lvj/GV5XemlrG0IHrXEpovCVRh2O+P1CnLNwaJ6ov4BhMfP6AzUHiH4NKipATwuOgy0xbZm7OJbjCG1tjkDOgpB/4920qIRffg6eHb6evseZ5xGZHYxOdrmEE9Ka0by31TC9GKYrLnI3WwfzPojB0WlTKV7nznWGtBg6qXL7Ndei6IQEx8lENKjdGqI6NZhG3M9g0td3cyhzlES4ONx0QhSSv9+JUK+7qtFD3Ny+PERasxCFlx3c4R48iWl7IgEWB1zglMXgI7jZOSmfjw5FjdA7INFiKUi249vZvPhR4pobc6FTO+MslgOjiO/mTmjdXky/yI2FeZcHOs3oRyg6HA==|6497E3319343ED0DA8514FFE_is_open';
     return userData;
   }
 }
