@@ -251,7 +251,7 @@ When(
         .set('md-api-key', this.apiKey)
         .set('x-access-token', CustomWorld.getStoreData('JWT') ?? this.token)
         .set('User-Agent', 'PostmanRuntime/7.44.1');
-      // console.log('API response:', JSON.stringify(this.response.body, null, 2));
+      console.log('API response:', JSON.stringify(this.response.body, null, 2));
     } catch (error: unknown) {
       const err = error as {
         response?: any;

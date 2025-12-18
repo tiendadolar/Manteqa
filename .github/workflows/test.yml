@@ -21,6 +21,8 @@ on:
           - 'Sintéticos'
           - 'Withdraw Fiat v1'
           - 'Withdraw Fiat v2'
+          - 'Withdraw Crypto V1'
+          - 'Withdraw Crypto V2'
           - 'Remesas'
 
   # Ejecución automática en cada push
@@ -91,6 +93,12 @@ jobs:
               ;;
             "Withdraw Fiat v2")
               TAGS="@Withdraw and @Smoke and @Fiat and @V2 and @Automated"
+              ;;
+            "Withdraw Crypto V1")
+              TAGS="@Withdraw and @Smoke and @Crypto and @V1 and @Automated"
+              ;;
+            "Withdraw Crypto V2")
+              TAGS="@Withdraw and @Smoke and @Crypto and @V2 and @Automated"
               ;;
             "Remesas")
               TAGS="@Withdraw and @Smoke and @Remesas and @Automated"

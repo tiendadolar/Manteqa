@@ -31,7 +31,7 @@ Feature: Retiros Crypto
             | USDT  | 100007647 | ARBITRUM |
 
 
-    @Smoke @V1 @Automated
+    @Smoke @Crypto @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> por V1 endpoints
         Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -59,23 +59,24 @@ Feature: Retiros Crypto
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
+        # Polygon has nonce number faileds so it can generate failed withdraws
         Examples:
             | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100007647 | WORLDCHAIN | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100007647 | POLYGON    | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100007647 | ARBITRUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | WLD  | 100007647 | WORLDCHAIN | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100007647 | POLYGON    | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            # | USDT | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            # | USDT | 100007647 | ARBITRUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             | USDT | 100007647 | ETHEREUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | DAI  | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | ETH  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | ETH  | 100007647 | ETHEREUM   | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | BNB  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | BTC  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | POL  | 100007647 | POLYGON    | 0.5    | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100007647 | POLYGON    | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100007647 | BSC        | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100007647 | OPTIMISM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100007647 | ARBITRUM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            # | DAI  | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            # | ETH  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            # | ETH  | 100007647 | ETHEREUM   | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            # | BNB  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            # | BTC  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            | POL  | 100007647 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | USDC | 100007647 | POLYGON    | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No Funds in hot wallet Argentina
+            # | USDC | 100007647 | BSC        | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            | USDC | 100007647 | OPTIMISM   | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+    # | USDC | 100007647 | ARBITRUM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
 
     @Regression @Crypto @ARG @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user ARG por V1
@@ -109,15 +110,15 @@ Feature: Retiros Crypto
         Examples:
             | coin | userId    | chain      | amount | wallet                                     |
             | WLD  | 100009893 | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | WLD  | 100009893 | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+        # | WLD  | 100009893 | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | No funds in hot wallet Argentina
 
         @Working
         Examples:
             | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009893 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009893 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDT | 100009893 | POLYGON  | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            # | USDT | 100009893 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             | USDT | 100009893 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009893 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | USDC | 100009893 | OPTIMISM | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
 
     @Regression @Crypto @CHL @V1 @Automated
@@ -844,7 +845,7 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @Smoke @Lock
+    @Smoke @Crypto @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> haciendo lock price por V2
         Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -875,8 +876,12 @@ Feature: Retiros Crypto
         Examples:
             | type   | asset | userAnyId | country | network    | amount | address                                    |
             | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | crypto | USDT  | 100009873 | ARG     | POLYGON    | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | crypto | USDT  | 100009873 | ARG     | ETHEREUM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | crypto | POL   | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 2      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
-    @auth @Automated
+    @Smoke @HotWallet @Automated
     Scenario Outline: Validar que los retiros para un user exchange <exchange> se realicen por la Hot Wallet <wallet>
         Given The API key is available "<apiKEY>"
         And login user admin "<credential>"
@@ -895,7 +900,7 @@ Feature: Retiros Crypto
             | apiKEY                          | credential                | userId    | chain | coin | amount | address                                    |
             # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 4     | USDC | 3      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 0     | USDT | 5      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
-        # | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | andresperalta@manteca.dev | 100009873 | 1     | USDT | 3      | 0x6fBf278Bf9cd0cF2897A66fB1FFc8C1320Ec70C1 |
+            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | andresperalta@manteca.dev | 100009873 | 1     | USDT | 3      | 0x6fBf278Bf9cd0cF2897A66fB1FFc8C1320Ec70C1 |
 
 
 
