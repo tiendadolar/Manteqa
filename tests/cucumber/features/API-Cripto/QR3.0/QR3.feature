@@ -43,7 +43,7 @@ Feature: Sintético QR 3.0
     # ------ NO DESCUBIERTOS -------
     # ------ QR V1 ------
 
-    @Smoke @QRV1NoDescp @Automated
+    @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <ticker> en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -75,7 +75,7 @@ Feature: Sintético QR 3.0
             | 100009352 | estático | pixmanualamount                                                                                                                                                                                            | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
             | 100009352 | embebido | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
-    @Smoke @QRV1NoDescp @Automated
+    @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <against> en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"

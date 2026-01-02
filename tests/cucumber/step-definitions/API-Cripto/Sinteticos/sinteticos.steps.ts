@@ -109,9 +109,10 @@ Then('Obtain a response {int} and status {string} for {string} synthetic', { tim
   const urlBase = this.urlBase;
   const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
   const apiKEY = this.apiKey;
+  const userAnyId = CustomWorld.getStoreData('userAnyId');
   const ms = timeoutsBySynthetic[syntheticType] ?? timeoutsBySynthetic['default'];
 
-  const user = await getUserInfoHelper(apiKEY, this.userAnyId);
+  const user = await getUserInfoHelper(apiKEY, undefined, userAnyId);
   CustomWorld.setStoreData('userExchange', user.body.exchange);
 
   await delay(ms);
