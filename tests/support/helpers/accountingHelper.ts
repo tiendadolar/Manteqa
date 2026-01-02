@@ -4,6 +4,7 @@ import logger from '../utils/logger';
 import { compareBalanceFlowValidator, compareBalanceTypeValidator, thereIsBalanceCurrencyValidator, thereIsFinalBalanceCurrencyValidator } from '../validators/userBalanceValidators';
 import { CustomWorld } from '../world';
 import { apiRequest } from './requestHelper';
+import { getUserInfoHelper } from './userHelper';
 
 const getInicialDebtBalance = (response: any, coin: string) => {
   if (response.hasOwnProperty(coin)) {
@@ -71,6 +72,9 @@ export const getUserDebtBalance = async (
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
   // const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY);
   const { balance } = response.body;
+  // We ser userExchange to compare with type payment (user exchange arg paying pix e.j.)
+  // CustomWorld.setStoreData('userExchange', response.body.exchange, true);
+  // logger.error(CustomWorld.getStoreData('userExchange'));
 
   if (CustomWorld.getStoreData('userBalance') === undefined && paymentAmount !== undefined) paymentAmount = undefined;
 
@@ -130,6 +134,9 @@ export const getUserBalanceHelper = async (urlBase: string, endpoint: string, ap
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
   // take only balance property from response
   const { balance } = response.body;
+  // We ser userExchange to compare with type payment (user exchange arg paying pix e.j.)
+  // CustomWorld.setStoreData('userExchange', response.body.exchange, true);
+  // logger.error(CustomWorld.getStoreData('userExchange'));
 
   // validate if we have inicial balance stored and set final balance accordingly
   thereIsFinalBalanceCurrencyValidator(balance, currency, 'inicialUserBalance', 'finalUserBalance');

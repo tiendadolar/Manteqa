@@ -114,7 +114,7 @@ Feature: Synthetic Refunds
 
     # User exchange BRL opereted a PIX against BRL
     @Manual @Automated
-    Scenario Outline: Refund manual de sintetico de pago PIX contra ARS (Sobre User Balance Argentino)
+    Scenario Outline: Refund manual de sintetico de pago PIX contra BRL (Sobre User Balance Brasilero)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
         And Obtain "<balance>" balance for "<userAnyId>" user over "<charge>"

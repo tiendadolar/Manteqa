@@ -4,6 +4,7 @@ const request = require('supertest');
 import { timeoutsBySynthetic } from '../../../../support/constants/constants.timeouts';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import { getSyntheticStatus, lockPaymentHelper, syntheticPaymentHelper, validateSyntheticRefundStage, validateSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
+import { getUserInfoHelper } from '../../../../support/helpers/userHelper';
 import logger from '../../../../support/utils/logger';
 import { delay } from '../../../../support/utils/utils';
 import { CustomWorld, UserData } from '../../../../support/world';
@@ -109,6 +110,9 @@ Then('Obtain a response {int} and status {string} for {string} synthetic', { tim
   const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
   const apiKEY = this.apiKey;
   const ms = timeoutsBySynthetic[syntheticType] ?? timeoutsBySynthetic['default'];
+
+  const user = await getUserInfoHelper(apiKEY, this.userAnyId);
+  CustomWorld.setStoreData('userExchange', user.body.exchange);
 
   await delay(ms);
   const response = await getSyntheticStatus(urlBase, endpoint, apiKEY, statusCode, statusName);

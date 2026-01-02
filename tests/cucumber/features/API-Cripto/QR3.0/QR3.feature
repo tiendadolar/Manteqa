@@ -43,7 +43,7 @@ Feature: Sintético QR 3.0
     # ------ NO DESCUBIERTOS -------
     # ------ QR V1 ------
 
-    @Smoke @QRV1NoDesc @Automated
+    @Smoke @QRV1NoDescp @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <ticker> en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -75,7 +75,7 @@ Feature: Sintético QR 3.0
             | 100009352 | estático | pixmanualamount                                                                                                                                                                                            | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
             | 100009352 | embebido | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
-    @Smoke @QRV1NoDesc @Automated
+    @Smoke @QRV1NoDescp @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <against> en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -185,7 +185,6 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
-        @bob
         Examples:
             | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
             | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
@@ -1192,7 +1191,7 @@ Feature: Sintético QR 3.0
             | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014302 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
             | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014302 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
 
-    @Smoke @Desc @Sender @Automated
+    @Smoke @Desc @Sender @Peru @Automated
     Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender completo info desde Principal Account <accountExc> por PLUS_PAGOS
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

@@ -6,9 +6,11 @@ import { apiRequest } from './requestHelper';
 
 export const getUserInfoHelper = async (apiKey: string, key?: string, userAnyId?: string) => {
   const urlBase = `https://sandbox.manteca.dev/crypto/v2`;
-  const endpoint = `/users/${userAnyId}`;
+  const endpoint = `/users/${CustomWorld.getStoreData('userAnyId')}`;
 
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  logger.warn(key);
+  logger.warn(response.body);
 
   if (key !== undefined) {
     CustomWorld.setStoreData(key.toString(), response.body[key.toString()]);

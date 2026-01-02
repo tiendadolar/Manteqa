@@ -373,7 +373,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId           | email                     | legalId | exchange | name              | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | andresperalta@manteca.dev | Company Ppal Account | ppalaccount-bob@gmail.com | 5334072 | BOLIVIA  | PRINCIPAL ACCOUNT | BOLIVIA | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | bolivia     | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId | email               | legalId       | exchange  | name   | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | andresperalta@manteca.dev | testbill2  | testbill2@gmail.com | 27-16628199-2 | ARGENTINA | Malena | Cepeda  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Argentina   | SAMUEL PIRES DE MELO |
 
 

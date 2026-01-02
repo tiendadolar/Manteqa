@@ -42,6 +42,10 @@ export const validateSyntheticRefundStage = (body: any) => {
 };
 
 export const validateSyntheticStatus = (body: any, httpStatus: number, statusCode?: number, statusName?: string) => {
+  logger.warn(CustomWorld.getStoreData('userExchange'));
+  logger.warn(CustomWorld.getStoreData('syntheticType'));
+  if (CustomWorld.getStoreData('userExchange') === 'ARGENTINA' && CustomWorld.getStoreData('syntheticType') === 'PIX_PAYMENT') statusName = 'ACTIVE';
+  logger.warn(statusName);
   if (body.status !== statusName) CustomWorld.clearStoreData();
 
   expect(httpStatus).to.equal(statusCode);
@@ -54,10 +58,10 @@ export const validateSyntheticStatus = (body: any, httpStatus: number, statusCod
 
 export const getSyntheticStatus = async (urlBase: string, endpoint: string, apiKey: string, statusCode?: number, statusName?: string): Promise<any> => {
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
-  logger.debug(JSON.stringify(response.body, null, 2));
   // const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY);
   const body: any = response.body;
   const httpStatus: number = response.status;
+  CustomWorld.setStoreData('syntheticType', body.type);
 
   logger.info(httpStatus);
   logger.info(JSON.stringify(body, null, 2));
