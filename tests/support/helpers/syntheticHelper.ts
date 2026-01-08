@@ -42,9 +42,20 @@ export const validateSyntheticRefundStage = (body: any) => {
 };
 
 export const validateSyntheticStatus = (body: any, httpStatus: number, statusCode?: number, statusName?: string) => {
-  logger.warn(CustomWorld.getStoreData('userExchange'));
-  logger.warn(CustomWorld.getStoreData('syntheticType'));
-  if (CustomWorld.getStoreData('userExchange') === 'ARGENTINA' && CustomWorld.getStoreData('syntheticType') === 'PIX_PAYMENT') statusName = 'ACTIVE';
+  // Cuando los errores de transfero pix en QA se solucionen, comentar este if
+  if (CustomWorld.getStoreData('userExchange') === 'ARGENTINA' && CustomWorld.getStoreData('syntheticType') === 'PIX_PAYMENT') {
+    logger.warn(statusName);
+    if (body.status !== statusName) CustomWorld.clearStoreData();
+
+    expect(httpStatus).to.equal(statusCode);
+    expect(body.status).to.be.oneOf(['ACTIVE', 'COMPLETED']);
+
+    if (body?.stages?.['1'].stageType === 'DEPOSIT') CustomWorld.setStoreData('depositStage', true);
+    if (body?.stages?.['1'].stageType !== 'DEPOSIT') CustomWorld.setStoreData('notDepositStage', true);
+    if (body.hasOwnProperty('details') && body.details.paymentAgainst !== 'USDT') CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
+    return;
+  }
+
   logger.warn(statusName);
   if (body.status !== statusName) CustomWorld.clearStoreData();
 

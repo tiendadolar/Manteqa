@@ -343,10 +343,10 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
-        Examples:
-            | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009628 | pixmanualamount | 10     | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
-            | embebido | 100009628 | pix             |        | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
+        #     | manual   | 100009628 | pixmanualamount | 10     | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
+        #     | embebido | 100009628 | pix             |        | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
 
         #When transfero pix failed
         Examples:
@@ -381,11 +381,11 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<against>" balance for "<userAnyId>" user
 
-        Examples:
-            | accion   | userAnyId | qrCode             | against | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009628 | pixmanualamount    | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | embebido | 100009628 | pix                | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | estatico | 100013787 | qr3BOBmanualamount | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+        # Examples:
+        #     | accion   | userAnyId | qrCode             | against | amount | sessionId                 | to                                         | ticker |
+        #     | manual   | 100009628 | pixmanualamount    | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+        #     | embebido | 100009628 | pix                | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+        #     | estatico | 100013787 | qr3BOBmanualamount | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
         #When transfero pix failed
         Examples:
