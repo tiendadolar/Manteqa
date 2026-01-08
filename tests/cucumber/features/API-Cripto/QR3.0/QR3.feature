@@ -69,11 +69,18 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
-        # First QR is implemented to skip microoperations blocked
+        # # First QR is implemented to skip microoperations blocked 08449ae2-8a26-47a5-992d-2689f135bc11
+        # Examples:
+        #     | userAnyId | type     | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
+        #     | 100009352 | estático | pixmanualamount                                                                                                                                                                                            | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+        #     | 100009352 | embebido | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | userAnyId | type     | qrCode                                                                                                                                                                                                     | amount | sessionId      | to                                         | ticker |
-            | 100009352 | estático | pixmanualamount                                                                                                                                                                                            | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
-            | 100009352 | embebido | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | userAnyId | type     | qrCode                               | amount | sessionId      | to                                         | ticker |
+            | 100009352 | estático | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+            | 100009352 | embebido | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
+
 
     @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <against> en no descubierto vía V1 endpoints
@@ -102,10 +109,16 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<against>" balance for "<userAnyId>" user
 
+        # Examples:
+        #     | userAnyId | type     | qrCode                                                                                                                                                                                                     | against | amount | sessionId      | to                                         |
+        #     | 100009352 | embebido | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
+        #     | 100009352 | estático | pixmanualamount
+
+        #When transfero pix failed
         Examples:
-            | userAnyId | type     | qrCode                                                                                                                                                                                                     | against | amount | sessionId      | to                                         |
-            | 100009352 | embebido | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
-            | 100009352 | estático | pixmanualamount                                                                                                                                                                                            | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
+            | userAnyId | type     | qrCode                               | against | amount | sessionId      | to                                         |
+            | 100009352 | embebido | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
+            | 100009352 | estático | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
 
     @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
@@ -239,10 +252,16 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
+        #     | manual   | 100009624 | pixmanualamount | 10     | PIX-manual-V1-NO-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+        #     | embebido | 100009624 | pix             | 10     | PIX-embebido-V1-NO-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode          | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009624 | pixmanualamount | 10     | PIX-manual-V1-NO-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
-            | embebido | 100009624 | pix             | 10     | PIX-embebido-V1-NO-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | accion   | userAnyId | qrCode                               | amount | sessionId                 | to                                         | ticker |
+            | manual   | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V1-NO-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | embebido | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-embebido-V1-NO-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
 
     @Smoke @PixV1NoDesc @Automated
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V1 endpoints
@@ -271,10 +290,16 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<against>" balance for "<userAnyId>" user
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
+        #     | embebido | 100009624 | pix             | ARS     | 10     | PIX-embebido-V1-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+        #     | manual   | 100009624 | pixmanualamount | ARS     | 10     | PIX-manual-V1-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
-            | embebido | 100009624 | pix             | ARS     | 10     | PIX-embebido-V1-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
-            | manual   | 100009624 | pixmanualamount | ARS     | 10     | PIX-manual-V1-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | accion   | userAnyId | qrCode                               | against | amount | sessionId              | to                                         | ticker |
+            | embebido | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-embebido-V1-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | manual   | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-manual-V1-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
 
     @Smoke @PixV1NoDesc @Automated
     Scenario Outline: Validar Clean Code al ejecutar lock de QR PIX estático sin enviar amount vía V2 endpoints
@@ -323,6 +348,12 @@ Feature: Sintético QR 3.0
             | manual   | 100009628 | pixmanualamount | 10     | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
             | embebido | 100009628 | pix             |        | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
 
+        #When transfero pix failed
+        Examples:
+            | accion   | userAnyId | qrCode                               | amount | sessionId                 | to                                         | ticker |
+            | manual   | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
+            | embebido | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 |        | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
+
     @Smoke @PixV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V2 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
@@ -355,6 +386,13 @@ Feature: Sintético QR 3.0
             | manual   | 100009628 | pixmanualamount    | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | embebido | 100009628 | pix                | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | estatico | 100013787 | qr3BOBmanualamount | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+
+        #When transfero pix failed
+        Examples:
+            | accion   | userAnyId | qrCode                               | against | amount | sessionId                 | to                                         | ticker |
+            | manual   | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | embebido | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | estatico | 100013787 | qr3BOBmanualamount                   | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @Peru @NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>" sobre el Balance User
@@ -509,10 +547,16 @@ Feature: Sintético QR 3.0
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
         # First QR is implemented to skip microoperations blocked
+        # Examples:
+        #     | userAnyId | type     | qrCode          | amount | sessionId           | ticker |
+        #     | 100015037 | estático | pixmanualamount | 10     | QR-UserBalance-V1-n | USDT   |
+        #     | 100015037 | estático | pixmanualamount | 10     | QR-UserBalance-V1-n | ARS    |
+
+        #When transfero pix failed
         Examples:
-            | userAnyId | type     | qrCode          | amount | sessionId           | ticker |
-            | 100015037 | estático | pixmanualamount | 10     | QR-UserBalance-V1-n | USDT   |
-            | 100015037 | estático | pixmanualamount | 10     | QR-UserBalance-V1-n | ARS    |
+            | userAnyId | type     | qrCode                               | amount | sessionId           | ticker |
+            | 100015037 | estático | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-UserBalance-V1-n | USDT   |
+            | 100015037 | estático | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-UserBalance-V1-n | ARS    |
 
     # ------ QR V2 ------
 
@@ -576,10 +620,18 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | amount | sessionId            | ticker |
+        #     | estático | 100015039 | pixmanualamount | 10     | PIX-UserBalance-V1-n | USDT   |
+        #     | estático | 100015039 | pixmanualamount | 10     | PIX-UserBalance-V1-n | ARS    |
+
+        #When transfero pix
         Examples:
-            | accion   | userAnyId | qrCode          | amount | sessionId            | ticker |
-            | estático | 100015039 | pixmanualamount | 10     | PIX-UserBalance-V1-n | USDT   |
-            | estático | 100015039 | pixmanualamount | 10     | PIX-UserBalance-V1-n | ARS    |
+            | accion   | userAnyId | qrCode                               | amount | sessionId            | ticker |
+            | estático | 100015039 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V1-n | USDT   |
+            | estático | 100015039 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V1-n | ARS    |
+
+
 
     # ------ PIX V2 ------
 
@@ -608,10 +660,16 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | amount | sessionId            | ticker |
+        #     | estático | 100015040 | pixmanualamount | 10     | PIX-UserBalance-V2-n | USDT   |
+        #     | estático | 100015040 | pixmanualamount | 10     | PIX-UserBalance-V2-n | ARS    |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode          | amount | sessionId            | ticker |
-            | estático | 100015040 | pixmanualamount | 10     | PIX-UserBalance-V2-n | USDT   |
-            | estático | 100015040 | pixmanualamount | 10     | PIX-UserBalance-V2-n | ARS    |
+            | accion   | userAnyId | qrCode                               | amount | sessionId            | ticker |
+            | estático | 100015040 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V2-n | USDT   |
+            | estático | 100015040 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V2-n | ARS    |
 
     #*************************************
     # !------ DESCUBIERTOS -------
@@ -641,9 +699,15 @@ Feature: Sintético QR 3.0
         # Get company balance after execute qr payment
         And Obtain a company debt "<ticker>" balance
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId    | to                                         | ticker |
+        #     | embebido | 100009358 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | sessionId    | to                                         | ticker |
-            | embebido | 100009358 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+            | accion   | userAnyId | qrCode                               | amount | sessionId    | to                                         | ticker |
+            | embebido | 100009358 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+
 
     @Smoke @Desc @V1Desc @Automated
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra ARS en descubierto vía V1 endpoints
@@ -670,9 +734,15 @@ Feature: Sintético QR 3.0
         # Get company balance after execute qr payment
         And Obtain a company debt "<against>" balance
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | against | sessionId    | to                                         | ticker |
+        #     | embebido | 100009358 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | ARS     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode                                                                                                                                                                                                     | amount | against | sessionId    | to                                         | ticker |
-            | embebido | 100009358 | 00020101021226990014br.gov.bcb.pix2577pix-h.bancogenial.com/qrs1/v2/014oS98KbQ7LEFcTdc8P69XEVBEqJRsBDDJtTCs6Kv3DScU52040000530398654042.105802BR5917Transafero Brasil6014Rio de Janeiro62070503***6304211D | 10     | ARS     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+            | accion   | userAnyId | qrCode                               | amount | against | sessionId    | to                                         | ticker |
+            | embebido | 100009358 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | ARS     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
+
 
     # ------ QR V2 ------
 
@@ -842,10 +912,16 @@ Feature: Sintético QR 3.0
         # Get company balance after execute qr payment
         And Obtain a company debt "<ticker>" balance
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
+        #     | embebido | 100009360 | pix             | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+        #     | manual   | 100009360 | pixmanualamount | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
-            | embebido | 100009360 | pix             | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
-            | manual   | 100009360 | pixmanualamount | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+            | accion   | userAnyId | qrCode                               | amount | sessionId              | to                                         | ticker |
+            | embebido | 100009360 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+            | manual   | 100009360 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
 
     @Smoke @Desc @PixV1Desc @Automated
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra ARS en descubierto vía V1 endpoints
@@ -872,10 +948,16 @@ Feature: Sintético QR 3.0
         And Obtain a company debt "<against>" balance
 
         #Usuario argentino realizando pago qr a brasil
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
+        #     | embebido | 100009360 | pix             | ARS     | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+        #     | manual   | 100009360 | pixmanualamount | ARS     | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
-            | embebido | 100009360 | pix             | ARS     | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
-            | manual   | 100009360 | pixmanualamount | ARS     | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+            | accion   | userAnyId | qrCode                               | against | amount | sessionId              | to                                         | ticker |
+            | embebido | 100009360 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
+            | manual   | 100009360 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
 
     # ------ PIX V2 ------
 
@@ -902,10 +984,16 @@ Feature: Sintético QR 3.0
         # Get company balance after execute qr payment
         And Obtain a company debt "<ticker>" balance
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
+        #     | manual   | 100009361 | pixmanualamount | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+        #     | embebido | 100009361 | pix             | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode          | amount | sessionId              | to                                         | ticker |
-            | manual   | 100009361 | pixmanualamount | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | embebido | 100009361 | pix             | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | accion   | userAnyId | qrCode                               | amount | sessionId              | to                                         | ticker |
+            | manual   | 100009361 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | embebido | 100009361 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
     @Smoke @Desc @PixV2Desc @Automated
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en descubierto vía V2 endpoints
@@ -931,10 +1019,16 @@ Feature: Sintético QR 3.0
         # Get company balance after execute qr payment
         And Obtain a company debt "<against>" balance
 
+        # Examples:
+        #     | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
+        #     | manual   | 100009361 | pixmanualamount | ARS     | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+        #     | embebido | 100009361 | pix             | ARS     | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode          | against | amount | sessionId              | to                                         | ticker |
-            | manual   | 100009361 | pixmanualamount | ARS     | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | embebido | 100009361 | pix             | ARS     | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | accion   | userAnyId | qrCode                               | against | amount | sessionId              | to                                         | ticker |
+            | manual   | 100009361 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
+            | embebido | 100009361 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
     # ------ PaymentDestinarion ------
 
@@ -962,16 +1056,26 @@ Feature: Sintético QR 3.0
         # Get company balance after execute qr payment
         And Obtain a company debt "<coin>" balance
 
+        # Examples:
+        #     | pay | nacionality | coin | accion   | userAnyId | paymentDestination | against | amount | sessionId                    | to                                         | ticker |
+        #     | PIX | Argentina   | USDT | manual   | 100009406 | pixmanualamount    |         | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+        #     | PIX | Argentina   | USDT | embebido | 100009406 | pix                |         | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+        #     | QR  | Argentina   | USDT | manual   | 100009406 | qr3manualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+        #     | QR  | Argentina   | USDT | embebido | 100009406 | qr3                |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+        #     | QR  | Brasil      | USDT | manual   | 100009407 | pixmanualamount    | USDT    | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+        #     | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+        #     | QR  | Brasil      | USDT | embebido | 100009407 | qr3                |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+        #     | QR  | Brasil      | USDT | embebido | 100009407 | pix                | USDT    | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+
+        #When transfero pix failed
         Examples:
-            | pay | nacionality | coin | accion   | userAnyId | paymentDestination | against | amount | sessionId                    | to                                         | ticker |
-            | PIX | Argentina   | USDT | manual   | 100009406 | pixmanualamount    |         | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | PIX | Argentina   | USDT | embebido | 100009406 | pix                |         | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Argentina   | USDT | manual   | 100009406 | qr3manualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Argentina   | USDT | embebido | 100009406 | qr3                |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | manual   | 100009407 | pixmanualamount    | USDT    | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount    |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | embebido | 100009407 | qr3                |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | embebido | 100009407 | pix                | USDT    | 10     | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | pay | nacionality | coin | accion   | userAnyId | paymentDestination                   | against | amount | sessionId                    | to                                         | ticker |
+            | PIX | Argentina   | USDT | manual   | 100009406 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | QR  | Argentina   | USDT | manual   | 100009406 | qr3manualamount                      |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | QR  | Argentina   | USDT | embebido | 100009406 | qr3                                  |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | QR  | Brasil      | USDT | manual   | 100009407 | 08449ae2-8a26-47a5-992d-2689f135bc11 | USDT    | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount                      |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+            | QR  | Brasil      | USDT | embebido | 100009407 | qr3                                  |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
     @Smoke @Desc @BybitPixkeyb @Automated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" hacia PixKey en descubierto para usuario "<nacionality>" vía ByBit endpoints
@@ -1038,7 +1142,7 @@ Feature: Sintético QR 3.0
             | QR  | Argentina   | USDT | dinámico | 100010503 | 0002010102122637000280010390302202508210921195427978452044829530360454031505802PE5925Tupay Test Prod - S/ 1.006004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA01089999999963040C20 | USDT    |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
             | QR  | Peru        | USDT | dinámico | 100010539 | 0002010102122637000280010390302202508210921195427976252044829530360454031105802PE5925Tupay Test Prod - S/ 1.006004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192140005QUOTA010156304D30A        | USDT    |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
 
-    @Peru @Smoke @Desc @Automated
+    @Peru @Smoke @Desc @ToBeAutomated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<against>" en descubierto para usuario "<nacionality>"
         Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1131,7 +1235,7 @@ Feature: Sintético QR 3.0
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013202 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
             | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
 
-    @Smoke @Desc @Sender @Automated
+    @Smoke @Desc @Sender @ToBeAutomated
     Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc> por PLUS_PAGOS
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

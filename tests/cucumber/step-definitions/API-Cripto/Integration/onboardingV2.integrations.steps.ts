@@ -9,7 +9,6 @@ import { CustomWorld } from '../../../../support/world';
 
 Then('Validate initial onboarding response attributes', { timeout: 50 * 1000 }, async function (this: CustomWorld) {
   const res = this.response;
-  console.log('AQUI');
 
   console.log(JSON.stringify(res.body, null, 2));
 
