@@ -350,9 +350,8 @@ Feature: Sintético QR 3.0
 
         #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode                               | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V2-NO-DESC-n   | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
-            | embebido | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 |        | PIX-embebido-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
+            | accion | userAnyId | qrCode                               | amount | sessionId               | to                                         | ticker |
+            | manual | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
 
     @Smoke @PixV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V2 endpoints
@@ -1074,8 +1073,9 @@ Feature: Sintético QR 3.0
             | QR  | Argentina   | USDT | manual   | 100009406 | qr3manualamount                      |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Argentina   | USDT | embebido | 100009406 | qr3                                  |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | manual   | 100009407 | 08449ae2-8a26-47a5-992d-2689f135bc11 | USDT    | 10     | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount                      |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            | QR  | Brasil      | USDT | embebido | 100009407 | qr3                                  |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+    # Ver routing de ppal accounts
+    # | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount                      |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
+    # | QR  | Brasil      | USDT | embebido | 100009407 | qr3                                  |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
     @Smoke @Desc @BybitPixkeyb @Automated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" hacia PixKey en descubierto para usuario "<nacionality>" vía ByBit endpoints

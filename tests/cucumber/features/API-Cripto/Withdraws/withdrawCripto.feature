@@ -877,7 +877,7 @@ Feature: Retiros Crypto
             | type   | asset | userAnyId | country | network    | amount | address                                    |
             | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | crypto | USDT  | 100009873 | ARG     | POLYGON    | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | crypto | USDT  | 100009873 | ARG     | ETHEREUM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | crypto | USDT  | 100009873 | ARG     | ETHEREUM   | 7      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | crypto | POL   | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 2      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 

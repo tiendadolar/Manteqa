@@ -76,7 +76,8 @@ export const addBankAccountHelper = async (urlBase: string, endpoint: string, ap
     bank: {
       code: exchangeData[exchange].code
     },
-    accountType: exchangeData[exchange].accountType
+    accountType: exchangeData[exchange].accountType,
+    network: exchangeData[exchange].network
   };
 
   const payload = exchange === 'ARGENTINA' || exchange === 'BRAZIL' ? argPayload : noArgPayload;

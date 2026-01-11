@@ -4,70 +4,83 @@
     "cbu": "3511234567",
     "description": "Cuenta de ahorros",
     "code": "1507",
-    "accountType": "SAVINGS"
+    "accountType": "SAVINGS",
+    "network": "TRANSFIYA"
   },
   "CHILE": {
     "currency": "CLP",
     "cbu": "16778957",
     "description": "Cuenta de ahorros",
     "code": "317",
-    "accountType": "RUT"
+    "accountType": "RUT",
+    "network": ""
   },
   "PANAMA": {
     "currency": "PUSD",
     "cbu": "0472018417951",
     "description": "Cuenta de ahorros",
     "code": "0013",
-    "accountType": "CHECKING"
+    "accountType": "CHECKING",
+    "network": ""
   },
   "GUATEMALA": {
     "currency": "GTQ",
     "cbu": "1234567",
     "description": "Cuenta de ahorros",
     "code": "001",
-    "accountType": "CHECKING"
+    "accountType": "CHECKING",
+    "network": ""
   },
   "COSTA_RICA": {
     "currency": "CRC",
     "cbu": "CR88010404046620113218",
     "description": "Cuenta de ahorros",
     "code": "0102",
-    "accountType": "CHECKING"
+    "accountType": "CHECKING",
+    "network": ""
   },
   "MEXICO": {
     "currency": "MXN",
     "cbu": "156356784125789654",
     "description": "Cuenta de ahorros",
     "code": "002",
-    "accountType": "CHECKING"
+    "accountType": "CHECKING",
+    "network": ""
   },
   "PHILIPPINES": {
     "currency": "PHP",
     "cbu": "09300164750",
     "description": "Cuenta de ahorros",
     "code": "shopeepay",
-    "accountType": "CHECKING"
+    "accountType": "CHECKING",
+    "network": ""
   },
   "ARGENTINA": {
     "currency": "ARS",
     "cbu": "4530000800015017168564",
-    "description": "Cuenta de ahorros"
+    "description": "Cuenta de ahorros",
+    "network": ""
   },
   "BRAZIL": {
     "currency": "BRL",
     "cbu": "07185653711",
-    "description": "Cuenta de ahorros"
+    "description": "Cuenta de ahorros",
+    "network": ""
   },
   "BOLIVIA": {
     "currency": "BOB",
     "cbu": "1566987425",
     "description": "Cuenta de ahorros",
     "code": "001",
-    "accountType": "SAVINGS"
+    "accountType": "SAVINGS",
+    "network": ""
   },
   "PERU": {
     "currency": "PEN",
     "cbu": "00230005123456789021",
-    "description": "Cuenta de ahorros"
+    "description": "Cuenta de ahorros",
+    "code": "002",
+    "accountType": "SAVINGS",
+    "network": ""
   }
 }
