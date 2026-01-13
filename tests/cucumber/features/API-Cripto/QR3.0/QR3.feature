@@ -1,43 +1,6 @@
 @QR
 Feature: Sintético QR 3.0
 
-    @INTest
-    Scenario: Ejecución del lock de pago QR 3.0 vía qr endpoint
-        Given The API key is available "99QM9HQ-9JWM288-NHEZ6RB-2NBDZP3"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "100007956" to the variable "userAnyId"
-        And Assign the value "00020101021140200010com.yacare02022350150011336972350495204858553030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401" to the variable "qrCode"
-        And Assign the value "2200" to the variable "amount"
-        And Execute the POST method on the endpoint "/v2/payment-locks"
-        Then Obtain a response 201
-        And The price LockPix is created
-
-    @INTest
-    Scenario: Creación del síntetico de pago QR 3.0 vía qr endpoint
-        Given The API key is available "99QM9HQ-9JWM288-NHEZ6RB-2NBDZP3"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "automation-test-n" to the variable "sessionId"
-        And Assign the value "100007956" to the variable "userAnyId"
-        And Assign the value "pixCode" to the variable "pixCode"
-        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
-        Then Obtain a response 201
-        And The payment synthetic is created
-
-    @INTestd
-    Scenario: Generar deposito Crypto
-        Given The API key is available "C10XB2Z-AG243CS-G42KB2M-4085WTF"
-        And The API secret is available "rcrgtDnGxjY2AYC5qs"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        When Assign the value "0of00s808a0s0a0d0000129tfd00000f00f0c0cz00fi00efb0000t00000i1g0f" to the variable "hash"
-        And Assign the value "0x9bD31d82B6212dd60a9328CCe7277161e5975fB5" to the variable "from"
-        And Assign the value "0x449aC40afE7C69e67Ac0321970d72d3107153F30" to the variable "to"
-        And Assign the value "10000000000000000000" to the variable "wei"
-        And Assign the value "10" to the variable "human"
-        And Assign the value "WLD" to the variable "ticker"
-        And Assign the value 6 to the variable "chain"
-        And Execute the POST method on the endpoint "/v1/transaction/deposit"
-        Then Obtain a response 201
-
     # **** SUITE ****
     # ! NO TOCAR DATOS
     # ------ NO DESCUBIERTOS -------
@@ -1104,77 +1067,15 @@ Feature: Sintético QR 3.0
         # User ARG no funciona todavia por eso se comentó
         Examples:
             | pay | nacionality | coin | accion   | userAnyId | paymentDestination                   | against | amount | sessionId                       | to                                         | ticker |
-            # | PIX | Argentina   | USDT | manual   | 100009406 | martin@gmail.com                     |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            # | PIX | Argentina   | USDT | embebido | 100009406 | renancamargo19@gmail.com             |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            # | PIX | Argentina   | USDT | manual   | 100009406 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
-            # | PIX | Argentina   | USDT | embebido | 100009406 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | manual   | 100009407 | martin@gmail.com                     |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | renancamargo19@gmail.com             |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | manual   | 100009407 | +5511949227612                       |         | 10     | PixKey-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
             | QR  | Brasil      | USDT | embebido | 100009407 | 08449ae2-8a26-47a5-992d-2689f135bc11 |         | 10     | PixKey-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
-    @Peru @ToBeAutomated
-    Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en descubierto para usuario "<nacionality>"
-        Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        # Get company balance before execute qr payment
-        When Obtain a company debt "<coin>" balance
-        # Request de lock payment
-        When Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
-        And Assign the value "<against>" to the variable "against"
-        And Assign the value "<amount>" to the variable "amount"
-        And Execute the POST method on the endpoint "/v2/payment-locks"
-        Then Obtain a response 201 for lock payment
-        # Execute synthetic payment
-        When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "pixCode" to the variable "pixCode"
-        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
-        Then Obtain a response 201
-        # Get status synthetic payment
-        And Obtain a response 200 and status "COMPLETED" for "pix payment" synthetic
-        # Get company balance after execute qr payment
-        And Obtain a company debt "<coin>" balance
-
-        Examples:
-            | pay | nacionality | coin | accion   | userAnyId | paymentDestination                                                                                                                                                                                                                                                                                 | against | amount | sessionId | to                                         | ticker |
-            | QR  | Argentina   | USDT | dinámico | 100010503 | 0002010102122637000280010390302202508210921195427978452044829530360454031505802PE5925Tupay Test Prod - S/ 1.006004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA01089999999963040C20 | USDT    |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
-            | QR  | Peru        | USDT | dinámico | 100010539 | 0002010102122637000280010390302202508210921195427976252044829530360454031105802PE5925Tupay Test Prod - S/ 1.006004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192140005QUOTA010156304D30A        | USDT    |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
-
-    @Peru @Smoke @Desc @ToBeAutomated
-    Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<against>" en descubierto para usuario "<nacionality>"
-        Given The API key is available "HCV8JDA-P574VG5-MR5JYEG-HRZCP74"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Obtain a company debt "<coin>" balance
-
-        # Request de lock payment
-        When Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
-        And Assign the value "<against>" to the variable "against"
-        And Assign the value "<amount>" to the variable "amount"
-        And Execute the POST method on the endpoint "/v2/payment-locks"
-        Then Obtain a response 201 for lock payment
-
-        # Execute synthetic payment
-        When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "pixCode" to the variable "pixCode"
-        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
-        Then Obtain a response 201
-
-        # Get status synthetic payment
-        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
-
-        Examples:
-            | pay | nacionality | coin | accion                  | userAnyId | paymentDestination | against | amount | sessionId      | to                                         | ticker |
-            | QR  | Argentina   | USDT | pago a teléfono celular | 100010503 | +51987365083       | USDT    | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
-            | QR  | Peru        | USDT | pago a teléfono celular | 100010539 | +51987365083       | USDT    | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
-
     # Sender ----------------------------------------------------------------------------------------
 
-    @Smoke @Desc @Sender @Ignore
-    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc> por BIND_PAGOS
+    @Smoke @Desc @Peru @Sender @Automated
+    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc>
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         # Get company balance before execute qr payment
@@ -1205,95 +1106,19 @@ Feature: Sintético QR 3.0
         #No admitido yet pagos desde principal accounts NO PERU. Por el momento solo desde ppal acc PERU
         @ARG
         Examples:
-            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100011832 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-
+            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                          | accountExc |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037735 | +5511949227612                                                                                                                               | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100037735 | +5511949227612                                                                                                                               | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037735 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100037735 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037735 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100037735 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
 
         @BRA
         Examples:
-            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013250 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013250 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-
-        #Completar con peru. Falla pagos a QR peru por sender y no sender
-        @PER
-        Examples:
-            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013202 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013202 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013202 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
-
-    @Smoke @Desc @Sender @ToBeAutomated
-    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc> por PLUS_PAGOS
-        Given The API key is available "<apiKEY>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        # Get company balance before execute qr payment
-        When Obtain a company debt "<against>" balance
-        # Request de lock payment
-        And Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
-        And Assign the value "<against>" to the variable "against"
-        And Assign the value "<amount>" to the variable "amount"
-        And Assign the value "<exchange>" to the variable "exchange"
-        And Assign the value "<legalId>" to the variable "legalId"
-        And Assign the value "<name>" to the variable "name"
-        And Assign the value "<surname>" to the variable "surname"
-        And Execute the POST method on the endpoint "/v2/payment-locks"
-        Then Obtain a response 201 for lock payment
-        # Execute synthetic payment
-        When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "pixCode" to the variable "pixCode"
-        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
-        Then Obtain a response 201
-        # Get status synthetic payment
-        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
-        And Validate sender info
-        # Get company balance after execute qr payment
-        And Obtain a company debt "<against>" balance
-
-        @ARG
-        Examples:
-            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014295 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014295 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014295 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014295 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014295 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014295 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100011832 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | ARGENTINA  |
-
-
-        @BRA
-        Examples:
-            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014296 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014296 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-        # | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR_PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | BRAZIL     |
-
-        @PERU
-        Examples:
-            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                      | accountExc |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014302 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014302 | pixmanualamount                                                                                                                              | USDT    | 10     | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014302 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014302 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination | against | amount | sessionId                          | accountExc |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013250 | +5511949227612     | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | +5511949227612     | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
 
     @Smoke @Desc @Sender @Peru @Automated
     Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender completo info desde Principal Account <accountExc> por PLUS_PAGOS
@@ -1329,10 +1154,11 @@ Feature: Sintético QR 3.0
         And Obtain a company debt "<against>" balance
 
         Examples:
-            | apiKEY                          | pay     | exchange | legalId  | name          | surname  | work     | email              | phoneNumber  | gender | userAnyId | paymentDestination                                                                                                                                                                                                                                                                         | against | amount | sessionId                      | accountExc |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR_PERU | PERU     | 46326357 | DARIO AUGUSTO | DA SILVA | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | 100014302 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | apiKEY                          | pay           | exchange | legalId  | name          | surname  | work     | email              | phoneNumber  | gender | userAnyId | paymentDestination                                                                                                                                                                                                                                                                         | against | amount | sessionId                      | accountExc |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR_PERU       | PERU     | 46326357 | DARIO AUGUSTO | DA SILVA | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | 100014302 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR_PERU_PHONE | PERU     | 46326357 | DARIO AUGUSTO | DA SILVA | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | 100014302 | +51919468262                                                                                                                                                                                                                                                                               | USDT    | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
 
-    @Smoke @Desc @Sender @Foreigns @Automated
+    @Smoke @Desc @Sender @Peru @Foreigns @Automated
     Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender completo info para FOREINGS desde Principal Account <accountExc> por PLUS_PAGOS
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
