@@ -593,8 +593,6 @@ Feature: Sintético QR 3.0
             | estático | 100015039 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V1-n | USDT   |
             | estático | 100015039 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V1-n | ARS    |
 
-
-
     # ------ PIX V2 ------
 
     @Smoke @UserBalance @PixV2UserBalance @Automated
@@ -632,6 +630,96 @@ Feature: Sintético QR 3.0
             | accion   | userAnyId | qrCode                               | amount | sessionId            | ticker |
             | estático | 100015040 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V2-n | USDT   |
             | estático | 100015040 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V2-n | ARS    |
+
+    @Smoke @UserBalance @Peru @Sender @Automated
+    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc>
+        Given The API key is available "<apiKEY>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Get company balance before execute qr payment
+        When Obtain "<against>" balance for "<userAnyId>" user
+        # Request de lock payment
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<name>" to the variable "name"
+        And Assign the value "<surname>" to the variable "surname"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "true" to the variable "skipDeposit"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        And Validate sender info
+        # Get company balance after execute qr payment
+        And Obtain "<against>" balance for "<userAnyId>" user
+
+        #No admitido yet pagos desde principal accounts NO PERU. Por el momento solo desde ppal acc PERU
+        @ARG
+        Examples:
+            | apiKEY                          | pay | exchange | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                          | accountExc |
+            | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | PIX | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037733 | +5511949227612                                                                                                                               | ARS     | 10     | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | QR  | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037733 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | ARS     | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+
+        @BRA
+        Examples:
+            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination | against | amount | sessionId                          | accountExc |
+            | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037715 | +5511949227612     | BRL     | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
+            | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100037715 | +5511949227612     | BRL     | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
+
+    # @BOB
+    # Examples:
+    #     | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination | against | amount | sessionId                          | accountExc |
+    #     | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037707 | qr3BOBmanualamount | BOB     | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
+    #     | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100037707 | qr3BOBmanualamount | BOB     | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
+
+
+    @Smoke @UserBalance @Sender @Peru @Automated
+    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender completo info desde Principal Account <accountExc> por PLUS_PAGOS
+        Given The API key is available "<apiKEY>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Get company balance before execute qr payment
+        When Obtain "<against>" balance for "<userAnyId>" user
+        # Request de lock payment
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<name>" to the variable "name"
+        And Assign the value "<surname>" to the variable "surname"
+        And Assign the value "<work>" to the variable "work"
+        And Assign the value "<email>" to the variable "email"
+        And Assign the value "<phoneNumber>" to the variable "phoneNumber"
+        And Assign the value "<gender>" to the variable "gender"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "true" to the variable "skipDeposit"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        And Validate sender info
+        # Get company balance after execute qr payment
+        And Obtain "<against>" balance for "<userAnyId>" user
+
+        Examples:
+            | apiKEY                          | pay           | exchange | legalId  | name          | surname  | work     | email              | phoneNumber  | gender | userAnyId | paymentDestination                                                                                                                                                                                                                                                                         | against | amount | sessionId                      | accountExc |
+            | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | QR_PERU       | PERU     | 46326357 | DARIO AUGUSTO | DA SILVA | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | 100037706 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | PEN     | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | QR_PERU_PHONE | PERU     | 46326357 | DARIO AUGUSTO | DA SILVA | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | 100037706 | +51919468262                                                                                                                                                                                                                                                                               | PEN     | 1000   | PixKey-Sender-manual-V2-DESC-n | PERU       |
+
 
     #*************************************
     # !------ DESCUBIERTOS -------
