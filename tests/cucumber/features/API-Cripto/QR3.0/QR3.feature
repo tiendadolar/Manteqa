@@ -7,7 +7,7 @@ Feature: Sintético QR 3.0
     # ------ QR V1 ------
 
     @Smoke @QRV1NoDesc @Automated
-    Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <ticker> en no descubierto vía V1 endpoints
+    Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <ticker> no descubierto vía V1 endpoints desde User Account
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -40,10 +40,8 @@ Feature: Sintético QR 3.0
 
         #When transfero pix failed
         Examples:
-            | userAnyId | type     | qrCode                               | amount | sessionId      | to                                         | ticker |
-            | 100009352 | estático | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
-            | 100009352 | embebido | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
-
+            | userAnyId | type    | qrCode                               | amount | sessionId      | to                                         | ticker |
+            | 100009352 | PIX-KEY | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
     @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <against> en no descubierto vía V1 endpoints
@@ -81,7 +79,6 @@ Feature: Sintético QR 3.0
         Examples:
             | userAnyId | type     | qrCode                               | against | amount | sessionId      | to                                         |
             | 100009352 | embebido | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
-            | 100009352 | estático | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
 
     @Smoke @QRV1NoDesc @Automated
     Scenario Outline: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
@@ -129,7 +126,7 @@ Feature: Sintético QR 3.0
         #QR BOB monto nuy bajo, falla contra USDT
         Examples:
             | credential                | accion   | userAnyId | qrCode             | amount | sessionId    | to                                         | ticker |
-            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount    | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | andresperalta@manteca.dev | dinamico | 100009502 | qr3                |        | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount    | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | andresperalta@manteca.dev | estatico | 100013787 | qr3BOBmanualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
@@ -222,9 +219,8 @@ Feature: Sintético QR 3.0
 
         #When transfero pix failed
         Examples:
-            | accion   | userAnyId | qrCode                               | amount | sessionId                 | to                                         | ticker |
-            | manual   | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V1-NO-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
-            | embebido | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-embebido-V1-NO-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
+            | accion | userAnyId | qrCode                               | amount | sessionId               | to                                         | ticker |
+            | manual | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V1-NO-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
 
     @Smoke @PixV1NoDesc @Automated
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V1 endpoints
@@ -262,7 +258,6 @@ Feature: Sintético QR 3.0
         Examples:
             | accion   | userAnyId | qrCode                               | against | amount | sessionId              | to                                         | ticker |
             | embebido | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-embebido-V1-DESC-n | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
-            | manual   | 100009624 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-manual-V1-DESC-n   | 0xC19b0041b0D6261FD98BFe753d76D58Ae65e44aD | USDT   |
 
     @Smoke @PixV1NoDesc @Automated
     Scenario Outline: Validar Clean Code al ejecutar lock de QR PIX estático sin enviar amount vía V2 endpoints
@@ -356,7 +351,7 @@ Feature: Sintético QR 3.0
             | embebido | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | estatico | 100013787 | qr3BOBmanualamount                   | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
-    @Peru @NoDesc @Automated
+    @Smoke @Peru @NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>" sobre el Balance User
         Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -631,7 +626,7 @@ Feature: Sintético QR 3.0
             | estático | 100015040 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V2-n | USDT   |
             | estático | 100015040 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-UserBalance-V2-n | ARS    |
 
-    @Smoke @UserBalance @Peru @Sender @Automated
+    @Smoke @Peru @UserBalance @Peru @Sender @Automated
     Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc>
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1162,7 +1157,7 @@ Feature: Sintético QR 3.0
 
     # Sender ----------------------------------------------------------------------------------------
 
-    @Smoke @Desc @Peru @Sender @Automated
+    @Smoke @Desc @Sender @Automated
     Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender info desde Principal Account <accountExc>
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1291,6 +1286,116 @@ Feature: Sintético QR 3.0
 
 
     # Sender ----------------------------------------------------------------------------------------
+
+    #*************************************
+    # !------ USER ACCOUNTS -------
+
+    @Smoke @UserAccount @Desc @Automated
+    Scenario Outline: Ejecutar sintético de pago <payment> contra <against> tomando deuda
+        Given The API key is available "<apiKEY>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Get company balance before execute qr payment
+        And Obtain a company debt "<against>" balance
+        # Request de lock payment
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "qrCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        # Get company balance after execute qr payment
+        And Obtain a company debt "<against>" balance
+
+        Examples:
+            | apiKEY                          | payment    | userAnyId | paymentDestination                                                                                                                                                                                                                                                                         | against | amount | sessionId             |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BOB     | 100037877 | qr3BOBmanualamount                                                                                                                                                                                                                                                                         | USDT    | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR PERU    | 100037878 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PERU PHONE | 100037878 | +51986667537                                                                                                                                                                                                                                                                               | USDT    | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BRAZIL  | 100037879 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8                                                                                                                | USDT    | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PIX KEY    | 100037879 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | USDT    | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR ARG     | 100037880 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401                                                                                                                                               | USDT    | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PAGO PIX   | 100037880 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | USDT    | 10     | useraccount-payment-n |
+
+    @Smoke @UserAccount @Desc @Automated
+    Scenario Outline: Ejecutar sintético de pago <payment> contra <against> tomando deuda
+        Given The API key is available "<apiKEY>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Validate initial balance before execute qr payment
+        And Obtain "<against>" balance for "<userAnyId>" user
+        # Request de lock payment
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<against>" to the variable "against"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "true" to the variable "skipDeposit"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        And The attributes of the QR "<against>" synthetic are validated
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        # Validate balance after execute qr payment
+        And Obtain "<against>" balance for "<userAnyId>" user
+
+        @bob
+        Examples:
+            | apiKEY                          | payment   | userAnyId | paymentDestination                                                                                                                                                                                                                                                                         | against | amount | sessionId             |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BOB    | 100037877 | qr3BOBmanualamount                                                                                                                                                                                                                                                                         | BOB     | 1000   | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR PERU   | 100037878 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | PEN     | 1000   | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR PERU   | 100037878 | +51986667537                                                                                                                                                                                                                                                                               | PEN     | 1000   | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BRAZIL | 100037879 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8                                                                                                                | BRL     | 1000   | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BRAZIL | 100037879 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | BRL     | 1000   | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR ARG    | 100037880 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401                                                                                                                                               | ARS     | 1000   | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PAGO PIX  | 100037880 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | ARS     | 1000   | useraccount-payment-n |
+
+
+    #*************************************
+    # !------ ROUTING -------
+
+    @Smoke @Routing @Desc @Automated
+    Scenario Outline: Ejecutar sintético de pago <payment> contra <against> tomando deuda
+        Given The API key is available "<apiKEY>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Get company balance before execute qr payment
+        And Obtain a company debt "<against>" balance
+        # Request de lock payment
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<principalAccount>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "qrCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        # Get company balance after execute qr payment
+        And Obtain a company debt "<against>" balance
+
+        Examples:
+            | apiKEY                          | payment   | userAnyId | principalAccount | paymentDestination                                                                                                                                                          | against | amount | sessionId             |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR BOB    | 100037522 | 100014042        | qr3BOBmanualamount                                                                                                                                                          | USDT    | 10     | useraccount-payment-n |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR BRAZIL | 100037510 | 100013250        | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | USDT    | 10     | useraccount-payment-n |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR PERU   | 100037522 | 100013202        | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5B  | USDT    | 10     | useraccount-payment-n |
+            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR ARG    | 100037510 | 100037735        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401                                | USDT    | 10     | useraccount-payment-n |
+
 
     @Refunds @RefundsDs @Automated
     Scenario Outline: Validar refund para usuario operando en descubierto
