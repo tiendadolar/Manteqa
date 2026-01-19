@@ -1,6 +1,7 @@
 const request = require('supertest');
 const { expect } = require('chai');
 import logger from '../utils/logger';
+import { getWithdrawStage } from '../utils/utils';
 import { CustomWorld } from '../world';
 import { apiRequest, validateRes } from './requestHelper';
 const payments = require('../data/syntheticPaymentData.json');
@@ -44,11 +45,16 @@ export const validateSyntheticRefundStage = (body: any) => {
 export const validateSyntheticStatus = (body: any, httpStatus: number, statusCode?: number, statusName?: string) => {
   // Cuando los errores de transfero pix en QA se solucionen, comentar este if
   if (CustomWorld.getStoreData('userExchange') === 'ARGENTINA' && CustomWorld.getStoreData('syntheticType') === 'PIX_PAYMENT') {
+    const withdrawStage = getWithdrawStage(body.stages);
+    const withdrawId = withdrawStage.withdrawId;
+
     logger.warn(statusName);
+    logger.warn(withdrawId);
     if (body.status !== statusName) CustomWorld.clearStoreData();
 
     expect(httpStatus).to.equal(statusCode);
     expect(body.status).to.be.oneOf(['ACTIVE', 'COMPLETED']);
+    expect(withdrawId).to.be.a('string').and.not.empty;
 
     if (body?.stages?.['1'].stageType === 'DEPOSIT') CustomWorld.setStoreData('depositStage', true);
     if (body?.stages?.['1'].stageType !== 'DEPOSIT') CustomWorld.setStoreData('notDepositStage', true);

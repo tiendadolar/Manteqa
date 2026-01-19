@@ -20,6 +20,15 @@ const getUserByLegalId = async (legalId: string, url: string, token: string) => 
   return response.body.users.numberId;
 };
 
+export const getWithdrawStage = (stages: Record<string, any>) => {
+  const stage = Object.keys(stages)
+    .map(Number)
+    .sort((a, b) => a - b)
+    .pop();
+
+  return stage ? stages[stage.toString()] : undefined;
+};
+
 const validateExchange = (asset: string) => {
   switch (asset) {
     case 'ARS':
