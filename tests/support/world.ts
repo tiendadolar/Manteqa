@@ -73,6 +73,7 @@ export class CustomWorld extends World {
   }
 
   static getExternalId(value: string): string {
+    if (value === 'integrations') return value;
     this.extIdCounter++;
     fs.writeFileSync(this.externalIdFile, this.extIdCounter.toString());
     return `${value}-${this.extIdCounter}`;

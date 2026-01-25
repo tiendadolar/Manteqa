@@ -31,19 +31,15 @@ Feature: Lock Payment Integrations
 
         @BRA
         Examples:
-            | apiKEY                          | pay | exchange | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | accountExc |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | pixmanualamount                                                                                                                              | USDT    | 10     | BRAZIL     |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | pixmanualamount                                                                                                                              | BRL     | 10     | BRAZIL     |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | BRAZIL     |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDC    | 1000   | BRAZIL     |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | BRAZIL     |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | ARS     | 1000   | BRAZIL     |
+            | apiKEY                          | pay | exchange | legalId     | name          | surname  | userAnyId | paymentDestination | against | amount | accountExc |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | pixmanualamount    | USDT    | 10     | BRAZIL     |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014296 | pixmanualamount    | BRL     | 10     | BRAZIL     |
 
         @PER
         Examples:
-            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | accountExc |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014302 | pixmanualamount                                                                                                                              | USDT    | 10     | PERU       |
-            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014302 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PERU       |
+            | apiKEY                          | pay  | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                                                                                                                                                                         | against | amount | accountExc |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PERU | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100014302 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 10     | PERU       |
+            | SG0EPCX-9XW4G7Y-NQDMP1Q-52X6MB9 | PERU | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100014302 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 1000   | PERU       |
 
     @HappyPath @UA
     Scenario Outline: Validate success lock payment response for <pay> from user account

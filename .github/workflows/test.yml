@@ -24,6 +24,7 @@ on:
           - 'Withdraw Crypto V1'
           - 'Withdraw Crypto V2'
           - 'Remesas'
+          - 'Integrations-OnboardingV2'
 
   # Ejecución automática en cada push
   push:
@@ -102,6 +103,9 @@ jobs:
               ;;
             "Remesas")
               TAGS="@Withdraw and @Smoke and @Remesas and @Automated"
+              ;;
+            "Integrations-OnboardingV2")
+              TAGS="@Integrations and @OnboardingV2 and @Regression and @Automated"
               ;;
             *)
               TAGS="@Smoke and @Automated"
@@ -251,6 +255,7 @@ jobs:
                   feature.elements.forEach(scenario => {
                     totalScenarios++;
                     let scenarioFailed = false;
+                    let failureDetails = null;
                     
                     if (scenario.steps) {
                       scenario.steps.forEach(step => {
@@ -268,6 +273,13 @@ jobs:
                             case 'failed':
                               failedSteps++;
                               scenarioFailed = true;
+                              // Capturar detalles del fallo
+                              if (!failureDetails) {
+                                failureDetails = {
+                                  step: step.name || 'Step sin nombre',
+                                  error: step.result.error_message || 'Error sin mensaje'
+                                };
+                              }
                               break;
                             case 'skipped':
                               skippedSteps++;
@@ -281,7 +293,8 @@ jobs:
                       failedScenarios++;
                       failedTests.push({
                         feature: feature.name || 'Feature sin nombre',
-                        scenario: scenario.name || 'Escenario sin nombre'
+                        scenario: scenario.name || 'Escenario sin nombre',
+                        failureDetails: failureDetails
                       });
                     } else {
                       passedScenarios++;
@@ -292,6 +305,7 @@ jobs:
               
               const duration = Math.round(totalDuration / 1000000);
               const successRate = totalScenarios > 0 ? Math.round((passedScenarios / totalScenarios) * 100) : 0;
+              const failureRate = totalScenarios > 0 ? Math.round((failedScenarios / totalScenarios) * 100) : 0;
               
               console.log('| Métrica | Valor |');
               console.log('|---------|-------|');
@@ -299,6 +313,7 @@ jobs:
               console.log(`| ✅ **Escenarios Exitosos** | ${passedScenarios} |`);
               console.log(`| ❌ **Escenarios Fallidos** | ${failedScenarios} |`);
               console.log(`| 📈 **Tasa de Éxito** | ${successRate}% |`);
+              console.log(`| 📉 **Tasa de Fallo** | ${failureRate}% |`);
               console.log(`| 🔧 **Steps Totales** | ${totalSteps} |`);
               console.log(`| ⏱️ **Duración Total** | ${duration}ms |`);
               console.log('');
@@ -323,9 +338,11 @@ jobs:
                 passedScenarios,
                 failedScenarios,
                 successRate,
+                failureRate,
                 totalSteps,
                 duration,
                 failedTests,
+                isCriticalFailure: failureRate > 65,
                 timestamp: new Date().toLocaleString('es-ES', { timeZone: 'America/Argentina/Mendoza' })
               };
               
@@ -337,6 +354,7 @@ jobs:
                 testStatus: 'ANALYSIS_ERROR',
                 testSuite: process.env.TEST_SUITE || 'Unknown',
                 error: error.message,
+                isCriticalFailure: false,
                 timestamp: new Date().toLocaleString('es-ES', { timeZone: 'America/Argentina/Mendoza' })
               };
               require('fs').writeFileSync('test-results.json', JSON.stringify(errorData, null, 2));
@@ -346,8 +364,30 @@ jobs:
             TEST_SUITE="${{ steps.set-suite.outputs.test_suite }}" node analyze-results.js >> $GITHUB_STEP_SUMMARY
           else
             echo "❌ No se encontró cucumber-report.json" >> $GITHUB_STEP_SUMMARY
-            echo '{"testStatus":"NO_REPORT","testSuite":"${{ steps.set-suite.outputs.test_suite }}","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json"}' > test-results.json
+            echo '{"testStatus":"NO_REPORT","testSuite":"${{ steps.set-suite.outputs.test_suite }}","timestamp":"'$(date)'","error":"No se encontró cucumber-report.json","isCriticalFailure":false}' > test-results.json
           fi
+
+      - name: Check if email should be sent
+        if: always()
+        id: check-email
+        run: |
+          SHOULD_SEND="false"
+          
+          if [ -f test-results.json ]; then
+            FAILURE_RATE=$(cat test-results.json | grep -o '"failureRate":[0-9]*' | cut -d':' -f2)
+            IS_CRITICAL=$(cat test-results.json | grep -o '"isCriticalFailure":[a-z]*' | cut -d':' -f2)
+            
+            if [ "$IS_CRITICAL" == "true" ] || [ "$FAILURE_RATE" -gt 65 ] 2>/dev/null; then
+              SHOULD_SEND="true"
+              echo "📧 Se enviará correo: Tasa de fallo ${FAILURE_RATE}% supera el 65%"
+            else
+              echo "📭 No se enviará correo: Tasa de fallo ${FAILURE_RATE}% no supera el 65%"
+            fi
+          else
+            echo "⚠️ No se encontraron resultados de tests"
+          fi
+          
+          echo "should_send=${SHOULD_SEND}" >> $GITHUB_OUTPUT
 
       - name: Create Slack-friendly summary
         if: always()
@@ -364,12 +404,17 @@ jobs:
               summary += `✅ *Exitosos:* ${results.passedScenarios}/${results.totalScenarios}\n`;
               summary += `❌ *Fallidos:* ${results.failedScenarios}\n`;
               summary += `📈 *Tasa de éxito:* ${results.successRate}%\n`;
+              summary += `📉 *Tasa de fallo:* ${results.failureRate}%\n`;
               summary += `⏱️ *Duración:* ${results.duration}ms\n\n`;
+              
+              // Alerta crítica si tasa de fallo > 65%
+              if (results.isCriticalFailure) {
+                summary += '*🚨 ALERTA CRÍTICA: Tasa de fallo superior al 65%*\n\n';
+              }
               
               if (results.failedTests && results.failedTests.length > 0) {
                 summary += '*❌ Tests Fallidos:*\n';
                 results.failedTests.slice(0, 5).forEach(test => {
-                  // Escapar comillas en el nombre del test
                   const scenarioName = test.scenario.replace(/"/g, '\\"');
                   summary += `• ${scenarioName}\n`;
                 });
@@ -385,7 +430,6 @@ jobs:
             
             summary += `\n_Timestamp: ${results.timestamp}_`;
             
-            // Escapar caracteres especiales para JSON y eliminar saltos de línea problemáticos
             const output = JSON.stringify(summary);
             console.log(output);
           EOF
@@ -511,8 +555,66 @@ jobs:
             --data @slack-payload.json \
             "$SLACK_WEBHOOK_URL"
 
+      - name: Generate Email Body with Failure Details
+        if: always() && steps.check-email.outputs.should_send == 'true'
+        id: email-body
+        run: |
+          cat > generate-email-body.js << 'EOF'
+          const fs = require('fs');
+          
+          try {
+            const results = JSON.parse(fs.readFileSync('test-results.json', 'utf8'));
+            
+            let body = `🚨 ALERTA CRÍTICA: TASA DE FALLO SUPERIOR AL 65%\n\n`;
+            body += `Hola!\n\n`;
+            body += `Se detectó una tasa de fallo crítica en la suite "${results.testSuite}".\n\n`;
+            body += `📊 ESTADÍSTICAS:\n`;
+            body += `- Tasa de fallo: ${results.failureRate}%\n`;
+            body += `- Escenarios fallidos: ${results.failedScenarios}/${results.totalScenarios}\n`;
+            body += `- Escenarios exitosos: ${results.passedScenarios}/${results.totalScenarios}\n`;
+            body += `- Duración total: ${results.duration}ms\n\n`;
+            
+            if (results.failedTests && results.failedTests.length > 0) {
+              body += `❌ DETALLES DE FALLOS:\n\n`;
+              
+              results.failedTests.forEach((test, index) => {
+                body += `${index + 1}. Feature: ${test.feature}\n`;
+                body += `   Escenario: ${test.scenario}\n`;
+                
+                if (test.failureDetails) {
+                  body += `   Step fallido: ${test.failureDetails.step}\n`;
+                  body += `   Error:\n`;
+                  // Limitar el mensaje de error a las primeras líneas para no saturar el email
+                  const errorLines = test.failureDetails.error.split('\n').slice(0, 5);
+                  errorLines.forEach(line => {
+                    body += `   ${line}\n`;
+                  });
+                  if (test.failureDetails.error.split('\n').length > 5) {
+                    body += `   ... (ver detalles completos en el reporte)\n`;
+                  }
+                }
+                body += `\n`;
+              });
+            }
+            
+            body += `---\n`;
+            body += `Timestamp: ${results.timestamp}\n`;
+            
+            // Guardar el cuerpo del email en un archivo
+            fs.writeFileSync('email-body.txt', body);
+            console.log('Email body generado correctamente');
+            
+          } catch (error) {
+            const fallbackBody = `Error al generar el cuerpo del email: ${error.message}`;
+            fs.writeFileSync('email-body.txt', fallbackBody);
+            console.error('Error:', error.message);
+          }
+          EOF
+          
+          node generate-email-body.js
+
       - name: Send Email Notification
-        if: always()
+        if: always() && steps.check-email.outputs.should_send == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -521,28 +623,12 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           from: ${{ secrets.EMAIL_USERNAME }}
           to: ${{ secrets.NOTIFICATION_EMAIL }}
-          subject: "🧪 Tests ${{ steps.set-suite.outputs.test_suite }} - ${{ github.repository }} [${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}] ${{ github.event_name == 'schedule' && '🕐 [PROGRAMADO]' || github.event_name == 'push' && '🚀 [PUSH]' || '' }}"
-          body: |
-            Hola!
-
-            Se ejecutaron los tests de la suite "${{ steps.set-suite.outputs.test_suite }}" en el repositorio ${{ github.repository }}
-
-            ${{ github.event_name == 'schedule' && '🕐 Tipo de ejecución: PROGRAMADA (Viernes 01:30 AM Argentina)' || github.event_name == 'push' && '🚀 Tipo de ejecución: AUTOMÁTICA (Push al repositorio)' || '👤 Tipo de ejecución: MANUAL' }}
-            📊 Estado del Workflow: ${{ steps.workflow-status.outputs.workflow_status || 'UNKNOWN' }}
-            🏷️ Suite ejecutada: ${{ steps.set-suite.outputs.test_suite }}
-            📋 Tags utilizados: ${{ steps.map-tags.outputs.tags }}
-            ${{ github.event_name == 'push' && format('🌿 Rama: {0}', github.ref_name) || '' }}
-            ${{ github.event_name == 'push' && format('👤 Autor: {0}', github.actor) || '' }}
-
-            El workflow de GitHub Actions ${{ steps.workflow-status.outputs.workflow_status == 'SUCCESS' && 'se completó exitosamente' || 'falló durante la ejecución' }}.
-
-            🔗 Ver resultados completos:
-            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
-            📊 Resumen de tests disponible en la pestaña "Summary" del workflow.
-
-            ---
-            Generado automáticamente por GitHub Actions
+          subject: "🚨 ALERTA CRÍTICA - Tests ${{ steps.set-suite.outputs.test_suite }} - Tasa de Fallo > 65% [${{ steps.workflow-status.outputs.workflow_status || 'FAILED' }}]"
+          body: file://email-body.txt
+          convert_markdown: true
+          attachments: |
+            cucumber-report.json
+            test-results.json
 
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
@@ -554,3 +640,4 @@ jobs:
             reports/
             cucumber-report.json
             test-results.json
+            email-body.txt

@@ -1,10 +1,10 @@
-@Integrations @OnboardingV2
+@Integrations @OnboardingV2 @Regression
 Feature: Initial Onboarding Integrations
 
     Background:
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-    @HappyPath
+    @HappyPath @Automated
     Scenario Outline: Validate Onboarding V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -37,12 +37,12 @@ Feature: Initial Onboarding Integrations
         And Validate initial onboarding response attributes
 
         Examples:
-            | apiKEY                          | credential                | externalId            | email                | legalId     | exchange  | name            | surname   | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street         |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | Integrations-test-Arg | inttestarg@gmail.com | 27293948262 | ARGENTINA | LUCIANA CECILIA | GUGLIELMO | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | Av. Corrientes |
+            | apiKEY                          | credential                | externalId            | email                | legalId     | exchange  | name          | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street         |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | Integrations-test-Arg | inttestarg@gmail.com | 20167417435 | ARGENTINA | MARIO GABRIEL | ABADI   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | Av. Corrientes |
 
     # ------------------------------- Error Path -------------------------------
 
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error initial onboarding sending <case> V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -76,12 +76,11 @@ Feature: Initial Onboarding Integrations
 
         Examples:
             | apiKEY                          | case                                          | credential                | externalId          | email                          | legalId     | exchange  | name   | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | statusCode | internalStatus    | message                              |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | used externalId                               | andresperalta@manteca.dev | externalIdRepeat    | inttestarg@gmail.com           | 27323361083 | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 409        | USER_EXISTS       | User already exists                  |
+            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | used externalId                               | andresperalta@manteca.dev | integrations        | inttestarg@gmail.com           | 27323361083 | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 409        | USER_EXISTS       | User already exists                  |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | used email                                    | andresperalta@manteca.dev | externalIdNotRepeat | boddeuquipure-8560@yopmail.com | 27323361083 | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 409        | USER_EXISTS_EMAIL | User with that email already exists. |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | used legalId (deberia ser code 409 i guess..) | andresperalta@manteca.dev | externalIdNotRepeat | boddeuquipure-8562@yopmail.com | 20357891079 | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 409        | USER_EXISTS       | User already exists.                 |
 
-
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error initial onboarding sending <case> V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -125,7 +124,7 @@ Feature: Initial Onboarding Integrations
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | invalid date            | andresperalta@manteca.dev | external-n | inttestarg@gmail.com | 27323361083 | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-13-15 | Soltero       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 400        | BAD_REQUEST    | Bad request. | personalData..birthDate has wrong value 1999-13-15. Value should be valid ISO Date string like 2024-01-20.                                                                     |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | invalid maritalStatus   | andresperalta@manteca.dev | external-n | inttestarg@gmail.com | 27323361083 | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-06-15 | INVALID       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 400        | BAD_REQUEST    | Bad request. | personalData..maritalStatus has wrong value INVALID. Possible values are Soltero,Casado,Divorciado,Viudo,Otros.                                                                |
 
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error Onboarding sending legalId mismatch <exchange> V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -174,7 +173,7 @@ Feature: Initial Onboarding Integrations
 
     # ------------------------------- Error Path by Empty Fields -------------------------------
 
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error initial onboarding sending <case> V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -210,7 +209,7 @@ Feature: Initial Onboarding Integrations
             | apiKEY                          | case        | credential                | externalId | email | legalId     | exchange  | name   | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | statusCode | internalStatus | message      | errors            |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | empty email | andresperalta@manteca.dev | external-n | null  | 27323361083 | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 400        | BAD_REQUEST    | Bad request. | email is missing. |
 
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error initial onboarding sending <case> V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -245,7 +244,7 @@ Feature: Initial Onboarding Integrations
             | apiKEY                          | case          | credential                | externalId | email            | legalId | exchange  | name   | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | statusCode | internalStatus | message      | errors              |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | empty legalId | andresperalta@manteca.dev | external-n | user@manteca.dev | null    | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 400        | BAD_REQUEST    | Bad request. | legalId is missing. |
 
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error initial onboarding sending <case> V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
