@@ -24,7 +24,8 @@ on:
           - 'Withdraw Crypto V1'
           - 'Withdraw Crypto V2'
           - 'Remesas'
-          - 'Integrations-OnboardingV2'
+          - 'Integrations - OnboardingV2'
+          - 'Integrations - Lock Payment'
 
   # Ejecución automática en cada push
   push:
@@ -104,8 +105,11 @@ jobs:
             "Remesas")
               TAGS="@Withdraw and @Smoke and @Remesas and @Automated"
               ;;
-            "Integrations-OnboardingV2")
+            "Integrations - OnboardingV2")
               TAGS="@Integrations and @OnboardingV2 and @Regression and @Automated"
+              ;;
+            "Integrations - Lock Payment")
+              TAGS="@Integrations and @LockPayment and @Regression and @Automated"
               ;;
             *)
               TAGS="@Smoke and @Automated"
@@ -321,10 +325,27 @@ jobs:
               if (failedTests.length > 0) {
                 console.log('### ❌ Tests Fallidos:');
                 console.log('');
-                failedTests.forEach(test => {
-                  console.log(`- **${test.feature}** → ${test.scenario}`);
+                failedTests.forEach((test, index) => {
+                  console.log(`#### ${index + 1}. ${test.feature} → ${test.scenario}`);
+                  console.log('');
+                  if (test.failureDetails) {
+                    console.log('**Step fallido:**');
+                    console.log('```');
+                    console.log(test.failureDetails.step);
+                    console.log('```');
+                    console.log('');
+                    console.log('**Error:**');
+                    console.log('```');
+                    // Limitar a las primeras 20 líneas del error para no saturar el reporte
+                    const errorLines = test.failureDetails.error.split('\n').slice(0, 20);
+                    console.log(errorLines.join('\n'));
+                    if (test.failureDetails.error.split('\n').length > 20) {
+                      console.log('... (error truncado, ver reporte completo)');
+                    }
+                    console.log('```');
+                    console.log('');
+                  }
                 });
-                console.log('');
               }
               
               if (failedScenarios === 0) {
@@ -372,7 +393,7 @@ jobs:
         id: check-email
         run: |
           SHOULD_SEND="false"
-          
+
           if [ -f test-results.json ]; then
             FAILURE_RATE=$(cat test-results.json | grep -o '"failureRate":[0-9]*' | cut -d':' -f2)
             IS_CRITICAL=$(cat test-results.json | grep -o '"isCriticalFailure":[a-z]*' | cut -d':' -f2)
@@ -386,7 +407,7 @@ jobs:
           else
             echo "⚠️ No se encontraron resultados de tests"
           fi
-          
+
           echo "should_send=${SHOULD_SEND}" >> $GITHUB_OUTPUT
 
       - name: Create Slack-friendly summary
@@ -561,7 +582,7 @@ jobs:
         run: |
           cat > generate-email-body.js << 'EOF'
           const fs = require('fs');
-          
+
           try {
             const results = JSON.parse(fs.readFileSync('test-results.json', 'utf8'));
             
@@ -610,7 +631,7 @@ jobs:
             console.error('Error:', error.message);
           }
           EOF
-          
+
           node generate-email-body.js
 
       - name: Send Email Notification
