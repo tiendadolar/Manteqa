@@ -448,7 +448,7 @@ Feature: Sintético QR 3.0
             | QR  | Argentina   | USDT | pago a teléfono celular | 100010488 | +51987365083       | PEN     | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
             | QR  | Peru        | USDT | pago a teléfono celular | 100010538 | +51987365083       | PEN     | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
 
-    @Peru @Smoke @Automated
+    @Peru @Smoke @ToBeAutomated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<against>" no descubierto para usuario "<nacionality>"
         Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -472,7 +472,6 @@ Feature: Sintético QR 3.0
 
         Examples:
             | pay | nacionality | coin | accion                  | userAnyId | paymentDestination | against | amount | sessionId      | to                                         | ticker |
-            | QR  | Argentina   | USDT | pago a teléfono celular | 100010488 | +51987365083       | USDT    | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
             | QR  | Peru        | USDT | pago a teléfono celular | 100010538 | +51987365083       | USDT    | 1000   | QR-PeruPhone-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 | USDT   |
 
     #*************************************
@@ -1190,18 +1189,18 @@ Feature: Sintético QR 3.0
         @ARG
         Examples:
             | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                           | against | amount | sessionId                          | accountExc |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037735 | +5511949227612                                                                                                                               | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100037735 | +5511949227612                                                                                                                               | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037735 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100037735 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100037735 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100037735 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100038486 | +5511949227612                                                                                                                               | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100038486 | +5511949227612                                                                                                                               | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100038486 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100038486 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | USDT    | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100038486 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR  | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100038486 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401 | WLD     | 1000   | PrincipalAccount-payment-V2-DESC-n | ARGENTINA  |
 
         @BRA
         Examples:
             | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination                                                                                                                                                          | against | amount | sessionId                          | accountExc |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100013250 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100013250 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100038487 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100038487 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
 
     @Smoke @Desc @Sender @Peru @Automated
     Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender completo info desde Principal Account <accountExc> por PLUS_PAGOS
@@ -1356,16 +1355,16 @@ Feature: Sintético QR 3.0
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BOB    | 100037877 | qr3BOBmanualamount                                                                                                                                                                                                                                                                         | BOB     | 1000   | useraccount-payment-n |
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR PERU   | 100037878 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | PEN     | 1000   | useraccount-payment-n |
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR PERU   | 100037878 | +51986667537                                                                                                                                                                                                                                                                               | PEN     | 1000   | useraccount-payment-n |
-            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BRAZIL | 100037879 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8                                                                                                                | BRL     | 1000   | useraccount-payment-n |
-            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BRAZIL | 100037879 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | BRL     | 1000   | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BRAZIL | 100037879 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8                                                                                                                | BRL     | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BRAZIL | 100037879 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | BRL     | 10     | useraccount-payment-n |
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR ARG    | 100037880 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401                                                                                                                                               | ARS     | 1000   | useraccount-payment-n |
-            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PAGO PIX  | 100037880 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | ARS     | 1000   | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PAGO PIX  | 100037880 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | ARS     | 10     | useraccount-payment-n |
 
 
     #*************************************
     # !------ ROUTING -------
 
-    @Smoke @Routingt @Desc @Automated
+    @Smoke @Routing @Desc @Automated
     Scenario Outline: Ejecutar sintético de pago <payment> contra <against> desde la principal account balance
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1392,13 +1391,13 @@ Feature: Sintético QR 3.0
 
         Examples:
             | apiKEY                          | payment   | userAnyId | principalAccount | paymentDestination                                                                                                                                                                     | against | amount | sessionId             |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR BOB    | 100037522 | 100014042        | qr3BOBmanualamount                                                                                                                                                                     | BOB     | 10     | useraccount-payment-n |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR BOB    | 100038492 | 100038490        | qr3BOBmanualamount                                                                                                                                                                     | BOB     | 10     | useraccount-payment-n |
             | FF4CEBS-1404S0J-M3YQ6Q0-8ZR4GTT | QR BRAZIL | 100038086 | 100038082        | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8            | BRL     | 10     | useraccount-payment-n |
             | FF4CEBS-1404S0J-M3YQ6Q0-8ZR4GTT | QR PERU   | 100038086 | 100038083        | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5Bmanualamount | PEN     | 10     | useraccount-payment-n |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR ARG    | 100037510 | 100037735        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401manualamount                               | ARS     | 1000   | useraccount-payment-n |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR BREB   | 100037822 | 100037799        | manteca-breb-qa-manual-amount                                                                                                                                                          | COP     | 1000   | useraccount-payment-n |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR ARG    | 100038493 | 100038486        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401manualamount                               | ARS     | 1000   | useraccount-payment-n |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR BREB   | 100038493 | 100038489        | manteca-breb-qa-manual-amount                                                                                                                                                          | COP     | 1000   | useraccount-payment-n |
 
-    @Smoke @Routingt @Desc @Automated
+    @Smoke @Routing @Desc @Automated
     Scenario Outline: Ejecutar sintético de pago <payment> contra <against> tomando deuda
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1424,11 +1423,11 @@ Feature: Sintético QR 3.0
 
         Examples:
             | apiKEY                          | payment   | userAnyId | principalAccount | paymentDestination                                                                                                                                                                     | against | amount | sessionId             |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR BOB    | 100037522 | 100014042        | qr3BOBmanualamount                                                                                                                                                                     | USDT    | 10     | useraccount-payment-n |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR BOB    | 100038494 | 100038490        | qr3BOBmanualamount                                                                                                                                                                     | USDT    | 10     | useraccount-payment-n |
             | FF4CEBS-1404S0J-M3YQ6Q0-8ZR4GTT | QR BRAZIL | 100038086 | 100038082        | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8            | USDT    | 10     | useraccount-payment-n |
             | FF4CEBS-1404S0J-M3YQ6Q0-8ZR4GTT | QR PERU   | 100038086 | 100038083        | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5Bmanualamount | USDT    | 10     | useraccount-payment-n |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR ARG    | 100037510 | 100037735        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401manualamount                               | USDT    | 10     | useraccount-payment-n |
-            | C8P0Y2E-HQ4MTGE-JCQC1P9-9SETP69 | QR BREB   | 100037822 | 100037799        | manteca-breb-qa-manual-amount                                                                                                                                                          | USDT    | 1000   | useraccount-payment-n |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR ARG    | 100038493 | 100038486        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401manualamount                               | USDT    | 1000   | useraccount-payment-n |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR BREB   | 100038493 | 100038489        | manteca-breb-qa-manual-amount                                                                                                                                                          | USDT    | 1000   | useraccount-payment-n |
 
 
     @Refunds @RefundsDs @Automated

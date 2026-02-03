@@ -285,7 +285,7 @@ Feature: Sintéticos
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | skipDeposit | withdrawAddress                            | withdrawNetwork |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 3           | true        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
-    @Smoke @RampOff @NoDesc @Automated @Run @f
+    @Smoke @RampOff @NoDesc @Automated @Run
     Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"

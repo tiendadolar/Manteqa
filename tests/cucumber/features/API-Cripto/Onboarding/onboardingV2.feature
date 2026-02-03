@@ -147,10 +147,12 @@ Feature: Onboarding User - V2
             # | Colombia | 100009524 | 3519876543         | COP      | HSBC        | 1551     | CHECKING    |
             # | Colombia | 100009524 | 8123456789012345   | COP      | CHASE       | 1051     | CHECKING    |
             | Colombia | 100009524 | 0123456789      | COP      | CHASE       | 1051     | SAVINGS     |
+            | Colombia | 100009524 | 455900170867    | COP      | CHASE       | 1051     | SAVINGS     |
             | Colombia | 100009524 | 987654321       | COP      | BANCO       | 1001     | SAVINGS     |
             | Colombia | 100009524 | 987654587       | COP      | BANCO       | 1001     | CHECKING    |
             # | Colombia | 100009524 | 0472018417981      | COP      | HSBC        | 1032     | CHECKING    |
             | Colombia | 100009524 | 49999999999     | COP      | HSBC        | 1032     | CHECKING    |
+            | Colombia | 100009524 | 24125073299     | COP      | HSBC        | 1032     | CHECKING    |
             # | Colombia | 100009524 | 123456789012345678 | COP      | CHASE       | 1013     | CHECKING    |
             | Colombia | 100009524 | 12345678901234  | COP      | CHASE       | 1013     | SAVINGS     |
             # | Colombia | 100009525 | 467890123       | COP      | BANCO       | 1052     | CHECKING    |
@@ -372,7 +374,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId | email              | legalId    | exchange | name            | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | MCGKK4Q-4RA4MSN-HMT8FFQ-0BXW028 | andresperalta@manteca.dev | user       | juanabal@gmail.com | 17199396-2 | CHILE    | CRISTIAN ANDRES | HERRERA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Chile       | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId | email                    | legalId | exchange | name        | surname       | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | andresperalta@manteca.dev | userCOP    | andradehoyosru@gmail.com | 2375435 | COLOMBIA | RUBEN DARIO | ANDRADE HOYOS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Colombia    | SAMUEL PIRES DE MELO |
 
 
