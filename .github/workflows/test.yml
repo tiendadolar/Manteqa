@@ -32,9 +32,9 @@ on:
     branches:
       - '**' # Se ejecuta en todas las ramas, o especifica ramas específicas como: main, develop, etc.
 
-  # Ejecución automática de Providers los viernes a las 01:30 AM hora Argentina (04:30 UTC)
+  # Ejecución automática de Providers todos los días a las 01:30 AM hora Argentina (04:30 UTC)
   schedule:
-    - cron: '45 4 * * 5'
+    - cron: '30 4 * * *'
 
 jobs:
   test:
