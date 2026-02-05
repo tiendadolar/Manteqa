@@ -66,7 +66,7 @@ Then('Obtain {string} debt balance {string}', { timeout: 500 * 1000 }, async fun
 
   const response = await getCompanyDebtBalanceHelper(urlBase, endpoint, apiKEY, currency);
   validateRes(response, 200);
-  analizeBalances(undefined, 'inicialDebtBalance', 'finalDebtBalance');
+  analizeBalances(charge, 'inicialDebtBalance', 'finalDebtBalance');
 });
 
 // New accounting flow for manual refunds

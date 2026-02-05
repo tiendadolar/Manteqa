@@ -3,7 +3,7 @@ Feature: Sintético billing payments
 
     # ------ DESCUBIERTOS -------
 
-    @Smoke @Descubierto @PA @ARG
+    @Smoke @Descubierto @PA @ARG @Automated
     Scenario Outline: Ejecutar sintético billing en descubierto operando contra <against> desde principal account ARG enviando sender <exchange>
         Given The API key is available "<apiKEY>"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -35,7 +35,7 @@ Feature: Sintético billing payments
             | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDT    | 80000  | PERU      | 28316206      | CURI QUISPE WILDHER CHRISTIAN |
             | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDC    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
 
-    @Smoke @Balance @PA @ARG
+    @Smoke @Balance @PA @ARG @Automated
     Scenario Outline: Ejecutar sintético billing sobre user balance operando contra <against> desde principal account ARG enviando sender <exchange>
         Given The API key is available "<apiKEY>"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -63,7 +63,7 @@ Feature: Sintético billing payments
 
     # ------ NO DESCUBIERTOS -------
 
-    @Smoke @NoDescubierto @UA @Crypto @ARG
+    @Smoke @NoDescubierto @UA @Crypto @ARG @Automated
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
         Given The API key is available "<apiKEY>"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -91,7 +91,7 @@ Feature: Sintético billing payments
             | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036761 | USDT    | 1000   |
             | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036761 | USDC    | 1000   |
 
-    @Smoke @NoDescubierto @UA @Fiat @ARG
+    @Smoke @NoDescubierto @UA @Fiat @ARG @Automated
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
         Given The API key is available "<apiKEY>"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"

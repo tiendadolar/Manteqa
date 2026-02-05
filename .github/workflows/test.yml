@@ -16,6 +16,7 @@ on:
           - 'Orders v1'
           - 'Orders v2'
           - 'Pagos'
+          - 'Billing'
           - 'Providers'
           - 'Refunds'
           - 'Sintéticos'
@@ -32,9 +33,9 @@ on:
     branches:
       - '**' # Se ejecuta en todas las ramas, o especifica ramas específicas como: main, develop, etc.
 
-  # Ejecución automática de Providers todos los días a las 01:30 AM hora Argentina (04:30 UTC)
+  # Ejecución automática de Providers todos los días a las 01:30 AM hora Argentina (03:30 UTC)
   schedule:
-    - cron: '30 4 * * *'
+    - cron: '30 3 * * *'
 
 jobs:
   test:
@@ -80,6 +81,9 @@ jobs:
               ;;
             "Pagos")
               TAGS="@QR and @Smoke and @Automated"
+              ;;
+            "Billing")
+              TAGS="@Billing and @Smoke and @Automated"
               ;;
             "Providers")
               TAGS="@Provider and @Smoke and @Automated"
