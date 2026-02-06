@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 import {
   analizeBalances,
+  compareBalance,
   getCompanyCreditBalanceHelper,
   getCompanyDebtBalance,
   getCompanyDebtBalanceHelper,
@@ -52,6 +53,22 @@ Then('Obtain {string} balance for {string} user over {string}', { timeout: 500 *
   const response = await getUserBalanceHelper(urlBase, endpoint, apiKEY, currency);
   validateRes(response, 200);
   analizeBalances(chargeType, 'inicialUserBalance', 'finalUserBalance');
+});
+
+Then('Get {string} balance for {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, userAnyId: string) {
+  const urlBase = this.urlBase;
+  const endpoint = `/v2/user-balances/${userAnyId}`;
+  const apiKEY = this.apiKey;
+  const currency: any = fiat.toUpperCase();
+
+  const response = await getUserBalanceHelper(urlBase, endpoint, apiKEY, currency);
+  validateRes(response, 200);
+});
+
+Then('Validate {string} balance due', { timeout: 500 * 1000 }, async function (this: CustomWorld, compareType: string) {
+  const res = this.response;
+
+  compareBalance(compareType, res);
 });
 
 // New accounting flow for manual refunds

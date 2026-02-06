@@ -1,4 +1,4 @@
-import { getBillIdInfoHelper } from '../../../../support/helpers/billingHelper';
+import { getBillIdInfoHelper, getTopUpIdInfoHelper } from '../../../../support/helpers/billingHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import logger from '../../../../support/utils/logger';
 import { CustomWorld } from '../../../../support/world';
@@ -6,8 +6,17 @@ const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
 
-Given('Get billId from provider', async function (this: CustomWorld) {
+Given('Get billId from billing provider', async function (this: CustomWorld) {
   const res = await getBillIdInfoHelper(this.apiKey);
+  const billId = res.body[0].id;
+  await validateRes(res, 200);
+
+  CustomWorld.setStoreData('billId', billId, true);
+  console.log(CustomWorld.getStoreData('billId'));
+});
+
+Given('Get billId from top up provider', async function (this: CustomWorld) {
+  const res = await getTopUpIdInfoHelper(this.apiKey);
   const billId = res.body[0].id;
   await validateRes(res, 200);
 

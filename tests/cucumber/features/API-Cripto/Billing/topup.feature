@@ -1,14 +1,14 @@
-@Billing
-Feature: Sintético billing payments
+@Topup
+Feature: Sintético top-up payments
 
     # ------ DESCUBIERTOS -------
 
     @Smoke @Descubierto @PA @ARG @Automated
-    Scenario Outline: Ejecutar sintético billing en descubierto operando contra <against> desde principal account ARG enviando sender <exchange>
+    Scenario Outline: Ejecutar sintético top up en descubierto operando contra <against> desde principal account ARG enviando sender <exchange>
         Given The API key is available "<apiKEY>"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from billing provider
+        And Get billId from top up provider
         And Obtain "<against>" debt balance "company"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -36,11 +36,11 @@ Feature: Sintético billing payments
             | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDC    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
 
     @Smoke @Balance @PA @ARG @Automated
-    Scenario Outline: Ejecutar sintético billing sobre user balance operando contra <against> desde principal account ARG enviando sender <exchange>
+    Scenario Outline: Ejecutar sintético top up sobre user balance operando contra <against> desde principal account ARG enviando sender <exchange>
         Given The API key is available "<apiKEY>"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from billing provider
+        And Get billId from top up provider
         And Get "<against>" balance for "<userAnyId>"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -72,7 +72,7 @@ Feature: Sintético billing payments
         Given The API key is available "<apiKEY>"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from billing provider
+        And Get billId from top up provider
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -100,7 +100,7 @@ Feature: Sintético billing payments
         Given The API key is available "<apiKEY>"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from billing provider
+        And Get billId from top up provider
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"

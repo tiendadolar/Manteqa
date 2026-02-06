@@ -151,3 +151,13 @@ export const analizeBalances = (charge?: string, inicial?: string, final?: strin
   const balances = compareBalanceTypeValidator(charge, inicial, final);
   compareBalanceFlowValidator(balances.inicialBalance, balances.finalBalance);
 };
+
+export const compareBalance = (compareType: string, res: any): any => {
+  if ((compareType = 'user')) {
+    const finalUserBalance = parseFloat(CustomWorld.getStoreData('finalUserBalance'));
+    const balance = parseFloat(CustomWorld.getStoreData('inicialUserBalance')) - parseFloat(res.body.stages['1'].amount);
+
+    expect(finalUserBalance).to.be.closeTo(balance, 0.02);
+    logger.info(`In this case we operated onto user balance`);
+  }
+};

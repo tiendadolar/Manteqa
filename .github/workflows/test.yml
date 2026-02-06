@@ -17,6 +17,7 @@ on:
           - 'Orders v2'
           - 'Pagos'
           - 'Billing'
+          - 'Top Up'
           - 'Providers'
           - 'Refunds'
           - 'Sintéticos'
@@ -84,6 +85,9 @@ jobs:
               ;;
             "Billing")
               TAGS="@Billing and @Smoke and @Automated"
+              ;;
+            "Top Up")
+              TAGS="@Topup and @Smoke and @Automated"
               ;;
             "Providers")
               TAGS="@Provider and @Smoke and @Automated"

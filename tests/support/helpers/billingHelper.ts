@@ -12,3 +12,12 @@ export const getBillIdInfoHelper = async (apiKey: string, key?: string, userAnyI
 
   return response;
 };
+
+export const getTopUpIdInfoHelper = async (apiKey: string, key?: string, userAnyId?: string) => {
+  const urlBase = `https://sandbox.manteca.dev/crypto/v2`;
+  const endpoint = `/info/bill-companies/AR-R-00009/a5555957-72a9-42a3-9de9-8f71807b2499/recharges/1111110000`;
+
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+
+  return response;
+};
