@@ -28,6 +28,7 @@ on:
           - 'Remesas'
           - 'Integrations - OnboardingV2'
           - 'Integrations - Lock Payment'
+          - 'Integrations - Withdraw V2'
 
   # Ejecución automática en cada push
   push:
@@ -118,6 +119,10 @@ jobs:
               ;;
             "Integrations - Lock Payment")
               TAGS="@Integrations and @LockPayment and @Regression and @Automated"
+              ;;
+            *)
+            "Integrations - Withdraw V2")
+              TAGS="@Integrations and @WithdrawV2 and @Regression and @Automated"
               ;;
             *)
               TAGS="@Smoke and @Automated"

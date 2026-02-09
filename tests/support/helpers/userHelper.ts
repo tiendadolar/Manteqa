@@ -9,8 +9,21 @@ export const getUserInfoHelper = async (apiKey: string, key?: string, userAnyId?
   const endpoint = `/users/${userAnyId}`;
 
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
-  logger.warn(key);
-  logger.warn(response.body);
+
+  if (key !== undefined) {
+    CustomWorld.setStoreData(key.toString(), response.body[key.toString()]);
+    logger.debug(CustomWorld.getStoreData(key.toString()));
+    return;
+  }
+
+  return response;
+};
+
+export const getUserInfoDougHelper = async (token: string, userAnyId?: string, key?: string) => {
+  const urlBase = `https://api-qa.tiendacrypto.com/v1`;
+  const endpoint = `/admin/user/${userAnyId}/doug`;
+
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', token });
 
   if (key !== undefined) {
     CustomWorld.setStoreData(key.toString(), response.body[key.toString()]);

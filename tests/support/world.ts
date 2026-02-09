@@ -63,6 +63,7 @@ export class CustomWorld extends World {
   static getSessionId(value: string): string {
     this.sessionCounter++;
     fs.writeFileSync(this.sessionCounterFile, this.sessionCounter.toString());
+    CustomWorld.setStoreData('sessionId', `${value}-${this.sessionCounter}`);
     return `${value}-${this.sessionCounter}`;
   }
 
@@ -74,8 +75,10 @@ export class CustomWorld extends World {
 
   static getExternalId(value: string): string {
     if (value === 'integrations') return value;
+    if (value === 'externalIdRepeat') return value;
     this.extIdCounter++;
     fs.writeFileSync(this.externalIdFile, this.extIdCounter.toString());
+    CustomWorld.setStoreData('externalId', `${value}-${this.extIdCounter}`);
     return `${value}-${this.extIdCounter}`;
   }
 

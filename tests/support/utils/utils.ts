@@ -348,10 +348,9 @@ export const fiatWithdrawApiCrypto = (userData: any) => {
 };
 
 export const fiatWithdrawApiCryptoV2 = (userData: any) => {
-  console.log(CustomWorld.getStoreData('code'));
-
   if (userData.asset === 'ARS' || userData.asset === 'USD' || userData.asset === 'BRL') {
     return {
+      externalId: CustomWorld.getExternalId(userData.externalId),
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
       network: userData.network,
@@ -364,6 +363,7 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
     };
   } else if (userData.asset === 'CRC') {
     return {
+      externalId: CustomWorld.getExternalId(userData.externalId),
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
       network: userData.network,
@@ -381,6 +381,7 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
   if (userData.type === 'crypto') {
     // if (userData.country === "ARG" || userData.country === "BRL") {
     return {
+      externalId: CustomWorld.getExternalId(userData.externalId),
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
       // network: userData.network,
@@ -394,6 +395,7 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
     };
   } else if (userData.type === 'crypto' && CustomWorld.getStoreData('code') !== undefined) {
     return {
+      externalId: CustomWorld.getExternalId(userData.externalId),
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
       // network: userData.network,
@@ -408,6 +410,7 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
   }
 
   return {
+    externalId: CustomWorld.getExternalId(userData.externalId),
     sessionId: CustomWorld.getSessionId(userData.sessionId),
     userAnyId: userData.userAnyId,
     network: userData.network,

@@ -46,7 +46,7 @@ Feature: Orders Integrations
 
     # ------------------------------- Error Path -------------------------------
 
-    @ErrorPath7
+    @ErrorPath
     Scenario Outline: Validate error order response sending <case>
         Given The API key is available "<apiKEY>"
         When Assign the value "<externalId>" to the variable "externalId"
@@ -91,7 +91,7 @@ Feature: Orders Integrations
             | case               | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message                                                                                                 |
             | enviroment api-KEY | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 403        | FORBIDDEN      | You do not have enough permissions to access the resource with the provided authentication credentials. |
 
-    @ErrorPath1
+    @ErrorPath
     Scenario Outline: Validate error order response sending empty <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And The API key is available "<apiKEY>"
