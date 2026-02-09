@@ -119,14 +119,13 @@ jobs:
               ;;
             "Integrations - Lock Payment")
               TAGS="@Integrations and @LockPayment and @Regression and @Automated"
-              ;;
-            *)
+              ;;            
             "Integrations - Withdraw V2")
               TAGS="@Integrations and @WithdrawV2 and @Regression and @Automated"
               ;;
-            *)
+            *)            
               TAGS="@Smoke and @Automated"
-              ;;
+              ;;            
           esac
 
           echo "tags=${TAGS}" >> $GITHUB_OUTPUT
