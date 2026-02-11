@@ -144,13 +144,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Prepare clean installation
+      - name: Verify CodeArtifact connectivity
         run: |
-          echo "Limpiando solo archivos locales del proyecto..."
-          rm -rf node_modules
-          rm -f package-lock.json
-
-          echo "Verificando conectividad con CodeArtifact..."
           aws codeartifact describe-repository \
             --domain td \
             --repository backend-shared-libs \
@@ -187,49 +182,8 @@ jobs:
 
           unset CODEARTIFACT_AUTH_TOKEN
 
-      - name: Smart dependency installation
-        run: |
-          echo "=== Método 1: Instalación estándar ==="
-          if npm install --fetch-retries=5 --fetch-retry-mintimeout=10000; then
-            echo "✅ Instalación exitosa con método estándar"
-            exit 0
-          fi
-
-          echo "=== Método 2: Reinstalación desde cero ==="
-          rm -rf node_modules
-          rm -f package-lock.json
-
-          if npm install --fetch-retries=5 --fetch-retry-mintimeout=10000; then
-            echo "✅ Instalación exitosa con reinstalación"
-            exit 0
-          fi
-
-          echo "=== Método 3: Manejo específico del paquete problemático ==="
-          if npm info dunder-proto@1.0.1; then
-            echo "El paquete existe en el registro, reintentando..."
-            npm install dunder-proto@1.0.1 --fetch-retries=5
-            npm install --fetch-retries=5
-            
-            if [ $? -eq 0 ]; then
-              echo "✅ Instalación exitosa con manejo específico"
-              exit 0
-            fi
-          fi
-
-          echo "=== Método 4: Último recurso con cache bypass ==="
-          rm -rf node_modules
-          rm -f package-lock.json
-
-          if npm install --no-cache --fetch-retries=5; then
-            echo "✅ Instalación exitosa sin cache"
-          else
-            echo "❌ Todos los métodos fallaron"
-            echo "Información de diagnóstico:"
-            npm --version
-            node --version
-            ls -la
-            exit 1
-          fi
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run Cucumber tests - ${{ steps.set-suite.outputs.test_suite }}
         continue-on-error: true

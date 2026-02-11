@@ -3,10 +3,10 @@ const { expect } = require('chai');
 import logger from '../utils/logger';
 import { CustomWorld } from '../world';
 
-const errorRequest = (response: any) => {
+const errorRequest = (response: any, expectedStatus: number) => {
   logger.error(response.status);
   logger.error(JSON.stringify(response.body));
-  throw new Error();
+  throw new Error(`Expected ${expectedStatus} but got ${response.status}: ${JSON.stringify(response.body)}`);
 };
 
 export const apiRequest = async ({
@@ -63,6 +63,6 @@ export const validateRes = (response: any, expectedStatus: number) => {
     expect(response.status).to.equal(expectedStatus);
     CustomWorld.setStoreData('responseHelper', response.body);
   } catch (error) {
-    errorRequest(response);
+    errorRequest(response, expectedStatus);
   }
 };

@@ -23,10 +23,10 @@ const options = {
   metadata: {
     'App Version': '1.0.0',
     'Test Environment': 'STAGING',
-    Browser: 'Chrome  54.0.2840.98',
-    Platform: 'Windows 10',
+    'Test Type': 'API',
+    Platform: 'Node.js',
     Parallel: 'Scenarios',
-    Executed: 'Remote'
+    Executed: 'CI/CD'
   }
 };
 
