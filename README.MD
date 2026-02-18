@@ -281,12 +281,15 @@ export const validateNuevoDominioResponse = (response: any) => {
 | Trigger | Que corre | Cuando |
 |---------|-----------|--------|
 | Push a cualquier rama | OnboardingV2 Smoke | Automatico en cada push |
-| Manual (workflow_dispatch) | Suite seleccionada (32 opciones) | On-demand desde GitHub UI |
-| Cron diario (01:30 ARG) | Providers | Todos los dias |
+| Manual (workflow_dispatch) | Suite seleccionada (33 opciones) | On-demand desde GitHub UI |
+| Cron L-V 01:00 ARG | Smoke General | Detectar regressions del dia |
+| Cron L-V 01:30 ARG | Providers | Monitorear dependencias externas |
+| Cron L/Mi/V 02:00 ARG | Integrations OnboardingV2 | Flujos multi-step |
+| Cron Dom 03:00 ARG | Regression | Cobertura amplia semanal |
 
 ### Suites disponibles en dispatch manual
 
-Smoke General, Onboarding v1/v2, Orders v1/v2, Pagos, Billing, Top Up, Providers, Refunds, Sinteticos, Withdraw Fiat v1/v2, Withdraw Crypto v1/v2, Remesas, Integrations (OnboardingV2, Lock Payment, Withdraw V2).
+Smoke General, Onboarding v1/v2, Orders v1/v2, Pagos, Billing, Top Up, Providers, Refunds, Sinteticos, Withdraw Fiat v1/v2, Withdraw Crypto v1/v2, Remesas, Integrations (OnboardingV2, Lock Payment, Withdraw V2), Regression.
 
 ### Notificaciones
 
@@ -299,6 +302,36 @@ Cada run genera artifacts descargables:
 - `cucumber-report.html` - Reporte visual
 - `cucumber-report.json` - Datos crudos
 - `test-results.json` - Resumen con metricas
+
+### Pendiente: Trigger post-deploy desde microservicios
+
+Cuando un microservicio deploya a sandbox, deberia triggerear automaticamente los E2E relevantes. Esto todavia no esta implementado.
+
+**Pre-requisito**: Crear un GitHub Personal Access Token con permiso `actions:write` sobre `tiendadolar/Manteqa` y agregarlo como secret `MANTEQA_TRIGGER_TOKEN` en cada repo de microservicio.
+
+**Implementacion**: Agregar este step al final del workflow de deploy de cada servicio:
+
+```yaml
+- name: Trigger E2E tests
+  if: success()
+  env:
+    GH_TOKEN: ${{ secrets.MANTEQA_TRIGGER_TOKEN }}
+  run: |
+    gh workflow run test.yml \
+      --repo tiendadolar/Manteqa \
+      --ref main \
+      --field test_suite="${TEST_SUITE}"
+```
+
+**Mapping por servicio:**
+
+| Repo | test_suite | Por que |
+|------|-----------|---------|
+| b2b-ms-exchange | `Smoke General` | Toca orders, withdrawals, deposits |
+| b2b-ms-apiGateway | `Smoke General` | Todo pasa por el gateway |
+| b2b-ms-prices | `Orders v2` | Afecta precios y orders |
+| b2b-ms-compliance | `Onboarding v2` | Afecta flujo de alta |
+| md-bank-service | `Withdraw Fiat v2` | Afecta retiros y depositos fiat |
 
 ---
 

@@ -29,15 +29,19 @@ on:
           - 'Integrations - OnboardingV2'
           - 'Integrations - Lock Payment'
           - 'Integrations - Withdraw V2'
+          - 'Regression'
 
   # Ejecución automática en cada push
   push:
     branches:
       - '**' # Se ejecuta en todas las ramas, o especifica ramas específicas como: main, develop, etc.
 
-  # Ejecución automática de Providers todos los días a las 01:30 AM hora Argentina (03:30 UTC)
+  # Ejecuciones programadas (horarios en UTC, Argentina = UTC-3)
   schedule:
-    - cron: '30 3 * * *'
+    - cron: '0 4 * * 1-5'    # Smoke General   - L a V  01:00 ARG
+    - cron: '30 4 * * 1-5'   # Providers       - L a V  01:30 ARG
+    - cron: '0 5 * * 1,3,5'  # Integrations    - L/Mi/V 02:00 ARG
+    - cron: '0 6 * * 0'      # Regression      - Dom    03:00 ARG
 
 jobs:
   test:
@@ -51,8 +55,23 @@ jobs:
         id: set-suite
         run: |
           if [ "${{ github.event_name }}" == "schedule" ]; then
-            TEST_SUITE="Providers"
-            echo "🕐 Ejecución programada - Suite: Providers"
+            HOUR=$(date -u +%H)
+            MINUTE=$(date -u +%M)
+            DOW=$(date -u +%u)
+
+            if [ "$HOUR" == "04" ] && [ "$MINUTE" -lt 15 ]; then
+              TEST_SUITE="Smoke General"
+            elif [ "$HOUR" == "04" ]; then
+              TEST_SUITE="Providers"
+            elif [ "$HOUR" == "05" ]; then
+              TEST_SUITE="Integrations - OnboardingV2"
+            elif [ "$HOUR" == "06" ]; then
+              TEST_SUITE="Regression"
+            else
+              TEST_SUITE="Smoke General"
+            fi
+
+            echo "🕐 Ejecución programada - Suite: $TEST_SUITE (UTC $HOUR:$MINUTE, DOW $DOW)"
           elif [ "${{ github.event_name }}" == "push" ]; then
             TEST_SUITE="Onboarding v2"
             echo "🚀 Ejecución por push - Suite: Onboarding v2"
@@ -123,9 +142,12 @@ jobs:
             "Integrations - Withdraw V2")
               TAGS="@Integrations and @WithdrawV2 and @Regression and @Automated"
               ;;
-            *)            
+            "Regression")
+              TAGS="@Regression and @Automated"
+              ;;
+            *)
               TAGS="@Smoke and @Automated"
-              ;;            
+              ;;
           esac
 
           echo "tags=${TAGS}" >> $GITHUB_OUTPUT
