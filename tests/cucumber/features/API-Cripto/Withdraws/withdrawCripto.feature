@@ -453,16 +453,6 @@ Feature: Retiros Crypto
             | apiKEY                          | type   | asset | userAnyId | country | network | amount | address                            |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | TRON    | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
 
-        @Test
-        Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network | amount | address                                    |
-            #     | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            #     | crypto | BNB   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            #     | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            #     | crypto | BTC   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | BINANCE | 12     | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     @Smoke @Crypto @BRLv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2

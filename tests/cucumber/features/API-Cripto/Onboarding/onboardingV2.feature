@@ -4,7 +4,7 @@ Feature: Onboarding User - V2
     # Validar en DB, para realizar nuevamente el test eliminar bankAccounts en DB
     # No tocar datos de userAnyId, en caso de reutilizar elimnar datos de banking en DB. Maximo 15 banks por user
     #* Para volver a realizar test se debe limpiar el bankAddress de la DB de cada user
-    @Regression @testBankingCHL
+    @testBankingCHL
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -62,7 +62,7 @@ Feature: Onboarding User - V2
             | Chile   | 100009512 | 01710280153 | CLP      | BANCO       | 311      | CHECKING    |
             | Chile   | 100009512 | 01710280154 | CLP      | BANCO       | 311      | SAVINGS     |
 
-    @Regression @testBankingPAN
+    @testBankingPAN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -121,7 +121,7 @@ Feature: Onboarding User - V2
             | Panama  | 100009523 | 0472018417969 | PUSD     | BANCO       | 1397     | CHECKING    |
             | Panama  | 100009523 | 0472018417950 | PUSD     | BANCO       | 1397     | SAVINGS     |
 
-    @Regression @testBankingCOL
+    @testBankingCOL
     Scenario: Agregar cuenta bancaria a usuario de "<country>" con tipo de cuenta <accountType>
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -172,7 +172,7 @@ Feature: Onboarding User - V2
             | Colombia | 100009525 | 0472018417999   | COP      | BANCO       | 1292     | CHECKING    |
             | Colombia | 100009525 | 0472018417960   | COP      | BANCO       | 1292     | SAVINGS     |
 
-    @Regression @testBankingGUA
+    @testBankingGUA
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -219,7 +219,7 @@ Feature: Onboarding User - V2
             | Guatemala | 100009544 | 099999991799   | GTQ      | BANCO       | 048      | CHECKING    |
             | Guatemala | 100009544 | 099999915999   | GTQ      | BANCO       | 048      | SAVINGS     |
 
-    @Regression @testBankingCTR
+    @testBankingCTR
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -268,7 +268,7 @@ Feature: Onboarding User - V2
             | Costa Rica | 100009604 | CR123456789123776789   | CRC      | BANCO       | 0312     | CHECKING    |
             | Costa Rica | 100009604 | CR123456789123451189   | CRC      | BANCO       | 0312     | SAVINGS     |
 
-    @Regression @testBankingMXN
+    @testBankingMXN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -374,7 +374,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId | email                    | legalId | exchange | name        | surname       | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | andresperalta@manteca.dev | userCOP    | andradehoyosru@gmail.com | 2375435 | COLOMBIA | RUBEN DARIO | ANDRADE HOYOS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Colombia    | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId     | email             | legalId    | exchange | name     | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
+            | T4CT0H2-H1RM1B1-P611ZRV-M037A3N | andresperalta@manteca.dev | user-account-2 | patjara@gmail.com | 14210971-9 | CHILE    | PATRICIO | JARA    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Chile       | SAMUEL PIRES DE MELO |
 
 

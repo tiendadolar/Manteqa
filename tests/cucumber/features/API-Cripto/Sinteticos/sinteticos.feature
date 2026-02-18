@@ -1,9 +1,9 @@
-@Sintetico
+@Sintetico @Regression
 Feature: Sintéticos
 
     # ----- Descubierto -----
     # ----- LooselyManagedAssets -----
-    @Smoke @RampOnDesc @Automated
+    @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "<asset>" contra "<against>"
 
         # Parte 1: Creación de sintético
@@ -35,7 +35,12 @@ Feature: Sintéticos
             # | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ARBITRUM        |
             | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | BASE            |
 
-    @Smoke @RampOnDesc @Automated
+        @Smoke
+        Examples:
+            | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+
+    @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed con deposito "<asset>" contra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
@@ -59,11 +64,12 @@ Feature: Sintéticos
         Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
         And Obtain a company debt "<against>" balance
 
+        @Smoke
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                            | withdrawNetwork |
             | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
-    @Smoke @RampOnDesc @Automated
+    @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed operando desde userBalance "<asset>" contra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
@@ -83,11 +89,12 @@ Feature: Sintéticos
         Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
         And Obtain "<against>" balance for "<userAnyId>" user
 
+        @Smoke
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                            | withdrawNetwork |
             | 100009788 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
-    @Smoke @RampOnDesc @Tron @Automated
+    @RampOnDesc @Tron @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "<asset>" contra "<against>"
 
         # Parte 1: Creación de sintético
@@ -108,13 +115,14 @@ Feature: Sintéticos
         Then Obtain a response 200 and status "COMPLETED" for "tron ramp" synthetic
         And Obtain a company debt "<against>" balance
 
+        @Smoke
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                    | withdrawNetwork |
             | 100009780 | smoke-rampOn-DESC-test-n | TRX   | ARS     | 3           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
             | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
 
     # Se ejecuta solo el stage de orden
-    @Smoke @PartialRampOnDesc @Automated
+    @PartialRampOnDesc @Automated
     Scenario Outline: Flujo E2E Partial-Ramp-On descubierto loosely managed generando deuda a la company "<asset>" contra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
@@ -140,8 +148,13 @@ Feature: Sintéticos
             | 100009781 | smoke-partialRampOn-DESC-test-n | USDT  | ARS     | 7           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
             | 100009781 | smoke-partialRampOn-DESC-test-n | USDC  | ARS     | 5           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
+        @Smoke
+        Examples:
+            | userAnyId | sessionId                       | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 3           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
+
     # ----- PartiallyManagedAssets -----
-    @Smoke @RampOnDesc @Automated
+    @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto partially managed generando deuda a la company "<asset>" contra "<against>"
 
         # Parte 1: Creación de sintético
@@ -162,12 +175,13 @@ Feature: Sintéticos
         Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
         And Obtain a company debt "<against>" balance
 
+        @Smoke
         Examples:
             | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 100011129 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 7           | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ETHEREUM        |
 
 
-    @Smoke @RampOnDesc @Automated
+    @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto partially managed deposit stage "<asset>" contra "<against>"
 
         # Parte 1: Creación de sintético
@@ -200,7 +214,7 @@ Feature: Sintéticos
 
     # ----- No Descubierto -----
 
-    @Smoke @RampOn @Automated
+    @RampOn @Automated
     Scenario Outline: Flujo E2E Ramp-On no descubierto "<asset>" constra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "<apiKEY>"
@@ -230,7 +244,12 @@ Feature: Sintéticos
             # | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
 
-    @Smoke @RampOn @Tron @Automated
+
+        Examples:
+            | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+
+    @RampOn @Tron @Automated
     Scenario Outline: Flujo E2E Ramp-On no descubierto "<asset>" contra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "<apiKEY>"
@@ -254,12 +273,13 @@ Feature: Sintéticos
         Then Obtain a response 200 and status "COMPLETED" for "tron ramp" synthetic
         And Obtain "<against>" balance for "<userAnyId>" user
 
+        @Smoke
         Examples:
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                    | withdrawNetwork |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100011193 | smoke-test-n | TRX   | ARS     | 5           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
             | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100011193 | smoke-test-n | USDT  | ARS     | 10          | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
 
-    @Smoke @RampOn @Automated
+    @RampOn @Automated
     Scenario Outline: Flujo E2E Ramp-On no descubierto operando desde el user balance "<asset>" contra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "<apiKEY>"
@@ -281,11 +301,12 @@ Feature: Sintéticos
         Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
         And Obtain "<against>" balance for "<userAnyId>" user
 
+        @Smoke
         Examples:
             | apiKEY                          | userAnyId | sessionId    | asset | against | assetAmount | skipDeposit | withdrawAddress                            | withdrawNetwork |
             | P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD | 100008214 | smoke-test-n | WLD   | ARS     | 3           | true        | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
-    @Smoke @RampOff @NoDesc @Automated @Run
+    @RampOff @NoDesc @Automated @Run
     Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -306,6 +327,7 @@ Feature: Sintéticos
         # Parte 2: Validar ejeccución del sintético
         Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
 
+
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
             | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
@@ -313,7 +335,7 @@ Feature: Sintéticos
     # | 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
     # | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |
 
-    @Smoke @RampOff @Tron @Automated
+    @RampOff @Tron @Automated
     Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
         # Parte 1: Creación de sintético
         Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
@@ -334,12 +356,13 @@ Feature: Sintéticos
         # Parte 2: Validar ejeccución del sintético
         Then Obtain a response 200 and status "COMPLETED" for "tron ramp" synthetic
 
+        @Smoke
         Examples:
             | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                 | ticker | chain |
             | 100011193 | smoke-test-n | TRX   | ARS     | 3           | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | TRX    | 9     |
             | 100011193 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | USDT   | 9     |
 
-    @Smoke @PartialRampOn @Automated
+    @PartialRampOn @Automated
     Scenario Outline: Flujo E2E Partial-Ramp-On no descubierto
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -369,7 +392,7 @@ Feature: Sintéticos
             | 100009719 | smoke-partialRampOn-test-n | USDT  | ARS     | 7           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | ETHEREUM        |
             | 100009719 | smoke-partialRampOn-test-n | USDC  | ARS     | 4           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | OPTIMISM        |
 
-    @Smoke @PartialRampOff @Automated
+    @PartialRampOff @Automated
     Scenario Outline: Flujo E2E Partial-Ramp-Off no descubierto
         # Parte 1: Creación de sintético
         Given The API key is available "P0H3ZHM-N2EM338-PRP6BA7-S3NTRJD"
@@ -396,7 +419,7 @@ Feature: Sintéticos
             | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 0     |
     # | 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 5     |
 
-    @Smoke @RampOff @Exchange @Automated
+    @Smoke @RampOfft @Exchange @Automated
     Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
         Given The API key is available "<apiKEY>"
         And The API secret is available "6RcTZScYUFb2bq9qWq"
@@ -452,11 +475,11 @@ Feature: Sintéticos
 
         Examples:
             | apiKEY                          | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012259 | smoke-rampoff-n | USDT  | CLP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100013985 | smoke-rampoff-n | USDT  | COP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
-            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BINANCE         |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100011660 | smoke-rampoff-n | USDC  | BRL     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012259 | smoke-rampoff-n | USDC  | CLP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012269 | smoke-rampoff-n | USDC  | GTQ     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012270 | smoke-rampoff-n | USDC  | CRC     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012271 | smoke-rampoff-n | USDC  | MXN     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012272 | smoke-rampoff-n | USDC  | PHP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100013985 | smoke-rampoff-n | USDC  | COP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100012268 | smoke-rampoff-n | USDC  | PUSD    | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |

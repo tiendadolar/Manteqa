@@ -4,7 +4,7 @@ Feature: Lock Price Integrations
     Background:
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-    @HappyPath
+    @HappyPath @Automated
     Scenario Outline: Validate success lock price response <case>
         Given The API key is available "<apiKEY>"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -24,7 +24,7 @@ Feature: Lock Price Integrations
             | sending allowMultipleUses false | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | SELL | USDT  | ARS     | 150           | false             |
             | sending expireSeconds empty     | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | SELL | USDT  | ARS     |               | true              |
 
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error reponse lock price response <case>
         Given The API key is available "<apiKEY>"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -49,7 +49,7 @@ Feature: Lock Price Integrations
             | sending empty against        | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | BUY     | USDT    |         | 150           | true              | 400        | BAD_REQUEST    | Bad request.    | against has wrong value . Possible values are ARS,USD,CLP,COP,BRL,GTQ,CRC,PUSD,MXN,PHP,PEN,PYG,BOB,EUR,USDCCL.                                                                         |
             | sending invalid against      | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | BUY     | USDT    | INVALID | 150           | true              | 400        | BAD_REQUEST    | Bad request.    | against has wrong value INVALID. Possible values are ARS,USD,CLP,COP,BRL,GTQ,CRC,PUSD,MXN,PHP,PEN,PYG,BOB,EUR,USDCCL.                                                                  |
 
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error reponse lock price response <case>
         Given The API key is available "<apiKEY>"
         When Assign the value <userAnyId> to the variable "userAnyId"
@@ -66,7 +66,7 @@ Feature: Lock Price Integrations
             | case                          | apiKEY                          | userAnyId | side | asset | against | expireSeconds | allowMultipleUses | statusCode | internalStatus | message      | errors                                                        |
             | sending userAnyId as a number | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | BUY  | USDT  | ARS     | 150           | true              | 400        | BAD_REQUEST    | Bad request. | userAnyId needs to be of type string but it's of type number. |
 
-    @ErrorPath
+    @ErrorPath @Automated
     Scenario Outline: Validate error reponse lock price response <case>
         Given The API key is available "<apiKEY>"
         When Assign the value "<userAnyId>" to the variable "userAnyId"

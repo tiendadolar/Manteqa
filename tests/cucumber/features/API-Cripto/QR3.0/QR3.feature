@@ -1,4 +1,4 @@
-@QR
+@QR @Regression
 Feature: Sintético QR 3.0
 
     # **** SUITE ****
@@ -6,7 +6,7 @@ Feature: Sintético QR 3.0
     # ------ NO DESCUBIERTOS -------
     # ------ QR V1 ------
 
-    @Smoke @QRV1NoDesc @Automated
+    @QRV1NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <ticker> no descubierto vía V1 endpoints desde User Account
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -43,7 +43,7 @@ Feature: Sintético QR 3.0
             | userAnyId | type    | qrCode                               | amount | sessionId      | to                                         | ticker |
             | 100009352 | PIX-KEY | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 | USDT   |
 
-    @Smoke @QRV1NoDesc @Automated
+    @QRV1NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR PIX <type> contra <against> en no descubierto vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -80,7 +80,7 @@ Feature: Sintético QR 3.0
             | userAnyId | type     | qrCode                               | against | amount | sessionId      | to                                         |
             | 100009352 | embebido | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | QR-NoDesc-V1-n | 0x7921319332714EBea5c1219439c34309e600DF54 |
 
-    @Smoke @QRV1NoDesc @Automated
+    @QRV1NoDesc @Automated
     Scenario Outline: Validar Clean Code al ejecutar lock de QR estático sin enviar amount vía V1 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -96,7 +96,7 @@ Feature: Sintético QR 3.0
 
     # ------ QR V2 ------
 
-    @Smoke @QRV2NoDesc @Automated
+    @QRV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints against default
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -130,7 +130,7 @@ Feature: Sintético QR 3.0
             | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount    | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | andresperalta@manteca.dev | estatico | 100013787 | qr3BOBmanualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
-    @Smoke @QRV2NoDesc @Automated
+    @QRV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -158,12 +158,13 @@ Feature: Sintético QR 3.0
         # Validate balance after execute qr payment
         And Obtain "<ticker>" balance for "<userAnyId>" user
 
+        @Smoke
         Examples:
             | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
             | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | andresperalta@manteca.dev | embebido | 100009502 | qr3             | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
-        @WLD
+        @Smoke @WLD
         Examples:
             | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
             | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    |
@@ -311,7 +312,7 @@ Feature: Sintético QR 3.0
             | accion | userAnyId | qrCode                               | amount | sessionId               | to                                         | ticker |
             | manual | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V2-NO-DESC-n | 0x8aD91F66950d65C7a27a123c28fd4f861717bF08 | USDT   |
 
-    @Smoke @PixV2NoDesc @Automated
+    @PixV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en no descubierto vía V2 endpoints
         Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
@@ -345,11 +346,17 @@ Feature: Sintético QR 3.0
         #     | estatico | 100013787 | qr3BOBmanualamount | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
         #When transfero pix failed
+        @Smoke
         Examples:
             | accion   | userAnyId | qrCode                               | against | amount | sessionId                 | to                                         | ticker |
             | manual   | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | embebido | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | estatico | 100013787 | qr3BOBmanualamount                   | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+
+        @Smoke
+        Examples:
+            | accion | userAnyId | qrCode                               | against | amount | sessionId               | to                                         | ticker |
+            | manual | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-manual-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
     @Smoke @Peru @NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>" sobre el Balance User
@@ -516,7 +523,7 @@ Feature: Sintético QR 3.0
 
     # ------ QR V2 ------
 
-    @Smoke @UserBalance @QRV2UserBalance @Automated
+    @UserBalance @QRV2UserBalance @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> operando desde el user balance vía V2 endpoints
         Given The API key is available "0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -551,7 +558,7 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V1 ------
 
-    @Smoke @UserBalance @PixV1UserBalance @Automated
+    @UserBalance @PixV1UserBalance @Automated
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra USDT operando desde el user balance vía V1 endpoints
         Given The API key is available "0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P"
         And The API secret is available "9MrwHA3SZP33Z7gUmb"
@@ -589,7 +596,7 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V2 ------
 
-    @Smoke @UserBalance @PixV2UserBalance @Automated
+    @UserBalance @PixV2UserBalance @Automated
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra USDT operando desde el user balance vía V2 endpoints
         Given The API key is available "0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P"
         And The API secret is available "9MrwHA3SZP33Z7gUmb"
@@ -719,7 +726,7 @@ Feature: Sintético QR 3.0
     # !------ DESCUBIERTOS -------
     # ------ QR V1 ------
 
-    @Smoke @Desc @V1Desc @Automated
+    @Desc @V1Desc @Automated
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V1 endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -753,7 +760,7 @@ Feature: Sintético QR 3.0
             | embebido | 100009358 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | QR-V1-DESC-n | 0x0FE0845Da176E24d9F6Bcf86d19948e592909C8D | USDT   |
 
 
-    @Smoke @Desc @V1Desc @Automated
+    @Desc @V1Desc @Automated
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra ARS en descubierto vía V1 endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -790,7 +797,7 @@ Feature: Sintético QR 3.0
 
     # ------ QR V2 ------
 
-    @Smoke @Desc @QRV2Desc @Automated
+    @Desc @QRV2Desc @Automated
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V2 endpoints con against default
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -821,7 +828,7 @@ Feature: Sintético QR 3.0
             | embebido | 100009359 | qr3                | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
             | embebido | 100013788 | qr3BOBmanualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
-    @Smoke @Desc @QRV2Desc @Automated
+    @Desc @QRV2Desc @Automated
     Scenario Outline: Ejecutar sintético de pago QR "<accion>" contra USDT en descubierto vía V2 endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -933,7 +940,7 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V1 ------
 
-    @Smoke @Desc @PixV1Desc @Automated
+    @Desc @PixV1Desc @Automated
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra USDT en descubierto vía V1 endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -967,7 +974,7 @@ Feature: Sintético QR 3.0
             | embebido | 100009360 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-embebido-V1-DESC-n | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
             | manual   | 100009360 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V1-DESC-n   | 0x966af97f8D14FbAa77d3fdfe214a638b5587BCBA | USDT   |
 
-    @Smoke @Desc @PixV1Desc @Automated
+    @Desc @PixV1Desc @Automated
     Scenario Outline:  Ejecutar sintético de pago PIX "<accion>" contra ARS en descubierto vía V1 endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1005,7 +1012,7 @@ Feature: Sintético QR 3.0
 
     # ------ PIX V2 ------
 
-    @Smoke @Desc @PixV2Desc @Automated
+    @Desc @PixV2Desc @Automated
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra USDT en descubierto vía V2 endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1039,7 +1046,7 @@ Feature: Sintético QR 3.0
             | manual   | 100009361 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-manual-V2-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | embebido | 100009361 | 08449ae2-8a26-47a5-992d-2689f135bc11 | 10     | PIX-embebido-V2-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
-    @Smoke @Desc @PixV2Desc @Automated
+    @Desc @PixV2Desc @Automated
     Scenario Outline: Ejecutar sintético de pago PIX "<accion>" contra ARS en descubierto vía V2 endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1076,7 +1083,7 @@ Feature: Sintético QR 3.0
 
     # ------ PaymentDestinarion ------
 
-    @Smoke @Desc @Bybit @Automated
+    @Desc @Bybit @Automated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en descubierto para usuario "<nacionality>" vía ByBit endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1122,7 +1129,7 @@ Feature: Sintético QR 3.0
     # | QR  | Brasil      | USDT | manual   | 100009407 | qr3manualamount                      |         | 1000   | PIX-ByBit-manual-V2-DESC-n   | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
     # | QR  | Brasil      | USDT | embebido | 100009407 | qr3                                  |         | 1000   | PIX-ByBit-embebido-V2-DESC-n | 0x460e4C83dB07d8c3217Dc0fE96d99a829dA687d8 | USDT   |
 
-    @Smoke @Desc @BybitPixkeyb @Automated
+    @Desc @BybitPixkeyb @Automated
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" hacia PixKey en descubierto para usuario "<nacionality>" vía ByBit endpoints
         Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1397,7 +1404,7 @@ Feature: Sintético QR 3.0
             | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR ARG    | 100038493 | 100038486        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401manualamount                               | ARS     | 1000   | useraccount-payment-n |
             | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR BREB   | 100038493 | 100038489        | manteca-breb-qa-manual-amount                                                                                                                                                          | COP     | 1000   | useraccount-payment-n |
 
-    @Smoke @Routing @Desc @Automated
+    @Smoke @Routingt @Desc @Automated
     Scenario Outline: Ejecutar sintético de pago <payment> contra <against> tomando deuda
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -1512,4 +1519,3 @@ Feature: Sintético QR 3.0
             | credential                | userAnyId | qrCode          | against | amount | sessionId        | apiKeyDeposit                   |
             | andresperalta@manteca.dev | 100009417 | qr3manualamount | ARS     | 1000   | refund-NO-DESC-n | C10XB2Z-AG243CS-G42KB2M-4085WTF |
 
-#SENDER. Se aloja en la db solo minimal info, el resto es solo para BIND

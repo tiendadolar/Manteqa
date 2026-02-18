@@ -161,7 +161,7 @@ Feature: Ordenes
             | order-qaa-n | venta | USDC_MXN  | SELL      | 100009051 | 5      | MXN     |
             | order-qaa-n | venta | USDC_PHP  | SELL      | 100009089 | 5      | PHP     |
 
-    @Smoke @V1
+    @Smoke @V1 @Regression
     Scenario Outline: Ejecutar ordenes de <trade> de <coin> contra <against> V1
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -186,7 +186,7 @@ Feature: Ordenes
         And Execute the GET method on the endpoint "/v1/order/{orderNumberId}"
         Then Obtain a response 200 y status "COMPLETED"
 
-        @BuyByCountry @USDT  @Automated
+        @BuyByCountry @USDT @Automated
         Examples:
             | apiKEY                          | sessionId   | trade  | coin      | operation | userId    | amount | against |
             | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | order-qaa-n | compra | USDT_ARS  | BUY       | 100010451 | 5      | ARS     |
@@ -249,7 +249,7 @@ Feature: Ordenes
 
 
 
-    @Smoke @V2
+    @Smoke @V2 @Regression
     Scenario Outline: Ejecutar ordenes de <trade> de <coin> contra <against> V2
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -354,136 +354,3 @@ Feature: Ordenes
             | order-qaa-n | venta | WLD   | SELL | 100009508 | 5           | PUSD    |
             | order-qaa-n | venta | WLD   | SELL | 100009051 | 5           | MXN     |
             | order-qaa-n | venta | WLD   | SELL | 100009089 | 5           | PHP     |
-
-
-# @BuyByUser @ARS
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | WLD   | BUY  | 100008501 | 5           | ARS     |
-#     | order-qaa-n | compra | USDT  | BUY  | 100008501 | 5           | ARS     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100008501 | 5           | ARS     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100008501 | 5           | ARS     |
-#     | order-qaa-n | compra | DAI   | BUY  | 100008501 | 5           | ARS     |
-#     | order-qaa-n | compra | ETH   | BUY  | 100008501 | 0.01        | ARS     |
-#     | order-qaa-n | compra | BTC   | BUY  | 100008501 | 0.01        | ARS     |
-#     | order-qaa-n | compra | BNB   | BUY  | 100008501 | 0.01        | ARS     |
-
-# @BuyByUser @BRL
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | WLD   | BUY  | 100008848 | 5           | BRL     |
-#     | order-qaa-n | compra | USDT  | BUY  | 100008848 | 5           | BRL     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100008848 | 5           | BRL     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100008848 | 5           | BRL     |
-
-# @BuyByUser @CLP
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | WLD   | BUY  | 100009020 | 5           | CLP     |
-#     | order-qaa-n | compra | USDT  | BUY  | 100009020 | 5           | CLP     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100009020 | 5           | CLP     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100009020 | 5           | CLP     |
-
-# @BuyByUser @COP
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | WLD   | BUY  | 100009042 | 5           | COP     |
-#     | order-qaa-n | compra | USDT  | BUY  | 100009042 | 5           | COP     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100009042 | 5           | COP     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100009042 | 5           | COP     |
-
-# @BuyByUser @GTQ
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | WLD   | BUY  | 100009413 | 5           | GTQ     |
-#     | order-qaa-n | compra | USDT  | BUY  | 100009413 | 5           | GTQ     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100009413 | 5           | GTQ     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100009413 | 5           | GTQ     |
-
-# @BuyByUser @CRC
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | WLD   | BUY  | 100009603 | 5           | CRC     |
-#     | order-qaa-n | compra | USDT  | BUY  | 100009603 | 5           | CRC     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100009603 | 5           | CRC     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100009603 | 5           | CRC     |
-
-# @BuyByUser @PUSD
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     # | order-qaa-n | compra | WLD   | BUY  | 100009508 | 5           | PUSD    |
-#     | order-qaa-n | compra | USDT  | BUY  | 100009508 | 5           | PUSD    |
-# # | order-qaa-n | compra | USDC  | BUY  | 100009508 | 5           | PUSD    |
-# # | order-qaa-n | compra | USDCB | BUY  | 100009508 | 5           | PUSD    |
-
-# @BuyByUser @MXN
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | WLD   | BUY  | 100009051 | 5           | MXN     |
-#     | order-qaa-n | compra | USDT  | BUY  | 100009051 | 5           | MXN     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100009051 | 5           | MXN     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100009051 | 5           | MXN     |
-
-# @BuyByUser @PHP
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | WLD   | BUY  | 100009089 | 5           | PHP     |
-#     | order-qaa-n | compra | USDT  | BUY  | 100009089 | 5           | PHP     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100009089 | 5           | PHP     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100009089 | 5           | PHP     |
-
-# @BuyByUser @BOB
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | USDT  | BUY  | 100010879 | 5           | BOB     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100010879 | 5           | BOB     |
-#     # | order-qaa-n | compra | WLD   | BUY  | 100010879 | 5           | BOB     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100010879 | 5           | BOB     |
-
-# @BuyByUser @PEN
-# Examples:
-#     | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | compra | USDT  | BUY  | 100010538 | 5           | PEN     |
-#     | order-qaa-n | compra | USDC  | BUY  | 100010538 | 5           | PEN     |
-#     | order-qaa-n | compra | USDCB | BUY  | 100010538 | 5           | PEN     |
-#     | order-qaa-n | compra | WLD   | BUY  | 100010538 | 5           | PEN     |
-
-# @SellByUser @ARS
-# Examples:
-#     | sessionId   | trade | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | venta | WLD   | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | USDT  | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | USDC  | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | USDCB | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | DAI   | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | ETH   | SELL | 100008501 | 0.01        | ARS     |
-#     | order-qaa-n | venta | BTC   | SELL | 100008501 | 0.01        | ARS     |
-#     | order-qaa-n | venta | BNB   | SELL | 100008501 | 0.01        | ARS     |
-
-# @SellByUser @ARS
-# Examples:
-#     | sessionId   | trade | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | venta | WLD   | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | USDT  | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | USDC  | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | USDCB | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | DAI   | SELL | 100008501 | 5           | ARS     |
-#     | order-qaa-n | venta | ETH   | SELL | 100008501 | 0.01        | ARS     |
-#     | order-qaa-n | venta | BTC   | SELL | 100008501 | 0.01        | ARS     |
-#     | order-qaa-n | venta | BNB   | SELL | 100008501 | 0.01        | ARS     |
-
-# @SellByUser @BRL
-# Examples:
-#     | sessionId   | trade | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | venta | WLD   | SELL | 100008848 | 5           | BRL     |
-#     | order-qaa-n | venta | USDT  | SELL | 100008848 | 5           | BRL     |
-#     | order-qaa-n | venta | USDC  | SELL | 100008848 | 5           | BRL     |
-#     | order-qaa-n | venta | USDCB | SELL | 100008848 | 5           | BRL     |
-
-# @SellByUser @CLP
-# Examples:
-#     | sessionId   | trade | asset | side | userAnyId | assetAmount | against |
-#     | order-qaa-n | venta | WLD   | SELL | 100009020 | 5           | CLP     |
-#     | order-qaa-n | venta | USDT  | SELL | 100009020 | 5           | CLP     |
-#     | order-qaa-n | venta | USDC  | SELL | 100009020 | 5           | CLP     |
-#     | order-qaa-n | venta | USDCB | SELL | 100009020 | 5           | CLP     |

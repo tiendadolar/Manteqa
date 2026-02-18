@@ -199,7 +199,6 @@ Feature: Retiros Fiat
         Examples:
             | apiKEY                          | userAnyId | asset | address                | amount   | bankCode | accountType |
             | 1TP79KS-KPX4QYG-J0T505E-Z8PT3CC | 100009997 | ARS   | 1430001713039384360017 | 12000000 |          |             |
-    # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | 100008501 | ARS   | 0140420703690150418728 | 9200000 |          |             |
 
     @Regression @Fiat @coinag
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING MERU
