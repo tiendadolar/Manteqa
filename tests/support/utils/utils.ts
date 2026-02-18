@@ -143,8 +143,6 @@ export const inicialOnboardingApiCrypto = (userData: any) => {
 };
 
 export const inicialOnboardingApiCryptoV2 = (userData: any) => {
-  console.log(userData.nationality);
-
   if (userData.nationality === 'Argentina') {
     return {
       externalId: userData.externalId,
@@ -152,6 +150,45 @@ export const inicialOnboardingApiCryptoV2 = (userData: any) => {
       legalId: userData.legalId,
       // type: 'BUSINESS',
       exchange: userData.exchange,
+      personalData: {
+        name: userData.name,
+        surname: userData.surname,
+        sex: userData.sex,
+        work: userData.work,
+        birthDate: userData.birthDate,
+        maritalStatus: userData.maritalStatus,
+        isPep: userData.isPep === 'true',
+        isFep: userData.isFep === 'true',
+        isFatca: userData.isFatca === 'true',
+        phoneNumber: userData.phoneNumber, // Esta roto por el momento
+        nationality: userData.nationality,
+        address: {
+          street: userData.street
+        }
+      },
+      banking: {
+        // accounts: [
+        //   {
+        //     cbu: userData.ARScbu,
+        //     currency: userData.ARScurrency,
+        //     description: userData.ARSdescription,
+        //   },
+        //   {
+        //     cbu: userData.USDcbu,
+        //     currency: userData.USDcurrency,
+        //     description: userData.USDdescription,
+        //   },
+        // ],
+      }
+    };
+  } else if (userData.nationality === 'Colombia') {
+    return {
+      externalId: userData.externalId,
+      email: userData.email,
+      legalId: userData.legalId,
+      // type: 'BUSINESS',
+      exchange: userData.exchange,
+      legalIdType: userData.legalIdType,
       personalData: {
         name: userData.name,
         surname: userData.surname,
