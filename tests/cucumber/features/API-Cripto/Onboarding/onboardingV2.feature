@@ -375,7 +375,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId     | email             | legalId    | exchange | name     | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               |
-            | T4CT0H2-H1RM1B1-P611ZRV-M037A3N | andresperalta@manteca.dev | user-account-2 | patjara@gmail.com | 14210971-9 | CHILE    | PATRICIO | JARA    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Chile       | SAMUEL PIRES DE MELO |
+            | apiKEY                          | credential                | externalId       | email                  | legalId | exchange | name     | surname   | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
+            | 0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P | andresperalta@manteca.dev | user-account-cop | vavarretemau@gmail.com | 3010162 | COLOMBIA | MAURICIO | NAVARRETE | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Colombia    | SAMUEL PIRES DE MELO | NATIONAL_ID |
 
 

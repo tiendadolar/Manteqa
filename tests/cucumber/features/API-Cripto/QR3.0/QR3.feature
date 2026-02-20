@@ -98,7 +98,7 @@ Feature: Sintético QR 3.0
 
     @QRV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints against default
-        Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+        Given The API key is available "apiKEY"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         # Validate initial balance before execute qr payment
@@ -125,10 +125,10 @@ Feature: Sintético QR 3.0
 
         #QR BOB monto nuy bajo, falla contra USDT
         Examples:
-            | credential                | accion   | userAnyId | qrCode             | amount | sessionId    | to                                         | ticker |
-            | andresperalta@manteca.dev | dinamico | 100009502 | qr3                |        | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
-            | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount    | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
-            | andresperalta@manteca.dev | estatico | 100013787 | qr3BOBmanualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | apiKEY                          | credential                | accion   | userAnyId | qrCode             | amount | sessionId    | to                                         | ticker |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | dinamico | 100009502 | qr3                |        | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount    | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+            | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | andresperalta@manteca.dev | estatico | 100013787 | qr3BOBmanualamount | 1000   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     @QRV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints
@@ -1209,6 +1209,14 @@ Feature: Sintético QR 3.0
             | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | PIX | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100038487 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
             | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | PIX | ARGENTINA | 27414298732 | BETO LUIS     | SOLARI   | 100038487 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | USDT    | 10     | PrincipalAccount-payment-V2-DESC-n | BRAZIL     |
 
+        @COP
+        Examples:
+            | apiKEY                          | pay | exchange  | legalId     | name          | surname  | userAnyId | paymentDestination            | against | amount | sessionId                          | accountExc |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR  | BRAZIL    | 40842073817 | DARIO AUGUSTO | DA SILVA | 100038489 | manteca-breb-qa               | USDT    |        | PrincipalAccount-payment-V2-DESC-n | COLOMBIA   |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR  | COLOMBIA  | 2994445     | ROLANDO       | OVIEDO   | 100038489 | manteca-breb-qa-manual-amount | USDT    | 500    | PrincipalAccount-payment-V2-DESC-n | COLOMBIA   |
+            | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR  | ARGENTINA | 27283436719 | LAURA         | ACOSTA   | 100038489 | manteca-breb-qa-manual-amount | USDT    | 500    | PrincipalAccount-payment-V2-DESC-n | COLOMBIA   |
+
+
     @Smoke @Desc @Sender @Peru @Automated
     Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender completo info desde Principal Account <accountExc> por PLUS_PAGOS
         Given The API key is available "<apiKEY>"
@@ -1329,6 +1337,9 @@ Feature: Sintético QR 3.0
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PIX KEY    | 100037879 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | USDT    | 10     | useraccount-payment-n |
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR ARG     | 100037880 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401                                                                                                                                               | USDT    | 10     | useraccount-payment-n |
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PAGO PIX   | 100037880 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | USDT    | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR COP     | 100037935 | manteca-breb-qa-manual-amount                                                                                                                                                                                                                                                              | USDT    | 500    | useraccount-payment-n |
+
+
 
     @Smoke @UserAccount @Desc @Automated
     Scenario Outline: Ejecutar sintético de pago <payment> contra <against> desde el user balance
@@ -1366,6 +1377,7 @@ Feature: Sintético QR 3.0
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR BRAZIL | 100037879 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | BRL     | 10     | useraccount-payment-n |
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR ARG    | 100037880 | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401                                                                                                                                               | ARS     | 1000   | useraccount-payment-n |
             | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | PAGO PIX  | 100037880 | 08449ae2-8a26-47a5-992d-2689f135bc11                                                                                                                                                                                                                                                       | ARS     | 10     | useraccount-payment-n |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | QR COP    | 100037935 | manteca-breb-qa-manual-amount                                                                                                                                                                                                                                                              | COP     | 500    | useraccount-payment-n |
 
 
     #*************************************
@@ -1404,7 +1416,7 @@ Feature: Sintético QR 3.0
             | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR ARG    | 100038493 | 100038486        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401manualamount                               | ARS     | 1000   | useraccount-payment-n |
             | 9SE03H0-6KRMN7E-G6S75X8-VBRXM9S | QR BREB   | 100038493 | 100038489        | manteca-breb-qa-manual-amount                                                                                                                                                          | COP     | 1000   | useraccount-payment-n |
 
-    @Smoke @Routingt @Desc @Automated
+    @Smoke @Routing @Desc @Automated
     Scenario Outline: Ejecutar sintético de pago <payment> contra <against> tomando deuda
         Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
