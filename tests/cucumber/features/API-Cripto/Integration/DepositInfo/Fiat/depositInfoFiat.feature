@@ -5,7 +5,7 @@ Feature: Lock Price Integrations
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
 
     @HappyPath @Smoke @Automated
-    Scenario Outline: Validate success deposit info query response for <coin>
+    Scenario Outline: Validate success deposit info fiat query response for <coin>
         Given The API key is available "<apiKEY>"
         When Assign the value "<coin>" to the variable "coin"
         And Execute the GET method on the endpoint "/v2/info/deposit-info/<coin>"
