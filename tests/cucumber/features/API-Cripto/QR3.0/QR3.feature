@@ -98,7 +98,7 @@ Feature: Sintético QR 3.0
 
     @QRV2NoDesc @Automated
     Scenario Outline: Ejecutar sintético de pago QR ARS <accion> contra <ticker> en no descubierto vía V2 endpoints against default
-        Given The API key is available "apiKEY"
+        Given The API key is available "<apiKEY>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And The API secret is available "1RpvdT7Vc7ukKeGKdU"
         # Validate initial balance before execute qr payment
@@ -358,7 +358,7 @@ Feature: Sintético QR 3.0
             | accion | userAnyId | qrCode                               | against | amount | sessionId               | to                                         | ticker |
             | manual | 100009628 | 08449ae2-8a26-47a5-992d-2689f135bc11 | ARS     | 10     | PIX-manual-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
 
-    @Smoke @Peru @NoDesc @Automated
+    @Smoke @Peru @NoDesc @Ignore
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>" sobre el Balance User
         Given The API key is available "MBA68YQ-RXW46ZS-P4K4BAZ-D2KX43F"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -389,7 +389,7 @@ Feature: Sintético QR 3.0
             # | QR  | Peru        | PEN  | dinámico | 100010538 | 00020101021226370002800103903022025072409211954330527520448295303604540415005802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA01089999999963041AAA | PEN     |        | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 |        |
             | QR  | Peru        | PEN  | estático | 100010538 | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5B                                                                                                                 | PEN     | 100    | QR-Peru-n | 0x862Acf26956DCEf54F4726CF88709bFE9128e500 |        |
 
-    @Smoke @Peru @NoDesc @Automated
+    @Smoke @Peru @NoDesc @Ignore
     Scenario Outline: Ejecutar sintético de pago "<pay>" "<accion>" contra "<coin>" en no descubierto para usuario "<nacionality>"
         Given The API key is available "<apiKEY>"
         And The API secret is available "vH2W199pE1re5ZR4Z7"

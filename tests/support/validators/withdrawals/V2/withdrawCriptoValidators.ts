@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { isWithdrawCriptoV2Response, WithdrawCriptoV2Response } from '../../../interfaces/withdrawals/V2/withdrawCripto.interface';
+import { isWithdrawCriptoV2Response, WithdrawCriptoV2Response } from '../../../interfaces/Withdrawals/V2/withdrawCripto.interface';
 import { CustomWorld } from '../../../world';
 
 export class WithdrawCriptoValidator {

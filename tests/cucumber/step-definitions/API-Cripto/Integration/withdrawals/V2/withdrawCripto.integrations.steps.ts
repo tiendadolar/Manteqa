@@ -3,7 +3,7 @@ const request = require('supertest');
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 import { getUserInfoDougHelper } from '../../../../../../support/helpers/userHelper';
 import { getLockWithdrawCostV2Helper } from '../../../../../../support/helpers/withdrawals/V2/withdrawCriptoV2.helper';
-import { WithdrawCriptoV2Response } from '../../../../../../support/interfaces/withdrawals/V2/withdrawCripto.interface';
+import { WithdrawCriptoV2Response } from '../../../../../../support/interfaces/Withdrawals/V2/withdrawCripto.interface';
 import { validateResponse } from '../../../../../../support/validators/withdrawals/V2/withdrawCriptoValidators';
 import { CustomWorld } from '../../../../../../support/world';
 
