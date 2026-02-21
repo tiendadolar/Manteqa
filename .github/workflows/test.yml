@@ -29,6 +29,7 @@ on:
           - 'Integrations - OnboardingV2'
           - 'Integrations - Lock Payment'
           - 'Integrations - Withdraw V2'
+          - 'Integrations - Deposit Info'
           - 'Regression'
 
   # Ejecución automática en cada push
@@ -38,10 +39,10 @@ on:
 
   # Ejecuciones programadas (horarios en UTC, Argentina = UTC-3)
   schedule:
-    - cron: '0 4 * * 1-5'    # Smoke General   - L a V  01:00 ARG
-    - cron: '30 4 * * 1-5'   # Providers       - L a V  01:30 ARG
-    - cron: '0 5 * * 1,3,5'  # Integrations    - L/Mi/V 02:00 ARG
-    - cron: '0 6 * * 0'      # Regression      - Dom    03:00 ARG
+    - cron: '0 4 * * 1-5' # Smoke General   - L a V  01:00 ARG
+    - cron: '30 4 * * 1-5' # Providers       - L a V  01:30 ARG
+    - cron: '0 5 * * 1,3,5' # Integrations    - L/Mi/V 02:00 ARG
+    - cron: '0 6 * * 0' # Regression      - Dom    03:00 ARG
 
 jobs:
   test:
@@ -141,6 +142,9 @@ jobs:
               ;;            
             "Integrations - Withdraw V2")
               TAGS="@Integrations and @WithdrawV2 and @Regression and @Automated"
+              ;;
+            "Integrations - Deposit Info")
+              TAGS="@Integrations and @DepositInfo and @Fiat and @Regression and @Automated"
               ;;
             "Regression")
               TAGS="@Regression and @Automated"
