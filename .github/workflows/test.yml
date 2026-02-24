@@ -144,7 +144,7 @@ jobs:
               TAGS="@Integrations and @WithdrawV2 and @Regression and @Automated"
               ;;
             "Integrations - Deposit Info")
-              TAGS="@Integrations and @DepositInfo and @Fiat and @Regression and @Automated"
+              TAGS="@Integrations and @DepositInfo and @Regression and @Automated"
               ;;
             "Regression")
               TAGS="@Regression and @Automated"

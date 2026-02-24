@@ -375,7 +375,10 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId       | email                  | legalId | exchange | name     | surname   | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
-            | 0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P | andresperalta@manteca.dev | user-account-cop | vavarretemau@gmail.com | 3010162 | COLOMBIA | MAURICIO | NAVARRETE | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Colombia    | SAMUEL PIRES DE MELO | NATIONAL_ID |
-
+            | apiKEY                          | credential                | externalId         | email               | legalId     | exchange  | name     | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
+            | NZ3GF31-QWS4JHS-JGJ5XH8-XAKCFWR | andresperalta@manteca.dev | user-account-arg-1 | abdianpat@gmail.com | 27215850531 | ARGENTINA | PATRICIA | ABDIAN  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Argentina   | SAMUEL PIRES DE MELO |             |
+# | 7997ZG9-97042HS-P821399-SGEBCFH | andresperalta@manteca.dev | user-account-bra-1 | silvajoaq@gmail.com    | 25553550149 | BRAZIL    | JOAQUIN  | SILVA    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Brasil      | SAMUEL PIRES DE MELO |             |
+# | 7997ZG9-97042HS-P821399-SGEBCFH | andresperalta@manteca.dev | user-account-per-1 | esipdiana@gmail.com    | 77667305    | PERU      | DIANA    | ESPINOZA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Peru        | SAMUEL PIRES DE MELO |             |
+# | 7997ZG9-97042HS-P821399-SGEBCFH | andresperalta@manteca.dev | user-account-bob-1 | rudisal@gmail.com      | 4624367     | BOLIVIA   | ALBERTO  | RUDIS    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Bolivia     | SAMUEL PIRES DE MELO |             |
+# | 7997ZG9-97042HS-P821399-SGEBCFH | andresperalta@manteca.dev | user-account-cop-1 | hectorrincon@gmail.com | 2999652     | COLOMBIA  | HECTOR   | RINCON   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Colombia    | SAMUEL PIRES DE MELO | NATIONAL_ID |
 
