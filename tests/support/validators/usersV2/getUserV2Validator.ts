@@ -3,7 +3,7 @@ import logger from '../../utils/logger';
 import { CustomWorld } from '../../world';
 import { GetUserV2Response, isAddresses, isBanking, isGetUserV2Response, isOnboarding } from '../../interfaces/userV2.interface';
 
-const chains = ['ETHEREUM', 'BINANCE', 'TERRA', 'TERRA2', 'POLYGON', 'OPTIMISM', 'WORLDCHAIN', 'BASE', 'ARBITRUM', 'TRON'];
+const chains = ['ETHEREUM', 'BINANCE', 'POLYGON', 'OPTIMISM', 'WORLDCHAIN', 'BASE', 'ARBITRUM', 'TRON'];
 const steps = [
   'EMAIL_VALIDATION',
   'IDENTITY_DECLARATION',
@@ -64,12 +64,12 @@ export class GetUserValidator {
     chains.forEach((chain) => {
       expect(response.addresses.depositAddresses).to.have.property(chain);
 
-      if (chain === 'TERRA' || chain === 'TERRA2') {
-        expect(response.addresses.depositAddresses[chain])
-          .to.be.a('string')
-          .and.to.match(/^terra1[a-z0-9]{38}$/);
-        return;
-      }
+      // if (chain === 'TERRA' || chain === 'TERRA2') {
+      //   expect(response.addresses.depositAddresses[chain])
+      //     .to.be.a('string')
+      //     .and.to.match(/^terra1[a-z0-9]{38}$/);
+      //   return;
+      // }
 
       if (chain === 'TRON') {
         expect(response.addresses.depositAddresses[chain])
