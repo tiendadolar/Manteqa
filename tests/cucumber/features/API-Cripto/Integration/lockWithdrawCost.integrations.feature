@@ -46,3 +46,21 @@ Feature: Lock Withdraw Cost Integrations
             | sending wrong address EVM    | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | USDT  | ETHEREUM |                                            | 400        | BAD_REQUEST    | Bad request. | destination.address has wrong value . Value should be a valid ethers address or ICAP address.                                                                                   |
             | sending wrong network        | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | USDT  |          | 0x7921319332714EBea5c1219439c34309e600DF54 | 400        | BAD_REQUEST    | Bad request. | destination.network has wrong value . Possible values are ETHEREUM,BINANCE,POLYGON,OPTIMISM,WORLDCHAIN,BASE,ARBITRUM,TRON,TEMPO,INTERNAL.                                       |
             | sending wrong address   TRON | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | USDT  | TRON     |                                            | 400        | BAD_REQUEST    | Bad request. | destination.address has wrong value . Value should be a valid tron address with correct checksum.                                                                               |
+
+    # ------------------------------- Business Logic Error Paths -------------------------------
+
+    @ErrorPath
+    Scenario Outline: Validate error lock withdraw cost for unsupported asset on network <case>
+        Given The API key is available "<apiKEY>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<network>" to the variable "network"
+        And Execute the POST method on the endpoint "/v2/withdraw-locks"
+        Then Obtain a response <statusCode>
+        And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>"
+
+        Examples:
+            | case           | apiKEY                          | userAnyId | asset | network | address                                    | statusCode | internalStatus  | message                               |
+            | WLD on BINANCE | 95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6 | 100009352 | WLD   | BINANCE | 0x7921319332714EBea5c1219439c34309e600DF54 | 400        | INVALID_NETWORK | Network does not support given asset. |
