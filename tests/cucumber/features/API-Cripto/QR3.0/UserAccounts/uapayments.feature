@@ -32,12 +32,12 @@ Feature: Sintéticos de Pago User Accounts
             | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | USDT    |
             | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | USDT    |
             | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | USDT    |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru      | 100056105 | +51986667537                  | 100    | QR-UserBalance-V1-n | USDT    |
+            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | USDT    |
             | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | ARS     |
             | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | BRL     |
             | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | COP     |
             | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | BOB     |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru      | 100056105 | +51986667537                  | 100    | QR-UserBalance-V1-n | PEN     |
+            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | PEN     |
 
     @UserAccount @Deposit @ToBeAutomated
     Scenario Outline: User Account <country>: Ejecutar pago mediante deposito cripto contra <against>
@@ -74,7 +74,7 @@ Feature: Sintéticos de Pago User Accounts
             | 7997ZG9-97042HS-P821399-SGEBCFH | Brasil    | 100056115 | +5511949227612                | 10     | QR-V2-DESC-n | USDT    |
             | 7997ZG9-97042HS-P821399-SGEBCFH | Bolivia   | 100056117 | qr3BOBmanualamount            | 61.98  | QR-V2-DESC-n | USDT    |
             | 7997ZG9-97042HS-P821399-SGEBCFH | Colombia  | 100056118 | manteca-breb-qa-manual-amount | 500    | QR-V2-DESC-n | USDT    |
-            | 7997ZG9-97042HS-P821399-SGEBCFH | Peru      | 100056116 | +51986667537                  | 500    | QR-V2-DESC-n | USDT    |
+            | 7997ZG9-97042HS-P821399-SGEBCFH | Peru      | 100056116 | +51986667537                  | 1.5    | QR-V2-DESC-n | USDT    |
 
 
 

@@ -134,10 +134,10 @@ export class SyntheticPaymentHandler implements EndpointHandler {
     userData.userAnyId = userData.userAnyId ?? world.getStoreData('userId');
     if (userData.qrCode === 'qr3BOBmanualamount')
       userData.qrCode =
-        'p6Ll/7nOT/HlyF2DDH8s5yJ9KhRrnajNgjcsb3JTyHRP2EC8miqJ6McKc4P3DdHH51OmqQqtuBHLrN4nHYDvNLeMd2STHOLBeDvM+Au7irTMLIkLq5ujxtLzZY4vV0ElefFl1daxcp5MsOk+5mLHcI7JhA15UoW6ngZN/t1I7Uew1n1OVGKksBu0AAb3OkZbICsOZcfAK+mYUQD/G2ZDxgv9+0gqThme9N9TZYQe/mEwWUYu+7nTi8pBkZNPKE8e6zcIMyJQh9ZeMzMkYL/MbZ6BUReZymywd94uCOFPzyiqC/j/mxvhD/kKxOje1pHf21JD5SBj/T/7G0NJuE9x/w==|5B8FF436_is_open';
+        'Lvj/GV5XemlrG0IHrXEpovCVRh2O+P1CnLNwaJ6ov4BhMfP6AzUHiH4NKipATwuOgy0xbZm7OJbjCG1tjkDOgpB/4920qIRffg6eHb6evseZ5xGZHYxOdrmEE9Ka0by31TC9GKYrLnI3WwfzPojB0WlTKV7nznWGtBg6qXL7Ndei6IQEx8lENKjdGqI6NZhG3M9g0td3cyhzlES4ONx0QhSSv9+JUK+7qtFD3Ny+PERasxCFlx3c4R48iWl7IgEWB1zglMXgI7jZOSmfjw5FjdA7INFiKUi249vZvPhR4pobc6FTO+MslgOjiO/mTmjdXky/yI2FeZcHOs3oRyg6HA==|6497E3319343ED0DA8514FFE';
     if (userData.paymentDestination === 'qr3BOBmanualamount')
       userData.paymentDestination =
-        'p6Ll/7nOT/HlyF2DDH8s5yJ9KhRrnajNgjcsb3JTyHRP2EC8miqJ6McKc4P3DdHH51OmqQqtuBHLrN4nHYDvNLeMd2STHOLBeDvM+Au7irTMLIkLq5ujxtLzZY4vV0ElefFl1daxcp5MsOk+5mLHcI7JhA15UoW6ngZN/t1I7Uew1n1OVGKksBu0AAb3OkZbICsOZcfAK+mYUQD/G2ZDxgv9+0gqThme9N9TZYQe/mEwWUYu+7nTi8pBkZNPKE8e6zcIMyJQh9ZeMzMkYL/MbZ6BUReZymywd94uCOFPzyiqC/j/mxvhD/kKxOje1pHf21JD5SBj/T/7G0NJuE9x/w==|5B8FF436_is_open';
+        'Lvj/GV5XemlrG0IHrXEpovCVRh2O+P1CnLNwaJ6ov4BhMfP6AzUHiH4NKipATwuOgy0xbZm7OJbjCG1tjkDOgpB/4920qIRffg6eHb6evseZ5xGZHYxOdrmEE9Ka0by31TC9GKYrLnI3WwfzPojB0WlTKV7nznWGtBg6qXL7Ndei6IQEx8lENKjdGqI6NZhG3M9g0td3cyhzlES4ONx0QhSSv9+JUK+7qtFD3Ny+PERasxCFlx3c4R48iWl7IgEWB1zglMXgI7jZOSmfjw5FjdA7INFiKUi249vZvPhR4pobc6FTO+MslgOjiO/mTmjdXky/yI2FeZcHOs3oRyg6HA==|6497E3319343ED0DA8514FFE';
 
     return userData;
   }

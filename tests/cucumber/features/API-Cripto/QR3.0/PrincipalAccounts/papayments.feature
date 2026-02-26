@@ -79,8 +79,8 @@ Feature: Sintéticos de Pago Principal Accounts
 
         Examples:
             | apiKEY                          | country | userAnyId | paymentDestination | amount | sessionId           | against | exchange | legalId       | name   | surname | work     | email              | phoneNumber  | gender | street         | birthDate  |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru    | 100056100 | +51986667537       | 100    | QR-UserBalance-V1-n | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | Av. Corrientes | 1960-05-06 |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru    | 100056100 | +51986667537       | 100    | QR-UserBalance-V1-n | PEN     | PERU     | 74162704      | ALICIA | ALCARAZ | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | Av. Corrientes | 1960-05-06 |
+            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru    | 100056100 | +51986667537       | 1.5    | QR-UserBalance-V1-n | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | Av. Corrientes | 1960-05-06 |
+            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru    | 100056100 | +51986667537       | 1.5    | QR-UserBalance-V1-n | PEN     | PERU     | 74162704      | ALICIA | ALCARAZ | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | Av. Corrientes | 1960-05-06 |
 
 
     @PpalAccount @Deposit @ToBeAutomated
@@ -162,4 +162,4 @@ Feature: Sintéticos de Pago Principal Accounts
         #QR BOB monto nuy bajo, falla contra USDT
         Examples:
             | apiKEY                          | country | userAnyId | paymentDestination | amount | sessionId    | against | exchange | legalId  | name   | surname | work     | email              | phoneNumber  | gender |
-            | 7997ZG9-97042HS-P821399-SGEBCFH | Peru    | 100055873 | +51986667537       | 500    | QR-V2-DESC-n | USDT    | PERU     | 74162704 | ALICIA | ALCARAZ | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   |
+            | 7997ZG9-97042HS-P821399-SGEBCFH | Peru    | 100055873 | +51986667537       | 1.5    | QR-V2-DESC-n | USDT    | PERU     | 74162704 | ALICIA | ALCARAZ | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   |
