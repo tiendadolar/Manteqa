@@ -62,6 +62,24 @@ export const validateSyntheticStatus = (body: any, httpStatus: number, statusCod
     return;
   }
 
+  if (CustomWorld.getStoreData('syntheticType') === 'PERU_QR_PAYMENT') {
+    const withdrawStage = getWithdrawStage(body.stages);
+    const withdrawId = withdrawStage.withdrawId;
+
+    logger.warn(statusName);
+    logger.warn(withdrawId);
+    if (body.status !== statusName) CustomWorld.clearStoreData();
+
+    expect(httpStatus).to.equal(statusCode);
+    expect(body.status).to.be.oneOf(['ACTIVE', 'COMPLETED']);
+    expect(withdrawId).to.be.a('string').and.not.empty;
+
+    if (body?.stages?.['1'].stageType === 'DEPOSIT') CustomWorld.setStoreData('depositStage', true);
+    if (body?.stages?.['1'].stageType !== 'DEPOSIT') CustomWorld.setStoreData('notDepositStage', true);
+    if (body.hasOwnProperty('details') && body.details.paymentAgainst !== 'USDT') CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
+    return;
+  }
+
   logger.warn(statusName);
   if (body.status !== statusName) CustomWorld.clearStoreData();
 

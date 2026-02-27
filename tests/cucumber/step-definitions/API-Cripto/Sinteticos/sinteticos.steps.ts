@@ -108,6 +108,8 @@ Then('Obtain a response {int} y status {string}', function (this: CustomWorld, s
 Then('Obtain a response {int} and status {string} for {string} synthetic', { timeout: 125000 }, async function (this: CustomWorld, statusCode: number, statusName: string, syntheticType: string) {
   const urlBase = this.urlBase;
   const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
+  // const urlBase = 'https://amock.io/api/';
+  // const endpoint = `v2/synthetics/id`;
   const apiKEY = this.apiKey;
   const userAnyId = CustomWorld.getStoreData('userAnyId');
   const ms = timeoutsBySynthetic[syntheticType] ?? timeoutsBySynthetic['default'];
