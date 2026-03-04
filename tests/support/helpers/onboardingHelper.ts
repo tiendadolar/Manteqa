@@ -8,6 +8,7 @@ import { CustomWorld } from '../world';
 import { apiRequest, validateRes } from './requestHelper';
 
 const getUserNumberId = async (urlBase: string, apiKey: string, legalId: string) => {
+  logger.warn(apiKey);
   const endpoint: string = `/v2/users?legalId=${legalId}`;
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
   const numberId: string = response.body.data[0]?.numberId;
@@ -40,6 +41,7 @@ const putAwsUrl = async (awsUrl: string) => {
 
 export const onboardingHelper = async (urlBase: string, apiKEY: string, legalId: string): Promise<any> => {
   const numberId: string = await getUserNumberId(urlBase, apiKEY, legalId);
+  logger.warn(numberId);
 
   if (!numberId) return;
 
