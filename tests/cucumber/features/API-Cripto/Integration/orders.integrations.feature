@@ -177,3 +177,45 @@ Feature: Orders Integrations
         Examples:
             | case       | apiKEY                          | externalId       | sessionId            | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message                                           |
             | externalId | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | externalIdRepeat | integration-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 409        | ORDER_EXISTS   | An order with the same external id already exists |
+
+    # ------------------------------- Business Logic Error Paths -------------------------------
+
+    @ErrorPath
+    Scenario Outline: Validate error order response sending invalid non-empty <case>
+        Given The API key is available "<apiKEY>"
+        When Assign the value "<externalId>" to the variable "externalId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<side>" to the variable "side"
+        And Execute the POST method on the endpoint "/v2/orders"
+        Then Obtain a response <statusCode>
+        And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>" and error: "<errors>"
+
+        Examples:
+            | case    | apiKEY                          | externalId | sessionId             | asset   | side    | userAnyId | assetAmount | against | statusCode | internalStatus | message      | errors                                                                                                                                                                             |
+            | asset   | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | INVALID | BUY     | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | asset has wrong value INVALID. Possible values are DAI,USDT,BUSD,USDC,USDCB,ETH,BNB,ARB,POL,TRX,UST,AUST,BTC,LUNA,LUNA2,SOL,MATIC,NUARS,WLD,USDL,SDAI,AXS,MANA,ENJ,SAND,...and 8 more. |
+            | against | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | USDT    | BUY     | 100008501 | 10          | INVALID | 400        | BAD_REQUEST    | Bad request. | against has wrong value INVALID. Possible values are ARS,USD,CLP,COP,BRL,GTQ,CRC,PUSD,MXN,PHP,PEN,PYG,BOB,EUR,USDCCL,DAI,USDT,BUSD,USDC,USDCB.                                       |
+            | side    | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | USDT    | INVALID | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | side has wrong value INVALID. Possible values are BUY,SELL.                                                                                                                            |
+
+    @ErrorPath
+    Scenario Outline: Validate error order response for fiat exchange mismatch <case>
+        Given The API key is available "<apiKEY>"
+        When Assign the value "<externalId>" to the variable "externalId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<side>" to the variable "side"
+        And Execute the POST method on the endpoint "/v2/orders"
+        Then Obtain a response <statusCode>
+        And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>"
+
+        Examples:
+            | case                  | apiKEY                          | externalId | sessionId             | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus         | message                                        |
+            | ARS user ordering BRL | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | USDT  | BUY  | 100008501 | 5           | BRL     | 409        | FIAT_EXCHANGE_MISMATCH | User exchange and operation fiat do not match. |
+            | ARS user ordering CLP | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | USDT  | BUY  | 100008501 | 5           | CLP     | 409        | FIAT_EXCHANGE_MISMATCH | User exchange and operation fiat do not match. |
+            | ARS user selling BRL  | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | USDT  | SELL | 100008501 | 5           | BRL     | 409        | FIAT_EXCHANGE_MISMATCH | User exchange and operation fiat do not match. |
