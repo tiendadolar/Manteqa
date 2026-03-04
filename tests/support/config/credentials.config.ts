@@ -1,7 +1,9 @@
 import logger from '../utils/logger';
 
 export const getCredentials = (companyId: string) => {
-  let secret = `CREDS_${companyId}`;
+  logger.warn(companyId.trim().toUpperCase());
+  let normalized = companyId.trim().toUpperCase();
+  let secret = `CREDS_${normalized}`;
   let credentials = process.env[secret];
   logger.warn(credentials);
   if (!credentials) {
