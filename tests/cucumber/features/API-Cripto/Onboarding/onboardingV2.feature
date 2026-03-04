@@ -6,7 +6,7 @@ Feature: Onboarding User - V2
     #* Para volver a realizar test se debe limpiar el bankAddress de la DB de cada user
     @testBankingCHL
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<address>" to the variable "address"
@@ -19,52 +19,52 @@ Feature: Onboarding User - V2
         And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
-            | country | userAnyId | address     | currency | description | bankCode | accountType |
-            | Chile   | 100009266 | 01710280807 | CLP      | HSBC        | 317      | RUT         |
-            | Chile   | 100009266 | 01710280817 | CLP      | CHASE       | 323      | CHECKING    |
-            | Chile   | 100009266 | 01710280818 | CLP      | CHASE       | 323      | SAVINGS     |
-            | Chile   | 100009266 | 01710280827 | CLP      | BANCO       | 318      | CHECKING    |
-            | Chile   | 100009266 | 01710280828 | CLP      | BANCO       | 318      | SAVINGS     |
-            | Chile   | 100009266 | 01710280837 | CLP      | HSBC        | 314      | SAVINGS     |
-            | Chile   | 100009266 | 01710280838 | CLP      | HSBC        | 314      | CHECKING    |
-            | Chile   | 100009266 | 01710280847 | CLP      | CHASE       | 962      | CHECKING    |
-            | Chile   | 100009266 | 01710280848 | CLP      | CHASE       | 962      | SAVINGS     |
-            | Chile   | 100009266 | 01710280857 | CLP      | BANCO       | 310      | SAVINGS     |
-            | Chile   | 100009266 | 01710280858 | CLP      | BANCO       | 310      | CHECKING    |
-            | Chile   | 100009266 | 01710280867 | CLP      | HSBC        | 976      | SAVINGS     |
-            | Chile   | 100009266 | 01710280868 | CLP      | HSBC        | 976      | CHECKING    |
-            | Chile   | 100009266 | 01710280877 | CLP      | CHASE       | 325      | CHECKING    |
-            | Chile   | 100009266 | 01710280878 | CLP      | CHASE       | 325      | SAVINGS     |
-            | Chile   | 100009511 | 01710280887 | CLP      | BANCO       | 309      | CHECKING    |
-            | Chile   | 100009511 | 01710280888 | CLP      | BANCO       | 309      | SAVINGS     |
-            | Chile   | 100009511 | 01710280897 | CLP      | HSBC        | 322      | SAVINGS     |
-            | Chile   | 100009511 | 01710280898 | CLP      | HSBC        | 322      | CHECKING    |
-            | Chile   | 100009511 | 01710280903 | CLP      | CHASE       | 959      | CHECKING    |
-            | Chile   | 100009511 | 01710280904 | CLP      | CHASE       | 959      | SAVINGS     |
-            | Chile   | 100009511 | 01710280917 | CLP      | BANCO       | 319      | SAVINGS     |
-            | Chile   | 100009511 | 01710280918 | CLP      | BANCO       | 319      | CHECKING    |
-            | Chile   | 100009511 | 01710280927 | CLP      | CHASE       | 315      | SAVINGS     |
-            | Chile   | 100009511 | 01710280928 | CLP      | CHASE       | 315      | CHECKING    |
-            | Chile   | 100009511 | 01710280937 | CLP      | BANCO       | 312      | CHECKING    |
-            | Chile   | 100009511 | 01710280938 | CLP      | BANCO       | 312      | SAVINGS     |
-            | Chile   | 100009511 | 01710280937 | CLP      | BANCO       | 321      | CHECKING    |
-            | Chile   | 100009511 | 01710280138 | CLP      | BANCO       | 321      | SAVINGS     |
-            | Chile   | 100009511 | 01710280133 | CLP      | BANCO       | 960      | CHECKING    |
-            | Chile   | 100009512 | 01710280134 | CLP      | BANCO       | 960      | SAVINGS     |
-            | Chile   | 100009512 | 01710280141 | CLP      | BANCO       | 324      | CHECKING    |
-            | Chile   | 100009512 | 01710280142 | CLP      | BANCO       | 324      | SAVINGS     |
-            | Chile   | 100009512 | 01710280143 | CLP      | BANCO       | 961      | CHECKING    |
-            | Chile   | 100009512 | 01710280144 | CLP      | BANCO       | 961      | SAVINGS     |
-            | Chile   | 100009512 | 01710280145 | CLP      | BANCO       | 980      | CHECKING    |
-            | Chile   | 100009512 | 01710280146 | CLP      | BANCO       | 980      | SAVINGS     |
-            | Chile   | 100009512 | 01710280151 | CLP      | BANCO       | 308      | CHECKING    |
-            | Chile   | 100009512 | 01710280152 | CLP      | BANCO       | 308      | SAVINGS     |
-            | Chile   | 100009512 | 01710280153 | CLP      | BANCO       | 311      | CHECKING    |
-            | Chile   | 100009512 | 01710280154 | CLP      | BANCO       | 311      | SAVINGS     |
+            | companyId                | country | userAnyId | address     | currency | description | bankCode | accountType |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280807 | CLP      | HSBC        | 317      | RUT         |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280817 | CLP      | CHASE       | 323      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280818 | CLP      | CHASE       | 323      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280827 | CLP      | BANCO       | 318      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280828 | CLP      | BANCO       | 318      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280837 | CLP      | HSBC        | 314      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280838 | CLP      | HSBC        | 314      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280847 | CLP      | CHASE       | 962      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280848 | CLP      | CHASE       | 962      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280857 | CLP      | BANCO       | 310      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280858 | CLP      | BANCO       | 310      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280867 | CLP      | HSBC        | 976      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280868 | CLP      | HSBC        | 976      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280877 | CLP      | CHASE       | 325      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009266 | 01710280878 | CLP      | CHASE       | 325      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280887 | CLP      | BANCO       | 309      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280888 | CLP      | BANCO       | 309      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280897 | CLP      | HSBC        | 322      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280898 | CLP      | HSBC        | 322      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280903 | CLP      | CHASE       | 959      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280904 | CLP      | CHASE       | 959      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280917 | CLP      | BANCO       | 319      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280918 | CLP      | BANCO       | 319      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280927 | CLP      | CHASE       | 315      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280928 | CLP      | CHASE       | 315      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280937 | CLP      | BANCO       | 312      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280938 | CLP      | BANCO       | 312      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280937 | CLP      | BANCO       | 321      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280138 | CLP      | BANCO       | 321      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009511 | 01710280133 | CLP      | BANCO       | 960      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280134 | CLP      | BANCO       | 960      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280141 | CLP      | BANCO       | 324      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280142 | CLP      | BANCO       | 324      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280143 | CLP      | BANCO       | 961      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280144 | CLP      | BANCO       | 961      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280145 | CLP      | BANCO       | 980      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280146 | CLP      | BANCO       | 980      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280151 | CLP      | BANCO       | 308      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280152 | CLP      | BANCO       | 308      | SAVINGS     |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280153 | CLP      | BANCO       | 311      | CHECKING    |
+            | 683cce15397feba125068c9b | Chile   | 100009512 | 01710280154 | CLP      | BANCO       | 311      | SAVINGS     |
 
     @testBankingPAN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<address>" to the variable "address"
@@ -77,53 +77,53 @@ Feature: Onboarding User - V2
         And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
-            | country | userAnyId | address       | currency | description | bankCode | accountType |
-            | Panama  | 100009521 | 0472018417951 | PUSD     | HSBC        | 0013     | CHECKING    |
-            | Panama  | 100009521 | 0472018417970 | PUSD     | HSBC        | 0013     | SAVINGS     |
-            | Panama  | 100009521 | 0472018417971 | PUSD     | CHASE       | 0026     | CHECKING    |
-            | Panama  | 100009521 | 0472018417972 | PUSD     | CHASE       | 0026     | SAVINGS     |
-            | Panama  | 100009521 | 0472018417973 | PUSD     | BANCO       | 0039     | CHECKING    |
-            | Panama  | 100009521 | 0472018417974 | PUSD     | BANCO       | 0039     | SAVINGS     |
-            | Panama  | 100009521 | 0472018417975 | PUSD     | HSBC        | 0071     | SAVINGS     |
-            | Panama  | 100009521 | 0472018417976 | PUSD     | HSBC        | 0071     | CHECKING    |
-            | Panama  | 100009521 | 0472018417977 | PUSD     | CHASE       | 0181     | CHECKING    |
-            | Panama  | 100009521 | 0472018417978 | PUSD     | CHASE       | 0181     | SAVINGS     |
-            | Panama  | 100009521 | 0472018417979 | PUSD     | BANCO       | 0372     | SAVINGS     |
-            | Panama  | 100009521 | 0472018417980 | PUSD     | BANCO       | 0372     | CHECKING    |
-            | Panama  | 100009521 | 0472018417981 | PUSD     | HSBC        | 0408     | SAVINGS     |
-            | Panama  | 100009521 | 0472018417982 | PUSD     | HSBC        | 0408     | CHECKING    |
-            | Panama  | 100009521 | 0472018417983 | PUSD     | CHASE       | 0424     | CHECKING    |
-            | Panama  | 100009522 | 0472018417984 | PUSD     | CHASE       | 0424     | SAVINGS     |
-            | Panama  | 100009522 | 0472018417985 | PUSD     | BANCO       | 0518     | CHECKING    |
-            | Panama  | 100009522 | 0472018417986 | PUSD     | BANCO       | 0518     | SAVINGS     |
-            | Panama  | 100009522 | 0472018417987 | PUSD     | HSBC        | 0712     | SAVINGS     |
-            | Panama  | 100009522 | 0472018417988 | PUSD     | HSBC        | 0712     | CHECKING    |
-            | Panama  | 100009522 | 0472018417989 | PUSD     | CHASE       | 0767     | CHECKING    |
-            | Panama  | 100009522 | 0472018417990 | PUSD     | CHASE       | 0767     | SAVINGS     |
-            | Panama  | 100009522 | 0472018417991 | PUSD     | BANCO       | 0770     | SAVINGS     |
-            | Panama  | 100009522 | 0472018417992 | PUSD     | BANCO       | 0770     | CHECKING    |
-            | Panama  | 100009522 | 0472018417993 | PUSD     | CHASE       | 0916     | SAVINGS     |
-            | Panama  | 100009522 | 0472018417954 | PUSD     | CHASE       | 0916     | CHECKING    |
-            | Panama  | 100009522 | 0472018417995 | PUSD     | BANCO       | 1067     | CHECKING    |
-            | Panama  | 100009522 | 0472018417996 | PUSD     | BANCO       | 1067     | SAVINGS     |
-            | Panama  | 100009522 | 0472018417997 | PUSD     | BANCO       | 1083     | CHECKING    |
-            | Panama  | 100009522 | 0472018417998 | PUSD     | BANCO       | 1083     | SAVINGS     |
-            | Panama  | 100009523 | 0472018417999 | PUSD     | BANCO       | 1106     | CHECKING    |
-            | Panama  | 100009523 | 0472018417960 | PUSD     | BANCO       | 1106     | SAVINGS     |
-            | Panama  | 100009523 | 0472018417961 | PUSD     | BANCO       | 1151     | CHECKING    |
-            | Panama  | 100009523 | 0472018417962 | PUSD     | BANCO       | 1151     | SAVINGS     |
-            | Panama  | 100009523 | 0472018417963 | PUSD     | BANCO       | 1164     | CHECKING    |
-            | Panama  | 100009523 | 0472018417964 | PUSD     | BANCO       | 1164     | SAVINGS     |
-            | Panama  | 100009523 | 0472018417965 | PUSD     | BANCO       | 1258     | CHECKING    |
-            | Panama  | 100009523 | 0472018417966 | PUSD     | BANCO       | 1258     | SAVINGS     |
-            | Panama  | 100009523 | 0472018417967 | PUSD     | BANCO       | 1384     | CHECKING    |
-            | Panama  | 100009523 | 0472018417968 | PUSD     | BANCO       | 1384     | SAVINGS     |
-            | Panama  | 100009523 | 0472018417969 | PUSD     | BANCO       | 1397     | CHECKING    |
-            | Panama  | 100009523 | 0472018417950 | PUSD     | BANCO       | 1397     | SAVINGS     |
+            | companyId                | country | userAnyId | address       | currency | description | bankCode | accountType |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417951 | PUSD     | HSBC        | 0013     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417970 | PUSD     | HSBC        | 0013     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417971 | PUSD     | CHASE       | 0026     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417972 | PUSD     | CHASE       | 0026     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417973 | PUSD     | BANCO       | 0039     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417974 | PUSD     | BANCO       | 0039     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417975 | PUSD     | HSBC        | 0071     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417976 | PUSD     | HSBC        | 0071     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417977 | PUSD     | CHASE       | 0181     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417978 | PUSD     | CHASE       | 0181     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417979 | PUSD     | BANCO       | 0372     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417980 | PUSD     | BANCO       | 0372     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417981 | PUSD     | HSBC        | 0408     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417982 | PUSD     | HSBC        | 0408     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009521 | 0472018417983 | PUSD     | CHASE       | 0424     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417984 | PUSD     | CHASE       | 0424     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417985 | PUSD     | BANCO       | 0518     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417986 | PUSD     | BANCO       | 0518     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417987 | PUSD     | HSBC        | 0712     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417988 | PUSD     | HSBC        | 0712     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417989 | PUSD     | CHASE       | 0767     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417990 | PUSD     | CHASE       | 0767     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417991 | PUSD     | BANCO       | 0770     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417992 | PUSD     | BANCO       | 0770     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417993 | PUSD     | CHASE       | 0916     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417954 | PUSD     | CHASE       | 0916     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417995 | PUSD     | BANCO       | 1067     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417996 | PUSD     | BANCO       | 1067     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417997 | PUSD     | BANCO       | 1083     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009522 | 0472018417998 | PUSD     | BANCO       | 1083     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417999 | PUSD     | BANCO       | 1106     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417960 | PUSD     | BANCO       | 1106     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417961 | PUSD     | BANCO       | 1151     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417962 | PUSD     | BANCO       | 1151     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417963 | PUSD     | BANCO       | 1164     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417964 | PUSD     | BANCO       | 1164     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417965 | PUSD     | BANCO       | 1258     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417966 | PUSD     | BANCO       | 1258     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417967 | PUSD     | BANCO       | 1384     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417968 | PUSD     | BANCO       | 1384     | SAVINGS     |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417969 | PUSD     | BANCO       | 1397     | CHECKING    |
+            | 683cce15397feba125068c9b | Panama  | 100009523 | 0472018417950 | PUSD     | BANCO       | 1397     | SAVINGS     |
 
     @testBankingCOL
     Scenario: Agregar cuenta bancaria a usuario de "<country>" con tipo de cuenta <accountType>
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<address>" to the variable "address"
@@ -136,45 +136,45 @@ Feature: Onboarding User - V2
         And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
-            | country  | userAnyId | address         | currency | description | bankCode | accountType |
-            | Colombia | 100009524 | 3511234567      | COP      | HSBC        | 1507     | SAVINGS     |
+            | companyId                | country  | userAnyId | address         | currency | description | bankCode | accountType |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 3511234567      | COP      | HSBC        | 1507     | SAVINGS     |
             # | Colombia | 100009524 | 3009876543         | COP      | HSBC        | 1507     | SAVINGS     |
-            | Colombia | 100009524 | 1234567890      | COP      | CHASE       | 1007     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 1234567890      | COP      | CHASE       | 1007     | CHECKING    |
             # | Colombia | 100009524 | 09876543210        | COP      | CHASE       | 1007     | SAVINGS     |
             # | Colombia | 100009524 | 12345678           | COP      | BANCO       | 1809     | CHECKING    |
-            | Colombia | 100009524 | 1234567891      | COP      | BANCO       | 1809     | CHECKING    |
-            | Colombia | 100009524 | 03012345678     | COP      | HSBC        | 1551     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 1234567891      | COP      | BANCO       | 1809     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 03012345678     | COP      | HSBC        | 1551     | SAVINGS     |
             # | Colombia | 100009524 | 3519876543         | COP      | HSBC        | 1551     | CHECKING    |
             # | Colombia | 100009524 | 8123456789012345   | COP      | CHASE       | 1051     | CHECKING    |
-            | Colombia | 100009524 | 0123456789      | COP      | CHASE       | 1051     | SAVINGS     |
-            | Colombia | 100009524 | 455900170867    | COP      | CHASE       | 1051     | SAVINGS     |
-            | Colombia | 100009524 | 987654321       | COP      | BANCO       | 1001     | SAVINGS     |
-            | Colombia | 100009524 | 987654587       | COP      | BANCO       | 1001     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 0123456789      | COP      | CHASE       | 1051     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 455900170867    | COP      | CHASE       | 1051     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 987654321       | COP      | BANCO       | 1001     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 987654587       | COP      | BANCO       | 1001     | CHECKING    |
             # | Colombia | 100009524 | 0472018417981      | COP      | HSBC        | 1032     | CHECKING    |
-            | Colombia | 100009524 | 49999999999     | COP      | HSBC        | 1032     | CHECKING    |
-            | Colombia | 100009524 | 24125073299     | COP      | HSBC        | 1032     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 49999999999     | COP      | HSBC        | 1032     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 24125073299     | COP      | HSBC        | 1032     | CHECKING    |
             # | Colombia | 100009524 | 123456789012345678 | COP      | CHASE       | 1013     | CHECKING    |
-            | Colombia | 100009524 | 12345678901234  | COP      | CHASE       | 1013     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 12345678901234  | COP      | CHASE       | 1013     | SAVINGS     |
             # | Colombia | 100009525 | 467890123       | COP      | BANCO       | 1052     | CHECKING    |
-            | Colombia | 100009524 | 987654323       | COP      | BANCO       | 1052     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 987654323       | COP      | BANCO       | 1052     | SAVINGS     |
             # | Colombia | 100009525 | 1234937892      | COP      | HSBC        | 1801     | SAVINGS     |
-            | Colombia | 100009524 | 1234467884      | COP      | HSBC        | 1801     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 1234467884      | COP      | HSBC        | 1801     | CHECKING    |
             # | Colombia | 100009525 | 1234567890      | COP      | CHASE       | 1804     | CHECKING    |
-            | Colombia | 100009524 | 123456789012345 | COP      | CHASE       | 1804     | SAVINGS     |
-            | Colombia | 100009524 | 1234567893      | COP      | BANCO       | 1019     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 123456789012345 | COP      | CHASE       | 1804     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 1234567893      | COP      | BANCO       | 1019     | CHECKING    |
             # | Colombia | 100009525 | 2234567890      | COP      | BANCO       | 1019     | CHECKING    |
-            | Colombia | 100009524 | 512345678901    | COP      | CHASE       | 1062     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 512345678901    | COP      | CHASE       | 1062     | SAVINGS     |
             # | Colombia | 100009525 | 512345678901    | COP      | CHASE       | 1062     | CHECKING    |
-            | Colombia | 100009524 | 0472018417995   | COP      | BANCO       | 1070     | CHECKING    |
-            | Colombia | 100009525 | 0472018417996   | COP      | BANCO       | 1070     | SAVINGS     |
-            | Colombia | 100009525 | 1123456789012   | COP      | BANCO       | 1002     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009524 | 0472018417995   | COP      | BANCO       | 1070     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009525 | 0472018417996   | COP      | BANCO       | 1070     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009525 | 1123456789012   | COP      | BANCO       | 1002     | CHECKING    |
             # | Colombia | 100009525 | 512345678901    | COP      | BANCO       | 1002     | SAVINGS     |
-            | Colombia | 100009525 | 0472018417999   | COP      | BANCO       | 1292     | CHECKING    |
-            | Colombia | 100009525 | 0472018417960   | COP      | BANCO       | 1292     | SAVINGS     |
+            | 683cce15397feba125068c9b | Colombia | 100009525 | 0472018417999   | COP      | BANCO       | 1292     | CHECKING    |
+            | 683cce15397feba125068c9b | Colombia | 100009525 | 0472018417960   | COP      | BANCO       | 1292     | SAVINGS     |
 
     @testBankingGUA
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<address>" to the variable "address"
@@ -187,41 +187,41 @@ Feature: Onboarding User - V2
         And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
-            | country   | userAnyId | address        | currency | description | bankCode | accountType |
-            | Guatemala | 100009543 | 1234567        | GTQ      | HSBC        | 001      | CHECKING    |
-            | Guatemala | 100009543 | 119876543210   | GTQ      | CHASE       | 004      | CHECKING    |
-            | Guatemala | 100009543 | 021000000000   | GTQ      | CHASE       | 004      | SAVINGS     |
-            | Guatemala | 100009543 | 5123456789     | GTQ      | BANCO       | 012      | CHECKING    |
-            | Guatemala | 100009543 | 81234          | GTQ      | BANCO       | 012      | SAVINGS     |
-            | Guatemala | 100009543 | 11234567890    | GTQ      | HSBC        | 013      | SAVINGS     |
-            | Guatemala | 100009543 | 512345678901   | GTQ      | HSBC        | 013      | CHECKING    |
-            | Guatemala | 100009543 | 1234581890     | GTQ      | CHASE       | 015      | CHECKING    |
-            | Guatemala | 100009543 | 1274567        | GTQ      | CHASE       | 015      | SAVINGS     |
-            | Guatemala | 100009543 | 0123456789012  | GTQ      | BANCO       | 016      | SAVINGS     |
-            | Guatemala | 100009543 | 3123456789     | GTQ      | BANCO       | 016      | CHECKING    |
-            | Guatemala | 100009543 | 1239461890     | GTQ      | HSBC        | 019      | SAVINGS     |
-            | Guatemala | 100009543 | 1211281890     | GTQ      | HSBC        | 019      | CHECKING    |
-            | Guatemala | 100009543 | 0001288567     | GTQ      | CHASE       | 030      | CHECKING    |
-            | Guatemala | 100009543 | 987657851098   | GTQ      | BANCO       | 036      | CHECKING    |
-            | Guatemala | 100009544 | 987654321115   | GTQ      | BANCO       | 036      | SAVINGS     |
-            | Guatemala | 100009544 | 59876543211    | GTQ      | HSBC        | 039      | SAVINGS     |
-            | Guatemala | 100009544 | 517345678      | GTQ      | HSBC        | 039      | CHECKING    |
-            | Guatemala | 100009544 | 98765437879876 | GTQ      | CHASE       | 040      | CHECKING    |
-            | Guatemala | 100009544 | 98114432109876 | GTQ      | CHASE       | 040      | SAVINGS     |
-            | Guatemala | 100009544 | 4127173451589  | GTQ      | BANCO       | 041      | SAVINGS     |
-            | Guatemala | 100009544 | 961234569      | GTQ      | CHASE       | 042      | SAVINGS     |
-            | Guatemala | 100009544 | 00012345674    | GTQ      | CHASE       | 042      | CHECKING    |
-            | Guatemala | 100009544 | 01234567810    | GTQ      | BANCO       | 044      | CHECKING    |
-            | Guatemala | 100009544 | 01234567710    | GTQ      | BANCO       | 044      | SAVINGS     |
-            | Guatemala | 100009544 | 12345678362    | GTQ      | BANCO       | 045      | CHECKING    |
-            | Guatemala | 100009544 | 12345678315    | GTQ      | BANCO       | 045      | SAVINGS     |
-            | Guatemala | 100009544 | 98765438909876 | GTQ      | BANCO       | 047      | CHECKING    |
-            | Guatemala | 100009544 | 099999991799   | GTQ      | BANCO       | 048      | CHECKING    |
-            | Guatemala | 100009544 | 099999915999   | GTQ      | BANCO       | 048      | SAVINGS     |
+            | companyId                | country   | userAnyId | address        | currency | description | bankCode | accountType |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 1234567        | GTQ      | HSBC        | 001      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 119876543210   | GTQ      | CHASE       | 004      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 021000000000   | GTQ      | CHASE       | 004      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 5123456789     | GTQ      | BANCO       | 012      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 81234          | GTQ      | BANCO       | 012      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 11234567890    | GTQ      | HSBC        | 013      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 512345678901   | GTQ      | HSBC        | 013      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 1234581890     | GTQ      | CHASE       | 015      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 1274567        | GTQ      | CHASE       | 015      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 0123456789012  | GTQ      | BANCO       | 016      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 3123456789     | GTQ      | BANCO       | 016      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 1239461890     | GTQ      | HSBC        | 019      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 1211281890     | GTQ      | HSBC        | 019      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 0001288567     | GTQ      | CHASE       | 030      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009543 | 987657851098   | GTQ      | BANCO       | 036      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 987654321115   | GTQ      | BANCO       | 036      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 59876543211    | GTQ      | HSBC        | 039      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 517345678      | GTQ      | HSBC        | 039      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 98765437879876 | GTQ      | CHASE       | 040      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 98114432109876 | GTQ      | CHASE       | 040      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 4127173451589  | GTQ      | BANCO       | 041      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 961234569      | GTQ      | CHASE       | 042      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 00012345674    | GTQ      | CHASE       | 042      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 01234567810    | GTQ      | BANCO       | 044      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 01234567710    | GTQ      | BANCO       | 044      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 12345678362    | GTQ      | BANCO       | 045      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 12345678315    | GTQ      | BANCO       | 045      | SAVINGS     |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 98765438909876 | GTQ      | BANCO       | 047      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 099999991799   | GTQ      | BANCO       | 048      | CHECKING    |
+            | 683cce15397feba125068c9b | Guatemala | 100009544 | 099999915999   | GTQ      | BANCO       | 048      | SAVINGS     |
 
     @testBankingCTR
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<address>" to the variable "address"
@@ -234,43 +234,43 @@ Feature: Onboarding User - V2
         And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
-            | country    | userAnyId | address                | currency | description | bankCode | accountType |
-            | Costa Rica | 100009602 | CR1066456789123456789  | CRC      | HSBC        | 0102     | CHECKING    |
-            | Costa Rica | 100009602 | CR8541567891234567145  | CRC      | HSBC        | 0102     | SAVINGS     |
-            | Costa Rica | 100009602 | CR1252567891234561597  | CRC      | CHASE       | 0104     | CHECKING    |
-            | Costa Rica | 100009602 | CR125456789123456885   | CRC      | CHASE       | 0104     | SAVINGS     |
-            | Costa Rica | 100009602 | CR1234567891234566965  | CRC      | BANCO       | 0107     | CHECKING    |
-            | Costa Rica | 100009602 | CR1234567157234566987  | CRC      | BANCO       | 0107     | SAVINGS     |
-            | Costa Rica | 100009602 | CR1234567891234567635  | CRC      | HSBC        | 0114     | SAVINGS     |
-            | Costa Rica | 100009602 | CR12345678912345677896 | CRC      | HSBC        | 0114     | CHECKING    |
-            | Costa Rica | 100009602 | CR1234567891234545471  | CRC      | CHASE       | 0116     | CHECKING    |
-            | Costa Rica | 100009602 | CR12345678912344546983 | CRC      | CHASE       | 0116     | SAVINGS     |
-            | Costa Rica | 100009602 | CR123556789123456911   | CRC      | BANCO       | 0120     | SAVINGS     |
-            | Costa Rica | 100009602 | CR1234458589123226711  | CRC      | BANCO       | 0120     | CHECKING    |
-            | Costa Rica | 100009602 | CR12345678912345671123 | CRC      | HSBC        | 0123     | SAVINGS     |
-            | Costa Rica | 100009602 | CR523456789123452259   | CRC      | HSBC        | 0123     | CHECKING    |
-            | Costa Rica | 100009602 | CR122226789123456766   | CRC      | CHASE       | 0125     | CHECKING    |
-            | Costa Rica | 100009603 | CR1234567891234447548  | CRC      | CHASE       | 0125     | SAVINGS     |
-            | Costa Rica | 100009603 | CR123456789123456789   | CRC      | BANCO       | 0126     | CHECKING    |
-            | Costa Rica | 100009603 | CR1234567895554561123  | CRC      | BANCO       | 0126     | SAVINGS     |
-            | Costa Rica | 100009603 | CR1247567891234567788  | CRC      | HSBC        | 0127     | SAVINGS     |
-            | Costa Rica | 100009603 | CR1774567891234564564  | CRC      | HSBC        | 0127     | CHECKING    |
-            | Costa Rica | 100009603 | CR663456789123445789   | CRC      | CHASE       | 0151     | CHECKING    |
-            | Costa Rica | 100009603 | CR1234567891232267366  | CRC      | CHASE       | 0151     | SAVINGS     |
-            | Costa Rica | 100009603 | CR1215156789993456789  | CRC      | BANCO       | 0152     | SAVINGS     |
-            | Costa Rica | 100009603 | CR1234567892224567151  | CRC      | BANCO       | 0152     | CHECKING    |
-            | Costa Rica | 100009603 | CR9634567891234567966  | CRC      | CHASE       | 0161     | SAVINGS     |
-            | Costa Rica | 100009603 | CR2234567891234567811  | CRC      | CHASE       | 0161     | CHECKING    |
-            | Costa Rica | 100009603 | CR123456795123456755   | CRC      | BANCO       | 0162     | CHECKING    |
-            | Costa Rica | 100009603 | CR1234777891234567999  | CRC      | BANCO       | 0162     | SAVINGS     |
-            | Costa Rica | 100009603 | CR123452287123456744   | CRC      | BANCO       | 0231     | CHECKING    |
-            | Costa Rica | 100009603 | CR12345674451236656789 | CRC      | BANCO       | 0231     | SAVINGS     |
-            | Costa Rica | 100009604 | CR123456789123776789   | CRC      | BANCO       | 0312     | CHECKING    |
-            | Costa Rica | 100009604 | CR123456789123451189   | CRC      | BANCO       | 0312     | SAVINGS     |
+            | companyId                | country    | userAnyId | address                | currency | description | bankCode | accountType |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR1066456789123456789  | CRC      | HSBC        | 0102     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR8541567891234567145  | CRC      | HSBC        | 0102     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR1252567891234561597  | CRC      | CHASE       | 0104     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR125456789123456885   | CRC      | CHASE       | 0104     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR1234567891234566965  | CRC      | BANCO       | 0107     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR1234567157234566987  | CRC      | BANCO       | 0107     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR1234567891234567635  | CRC      | HSBC        | 0114     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR12345678912345677896 | CRC      | HSBC        | 0114     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR1234567891234545471  | CRC      | CHASE       | 0116     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR12345678912344546983 | CRC      | CHASE       | 0116     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR123556789123456911   | CRC      | BANCO       | 0120     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR1234458589123226711  | CRC      | BANCO       | 0120     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR12345678912345671123 | CRC      | HSBC        | 0123     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR523456789123452259   | CRC      | HSBC        | 0123     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009602 | CR122226789123456766   | CRC      | CHASE       | 0125     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR1234567891234447548  | CRC      | CHASE       | 0125     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR123456789123456789   | CRC      | BANCO       | 0126     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR1234567895554561123  | CRC      | BANCO       | 0126     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR1247567891234567788  | CRC      | HSBC        | 0127     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR1774567891234564564  | CRC      | HSBC        | 0127     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR663456789123445789   | CRC      | CHASE       | 0151     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR1234567891232267366  | CRC      | CHASE       | 0151     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR1215156789993456789  | CRC      | BANCO       | 0152     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR1234567892224567151  | CRC      | BANCO       | 0152     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR9634567891234567966  | CRC      | CHASE       | 0161     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR2234567891234567811  | CRC      | CHASE       | 0161     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR123456795123456755   | CRC      | BANCO       | 0162     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR1234777891234567999  | CRC      | BANCO       | 0162     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR123452287123456744   | CRC      | BANCO       | 0231     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009603 | CR12345674451236656789 | CRC      | BANCO       | 0231     | SAVINGS     |
+            | 683cce15397feba125068c9b | Costa Rica | 100009604 | CR123456789123776789   | CRC      | BANCO       | 0312     | CHECKING    |
+            | 683cce15397feba125068c9b | Costa Rica | 100009604 | CR123456789123451189   | CRC      | BANCO       | 0312     | SAVINGS     |
 
     @testBankingMXN
     Scenario: Agregar cuenta bancaria a usuario de "<country>"
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given The API key is available "683cce15397feba125068c9b"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<address>" to the variable "address"
@@ -283,42 +283,42 @@ Feature: Onboarding User - V2
         And Wait for the processing of the "DB" por 3 seconds
 
         Examples:
-            | country | userAnyId | address            | currency | description | bankCode | accountType |
-            | Mexico  | 100009607 | 156356784125789654 | MXN      | HSBC        | 002      | CHECKING    |
-            | Mexico  | 100009607 | 4342562861667390   | MXN      | HSBC        | 002      | DEBIT       |
-            | Mexico  | 100009607 | 1563567841         | MXN      | CHASE       | 002      | PHONE       |
-            | Mexico  | 100009607 | 124585858796321452 | MXN      | CHASE       | 006      | CHECKING    |
-            | Mexico  | 100009607 | 4342562861667390   | MXN      | BANCO       | 006      | DEBIT       |
-            | Mexico  | 100009607 | 1245858587         | MXN      | BANCO       | 006      | PHONE       |
-            | Mexico  | 100009607 | 323245789654122125 | MXN      | HSBC        | 009      | CHECKING    |
-            | Mexico  | 100009607 | 4342562861667390   | MXN      | HSBC        | 009      | DEBIT       |
-            | Mexico  | 100009607 | 3232457896         | MXN      | CHASE       | 009      | SAVINGS     |
-            | Mexico  | 100009607 | 856565322791366478 | MXN      | CHASE       | 012      | CHECKING    |
-            | Mexico  | 100009607 | 4342562861667390   | MXN      | BANCO       | 012      | DEBIT       |
-            | Mexico  | 100009607 | 8565653227         | MXN      | BANCO       | 012      | CHECKING    |
-            | Mexico  | 100009607 | 968851447362144586 | MXN      | HSBC        | 014      | SAVINGS     |
-            | Mexico  | 100009607 | 4342562861667390   | MXN      | HSBC        | 014      | DEBIT       |
-            | Mexico  | 100009607 | 9688514415         | MXN      | CHASE       | 014      | SAVINGS     |
-            | Mexico  | 100009608 | 669878485123659878 | MXN      | CHASE       | 019      | CHECKING    |
-            | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 019      | DEBIT       |
-            | Mexico  | 100009608 | 6698784851         | MXN      | BANCO       | 019      | CHECKING    |
-            | Mexico  | 100009608 | 599633214454612257 | MXN      | HSBC        | 021      | CHECKING    |
-            | Mexico  | 100009608 | 4342562861667390   | MXN      | HSBC        | 021      | DEBIT       |
-            | Mexico  | 100009608 | 5996332144         | MXN      | CHASE       | 021      | SAVINGS     |
-            | Mexico  | 100009608 | 152248798866547891 | MXN      | CHASE       | 030      | CHECKING    |
-            | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 030      | DEBIT       |
-            | Mexico  | 100009608 | 1522487988         | MXN      | BANCO       | 030      | CHECKING    |
-            | Mexico  | 100009608 | 225578961977833259 | MXN      | CHASE       | 124      | CHECKING    |
-            | Mexico  | 100009608 | 4342562861667390   | MXN      | CHASE       | 124      | DEBIT       |
-            | Mexico  | 100009608 | 2255789619         | MXN      | BANCO       | 124      | SAVINGS     |
-            | Mexico  | 100009608 | 996632647782201019 | MXN      | BANCO       | 126      | CHECKING    |
-            | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 126      | DEBIT       |
-            | Mexico  | 100009608 | 9966326477         | MXN      | BANCO       | 126      | CHECKING    |
+            | companyId                | country | userAnyId | address            | currency | description | bankCode | accountType |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 156356784125789654 | MXN      | HSBC        | 002      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 4342562861667390   | MXN      | HSBC        | 002      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 1563567841         | MXN      | CHASE       | 002      | PHONE       |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 124585858796321452 | MXN      | CHASE       | 006      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 4342562861667390   | MXN      | BANCO       | 006      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 1245858587         | MXN      | BANCO       | 006      | PHONE       |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 323245789654122125 | MXN      | HSBC        | 009      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 4342562861667390   | MXN      | HSBC        | 009      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 3232457896         | MXN      | CHASE       | 009      | SAVINGS     |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 856565322791366478 | MXN      | CHASE       | 012      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 4342562861667390   | MXN      | BANCO       | 012      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 8565653227         | MXN      | BANCO       | 012      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 968851447362144586 | MXN      | HSBC        | 014      | SAVINGS     |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 4342562861667390   | MXN      | HSBC        | 014      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009607 | 9688514415         | MXN      | CHASE       | 014      | SAVINGS     |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 669878485123659878 | MXN      | CHASE       | 019      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 019      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 6698784851         | MXN      | BANCO       | 019      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 599633214454612257 | MXN      | HSBC        | 021      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 4342562861667390   | MXN      | HSBC        | 021      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 5996332144         | MXN      | CHASE       | 021      | SAVINGS     |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 152248798866547891 | MXN      | CHASE       | 030      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 030      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 1522487988         | MXN      | BANCO       | 030      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 225578961977833259 | MXN      | CHASE       | 124      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 4342562861667390   | MXN      | CHASE       | 124      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 2255789619         | MXN      | BANCO       | 124      | SAVINGS     |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 996632647782201019 | MXN      | BANCO       | 126      | CHECKING    |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 4342562861667390   | MXN      | BANCO       | 126      | DEBIT       |
+            | 683cce15397feba125068c9b | Mexico  | 100009608 | 9966326477         | MXN      | BANCO       | 126      | CHECKING    |
 
     # E2E
     @Smoke @E2E
     Scenario: Onboarding de usuario de "<exchange>"
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
         And Validate existing user '<legalId>'
@@ -358,27 +358,27 @@ Feature: Onboarding User - V2
         # Do not change data
         @Automated
         Examples:
-            | apiKEY                          | credential                | externalId       | email                  | legalId            | exchange   | name       | surname           | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EArg    | onbe2earg@gmail.com    | 23452216604        | ARGENTINA  | TestArg    | OnbE2E            | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EChi    | onbe2echi@gmail.com    | 167789579          | CHILE      | TestChi    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Chile       | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2ECtr    | onbe2ectr@gmail.com    | 402440293          | COSTA_RICA | TestCtr    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Costa Rica  | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EGua    | onbe2egua@gmail.com    | 2126219200101      | GUATEMALA  | TestGua    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Guatemala   | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EMex    | onbe2emex@gmail.com    | luca860831mdfjrr08 | MEXICO     | TestMex    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EMexRFC | onbe2emexrfc@gmail.com | coza760507p86      | MEXICO     | TestMexRFC | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EPan    | onbe2epan@gmail.com    | 8934513            | PANAMA     | TestPan    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400134   | Panama      | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2EBra    | onbe2ebra@gmail.com    | 07185653711        | BRAZIL     | TestBra    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2ECol    | onbe2ecol@gmail.com    | 478806             | COLOMBIA   | OMAR       | MARTINEZ AGUILERA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400131   | Colombia    | SAMUEL PIRES DE MELO | NATIONAL_ID |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2Ebob-n  | onbe2ebob@gmail.com    | 3910113            | BOLIVIA    | WILDER     | ZAMBRANA          | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112132      | Bolivia     | SAMUEL PIRES DE MELO |             |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | testOnbE2Eper-n  | onbe2eper@gmail.com    | 47346108           | PERU       | ADRIANO    | PALACIOS  SANCHEZ | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400171   | Peru        | SAMUEL PIRES DE MELO |             |
+            | companyId                | credential                | externalId    | email               | legalId     | exchange  | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
+            | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2EArg | onbe2earg@gmail.com | 23452216604 | ARGENTINA | TestArg | OnbE2E  | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2EChi    | onbe2echi@gmail.com    | 167789579          | CHILE      | TestChi    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Chile       | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2ECtr    | onbe2ectr@gmail.com    | 402440293          | COSTA_RICA | TestCtr    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Costa Rica  | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2EGua    | onbe2egua@gmail.com    | 2126219200101      | GUATEMALA  | TestGua    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400132   | Guatemala   | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2EMex    | onbe2emex@gmail.com    | luca860831mdfjrr08 | MEXICO     | TestMex    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2EMexRFC | onbe2emexrfc@gmail.com | coza760507p86      | MEXICO     | TestMexRFC | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400133   | Mexico      | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2EPan    | onbe2epan@gmail.com    | 8934513            | PANAMA     | TestPan    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400134   | Panama      | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2EBra    | onbe2ebra@gmail.com    | 07185653711        | BRAZIL     | TestBra    | OnbE2E            | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400136   | Brasil      | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2ECol    | onbe2ecol@gmail.com    | 478806             | COLOMBIA   | OMAR       | MARTINEZ AGUILERA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400131   | Colombia    | SAMUEL PIRES DE MELO | NATIONAL_ID |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2Ebob-n  | onbe2ebob@gmail.com    | 3910113            | BOLIVIA    | WILDER     | ZAMBRANA          | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112132      | Bolivia     | SAMUEL PIRES DE MELO |             |
+        # | 683cce15397feba125068c9b | andresperalta@manteca.dev | testOnbE2Eper-n  | onbe2eper@gmail.com    | 47346108           | PERU       | ADRIANO    | PALACIOS  SANCHEZ | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400171   | Peru        | SAMUEL PIRES DE MELO |             |
 
         # | andresperalta@manteca.dev | testOnbE2EFil6 | onbe2efil6@gmail.com | 9674152135063897   | PHILIPPINES | TestPhi | OnbE2E  | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400135   | Filipinas   | SAMUEL PIRES DE MELO |
 
         @test
         Examples:
-            | apiKEY                          | credential                | externalId         | email            | legalId     | exchange  | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
+            | companyId                       | credential                | externalId         | email            | legalId     | exchange  | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
             | DG0DKDD-VRXMF9F-G84XH2H-03PXFMD | andresperalta@manteca.dev | user-account-arg-1 | abboyg@gmail.com | 20177983447 | ARGENTINA | GERARDO | ABBOY   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Argentina   | SAMUEL PIRES DE MELO |             |
 # | DG0DKDD-VRXMF9F-G84XH2H-03PXFMD | andresperalta@manteca.dev | user-account-bra-1 | alti2reis@gmail.com | 64406822100 | BRAZIL   | ALTINA | DOS REIS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Brasil      | SAMUEL PIRES DE MELO |             |
-# | 7997ZG9-97042HS-P821399-SGEBCFH | andresperalta@manteca.dev | user-account-per-1 | esipdiana@gmail.com    | 77667305    | PERU      | DIANA    | ESPINOZA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Peru        | SAMUEL PIRES DE MELO |             |
-# | 7997ZG9-97042HS-P821399-SGEBCFH | andresperalta@manteca.dev | user-account-bob-1 | rudisal@gmail.com      | 4624367     | BOLIVIA   | ALBERTO  | RUDIS    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Bolivia     | SAMUEL PIRES DE MELO |             |
-# | 7997ZG9-97042HS-P821399-SGEBCFH | andresperalta@manteca.dev | user-account-cop-1 | hectorrincon@gmail.com | 2999652     | COLOMBIA  | HECTOR   | RINCON   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Colombia    | SAMUEL PIRES DE MELO | NATIONAL_ID |
+# | 69972e13e4c6077150f16ce8 | andresperalta@manteca.dev | user-account-per-1 | esipdiana@gmail.com    | 77667305    | PERU      | DIANA    | ESPINOZA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Peru        | SAMUEL PIRES DE MELO |             |
+# | 69972e13e4c6077150f16ce8 | andresperalta@manteca.dev | user-account-bob-1 | rudisal@gmail.com      | 4624367     | BOLIVIA   | ALBERTO  | RUDIS    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Bolivia     | SAMUEL PIRES DE MELO |             |
+# | 69972e13e4c6077150f16ce8 | andresperalta@manteca.dev | user-account-cop-1 | hectorrincon@gmail.com | 2999652     | COLOMBIA  | HECTOR   | RINCON   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Colombia    | SAMUEL PIRES DE MELO | NATIONAL_ID |
 

@@ -2,8 +2,8 @@
 Feature: Activities entries
 
     Scenario Outline: validadr activities
-        Given The API key is available "RR3XN5E-R8MMCGX-PPVNJT6-GSK7BF2"
-        And The API secret is available "tNYgnM4sZR2ypkEDnU"
+        Given Get credentials for company "<companyId>"
+        # And The API secret is available "tNYgnM4sZR2ypkEDnU"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         # Request de lock payment
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -22,6 +22,6 @@ Feature: Activities entries
         And Validate entries for activity "<activity>"
 
         Examples:
-            | userAnyId | qrCode          | amount | sessionId    | to                                         | against | activity                |
-            | 100013904 | qr3manualamount | 1000   | activities-n | 0x7921319332714EBea5c1219439c34309e600DF54 | ARS     | direct currency payment |
-            | 100013905 | pixmanualamount | 10     | activities-n | 0x7921319332714EBea5c1219439c34309e600DF54 | ARS     | direct currency payment |
+            | companyId                | userAnyId | qrCode          | amount | sessionId    | to                                         | against | activity                |
+            | 6849d02e906eb70b50893536 | 100013904 | qr3manualamount | 1000   | activities-n | 0x7921319332714EBea5c1219439c34309e600DF54 | ARS     | direct currency payment |
+            | 6849d02e906eb70b50893536 | 100013905 | pixmanualamount | 10     | activities-n | 0x7921319332714EBea5c1219439c34309e600DF54 | ARS     | direct currency payment |

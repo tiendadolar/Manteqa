@@ -3,7 +3,7 @@ Feature: Prices V2
 
     @Smoke
     Scenario Outline: Obtener par prices <par_prices>
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And Execute the GET method on the endpoint "/v2/prices/direct/<par_price>"
         Then Obtain a response 200
@@ -11,107 +11,107 @@ Feature: Prices V2
 
         @ARS
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_ARS  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_ARS   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_ARS  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_ARS |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ETH_ARS   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | BTC_ARS   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | BNB_ARS   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | DAI_ARS   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_ARS   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_ARS  |
+            | 683cce15397feba125068c9b | WLD_ARS   |
+            | 683cce15397feba125068c9b | USDC_ARS  |
+            | 683cce15397feba125068c9b | USDCB_ARS |
+            | 683cce15397feba125068c9b | ETH_ARS   |
+            | 683cce15397feba125068c9b | BTC_ARS   |
+            | 683cce15397feba125068c9b | BNB_ARS   |
+            | 683cce15397feba125068c9b | DAI_ARS   |
+            | 683cce15397feba125068c9b | TRX_ARS   |
 
         @USD
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_USD  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_USD   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_USD  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_USD |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ETH_USD   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | BTC_USD   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | BNB_USD   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | DAI_USD   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_USD   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_USD  |
+            | 683cce15397feba125068c9b | WLD_USD   |
+            | 683cce15397feba125068c9b | USDC_USD  |
+            | 683cce15397feba125068c9b | USDCB_USD |
+            | 683cce15397feba125068c9b | ETH_USD   |
+            | 683cce15397feba125068c9b | BTC_USD   |
+            | 683cce15397feba125068c9b | BNB_USD   |
+            | 683cce15397feba125068c9b | DAI_USD   |
+            | 683cce15397feba125068c9b | TRX_USD   |
 
         @CLP
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_CLP  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_CLP   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_CLP  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_CLP |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_CLP   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_CLP  |
+            | 683cce15397feba125068c9b | WLD_CLP   |
+            | 683cce15397feba125068c9b | USDC_CLP  |
+            | 683cce15397feba125068c9b | USDCB_CLP |
+            | 683cce15397feba125068c9b | TRX_CLP   |
 
         @BRL
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_BRL  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_BRL   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_BRL  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_BRL |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_BRL   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_BRL  |
+            | 683cce15397feba125068c9b | WLD_BRL   |
+            | 683cce15397feba125068c9b | USDC_BRL  |
+            | 683cce15397feba125068c9b | USDCB_BRL |
+            | 683cce15397feba125068c9b | TRX_BRL   |
 
         @COP
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_COP  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_COP   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_COP  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_COP |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_COP   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_COP  |
+            | 683cce15397feba125068c9b | WLD_COP   |
+            | 683cce15397feba125068c9b | USDC_COP  |
+            | 683cce15397feba125068c9b | USDCB_COP |
+            | 683cce15397feba125068c9b | TRX_COP   |
 
         @CRC
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_CRC  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_CRC   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_CRC  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_CRC |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_CRC   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_CRC  |
+            | 683cce15397feba125068c9b | WLD_CRC   |
+            | 683cce15397feba125068c9b | USDC_CRC  |
+            | 683cce15397feba125068c9b | USDCB_CRC |
+            | 683cce15397feba125068c9b | TRX_CRC   |
 
         @MXN
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_MXN  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_MXN   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_MXN  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_MXN |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_MXN   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_MXN  |
+            | 683cce15397feba125068c9b | WLD_MXN   |
+            | 683cce15397feba125068c9b | USDC_MXN  |
+            | 683cce15397feba125068c9b | USDCB_MXN |
+            | 683cce15397feba125068c9b | TRX_MXN   |
 
         @PUSD
         Examples:
-            | apiKEY                          | par_price  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_PUSD  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_PUSD   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_PUSD  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_PUSD |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_PUSD   |
+            | companyId                | par_price  |
+            | 683cce15397feba125068c9b | USDT_PUSD  |
+            | 683cce15397feba125068c9b | WLD_PUSD   |
+            | 683cce15397feba125068c9b | USDC_PUSD  |
+            | 683cce15397feba125068c9b | USDCB_PUSD |
+            | 683cce15397feba125068c9b | TRX_PUSD   |
 
         @PHP
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_PHP  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_PHP   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_PHP  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_PHP |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | PHP       |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_PHP  |
+            | 683cce15397feba125068c9b | WLD_PHP   |
+            | 683cce15397feba125068c9b | USDC_PHP  |
+            | 683cce15397feba125068c9b | USDCB_PHP |
+            | 683cce15397feba125068c9b | PHP       |
 
         @PEN
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_PEN  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_PEN   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_PEN  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_PEN |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_PEN   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_PEN  |
+            | 683cce15397feba125068c9b | WLD_PEN   |
+            | 683cce15397feba125068c9b | USDC_PEN  |
+            | 683cce15397feba125068c9b | USDCB_PEN |
+            | 683cce15397feba125068c9b | TRX_PEN   |
 
         @BOB
         Examples:
-            | apiKEY                          | par_price |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDT_BOB  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | WLD_BOB   |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDC_BOB  |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | USDCB_BOB |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | TRX_BOB   |
+            | companyId                | par_price |
+            | 683cce15397feba125068c9b | USDT_BOB  |
+            | 683cce15397feba125068c9b | WLD_BOB   |
+            | 683cce15397feba125068c9b | USDC_BOB  |
+            | 683cce15397feba125068c9b | USDCB_BOB |
+            | 683cce15397feba125068c9b | TRX_BOB   |

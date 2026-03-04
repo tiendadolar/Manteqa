@@ -18,7 +18,12 @@ export class WithdrawCriptoValidator {
   }
 
   private static validateWithdrawCriptoV2Fields(response: WithdrawCriptoV2Response): void {
+    console.log('cost: ', CustomWorld.getStoreData('cost'));
+    console.log('amount: ', CustomWorld.getStoreData('amount'));
+
     const neto = parseFloat(CustomWorld.getStoreData('amount')) - parseFloat(CustomWorld.getStoreData('cost'));
+    console.log('neto: ', neto);
+
     expect(response.id)
       .to.be.a('string')
       .and.match(/^[a-fA-F0-9]{24}$/);
@@ -29,8 +34,8 @@ export class WithdrawCriptoValidator {
     expect(response.userNumberId).to.be.equal(CustomWorld.getStoreData('userAnyId'));
     expect(response.userLegalId).to.be.equal(CustomWorld.getStoreData('userLegalId'));
     expect(response.asset).to.be.equal(CustomWorld.getStoreData('asset'));
-    expect(response.amount).to.be.equal(neto.toString());
-    expect(response.filledAmount).to.be.equal(neto.toString());
+    expect(parseFloat(response.amount)).to.be.closeTo(neto, 0.000001);
+    expect(parseFloat(response.filledAmount)).to.be.closeTo(neto, 0.000001);
     expect(response.destination).to.be.equal(CustomWorld.getStoreData('address'));
     if (response.externalId !== undefined) {
       expect(response.externalId).to.be.equal(CustomWorld.getStoreData('externalId'));

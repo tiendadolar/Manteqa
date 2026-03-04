@@ -2,7 +2,7 @@
 Feature: Synthetic Refunds
 
     Background:
-        Given The API key is available "F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ"
+        Given Get credentials for company "684b9446017d29431c2cac6a"
 
     #Companies partiallyManaged take company debt instead take funds for user balances
     #Companies looselyManaged take funds for user balances instead take company debt. If user has no funds, take from company debt.

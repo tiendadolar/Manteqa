@@ -2,6 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const { setWorldConstructor, World } = require('@cucumber/cucumber');
 const { v4: uuidv4 } = require('uuid');
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export interface UserData {
   userAnyId?: string;

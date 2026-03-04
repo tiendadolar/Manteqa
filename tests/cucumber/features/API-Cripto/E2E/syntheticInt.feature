@@ -2,7 +2,7 @@
 Feature: Test de intragación sintético
 
     Background:
-        Given The API key is available "B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV"
+        Given The API key is available "683cce15397feba125068c9b"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
     Scenario Outline: Validar onboarding exitoso de usuario

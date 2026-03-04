@@ -13,6 +13,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "11.2.0",
     "@types/chai": "5.0.1",
+    "@types/dotenv": "^6.1.1",
     "@types/mocha": "10.0.10",
     "@types/supertest": "6.0.2",
     "artillery": "^2.0.21",
@@ -28,6 +29,7 @@
   "dependencies": {
     "@md/math": "^0.9.633",
     "chai": "4.5.0",
+    "dotenv": "^17.3.1",
     "express": "4.21.2",
     "qrcode": "^1.5.4",
     "speakeasy": "^2.0.0",

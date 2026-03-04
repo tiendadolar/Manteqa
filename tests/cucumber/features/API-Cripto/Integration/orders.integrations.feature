@@ -6,7 +6,7 @@ Feature: Orders Integrations
 
     @HappyPath
     Scenario Outline: Validate success order response sending assetAmount
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -20,13 +20,13 @@ Feature: Orders Integrations
         And Validate order response attributes
 
         Examples:
-            | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 5           | ARS     |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | venta  | USDT  | SELL | 100008501 | 5           | ARS     |
+            | companyId                | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against |
+            | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 5           | ARS     |
+            | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | venta  | USDT  | SELL | 100008501 | 5           | ARS     |
 
     @HappyPath
     Scenario Outline: Validate success order response sending againstAmount
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -40,15 +40,15 @@ Feature: Orders Integrations
         And Validate order response attributes
 
         Examples:
-            | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | againstAmount | against |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 5000          | ARS     |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | venta  | USDT  | SELL | 100008501 | 5000          | ARS     |
+            | companyId                | externalId | sessionId             | trade  | asset | side | userAnyId | againstAmount | against |
+            | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 5000          | ARS     |
+            | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | venta  | USDT  | SELL | 100008501 | 5000          | ARS     |
 
     # ------------------------------- Error Path -------------------------------
 
     @ErrorPath
     Scenario Outline: Validate error order response sending <case>
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -62,19 +62,19 @@ Feature: Orders Integrations
         And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>"
 
         Examples:
-            | case                | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against | priceCode                            | statusCode | internalStatus | message                                                                                                 |
-            | empty api-KEY       |                                 | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     |                                      | 400        | INVALID_PARAMS | Invalid parameters.                                                                                     |
-            | invalid api-KEY     | B8HJ3SS-2JQM6XD-HW4Z877-KZCESA  | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     |                                      | 403        | FORBIDDEN      | You do not have enough permissions to access the resource with the provided authentication credentials. |
-            | invalid userAnyId   | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008502 | 10          | ARS     |                                      | 404        | USER_NF        | User not found                                                                                          |
-            | invalid pixCode     | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | cc22e6af-d3c9-426d-acff-cc1f9e40a137 | 400        | EXPIRED_LOCK   | Expired price code.                                                                                     |
-            | invalid pixCode     | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100014663 | 10          | ARS     |                                      | 400        | NO_FUNDS       | Insufficient funds.                                                                                     |
-            | min assetAmount     | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100014663 | 0           | ARS     |                                      | 400        | MIN_SIZE       | Invalid order size (min).                                                                               |
-            | invalid status user | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008649 | 0           | ARS     |                                      | 409        | USER_STATUS    | User status does not allow this operation.                                                              |
+            | case                | companyId                | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against | priceCode                            | statusCode | internalStatus | message                                                                                                 |
+            | empty api-KEY       |                          | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     |                                      | 400        | INVALID_PARAMS | Invalid parameters.                                                                                     |
+            | invalid api-KEY     | invalidApiKEY            | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     |                                      | 403        | FORBIDDEN      | You do not have enough permissions to access the resource with the provided authentication credentials. |
+            | invalid userAnyId   | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008502 | 10          | ARS     |                                      | 404        | USER_NF        | User not found                                                                                          |
+            | invalid pixCode     | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | cc22e6af-d3c9-426d-acff-cc1f9e40a137 | 400        | EXPIRED_LOCK   | Expired price code.                                                                                     |
+            | invalid pixCode     | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100014663 | 10          | ARS     |                                      | 400        | NO_FUNDS       | Insufficient funds.                                                                                     |
+            | min assetAmount     | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100014663 | 0           | ARS     |                                      | 400        | MIN_SIZE       | Invalid order size (min).                                                                               |
+            | invalid status user | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008649 | 0           | ARS     |                                      | 409        | USER_STATUS    | User status does not allow this operation.                                                              |
 
     @ErrorPath
     Scenario Outline: Validate error order response sending wrong <case>
         Given The urlBase is available "https://api.manteca.dev/crypto"
-        And The API key is available "<apiKEY>"
+        And Get credentials for company "<companyId>"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -88,13 +88,13 @@ Feature: Orders Integrations
         And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>"
 
         Examples:
-            | case               | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message                                                                                                 |
-            | enviroment api-KEY | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 403        | FORBIDDEN      | You do not have enough permissions to access the resource with the provided authentication credentials. |
+            | case               | companyId                | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message                                                                                                 |
+            | enviroment api-KEY | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 403        | FORBIDDEN      | You do not have enough permissions to access the resource with the provided authentication credentials. |
 
     @ErrorPath
     Scenario Outline: Validate error order response sending empty <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And The API key is available "<apiKEY>"
+        And Get credentials for company "<companyId>"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -108,18 +108,18 @@ Feature: Orders Integrations
         And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>" and error: "<errors>"
 
         Examples:
-            | case              | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message      | errors                                                                                                                                                                          |
-            | userAnyId         | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  |           | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | userAnyId is missing.                                                                                                                                                           |
-            | assetAmount       | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 |             | ARS     | 400        | BAD_REQUEST    | Bad request. | One of these fields needs to be provided [assetAmount, againstAmount].                                                                                                          |
-            | asset coin        | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra |       | BUY  | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | asset has wrong value . Possible values are DAI,USDT,BUSD,USDC,USDCB,ETH,BNB,ARB,POL,TRX,UST,AUST,BTC,LUNA,LUNA2,SOL,MATIC,NUARS,WLD,USDL,SDAI,AXS,MANA,ENJ,SAND,...and 8 more. |
-            | against coin      | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          |         | 400        | BAD_REQUEST    | Bad request. | against has wrong value . Possible values are ARS,USD,CLP,COP,BRL,GTQ,CRC,PUSD,MXN,PHP,PEN,PYG,BOB,EUR,USDCCL,DAI,USDT,BUSD,USDC,USDCB.                                         |
-            | side              | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  |      | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | side has wrong value . Possible values are BUY,SELL.                                                                                                                            |
-            | number externalId | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV |            | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | externalId has wrong value 123. Value should be a string different than a 24 character hex string and different than an integer number.                                         |
+            | case              | companyId                | externalId | sessionId             | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message      | errors                                                                                                                                                                          |
+            | userAnyId         | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  |           | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | userAnyId is missing.                                                                                                                                                           |
+            | assetAmount       | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 |             | ARS     | 400        | BAD_REQUEST    | Bad request. | One of these fields needs to be provided [assetAmount, againstAmount].                                                                                                          |
+            | asset coin        | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra |       | BUY  | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | asset has wrong value . Possible values are DAI,USDT,BUSD,USDC,USDCB,ETH,BNB,ARB,POL,TRX,UST,AUST,BTC,LUNA,LUNA2,SOL,MATIC,NUARS,WLD,USDL,SDAI,AXS,MANA,ENJ,SAND,...and 8 more. |
+            | against coin      | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          |         | 400        | BAD_REQUEST    | Bad request. | against has wrong value . Possible values are ARS,USD,CLP,COP,BRL,GTQ,CRC,PUSD,MXN,PHP,PEN,PYG,BOB,EUR,USDCCL,DAI,USDT,BUSD,USDC,USDCB.                                         |
+            | side              | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  |      | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | side has wrong value . Possible values are BUY,SELL.                                                                                                                            |
+            | number externalId | 683cce15397feba125068c9b |            | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 400        | BAD_REQUEST    | Bad request. | externalId has wrong value 123. Value should be a string different than a 24 character hex string and different than an integer number.                                         |
 
     @ErrorPath
     Scenario Outline: Validate error order response sending empty <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And The API key is available "<apiKEY>"
+        And Get credentials for company "<companyId>"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -133,14 +133,14 @@ Feature: Orders Integrations
         And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>" and error: "<errors>"
 
         Examples:
-            | case                  | apiKEY                          | externalId | sessionId             | trade  | asset | side | userAnyId | againstAmount | against | statusCode | internalStatus | message                   | errors                                                                 |
-            | againstAmountAmount   | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 |               | ARS     | 400        | BAD_REQUEST    | Bad request.              | One of these fields needs to be provided [assetAmount, againstAmount]. |
-            | againstAmountAmount 0 | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 0             | ARS     | 400        | MIN_SIZE       | Invalid order size (min). |                                                                        |
+            | case                  | companyId                | externalId | sessionId             | trade  | asset | side | userAnyId | againstAmount | against | statusCode | internalStatus | message                   | errors                                                                 |
+            | againstAmountAmount   | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 |               | ARS     | 400        | BAD_REQUEST    | Bad request.              | One of these fields needs to be provided [assetAmount, againstAmount]. |
+            | againstAmountAmount 0 | 683cce15397feba125068c9b | ext-n      | integrationc-orders-n | compra | USDT  | BUY  | 100008501 | 0             | ARS     | 400        | MIN_SIZE       | Invalid order size (min). |                                                                        |
 
     @ErrorPath
     Scenario Outline: Validate error order response sending both <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And The API key is available "<apiKEY>"
+        And Get credentials for company "<companyId>"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -155,13 +155,13 @@ Feature: Orders Integrations
         And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>" and error: "<errors>"
 
         Examples:
-            | case                | apiKEY                          | externalId | sessionId            | trade  | asset | side | userAnyId | againstAmount | assetAmount | against | statusCode | internalStatus | message      | errors                                                                                           |
-            | againstAmountAmount | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | ext-n      | integration-orders-n | compra | USDT  | BUY  | 100008501 | 10            | 20          | ARS     | 400        | BAD_REQUEST    | Bad request. | Only one field is allowed between [assetAmount, againstAmount]. Please provide only one of them. |
+            | case                | companyId                | externalId | sessionId            | trade  | asset | side | userAnyId | againstAmount | assetAmount | against | statusCode | internalStatus | message      | errors                                                                                           |
+            | againstAmountAmount | 683cce15397feba125068c9b | ext-n      | integration-orders-n | compra | USDT  | BUY  | 100008501 | 10            | 20          | ARS     | 400        | BAD_REQUEST    | Bad request. | Only one field is allowed between [assetAmount, againstAmount]. Please provide only one of them. |
 
     @ErrorPath
     Scenario Outline: Validate error order response sending exist <case>
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And The API key is available "<apiKEY>"
+        And Get credentials for company "<companyId>"
         When Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -175,5 +175,5 @@ Feature: Orders Integrations
         And Validate response attributes with internalStatus: "<internalStatus>" and message: "<message>"
 
         Examples:
-            | case       | apiKEY                          | externalId       | sessionId            | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message                                           |
-            | externalId | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | externalIdRepeat | integration-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 409        | ORDER_EXISTS   | An order with the same external id already exists |
+            | case       | companyId                | externalId       | sessionId            | trade  | asset | side | userAnyId | assetAmount | against | statusCode | internalStatus | message                                           |
+            | externalId | 683cce15397feba125068c9b | externalIdRepeat | integration-orders-n | compra | USDT  | BUY  | 100008501 | 10          | ARS     | 409        | ORDER_EXISTS   | An order with the same external id already exists |

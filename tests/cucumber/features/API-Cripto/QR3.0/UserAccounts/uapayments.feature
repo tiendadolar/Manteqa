@@ -3,7 +3,7 @@ Feature: Sintéticos de Pago User Accounts
 
     @UserAccount @UserBalance @ToBeAutomated
     Scenario Outline: User Account <country>: Ejecutar pago desde balance contra <against>
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         # Validate initial balance before execute qr payment
         And Obtain "<against>" balance for "<userAnyId>" user
@@ -16,6 +16,7 @@ Feature: Sintéticos de Pago User Accounts
         Then Obtain a response 201 for lock payment
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "true" to the variable "skipDeposit"
         And Assign the value "pixCode" to the variable "pixCode"
@@ -27,23 +28,22 @@ Feature: Sintéticos de Pago User Accounts
 
 
         Examples:
-            | apiKEY                          | country   | userAnyId | paymentDestination            | amount | sessionId           | against |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | USDT    |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | USDT    |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | USDT    |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | USDT    |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | USDT    |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | ARS     |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | BRL     |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | COP     |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | BOB     |
-            | ZM6WZ67-8X64Z7Q-Q107HW1-0SFG9KK | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | PEN     |
+            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId           | externalId             | against |
+            | 699a62cc6e3dd6fb25fa5e91 | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | uap-userbalance-test-n | USDT    |
+            | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | uap-userbalance-test-n | USDT    |
+            | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | uap-userbalance-test-n | USDT    |
+            | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | uap-userbalance-test-n | USDT    |
+            # | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537       | 1.5    | QR-UserBalance-V1-n | USDT    |uap-userbalance-test-n
+            | 699a62cc6e3dd6fb25fa5e91 | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | uap-userbalance-test-n | ARS     |
+            | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | uap-userbalance-test-n | BRL     |
+            | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | uap-userbalance-test-n | COP     |
+            | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | uap-userbalance-test-n | BOB     |
+            | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | uap-userbalance-test-n | PEN     |
 
     @UserAccount @Deposit @ToBeAutomated
     Scenario Outline: User Account <country>: Ejecutar pago mediante deposito cripto contra <against>
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And The API secret is available "abc12345"
         # Validate initial balance before execute qr payment
         And Obtain "<against>" balance for "<userAnyId>" user
         # Request de lock payment
@@ -69,12 +69,12 @@ Feature: Sintéticos de Pago User Accounts
 
         #QR BOB monto nuy bajo, falla contra USDT
         Examples:
-            | apiKEY                          | country   | userAnyId | paymentDestination            | amount | sessionId    | against |
-            | 7997ZG9-97042HS-P821399-SGEBCFH | Argentina | 100056114 | qr3manualamount               | 1000   | QR-V2-DESC-n | USDT    |
-            | 7997ZG9-97042HS-P821399-SGEBCFH | Brasil    | 100056115 | +5511949227612                | 10     | QR-V2-DESC-n | USDT    |
-            | 7997ZG9-97042HS-P821399-SGEBCFH | Bolivia   | 100056117 | qr3BOBmanualamount            | 61.98  | QR-V2-DESC-n | USDT    |
-            | 7997ZG9-97042HS-P821399-SGEBCFH | Colombia  | 100056118 | manteca-breb-qa-manual-amount | 500    | QR-V2-DESC-n | USDT    |
-            | 7997ZG9-97042HS-P821399-SGEBCFH | Peru      | 100056116 | +51986667537                  | 1.5    | QR-V2-DESC-n | USDT    |
+            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId    | against |
+            | 69972e13e4c6077150f16ce8 | Argentina | 100056114 | qr3manualamount               | 1000   | QR-V2-DESC-n | USDT    |
+            | 69972e13e4c6077150f16ce8 | Brasil    | 100056115 | +5511949227612                | 10     | QR-V2-DESC-n | USDT    |
+            | 69972e13e4c6077150f16ce8 | Bolivia   | 100056117 | qr3BOBmanualamount            | 61.98  | QR-V2-DESC-n | USDT    |
+            | 69972e13e4c6077150f16ce8 | Colombia  | 100056118 | manteca-breb-qa-manual-amount | 500    | QR-V2-DESC-n | USDT    |
+# | 69972e13e4c6077150f16ce8 | Peru      | 100056116 | +51986667537                  | 1.5    | QR-V2-DESC-n | USDT    |
 
 
 

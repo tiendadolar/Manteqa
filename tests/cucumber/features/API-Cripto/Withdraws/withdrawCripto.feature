@@ -33,7 +33,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> por V1 endpoints
-        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -41,7 +41,7 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
@@ -53,7 +53,7 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -61,22 +61,22 @@ Feature: Retiros Crypto
 
         # Polygon has nonce number faileds so it can generate failed withdraws
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100007647 | WORLDCHAIN | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100007647 | POLYGON    | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            # | USDT | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            # | USDT | 100007647 | ARBITRUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | USDT | 100007647 | ETHEREUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            # | DAI  | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            # | ETH  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            # | ETH  | 100007647 | ETHEREUM   | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            # | BNB  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            # | BTC  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | POL  | 100007647 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | USDC | 100007647 | POLYGON    | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No Funds in hot wallet Argentina
-            # | USDC | 100007647 | BSC        | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | USDC | 100007647 | OPTIMISM   | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-    # | USDC | 100007647 | ARBITRUM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 67e56fea17c2cfbcc92efaab | WLD  | 100007647 | WORLDCHAIN | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 67e56fea17c2cfbcc92efaab | USDT | 100007647 | POLYGON    | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            # |67e56fea17c2cfbcc92efaab| USDT | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            # |67e56fea17c2cfbcc92efaab| USDT | 100007647 | ARBITRUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            | 67e56fea17c2cfbcc92efaab | USDT | 100007647 | ETHEREUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            #|67e56fea17c2cfbcc92efaab | DAI  | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            #| 67e56fea17c2cfbcc92efaab| ETH  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            #|67e56fea17c2cfbcc92efaab | ETH  | 100007647 | ETHEREUM   | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            #|67e56fea17c2cfbcc92efaab | BNB  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            #|67e56fea17c2cfbcc92efaab | BTC  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            | 67e56fea17c2cfbcc92efaab | POL  | 100007647 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            #| 67e56fea17c2cfbcc92efaab| USDC | 100007647 | POLYGON    | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No Funds in hot wallet Argentina
+            # |67e56fea17c2cfbcc92efaab| USDC | 100007647 | BSC        | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | OPTIMISM   | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+    # |67e56fea17c2cfbcc92efaab| USDC | 100007647 | ARBITRUM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
 
     @Regression @Crypto @ARG @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user ARG por V1
@@ -413,7 +413,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @ARGv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -428,7 +428,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -436,27 +436,27 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009873 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009873 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | POLYGON  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 7      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009873 | ARG     | BINANCE  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | POLYGON  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 7      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | BINANCE  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @TRON
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network | amount | address                            |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | TRON    | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
+            | companyId                | type   | asset | userAnyId | country | network | amount | address                            |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | TRON    | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
 
 
     @Smoke @Crypto @BRLv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -471,7 +471,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -479,22 +479,22 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | WLD   | 100011214 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | WLD   | 100011214 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 683cce15397feba125068c9b | crypto | WLD   | 100011214 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | WLD   | 100011214 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDC  | 100011214 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @TRON
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network | amount | address                            |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | crypto | USDT  | 100011214 | BRA     | POLYGON | 3      | TK87U6EA5Fyq1zLZc9Q6NEeasHtTTRMaLu |
+            | companyId                | type   | asset | userAnyId | country | network | amount | address                            |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | POLYGON | 3      | TK87U6EA5Fyq1zLZc9Q6NEeasHtTTRMaLu |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -508,7 +508,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @CPLv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -523,7 +523,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -531,17 +531,17 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009875 | ARG     | WORLDCHAIN | 3      | 0x48ed4fdbc27c52658912e7daad711defd7777908 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009875 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009875 | ARG     | WORLDCHAIN | 3      | 0x48ed4fdbc27c52658912e7daad711defd7777908 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009875 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009875 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009875 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009875 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009875 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009875 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -555,7 +555,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @COPv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -570,7 +570,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -578,17 +578,17 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009876 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009876 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009876 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009876 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009876 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009876 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009876 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009876 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009876 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
     #     | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
@@ -601,7 +601,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @MXNv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -616,7 +616,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -624,17 +624,17 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009877 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009877 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009877 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009877 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009877 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009877 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009877 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009877 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009877 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -648,7 +648,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @PANv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -663,7 +663,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -671,17 +671,17 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009878 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009878 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009878 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009878 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009878 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009878 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009878 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009878 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009878 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -695,7 +695,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @GTQv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -710,7 +710,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -718,17 +718,17 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009879 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009879 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009879 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009879 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009879 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009879 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009879 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009879 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009879 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009879 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009879 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009879 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -742,7 +742,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @PHPv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -757,7 +757,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -765,18 +765,18 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009880 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009880 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009880 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009880 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009880 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009880 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009880 | ARG     | ETHEREUM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009880 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009880 | ARG     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009880 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009880 | ARG     | ETHEREUM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | ARG     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -790,7 +790,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @CRCv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -805,7 +805,7 @@ Feature: Retiros Crypto
         Then Obtain a response 201
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
@@ -813,17 +813,17 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | WLD   | 100009881 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009881 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
-            | apiKEY                          | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009881 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009881 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDT  | 100009881 | ARG     | ETHEREUM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009881 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | crypto | USDC  | 100009881 | ARG     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009881 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009881 | ARG     | ETHEREUM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 | ARG     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -837,7 +837,7 @@ Feature: Retiros Crypto
 
     @Smoke @Crypto @V2Endpoint @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> haciendo lock price por V2
-        Given The API key is available "PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<asset>" to the variable "asset"
@@ -864,16 +864,16 @@ Feature: Retiros Crypto
 
         @WLD
         Examples:
-            | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | crypto | USDT  | 100009873 | ARG     | POLYGON    | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | crypto | USDT  | 100009873 | ARG     | ETHEREUM   | 7      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | crypto | POL   | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 2      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | POLYGON    | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | ETHEREUM   | 7      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | POL   | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 2      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     @Smoke @HotWallet @Automated
     Scenario Outline: Validar que los retiros para un user exchange <exchange> se realicen por la Hot Wallet <wallet>
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And login user admin "<credential>"
         And Get user "exchange" info for "<userId>" id
         And The urlBase is available "https://api-qa.tiendacrypto.com"
@@ -887,17 +887,16 @@ Feature: Retiros Crypto
 
         @NOTRON
         Examples:
-            | apiKEY                          | credential                | userId    | chain | coin | amount | address                                    |
-            # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 4     | USDC | 3      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011192 | 0     | USDT | 5      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
-            | PRAJYCG-71RM2H7-HSQK3BN-0NDD7MY | andresperalta@manteca.dev | 100009873 | 1     | USDT | 3      | 0x6fBf278Bf9cd0cF2897A66fB1FFc8C1320Ec70C1 |
+            | companyId                | credential                | userId    | chain | coin | amount | address                                    |
+            # | 683cce15397feba125068c9b | andresperalta@manteca.dev | 100011192 | 4     | USDC | 3      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
+            | 683cce15397feba125068c9b | andresperalta@manteca.dev | 100011192 | 0     | USDT | 5      | 0xf3CD48DAA6Eac2fb1495fa6832c5A88245Bf3a72 |
+            | 6864976a08430ed74bf61d0c | andresperalta@manteca.dev | 100009873 | 1     | USDT | 3      | 0x6fBf278Bf9cd0cF2897A66fB1FFc8C1320Ec70C1 |
 
 
 
         @TRON
         Examples:
-            | apiKEY                          | credential                | userId    | chain | coin | amount | address                            |
-            # | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | andresperalta@manteca.dev | 100011236 | 9     | TRX  | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv         |
-            | 0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P | andresperalta@manteca.dev | 100011236 | 9     | USDT | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
-            | 0DBQKAS-Q4R456C-HCYXX4W-AYBYC6P | andresperalta@manteca.dev | 100011236 | 9     | TRX  | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
-
+            | companyId                | credential                | userId    | chain | coin | amount | address                            |
+            # | 683cce15397feba125068c9b | andresperalta@manteca.dev | 100011236 | 9     | TRX  | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv         |
+            | 68a50570fbdff4f9d45884b0 | andresperalta@manteca.dev | 100011236 | 9     | USDT | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
+            | 68a50570fbdff4f9d45884b0 | andresperalta@manteca.dev | 100011236 | 9     | TRX  | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |

@@ -5,8 +5,7 @@ Feature: Sintético billing payments
 
     @Descubierto @PA @ARG @Automated
     Scenario Outline: Ejecutar sintético billing en descubierto operando contra <against> desde principal account ARG enviando sender <exchange>
-        Given The API key is available "<apiKEY>"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And Get billId from billing provider
         And Obtain "<against>" debt balance "company"
@@ -28,22 +27,21 @@ Feature: Sintético billing payments
         And Obtain "<against>" debt balance "company"
 
         Examples:
-            | apiKEY                          | externalId     | userAnyId | against | amount | exchange  | legalId       | name                          |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDT    | 2000   | CHILE     | 17710453-1    | ESTEFANIA ESPINOZA            |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDT    | 3000   | MEXICO    | CAOD421009K78 | DIONICIO CARRILLO OLVERA      |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDT    | 80000  | PERU      | 28316206      | CURI QUISPE WILDHER CHRISTIAN |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDC    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name                          |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 2000   | CHILE     | 17710453-1    | ESTEFANIA ESPINOZA            |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 3000   | MEXICO    | CAOD421009K78 | DIONICIO CARRILLO OLVERA      |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 80000  | PERU      | 28316206      | CURI QUISPE WILDHER CHRISTIAN |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDC    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
 
         @Smoke
         Examples:
-            | apiKEY                          | externalId     | userAnyId | against | amount | exchange  | legalId       | name            |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS |
 
     @Balance @PA @ARG @Automated
     Scenario Outline: Ejecutar sintético billing sobre user balance operando contra <against> desde principal account ARG enviando sender <exchange>
-        Given The API key is available "<apiKEY>"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And Get billId from billing provider
         And Get "<against>" balance for "<userAnyId>"
@@ -68,15 +66,14 @@ Feature: Sintético billing payments
 
         @Smoke
         Examples:
-            | apiKEY                          | externalId     | userAnyId | against | amount | exchange  | legalId       | name            |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036128 | ARS     | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | ARS     | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS |
 
     # ------ NO DESCUBIERTOS -------
 
     @NoDescubierto @UA @Crypto @ARG @Automated
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
-        Given The API key is available "<apiKEY>"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And Get billId from billing provider
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
@@ -97,14 +94,13 @@ Feature: Sintético billing payments
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
 
         Examples:
-            | apiKEY                          | externalId     | userAnyId | against | amount |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036761 | USDT    | 1000   |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036761 | USDC    | 1000   |
+            | companyId                | externalId     | userAnyId | against | amount |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDT    | 1000   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDC    | 1000   |
 
     @NoDescubierto @UA @Fiat @ARG @Automated
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
-        Given The API key is available "<apiKEY>"
-        And The API secret is available "1RpvdT7Vc7ukKeGKdU"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And Get billId from billing provider
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
@@ -125,6 +121,6 @@ Feature: Sintético billing payments
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
 
         Examples:
-            | apiKEY                          | externalId     | userAnyId | against | amount |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036761 | ARS     | 1000   |
-            | BG16CDQ-H9B4WK5-PQQN0W1-8HCD1QK | billing-test-n | 100036761 | ARS     | 1000   |
+            | companyId                | externalId     | userAnyId | against | amount |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   |

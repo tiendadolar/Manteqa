@@ -6,14 +6,14 @@ Feature: Lock Price Integrations
 
     @HappyPath @Smoke @Automated
     Scenario Outline: Validate success deposit info cripto query response for <coin>
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         When Assign the value "<coin>" to the variable "coin"
         And Execute the GET method on the endpoint "/v2/info/deposit-info/<coin>?userAnyId=<userAnyId>"
         Then Obtain a response 200
         And Validate deposit info cripto response attributes
 
         Examples:
-            | apiKEY                          | coin | userAnyId |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | WLD  | 100038447 |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | USDT | 100038447 |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | USDC | 100038447 |
+            | companyId                | coin | userAnyId |
+            | 6127ac5e8e7d68001294d6bb | WLD  | 100038447 |
+            | 6127ac5e8e7d68001294d6bb | USDT | 100038447 |
+            | 6127ac5e8e7d68001294d6bb | USDC | 100038447 |

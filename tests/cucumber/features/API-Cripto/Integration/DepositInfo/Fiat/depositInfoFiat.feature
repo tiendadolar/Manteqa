@@ -6,19 +6,19 @@ Feature: Lock Price Integrations
 
     @HappyPath @Smoke @Automated
     Scenario Outline: Validate success deposit info fiat query response for <coin>
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         When Assign the value "<coin>" to the variable "coin"
         And Execute the GET method on the endpoint "/v2/info/deposit-info/<coin>"
         Then Obtain a response 200
         And Validate deposit info fiat response attributes
 
         Examples:
-            | apiKEY                          | coin |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | ARS  |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | CLP  |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | BRL  |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | BOB  |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | GTQ  |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | MXN  |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | USD  |
-            | C10XB2Z-AG243CS-G42KB2M-4085WTF | COP  |
+            | companyId                | coin |
+            | 6127ac5e8e7d68001294d6bb | ARS  |
+            | 6127ac5e8e7d68001294d6bb | CLP  |
+            | 6127ac5e8e7d68001294d6bb | BRL  |
+            | 6127ac5e8e7d68001294d6bb | BOB  |
+            | 6127ac5e8e7d68001294d6bb | GTQ  |
+            | 6127ac5e8e7d68001294d6bb | MXN  |
+            | 6127ac5e8e7d68001294d6bb | USD  |
+            | 6127ac5e8e7d68001294d6bb | COP  |

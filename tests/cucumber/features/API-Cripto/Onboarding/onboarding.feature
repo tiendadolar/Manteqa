@@ -2,7 +2,7 @@
 Feature: Onboarding User - V1
 
   Background:
-    Given The API key is available "95ZZHZT-CRH4PM9-K1NQA51-DXYVTX6"
+    Given Get credentials for company "684b2f25dcca16d5557fd8b2"
     And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
   @Smoke @Automated

@@ -192,7 +192,7 @@ Feature: Descripcion del dominio
 
     @Smoke @Automated
     Scenario Outline: Descripcion del caso <variable>
-        Given The API key is available "<apiKEY>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<campo1>" to the variable "campo1"
         And Assign the value "<campo2>" to the variable "campo2"
@@ -200,8 +200,8 @@ Feature: Descripcion del dominio
         Then Obtain a response 201
 
         Examples:
-            | apiKEY                          | campo1 | campo2 |
-            | B8HJ3SS-2JQM6XD-HW4Z877-KZCESAV | valor1 | valor2 |
+            | companyId                | campo1 | campo2 |
+            | 683cce15397feba125068c9b | valor1 | valor2 |
 ```
 
 **Reglas:**

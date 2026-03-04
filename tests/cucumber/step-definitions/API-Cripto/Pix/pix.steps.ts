@@ -1,6 +1,7 @@
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
+import { getCredentials } from '../../../../support/config/credentials.config';
 import { CustomWorld, UserData } from '../../../../support/world';
 import {
   bankingOnboardingApiCambio,
@@ -27,6 +28,11 @@ const chainArray = ['WORLDCHAIN', 'BSC', 'ETHEREUM', 'POLYGON', 'BINANCE', 'BASE
 Given('The API key is available {string}', function (this: CustomWorld, APIkey: string) {
   // this.apiKey = "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB";
   this.apiKey = APIkey;
+});
+
+Given('Get credentials for company {string}', function (this: CustomWorld, companyId: string) {
+  const credentials = getCredentials(companyId);
+  this.apiKey = credentials;
 });
 
 Given('The API secret is available {string}', function (this: CustomWorld, APIsecret: string) {

@@ -167,7 +167,7 @@ Feature: Sintetico Pix
 
 
 # Examples:
-#   | APIkey                          | apiSecret          | Company            | Operatoria     | User1     | Descripcion |
+#   | companyId                | apiSecret          | Company            | Operatoria     | User1     | Descripcion |
 #   | GHJXE4N-J4C432Z-KCNNAN3-PYC7X1N | BuFJx56wuzdQArJktt | TestAutomation     | No descubierto | 100007673 | Para QR     |
 #   | GHJXE4N-J4C432Z-KCNNAN3-PYC7X1N | BuFJx56wuzdQArJktt | TestAutomation     | No descubierto | 100007670 | Comodín     |
 #   | JYM3AK8-XXGME8N-JZDQCP7-Q16T2NX | 15GevXUvmSAn6cyKqx | TestAutomationDesc | Descubierto    |           |             |
