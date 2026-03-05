@@ -13,6 +13,7 @@ export const getCredentials = (companyId: string) => {
       logger.warn(`Credentials for company: ${companyId} not configured in CREDENTIALS_MAP`);
       return '';
     }
+    return credentials;
   }
 
   // let secret = `CREDS_${normalized}`;
