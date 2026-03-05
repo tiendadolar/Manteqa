@@ -40,7 +40,7 @@ Feature: Sintéticos de Pago User Accounts
             | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | uap-userbalance-test-n | BRL     |
             | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | uap-userbalance-test-n | COP     |
             | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | uap-userbalance-test-n | BOB     |
-            | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | uap-userbalance-test-n | PEN     |
+    # | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | uap-userbalance-test-n | PEN     |
 
     #***************** Funds: Deposito Cripto ********************
 
