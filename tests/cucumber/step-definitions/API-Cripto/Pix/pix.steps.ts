@@ -26,7 +26,6 @@ import { EndpointHandlerFactory } from '../../../../support/factory/endpointHand
 const chainArray = ['WORLDCHAIN', 'BSC', 'ETHEREUM', 'POLYGON', 'BINANCE', 'BASE', 'ARBITRUM', 'OPTIMISM'];
 
 Given('The API key is available {string}', function (this: CustomWorld, APIkey: string) {
-  // this.apiKey = "BM2YZT6-MR5M5YY-QYZ5CY4-E8E9HYB";
   this.apiKey = APIkey;
 });
 

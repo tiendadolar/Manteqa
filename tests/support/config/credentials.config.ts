@@ -1,9 +1,7 @@
 import logger from '../utils/logger';
 
 export const getCredentials = (companyId: string) => {
-  let secret = companyId;
-  logger.warn(secret);
-
+  const secret = companyId;
   const creds = process.env.CREDENTIALS_MAP;
 
   if (creds) {
@@ -16,9 +14,8 @@ export const getCredentials = (companyId: string) => {
     return credentials;
   }
 
-  // let secret = `CREDS_${normalized}`;
   let credentials = process.env[secret];
-  logger.warn(credentials);
+
   if (!credentials) {
     logger.warn(`Credentials for company: ${companyId} not configured`);
     credentials = '';

@@ -1242,8 +1242,8 @@ Feature: Sintético QR 3.0
             | 6913d6f4db01142cde3fb7e0 | QR_PERU       | PERU     | 46326357 | DARIO AUGUSTO | DA SILVA | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU       |
             | 6913d6f4db01142cde3fb7e0 | QR_PERU_PHONE | PERU     | 46326357 | DARIO AUGUSTO | DA SILVA | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   | 100014302 | +51986667537                                                                                                                                                                                                                                                                                                           | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU       |
 
-    @Smoke @Desc @Sender @Peru @Foreigns @Automated
-    Scenario Outline: Ejecutar sintético de pago <pay> contra <against> enviando sender completo info para FOREINGS desde Principal Account <accountExc> por PLUS_PAGOS
+    @Smoke @Desc @Sender @Peru @Foreigns @Deprecated
+    Scenario Outline: Principal Account <country>: Ejecutar pago enviando sender extranjero descubierto
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         # Get company balance before execute qr payment
@@ -1278,12 +1278,12 @@ Feature: Sintético QR 3.0
         And Obtain a company debt "<against>" balance
 
         Examples:
-            | companyId                | pay     | exchange  | legalId       | name         | surname | work     | email                | phoneNumber    | gender | birthDate  | street               | userAnyId | paymentDestination                                                                                                                                                                                                                                                                                                     | against | amount | sessionId                      | accountExc |
-            | 6913d6f4db01142cde3fb7e0 | QR_PERU | ARGENTINA | 27-32244493-7 | PEDRO        | PEREZ   | EMPLEADO | peperez@gmail.com    | +5491153605263 | MALE   | 1960-05-06 | Av. Corrientes       | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | 6913d6f4db01142cde3fb7e0 | QR_PERU | BRAZIL    | 22373020149   | YAMIL        | SOUZA   | EMPLEADO | jsouza@gmail.com     | +5291153605263 | MALE   | 1960-05-06 | Av. Paulista         | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | 6913d6f4db01142cde3fb7e0 | QR_PERU | ANDORRA   | 22373020149   | SANTIAGO     | MARCO   | EMPLEADO | smarco@gmail.com     | +5291153605263 | MALE   | 1960-05-06 | Av. Andorra          | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | 6913d6f4db01142cde3fb7e0 | QR_PERU | MEXICO    | ROCS720312186 | JOSE SALOMON | ROMERO  | EMPLEADO | joseromero@gmail.com | +5291153605263 | MALE   | 1960-05-06 | Av. Distrito Federal | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU       |
-            | 6913d6f4db01142cde3fb7e0 | QR_PERU | CHILE     | 17720072-7    | MACARENA     | VAZQUEZ | EMPLEADO | vama@gmail.com       | +5291153605263 | MALE   | 1960-05-06 | Av. Santiago         | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU       |
+            | companyId                | pay     | exchange  | legalId       | name         | surname | work     | email                | phoneNumber    | gender | birthDate  | street               | userAnyId | paymentDestination                                                                                                                                                                                                                                                                                                     | against | amount | sessionId                      | country |
+            | 6913d6f4db01142cde3fb7e0 | QR_PERU | ARGENTINA | 27-32244493-7 | PEDRO        | PEREZ   | EMPLEADO | peperez@gmail.com    | +5491153605263 | MALE   | 1960-05-06 | Av. Corrientes       | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU    |
+            | 6913d6f4db01142cde3fb7e0 | QR_PERU | BRAZIL    | 22373020149   | YAMIL        | SOUZA   | EMPLEADO | jsouza@gmail.com     | +5291153605263 | MALE   | 1960-05-06 | Av. Paulista         | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU    |
+            | 6913d6f4db01142cde3fb7e0 | QR_PERU | ANDORRA   | 22373020149   | SANTIAGO     | MARCO   | EMPLEADO | smarco@gmail.com     | +5291153605263 | MALE   | 1960-05-06 | Av. Andorra          | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU    |
+            | 6913d6f4db01142cde3fb7e0 | QR_PERU | MEXICO    | ROCS720312186 | JOSE SALOMON | ROMERO  | EMPLEADO | joseromero@gmail.com | +5291153605263 | MALE   | 1960-05-06 | Av. Distrito Federal | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU    |
+            | 6913d6f4db01142cde3fb7e0 | QR_PERU | CHILE     | 17720072-7    | MACARENA     | VAZQUEZ | EMPLEADO | vama@gmail.com       | +5291153605263 | MALE   | 1960-05-06 | Av. Santiago         | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n | PERU    |
 
 
     # Sender ----------------------------------------------------------------------------------------
@@ -1370,39 +1370,6 @@ Feature: Sintético QR 3.0
     #*************************************
     # !------ ROUTING -------
 
-    @Smoke @Routing @Desc @ToBeAutomated
-    Scenario Outline: Ejecutar sintético de pago <payment> contra <against> desde la principal account balance
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        # Get company balance before execute qr payment
-        And Obtain "<against>" balance for "<principalAccount>" user
-        # Request de lock payment
-        When Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
-        And Assign the value "<against>" to the variable "against"
-        And Assign the value "<amount>" to the variable "amount"
-        And Execute the POST method on the endpoint "/v2/payment-locks"
-        Then Obtain a response 201 for lock payment
-        # Execute synthetic payment
-        When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<principalAccount>" to the variable "userAnyId"
-        And Assign the value "true" to the variable "skipDeposit"
-        And Assign the value "pixCode" to the variable "qrCode"
-        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
-        Then Obtain a response 201
-        # Get status synthetic payment
-        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
-        # Get company balance after execute qr payment
-        And Obtain "<against>" balance for "<principalAccount>" user
-
-        Examples:
-            | apiKEY | payment | userAnyId | principalAccount | paymentDestination | against | amount | sessionId |
-    # # | 6981ff2f4af353838a534bc4 | QR BOB    | 100038492 | 100038490        | qr3BOBmanualamount                                                                                                                                                          | BOB     | 10     | useraccount-payment-n |
-    # | FF4CEBS-1404S0J-M3YQ6Q0-8ZR4GTT | QR BRAZIL | 100038086 | 100038082        | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | BRL     | 10     | useraccount-payment-n |
-    # # | FF4CEBS-1404S0J-M3YQ6Q0-8ZR4GTT | QR PERU   | 100038086 | 100038083        | 000201010211263700028001039030220250424092119905530665204482953036045802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=6304FA5Bmanualamount | PEN     | 10     | useraccount-payment-n |
-    # | 6981ff2f4af353838a534bc4 | QR ARG    | 100038493 | 100038486        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401manualamount                    | ARS     | 1000   | useraccount-payment-n |
-    # | 6981ff2f4af353838a534bc4 | QR BREB   | 100038493 | 100038489        | manteca-breb-qa-manual-amount                                                                                                                                               | COP     | 1000   | useraccount-payment-n |
-
     @Smoke @Routing @Desc @Automated
     Scenario Outline: Ejecutar sintético de pago <payment> contra <against> tomando deuda
         Given Get credentials for company "<companyId>"
@@ -1436,83 +1403,5 @@ Feature: Sintético QR 3.0
             | 6981ff2f4af353838a534bc4 | QR BREB   | 100038493 | 100038489        | manteca-breb-qa-manual-amount                                                                                                                                                                                                                                                                                          | USDT    | 1000   | useraccount-payment-n |
 
 
-    @Refunds @RefundsDs @Automated
-    Scenario Outline: Validar refund para usuario operando en descubierto
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-        When Obtain a company debt "<against>" balance
-
-        And Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
-        And Assign the value "<against>" to the variable "against"
-        And Assign the value "<amount>" to the variable "amount"
-        And Assign the value "<sessionId>" to the variable "sessionId"
-        Then Execute the refund synthetic "descubierto"
-        And Obtain a response 200 y status "CANCELLED"
-
-        And Obtain a company debt "<against>" balance
-
-        Examples:
-            | companyId                | userAnyId | paymentDestination      | against | amount | sessionId     |
-            | 684b9446017d29431c2cac6a | 100009408 | failuremartin@gmail.com | USDT    | 1000   | refund-DESC-n |
-    # Cuando marto incluya +5511949227612 como siempre falla para reverse, borrar qr3manualamount
-    # Falta caso en against ARS en el que se toma deuda en ARS pero no hay order reversal
-
-    @Refunds @RefundsNDt @Automated
-    Scenario Outline: Validar refund para usuario operando en no descubierto contra <against>
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain a user in "<against>" balance
-
-        When Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
-        And Assign the value "<against>" to the variable "against"
-        And Assign the value "<amount>" to the variable "amount"
-        And Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<apiKeyDeposit>" to the variable "apiKeyDeposit"
-        Then Execute the refund synthetic "no descubierto"
-        And Obtain a response 200 y status "CANCELLED"
-
-        When Execute the GET method on the endpoint "/v2/user-balances/<userAnyId>"
-        Then Obtain a response 200
-        And Obtain refund on user in "<against>" balance
-
-        Examples:
-            | companyId                | userAnyId | paymentDestination      | against | amount | sessionId        | apiKeyDeposit            |
-            | 684b2f25dcca16d5557fd8b2 | 100009417 | failuremartin@gmail.com | ARS     | 1000   | refund-NO-DESC-n | 6127ac5e8e7d68001294d6bb |
-
-    @Refunds @manualRefund @Automated
-    Scenario Outline: Validar refund manual desde admin para usuario operando en no descubierto contra <against>
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And login user admin "<credential>"
-        # Validate initial balance before execute qr payment
-        And Obtain "<against>" balance for "<userAnyId>" user
-        # Request de lock payment
-        When Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "<qrCode>" to the variable "qrCode"
-        And Assign the value "<amount>" to the variable "amount"
-        And Assign the value "<against>" to the variable "against"
-        And Execute the POST method on the endpoint "/v2/payment-locks"
-        Then Obtain a response 201 for lock payment
-        # Execute synthetic payment
-        When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<userAnyId>" to the variable "userAnyId"
-        And Assign the value "pixCode" to the variable "pixCode"
-        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
-        Then Obtain a response 201
-        # And The attributes of the QR USDT synthetic are validated
-        # Get status synthetic payment
-        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
-        # Validate balance after execute qr payment
-        And Obtain "<against>" balance for "<userAnyId>" user
-        And Execute admin refund
-
-        Examples:
-            | companyId                | credential                | userAnyId | qrCode          | against | amount | sessionId        | apiKeyDeposit            |
-            | 684b2f25dcca16d5557fd8b2 | andresperalta@manteca.dev | 100009417 | qr3manualamount | ARS     | 1000   | refund-NO-DESC-n | 6127ac5e8e7d68001294d6bb |
 

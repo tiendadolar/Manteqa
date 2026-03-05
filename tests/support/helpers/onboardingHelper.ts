@@ -8,7 +8,6 @@ import { CustomWorld } from '../world';
 import { apiRequest, validateRes } from './requestHelper';
 
 const getUserNumberId = async (urlBase: string, apiKey: string, legalId: string) => {
-  logger.warn(apiKey);
   const endpoint: string = `/v2/users?legalId=${legalId}`;
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
   const numberId: string = response.body.data[0]?.numberId;

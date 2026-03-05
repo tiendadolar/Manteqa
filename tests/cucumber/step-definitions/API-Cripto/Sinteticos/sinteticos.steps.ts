@@ -1,6 +1,7 @@
 const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
+import { getCredentials } from '../../../../support/config/credentials.config';
 import { timeoutsBySynthetic } from '../../../../support/constants/constants.timeouts';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import { getSyntheticStatus, lockPaymentHelper, syntheticPaymentHelper, validateSyntheticRefundStage, validateSyntheticStatus } from '../../../../support/helpers/syntheticHelper';
@@ -132,7 +133,7 @@ Then('Validate sender info', { timeout: 125000 }, async function (this: CustomWo
 
 Then('Execute overdrawn {string} synthetic lock against {string} for user {string}', { timeout: 125000 }, async function (this: CustomWorld, type: string, against: string, userAnyId: string) {
   const urlBase: string = 'https://sandbox.manteca.dev/crypto';
-  const apiKEY: string = 'F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ';
+  const apiKEY: string = getCredentials('684b9446017d29431c2cac6a');
   const apiSecret: string = '1RpvdT7Vc7ukKeGKdU';
   const endpointLock: string = '/v2/payment-locks';
   const par: string = payType[against];
@@ -144,7 +145,7 @@ Then('Execute overdrawn synthetic payment', { timeout: 125000 }, async function 
   const userAnyId: string = this.response.body.userNumberId;
   const qrCode = this.response.body.code;
   const urlBase: string = 'https://sandbox.manteca.dev/crypto';
-  const apiKEY: string = 'F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ';
+  const apiKEY: string = getCredentials('684b9446017d29431c2cac6a');
   const endpointPayment: string = '/v2/synthetics/qr-payment';
 
   this.response = await syntheticPaymentHelper(urlBase, apiKEY, endpointPayment, qrCode, userAnyId);

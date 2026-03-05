@@ -2,12 +2,13 @@ import { execSync } from 'child_process';
 import fs from 'fs';
 import { apiRequest } from '../../support/helpers/requestHelper';
 import path from 'path';
+import { getCredentials } from '../../support/config/credentials.config';
 
 const lockPath = path.resolve(__dirname, '../payloads/lock.json');
 
 const urlBase = 'https://sandbox.manteca.dev/crypto';
 const endpoint = '/v2/payment-locks';
-const apiKey = 'F4EZSEW-AMC4Z24-G5CNFS4-880BSHJ';
+const apiKey = getCredentials('684b9446017d29431c2cac6a');
 
 async function getLock() {
   const payload = {
