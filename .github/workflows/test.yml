@@ -213,6 +213,8 @@ jobs:
 
       - name: Run Cucumber tests - ${{ steps.set-suite.outputs.test_suite }}
         continue-on-error: true
+        env:
+          CREDENTIALS_MAP: ${{ secrets.CREDENTIALS_MAP }}
         run: |
           TAGS="${{ steps.map-tags.outputs.tags }}"
 
