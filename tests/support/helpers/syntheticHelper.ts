@@ -101,8 +101,6 @@ export const getSyntheticStatus = async (urlBase: string, endpoint: string, apiK
   logger.info(httpStatus);
   logger.info(JSON.stringify(body, null, 2));
   return response;
-
-  validateSyntheticStatus(body, httpStatus, statusCode, statusName);
 };
 
 export const adminRefundHelper = async (urlBase: string, endpoint: string, token: string, refundReason: string, amount: string): Promise<any> => {

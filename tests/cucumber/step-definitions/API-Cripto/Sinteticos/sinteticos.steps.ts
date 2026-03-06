@@ -120,8 +120,16 @@ Then('Obtain a response {int} and status {string} for {string} synthetic', { tim
 
   await delay(ms);
   const response = await getSyntheticStatus(urlBase, endpoint, apiKEY, statusCode, statusName);
+  const body = response.body;
+  const status = response.status;
   validateRes(response, 200);
-  validateSyntheticStatus(response.body, response.status, statusCode, statusName);
+
+  try {
+    validateSyntheticStatus(body, status, statusCode, statusName);
+  } catch (error: any) {
+    error.message = `${error.message}\n\n📋 Response body:\n${JSON.stringify(body, null, 2)}`;
+    throw error;
+  }
 });
 
 Then('Validate sender info', { timeout: 125000 }, async function (this: CustomWorld) {

@@ -375,8 +375,8 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | companyId                       | credential                | externalId         | email            | legalId     | exchange  | name    | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
-            | DG0DKDD-VRXMF9F-G84XH2H-03PXFMD | andresperalta@manteca.dev | user-account-arg-1 | abboyg@gmail.com | 20177983447 | ARGENTINA | GERARDO | ABBOY   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Argentina   | SAMUEL PIRES DE MELO |             |
+            | companyId                | credential                | externalId              | email               | legalId     | exchange  | name           | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
+            | 69aa390533ca661b9c97bf94 | andresperalta@manteca.dev | user-account-arg-1-plus | abrevayat@gmail.com | 27242354686 | ARGENTINA | XIMENA CELESTE | ABREVAYA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Argentina   | SAMUEL PIRES DE MELO |             |
 # | DG0DKDD-VRXMF9F-G84XH2H-03PXFMD | andresperalta@manteca.dev | user-account-bra-1 | alti2reis@gmail.com | 64406822100 | BRAZIL   | ALTINA | DOS REIS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Brasil      | SAMUEL PIRES DE MELO |             |
 # | 69972e13e4c6077150f16ce8 | andresperalta@manteca.dev | user-account-per-1 | esipdiana@gmail.com    | 77667305    | PERU      | DIANA    | ESPINOZA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Peru        | SAMUEL PIRES DE MELO |             |
 # | 69972e13e4c6077150f16ce8 | andresperalta@manteca.dev | user-account-bob-1 | rudisal@gmail.com      | 4624367     | BOLIVIA   | ALBERTO  | RUDIS    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Bolivia     | SAMUEL PIRES DE MELO |             |

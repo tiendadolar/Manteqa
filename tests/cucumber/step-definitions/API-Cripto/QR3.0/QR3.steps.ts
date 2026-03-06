@@ -69,13 +69,18 @@ Then('Obtain a response {int} y status {string} for payment synthetics', { timeo
 
 Then('Obtain a response {int} for lock payment', { timeout: 500 * 1000 }, async function (this: CustomWorld, statusCode: number) {
   const response = this.response;
-  if (this.response.body.code) CustomWorld.setStoreData('pixCode', this.response.body.code);
+  const body = response.body;
+  try {
+    if (this.response.body.code) CustomWorld.setStoreData('pixCode', this.response.body.code);
 
-  expect(response.status).to.equal(statusCode);
-  expect(response.body).to.not.have.property('payload');
+    expect(response.status).to.equal(statusCode);
+    expect(response.body).to.not.have.property('payload');
 
-  CustomWorld.setStoreData('paymentAgainstAmount', response.body.paymentAgainstAmount);
-  logger.debug(`Response Status: ${response.status}`);
+    CustomWorld.setStoreData('paymentAgainstAmount', response.body.paymentAgainstAmount);
+    logger.debug(`Response Status: ${response.status}`);
+  } catch (error: any) {
+    throw new Error(`Response body:\n${JSON.stringify(body, null, 2)}`);
+  }
 });
 
 Then('Execute admin refund', { timeout: 500 * 1000 }, async function (this: CustomWorld) {

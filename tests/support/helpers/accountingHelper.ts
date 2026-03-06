@@ -32,7 +32,13 @@ const compareDebtBalance = (thereIsDepositStage: Boolean, response: any, coin: s
 
   againstAmountOperated !== undefined ? (instantDebt = parseFloat(againstAmountOperated)) : (instantDebt = parseFloat(paymentAgainstAmount));
 
+  // If instantDebt is Nan, we have an amount order V1 / V2
+  if (Number.isNaN(instantDebt)) {
+    instantDebt = CustomWorld.getStoreData('orderAmount');
+  }
+
   aquiredDebt = parseFloat(companyAccountingInfo) + instantDebt;
+
   logger.info(`Expected Debt Balance: ${aquiredDebt}, Payment Amount: ${instantDebt}, Actual Debt Balance: ${response[coin]}`);
   expect(parseFloat(response[coin])).to.be.closeTo(aquiredDebt, 0.02);
 
@@ -49,9 +55,9 @@ export const getCompanyDebtBalance = async (
   coin: string
 ): Promise<any> => {
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
-  // const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKey);
+  const initialDebtFlag = CustomWorld.getStoreData('companyAccountingInfo');
 
-  if (againstAmountOperated !== undefined || paymentAgainstAmount !== undefined) {
+  if (againstAmountOperated !== undefined || paymentAgainstAmount !== undefined || initialDebtFlag !== undefined) {
     await compareDebtBalance(thereIsDepositStage, response.body, coin, againstAmountOperated, paymentAgainstAmount);
     return response;
   } else {

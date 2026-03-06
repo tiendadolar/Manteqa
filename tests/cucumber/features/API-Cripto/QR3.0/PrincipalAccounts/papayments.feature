@@ -168,7 +168,7 @@ Feature: Sintéticos de Pago Principal Accounts
 
     #***************** Funds: Descubierto ********************
 
-    @Smoke @PpalAccount @Smoke @Desc @Sender @Peru @Foreigns @Automated
+    @Smoke @PpalAccount @Desc @Sender @Peru @Foreigns @Automated
     Scenario Outline: Principal Account Peru: Ejecutar pago enviando sender extranjero descubierto
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -211,7 +211,7 @@ Feature: Sintéticos de Pago Principal Accounts
             | 6913d6f4db01142cde3fb7e0 | QR_PERU | MEXICO    | ROCS720312186 | JOSE SALOMON | ROMERO  | EMPLEADO | joseromero@gmail.com | +5291153605263 | MALE   | 1960-05-06 | Av. Distrito Federal | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443manualamount | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n |
             | 6913d6f4db01142cde3fb7e0 | QR_PERU | CHILE     | 17720072-7    | MACARENA     | VAZQUEZ | EMPLEADO | vama@gmail.com       | +5291153605263 | MALE   | 1960-05-06 | Av. Santiago         | 100014302 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443manualamount | USDT    | 1.5    | PixKey-Sender-manual-V2-DESC-n |
 
-    @Smoke @PpalAccount @Automated
+    @Smoke @PpalAccount @Overdraw @Automated
     Scenario Outline: Principal Account <country>: Ejecutar pago mediante descubierto <against>
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

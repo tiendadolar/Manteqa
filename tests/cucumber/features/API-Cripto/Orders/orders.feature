@@ -242,12 +242,83 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC_MXN  | SELL      | 100009051 | 5      | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC_PHP  | SELL      | 100009089 | 5      | PHP     |
 
+    @Smoke @V1 @Regression @Plus
+    Scenario Outline: PLUS: Ejecutar ordenes de <trade> de <coin> contra <against> V1
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Obtain a company debt "<against>" balance
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<operation>" to the variable "operation"
+        And Assign the value "<userId>" to the variable "userId"
+        And Execute the POST method on the endpoint "/v1/order/lock"
+        Then Obtain a response 200
+        And The price lock is created
 
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<operation>" to the variable "operation"
+        And Assign the value "pixCode" to the variable "code"
+        And Execute the POST method on the endpoint "/v1/order"
+        Then Obtain a response 200
+        And The purchase order is created
 
+        When Wait for the processing of the "orden" por 1 seconds
+        And Execute the GET method on the endpoint "/v1/order/{orderNumberId}"
+        Then Obtain a response 200 y status "COMPLETED"
+        And Obtain a company debt "<against>" balance
+
+        @Buy @Automated
+        Examples:
+            | companyId                | sessionId   | trade  | coin      | operation | userId    | amount | against |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDT_ARS  | BUY       | 100058862 | 5      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDC_ARS  | BUY       | 100058862 | 5      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDCB_ARS | BUY       | 100058862 | 5      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | WLD_ARS   | BUY       | 100058862 | 5      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | DAI_ARS   | BUY       | 100058862 | 5      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | ETH_ARS   | BUY       | 100058862 | 0.01   | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BTC_ARS   | BUY       | 100058862 | 0.01   | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BNB_ARS   | BUY       | 100058862 | 0.1    | ARS     |
+
+    @Smoke @V1 @Regression @Plus
+    Scenario Outline: PLUS: Ejecutar ordenes de <trade> de <coin> contra <against> V1
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<operation>" to the variable "operation"
+        And Assign the value "<userId>" to the variable "userId"
+        And Execute the POST method on the endpoint "/v1/order/lock"
+        Then Obtain a response 200
+        And The price lock is created
+
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<operation>" to the variable "operation"
+        And Assign the value "pixCode" to the variable "code"
+        And Execute the POST method on the endpoint "/v1/order"
+        Then Obtain a response 200
+        And The purchase order is created
+
+        When Wait for the processing of the "orden" por 1 seconds
+        And Execute the GET method on the endpoint "/v1/order/{orderNumberId}"
+        Then Obtain a response 200 y status "COMPLETED"
+
+        @Sell @Automated
+        Examples:
+            | companyId                | sessionId   | trade | coin      | operation | userId    | amount | against |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDT_ARS  | SELL      | 100058862 | 4      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDC_ARS  | SELL      | 100058862 | 4      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDCB_ARS | SELL      | 100058862 | 4      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | WLD_ARS   | SELL      | 100058862 | 4      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | DAI_ARS   | SELL      | 100058862 | 4      | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | ETH_ARS   | SELL      | 100058862 | 0.01   | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | BTC_ARS   | SELL      | 100058862 | 0.01   | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | BNB_ARS   | SELL      | 100058862 | 0.1    | ARS     |
 
     #*---------------- V2 -----------------*
-
-
 
     @Smoke @V2 @Regression
     Scenario Outline: Ejecutar ordenes de <trade> de <coin> contra <against> V2

@@ -53,6 +53,8 @@ Then('The purchase order is created', function (this: CustomWorld) {
   expect(response).to.have.property('fee').that.is.a('number');
   expect(response).to.have.property('sessionId').that.is.a('string');
   expect(response).to.have.property('numberId').that.is.a('string');
+  // Store total amount operated in order
+  CustomWorld.setStoreData('orderAmount', response.amount * response.coinValue);
 });
 
 Then('The withdraw is processed', function (this: CustomWorld) {
