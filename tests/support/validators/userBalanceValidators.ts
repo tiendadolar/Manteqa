@@ -77,10 +77,13 @@ export const compareBalanceFlowValidator = (inicialAmount: string, finalAmount: 
   }
 
   if (response !== undefined && isCompanyDebt) {
-    coin = response.stages['1'].asset;
+    console.log(response);
+
+    const coin: string = response.stages?.['1']?.asset ?? response.coin?.split('_')[0] ?? 'UNKNOWN';
+
     logger.warn(coin);
     if (coin === 'USDT' || coin === 'USDC') {
-      assetAmountOperated = response.stages['1'].assetAmount;
+      assetAmountOperated = response.stages?.['1']?.assetAmount ?? response.coinValue * response.amount;
       logger.warn(assetAmountOperated);
 
       const finalDebt = parseFloat(inicialAmount) + parseFloat(assetAmountOperated);

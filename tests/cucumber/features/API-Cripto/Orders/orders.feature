@@ -285,6 +285,7 @@ Feature: Ordenes
     Scenario Outline: PLUS: Ejecutar ordenes de <trade> de <coin> contra <against> V1
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Obtain "<against>" credit balance "company"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<operation>" to the variable "operation"
         And Assign the value "<userId>" to the variable "userId"
@@ -305,6 +306,7 @@ Feature: Ordenes
         When Wait for the processing of the "orden" por 1 seconds
         And Execute the GET method on the endpoint "/v1/order/{orderNumberId}"
         Then Obtain a response 200 y status "COMPLETED"
+        And Obtain "<against>" credit balance "company"
 
         @Sell @Automated
         Examples:

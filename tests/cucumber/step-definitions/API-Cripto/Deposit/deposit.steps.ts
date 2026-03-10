@@ -6,6 +6,7 @@ import { getCredentials } from '../../../../support/config/credentials.config';
 import { NETWORKS_MAPPINGS } from '../../../../support/constants/constantsNetworks';
 import { cryptoDepositHelper, cryptoDepositHelper2, fiatDepositHelper } from '../../../../support/helpers/depositHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
+import { BlockchainService } from '../../../../support/services/blockChain.services';
 import logger from '../../../../support/utils/logger';
 import { CustomWorld, UserData } from '../../../../support/world';
 
@@ -60,4 +61,10 @@ Then('Execute fiat deposit', { timeout: 500 * 1000 }, async function (this: Cust
 
   logger.info('Executing fiat deposit for synthetic payment...');
   await fiatDepositHelper(urlBase, endpoint, apiKEY, apiSecret, userId, amount, coin);
+});
+
+Then('Execute cripto deposit to {string} by {string} chain', { timeout: 500 * 1000 }, async function (this: CustomWorld, address: string, chain: string) {
+  const amount = this.amount;
+  const service = new BlockchainService(chain);
+  
 });
