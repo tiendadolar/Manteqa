@@ -2,7 +2,7 @@
 Feature: Ordenes
 
     Scenario Outline: Ejecutar ordenes de <trade> de <coin> contra <against> V1
-        Given The API key is available "<companyId>"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<operation>" to the variable "operation"
@@ -23,7 +23,14 @@ Feature: Ordenes
 
         When Wait for the processing of the "orden" por 1 seconds
         And Execute the GET method on the endpoint "/v1/order/{orderNumberId}"
-        Then Obtain a response 200 y status COMPLETED
+        Then Obtain a response 200 y status "COMPLETED"
+
+        @PYG
+        Examples:
+            | companyId                | sessionId   | trade  | coin     | operation | userId    | amount | against |
+            | 683cce15397feba125068c9b | order-qaa-n | compra | WLD_PYG  | BUY       | 100061435 | 5      | PYG     |
+            | 683cce15397feba125068c9b | order-qaa-n | compra | USDT_PYG | BUY       | 100061435 | 5      | PYG     |
+            | 683cce15397feba125068c9b | order-qaa-n | compra | USDC_PYG | BUY       | 100061435 | 5      | PYG     |
 
         @Buy
         Examples:
@@ -355,6 +362,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDT  | BUY  | 100009051 | 5           | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDT  | BUY  | 100009089 | 5           | PHP     |
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDT  | BUY  | 100010879 | 5           | BOB     |
+            | 683cce15397feba125068c9b | order-qaa-n | compra | USDT  | BUY  | 100061435 | 5           | PYG     |
 
         @BuyByCountry @USDC
         Examples:
@@ -370,6 +378,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDC  | BUY  | 100009051 | 5           | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDC  | BUY  | 100009089 | 5           | PHP     |
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDC  | BUY  | 100010879 | 5           | BOB     |
+            | 683cce15397feba125068c9b | order-qaa-n | compra | USDC  | BUY  | 100061435 | 5           | PYG     |
 
         @BuyByCountry @WLD
         Examples:
@@ -385,6 +394,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | compra | WLD   | BUY  | 100009051 | 5           | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | compra | WLD   | BUY  | 100009089 | 5           | PHP     |
             | 683cce15397feba125068c9b | order-qaa-n | compra | WLD   | BUY  | 100010879 | 5           | BOB     |
+            | 683cce15397feba125068c9b | order-qaa-n | compra | WLD   | BUY  | 100061435 | 5           | PYG     |
 
         @SellByCountry @USDT @Automated
         Examples:
@@ -399,6 +409,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDT  | SELL | 100009508 | 5           | PUSD    |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDT  | SELL | 100009051 | 5           | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDT  | SELL | 100009089 | 5           | PHP     |
+            | 683cce15397feba125068c9b | order-qaa-n | venta | USDT  | SELL | 100061435 | 5           | PYG     |
 
         @SellByCountry @USDC
         Examples:
@@ -413,6 +424,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC  | SELL | 100009508 | 5           | PUSD    |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC  | SELL | 100009051 | 5           | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC  | SELL | 100009089 | 5           | PHP     |
+            | 683cce15397feba125068c9b | order-qaa-n | venta | USDC  | SELL | 100061435 | 5           | PYG     |
 
         @SellByCountry @WLD
         Examples:
@@ -427,3 +439,4 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100009508 | 5           | PUSD    |
             | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100009051 | 5           | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100009089 | 5           | PHP     |
+            | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100061435 | 5           | PYG     |

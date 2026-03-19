@@ -82,5 +82,13 @@
     "code": "002",
     "accountType": "SAVINGS",
     "network": ""
+  },
+  "PARAGUAY": {
+    "currency": "PYG",
+    "cbu": "111121996495",
+    "description": "SAVINGS",
+    "code": "004",
+    "accountType": "SAVINGS",
+    "network": ""
   }
 }

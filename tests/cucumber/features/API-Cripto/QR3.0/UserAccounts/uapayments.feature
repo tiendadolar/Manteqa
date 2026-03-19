@@ -18,7 +18,6 @@ Feature: Sintéticos de Pago User Accounts
         Then Obtain a response 201 for lock payment
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "true" to the variable "skipDeposit"
         And Assign the value "pixCode" to the variable "pixCode"
@@ -30,17 +29,17 @@ Feature: Sintéticos de Pago User Accounts
 
 
         Examples:
-            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId           | externalId             | against |
-            | 699a62cc6e3dd6fb25fa5e91 | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | uap-userbalance-test-n | USDT    |
-            | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | uap-userbalance-test-n | USDT    |
-            | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | uap-userbalance-test-n | USDT    |
-            | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | uap-userbalance-test-n | USDT    |
-            # | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537       | 1.5    | QR-UserBalance-V1-n | USDT    |uap-userbalance-test-n
-            | 699a62cc6e3dd6fb25fa5e91 | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | uap-userbalance-test-n | ARS     |
-            | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | uap-userbalance-test-n | BRL     |
-            | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | uap-userbalance-test-n | COP     |
-            | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | uap-userbalance-test-n | BOB     |
-    # | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | uap-userbalance-test-n | PEN     |
+            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId           | against |
+            | 699a62cc6e3dd6fb25fa5e91 | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | USDT    |
+            | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | USDT    |
+            | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | USDT    |
+            | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | USDT    |
+            # | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537       | 1.5    | QR-UserBalance-V1-n | USDT    |
+            | 699a62cc6e3dd6fb25fa5e91 | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | ARS     |
+            | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | BRL     |
+            | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | COP     |
+            | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | BOB     |
+    # | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n |  PEN     |
 
     #***************** Funds: Deposito Cripto ********************
 
@@ -97,7 +96,6 @@ Feature: Sintéticos de Pago User Accounts
         Then Obtain a response 201 for lock payment
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
@@ -109,11 +107,11 @@ Feature: Sintéticos de Pago User Accounts
         And Obtain a company debt "<against>" balance
 
         Examples:
-            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId                  | externalId                 | against |
-            | 696d44e622cceda591c025cd | Argentina | 100037880 | qr3manualamount               | 1000   | s-ayment-useraccount-desc  | e-payment-useraccount-desc | USDT    |
-            | 696d44e622cceda591c025cd | Brasil    | 100037879 | +5511949227612                | 10     | s-payment-useraccount-desc | e-payment-useraccount-desc | USDT    |
-            | 696d44e622cceda591c025cd | Bolivia   | 100037877 | qr3BOBmanualamount            | 61.98  | s-payment-useraccount-desc | e-payment-useraccount-desc | USDT    |
-            | 696d44e622cceda591c025cd | Colombia  | 100037935 | manteca-breb-qa-manual-amount | 500    | s-payment-useraccount-desc | e-payment-useraccount-desc | USDT    |
+            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId                  | against |
+            | 696d44e622cceda591c025cd | Argentina | 100037880 | qr3manualamount               | 1000   | s-ayment-useraccount-desc  | USDT    |
+            | 696d44e622cceda591c025cd | Brasil    | 100037879 | +5511949227612                | 10     | s-payment-useraccount-desc | USDT    |
+            | 696d44e622cceda591c025cd | Bolivia   | 100037877 | qr3BOBmanualamount            | 61.98  | s-payment-useraccount-desc | USDT    |
+            | 696d44e622cceda591c025cd | Colombia  | 100037935 | manteca-breb-qa-manual-amount | 500    | s-payment-useraccount-desc | USDT    |
     # | 696d44e622cceda591c025cd | Peru      | 100037878 | +51986667537                  | 1.5    | QR-V2-DESC-n | USDT    |
 
     @Smoke @UserAccount @ErrorPath @Automated

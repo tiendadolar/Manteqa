@@ -230,7 +230,6 @@ Feature: Sintéticos de Pago Principal Accounts
         Then Obtain a response 201 for lock payment
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
@@ -243,11 +242,11 @@ Feature: Sintéticos de Pago Principal Accounts
 
         #QR BOB monto nuy bajo, falla contra USDT
         Examples:
-            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId                  | externalId                 | against | exchange | legalId       | name   | surname |
-            | 6981ff2f4af353838a534bc4 | Argentina | 100038486 | qr3manualamount               | 1000   | s-payment-ppalaccount-desc | e-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
-            | 6981ff2f4af353838a534bc4 | Brasil    | 100038487 | +5511949227612                | 10     | s-payment-ppalaccount-desc | e-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
-            | 6981ff2f4af353838a534bc4 | Colombia  | 100038489 | manteca-breb-qa-manual-amount | 500    | s-payment-ppalaccount-desc | e-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
-            | 6981ff2f4af353838a534bc4 | Bolivia   | 100038490 | qr3BOBmanualamount            | 61.98  | s-payment-ppalaccount-desc | e-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId                  | against | exchange | legalId       | name   | surname |
+            | 6981ff2f4af353838a534bc4 | Argentina | 100038486 | qr3manualamount               | 1000   | s-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+            | 6981ff2f4af353838a534bc4 | Brasil    | 100038487 | +5511949227612                | 10     | s-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+            | 6981ff2f4af353838a534bc4 | Colombia  | 100038489 | manteca-breb-qa-manual-amount | 500    | s-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+            | 6981ff2f4af353838a534bc4 | Bolivia   | 100038490 | qr3BOBmanualamount            | 61.98  | s-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
 
     @Smoke @PpalAccount @Automated
     Scenario Outline: Principal Account Peru: Ejecutar pago con sender peruano mediante descubierto <against>
@@ -272,7 +271,6 @@ Feature: Sintéticos de Pago Principal Accounts
         Then Obtain a response 201 for lock payment
         # Execute synthetic payment
         When Assign the value "<sessionId>" to the variable "sessionId"
-        And Assign the value "<externalId>" to the variable "externalId"
         And Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "pixCode" to the variable "pixCode"
         And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
@@ -285,5 +283,5 @@ Feature: Sintéticos de Pago Principal Accounts
 
         #QR BOB monto nuy bajo, falla contra USDT
         Examples:
-            | companyId                | country   | userAnyId | paymentDestination | amount | sessionId                  | externalId                 | against | exchange | legalId  | name  | surname | work     | email              | phoneNumber  | gender |
-            | 6981ff2f4af353838a534bc4 | Argentina | 100038488 | +51986667537       | 1000   | s-payment-ppalaccount-desc | e-payment-ppalaccount-desc | USDT    | PERU     | 74162704 | PEDRO | PEREZ   | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   |
+            | companyId                | country   | userAnyId | paymentDestination | amount | sessionId                  | against | exchange | legalId  | name  | surname | work     | email              | phoneNumber  | gender |
+            | 6981ff2f4af353838a534bc4 | Argentina | 100038488 | +51986667537       | 1000   | s-payment-ppalaccount-desc | USDT    | PERU     | 74162704 | PEDRO | PEREZ   | EMPLEADO | polanque@gmail.com | +51953605263 | MALE   |

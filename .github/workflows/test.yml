@@ -1,5 +1,12 @@
 name: Run Tagged Tests
 
+run-name: >-
+  Tests: ${{
+    github.event_name == 'workflow_dispatch' && github.event.inputs.test_suite ||
+    github.event_name == 'push' && 'Onboarding v2 (Push)' ||
+    'Scheduled Run'
+  }}
+
 on:
   # Trigger manual
   workflow_dispatch:
