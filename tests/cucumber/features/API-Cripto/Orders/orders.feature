@@ -249,8 +249,10 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC_MXN  | SELL      | 100009051 | 5      | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC_PHP  | SELL      | 100009089 | 5      | PHP     |
 
+    #*---------------- PLUS -----------------*
+
     @Smoke @V1 @Regression @Plus
-    Scenario Outline: PLUS: Ejecutar ordenes de <trade> de <coin> contra <against> V1
+    Scenario Outline: PLUS: Ejecutar ordenes de <trade> de <coin> contra <against> V1 para user PLUS
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And Obtain a company debt "<against>" balance
@@ -289,7 +291,7 @@ Feature: Ordenes
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BNB_ARS   | BUY       | 100058862 | 0.1    | ARS     |
 
     @Smoke @V1 @Regression @Plus
-    Scenario Outline: PLUS: Ejecutar ordenes de <trade> de <coin> contra <against> V1
+    Scenario Outline: PLUS: Ejecutar ordenes de <trade> de <coin> contra <against> V1 para user PLUS
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         And Obtain "<against>" credit balance "company"
@@ -440,3 +442,46 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100009051 | 5           | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100009089 | 5           | PHP     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100061435 | 5           | PYG     |
+
+    @Smoke @V2 @Regression @Plus
+    Scenario Outline: Ejecutar ordenes de <trade> de <asset> contra <against> V2 para user PLUS
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<side>" to the variable "side"
+        And Assign the value "pixCode" to the variable "code"
+        And Execute the POST method on the endpoint "/v2/orders"
+        Then Obtain a response 201
+        # And The purchase order is created
+
+        When Wait for the processing of the "orden" por 1 seconds
+        And Execute the GET method on the endpoint "/v2/orders/{orderNumberId}"
+        Then Obtain a response 200 y status "COMPLETED"
+
+        @Sell @Automated
+        Examples:
+            | companyId                | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDT  | BUY  | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDC  | BUY  | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDCB | BUY  | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | WLD   | BUY  | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | DAI   | BUY  | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | ETH   | BUY  | 100058862 | 0.01        | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BTC   | BUY  | 100058862 | 0.01        | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BNB   | BUY  | 100058862 | 0.1         | ARS     |
+
+        @Sell @Automated
+        Examples:
+            | companyId                | sessionId   | trade | asset | side | userAnyId | assetAmount | against |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDT  | SELL | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDC  | SELL | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDCB | SELL | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | WLD   | SELL | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | DAI   | SELL | 100058862 | 5           | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | ETH   | SELL | 100058862 | 0.01        | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | BTC   | SELL | 100058862 | 0.01        | ARS     |
+            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | BNB   | SELL | 100058862 | 0.1         | ARS     |

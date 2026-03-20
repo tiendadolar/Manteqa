@@ -86,6 +86,7 @@ export interface Addresses {
 
 export interface Banking {
   accounts: any[];
+  addresses?: any[];
 }
 
 // export interface Onboarding {

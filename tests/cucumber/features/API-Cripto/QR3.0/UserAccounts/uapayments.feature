@@ -34,12 +34,12 @@ Feature: Sintéticos de Pago User Accounts
             | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | USDT    |
             | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | USDT    |
             | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | USDT    |
-            # | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537       | 1.5    | QR-UserBalance-V1-n | USDT    |
+            | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | USDT    |
             | 699a62cc6e3dd6fb25fa5e91 | Argentina | 100056107 | qr3manualamount               | 1000   | QR-UserBalance-V1-n | ARS     |
             | 699a62cc6e3dd6fb25fa5e91 | Brasil    | 100056104 | +5511949227612                | 10     | QR-UserBalance-V1-n | BRL     |
             | 699a62cc6e3dd6fb25fa5e91 | Colombia  | 100056111 | manteca-breb-qa-manual-amount | 500    | QR-UserBalance-V1-n | COP     |
             | 699a62cc6e3dd6fb25fa5e91 | Bolivia   | 100056108 | qr3BOBmanualamount            | 61.98  | QR-UserBalance-V1-n | BOB     |
-    # | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n |  PEN     |
+            | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056105 | +51986667537                  | 1.5    | QR-UserBalance-V1-n | PEN     |
 
     #***************** Funds: Deposito Cripto ********************
 
@@ -77,7 +77,7 @@ Feature: Sintéticos de Pago User Accounts
             | 69972e13e4c6077150f16ce8 | Brasil    | 100056115 | +5511949227612                | 10     | QR-V2-DESC-n | USDT    |
             | 69972e13e4c6077150f16ce8 | Bolivia   | 100056117 | qr3BOBmanualamount            | 61.98  | QR-V2-DESC-n | USDT    |
             | 69972e13e4c6077150f16ce8 | Colombia  | 100056118 | manteca-breb-qa-manual-amount | 500    | QR-V2-DESC-n | USDT    |
-    # | 69972e13e4c6077150f16ce8 | Peru      | 100056116 | +51986667537                  | 1.5    | QR-V2-DESC-n | USDT    |
+            | 69972e13e4c6077150f16ce8 | Peru      | 100056116 | +51986667537                  | 1.5    | QR-V2-DESC-n | USDT    |
 
     #***************** Funds: Descubierto ********************
 
@@ -112,7 +112,7 @@ Feature: Sintéticos de Pago User Accounts
             | 696d44e622cceda591c025cd | Brasil    | 100037879 | +5511949227612                | 10     | s-payment-useraccount-desc | USDT    |
             | 696d44e622cceda591c025cd | Bolivia   | 100037877 | qr3BOBmanualamount            | 61.98  | s-payment-useraccount-desc | USDT    |
             | 696d44e622cceda591c025cd | Colombia  | 100037935 | manteca-breb-qa-manual-amount | 500    | s-payment-useraccount-desc | USDT    |
-    # | 696d44e622cceda591c025cd | Peru      | 100037878 | +51986667537                  | 1.5    | QR-V2-DESC-n | USDT    |
+            | 696d44e622cceda591c025cd | Peru      | 100037878 | +51986667537                  | 1.5    | QR-V2-DESC-n               | USDT    |
 
     @Smoke @UserAccount @ErrorPath @Automated
     Scenario Outline: User Account <country>: Validate error response sending externalId repeated
