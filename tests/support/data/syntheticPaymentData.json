@@ -2,7 +2,7 @@
   "QR": {
     "ARS_ARS": {
       "userAnyId": "100009359",
-      "paymentDestination": "00020101021243430010ar.com.pvs010527524981130598910045990115015001123244825664520454115303032540530.205802AR5911HOMO prisma6008La Plata80980010ar.com.pvs0302030445SupplierItemID.99999989.CodCliente.476771111105062712210606271231070510.20811800141111111111111163041A2B",
+      "paymentDestination": "qr3manualamount",
       "amount": "1000",
       "against": "ARS"
     },
@@ -11,6 +11,12 @@
       "paymentDestination": "qr3manualamount",
       "amount": "1000",
       "against": "USDT"
+    },
+    "USDC_ARS": {
+      "userAnyId": "100009359",
+      "paymentDestination": "qr3manualamount",
+      "amount": "1000",
+      "against": "USDC"
     },
     "BRL_ARS": {
       "userAnyId": "100011657",

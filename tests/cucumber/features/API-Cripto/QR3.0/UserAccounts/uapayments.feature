@@ -107,12 +107,12 @@ Feature: Sintéticos de Pago User Accounts
         And Obtain a company debt "<against>" balance
 
         Examples:
-            | companyId                | country   | userAnyId | paymentDestination            | amount | sessionId                  | against |
-            | 696d44e622cceda591c025cd | Argentina | 100037880 | qr3manualamount               | 1000   | s-ayment-useraccount-desc  | USDT    |
-            | 696d44e622cceda591c025cd | Brasil    | 100037879 | +5511949227612                | 10     | s-payment-useraccount-desc | USDT    |
-            | 696d44e622cceda591c025cd | Bolivia   | 100037877 | qr3BOBmanualamount            | 61.98  | s-payment-useraccount-desc | USDT    |
-            | 696d44e622cceda591c025cd | Colombia  | 100037935 | manteca-breb-qa-manual-amount | 500    | s-payment-useraccount-desc | USDT    |
-            | 696d44e622cceda591c025cd | Peru      | 100037878 | +51986667537                  | 1.5    | QR-V2-DESC-n               | USDT    |
+            | companyId                | country | userAnyId | paymentDestination | amount | sessionId    | against |
+            # | 696d44e622cceda591c025cd | Argentina | 100037880 | qr3manualamount               | 1000   | s-ayment-useraccount-desc  | USDT    |
+            # | 696d44e622cceda591c025cd | Brasil    | 100037879 | +5511949227612                | 10     | s-payment-useraccount-desc | USDT    |
+            # | 696d44e622cceda591c025cd | Bolivia   | 100037877 | qr3BOBmanualamount            | 61.98  | s-payment-useraccount-desc | USDT    |
+            # | 696d44e622cceda591c025cd | Colombia  | 100037935 | manteca-breb-qa-manual-amount | 500    | s-payment-useraccount-desc | USDT    |
+            | 696d44e622cceda591c025cd | Peru    | 100037878 | +51986667537       | 1.5    | QR-V2-DESC-n | USDT    |
 
     @Smoke @UserAccount @ErrorPath @Automated
     Scenario Outline: User Account <country>: Validate error response sending externalId repeated

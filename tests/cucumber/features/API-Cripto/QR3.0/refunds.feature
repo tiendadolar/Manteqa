@@ -8,7 +8,7 @@ Feature: Synthetic Refunds
     #Companies looselyManaged take funds for user balances instead take company debt. If user has no funds, take from company debt.
 
     # User exchange ARG opereted a QR3.0 against ARS
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago QR3.0 contra ARS (Sobre User Argentino Balance)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -27,8 +27,97 @@ Feature: Synthetic Refunds
             | credential                | amount  | refundReason  | refundAsset | type | against | userAnyId | charge  |
             | andresperalta@manteca.dev | dynamic | Manual refund | ARS         | QR   | ARS     | 100009359 | balance |
 
-    # User exchange ARG opereted a QR3.0 against USDT
+
     @Manual @Automated
+    Scenario Outline: Refund total de sintetico de pago QR3.0 contra <against> (Sobre User Balance)
+        Given The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Get credentials for company "69b83acb59880505eeaa3e52"
+        And login user admin "<credential>"
+        And Obtain "<against>" balance for "<userAnyId>" user over "<charge>"
+        And Execute overdrawn "<type>" synthetic lock against "<against>" for user "<userAnyId>"
+        And Execute balance synthetic payment
+        When Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<refundReason>" to the variable "refundReason"
+        And Assign the value "<refundAsset>" to the variable "refundAsset"
+        And Execute the POST method on the endpoint "/v1/admin/synthetics/{syntheticId}/refund"
+        Then Obtain a response 204
+        And Validate total refund stages
+        And Obtain "<against>" balance for "<userAnyId>" user over "<charge>"
+
+        Examples:
+            | credential                | amount  | refundReason  | refundAsset | type | against | userAnyId | charge  |
+            | andresperalta@manteca.dev | dynamic | Manual refund | ARS         | QR   | ARS     | 100061862 | balance |
+            | andresperalta@manteca.dev | dynamic | Manual refund | ARS         | QR   | USDT    | 100061862 | balance |
+            | andresperalta@manteca.dev | dynamic | Manual refund | ARS         | QR   | USDC    | 100061862 | balance |
+
+    @Manual @Automated
+    Scenario Outline: Refund parcial de sintetico de pago QR3.0 contra <against> (Sobre User Balance)
+        Given The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Get credentials for company "69b83acb59880505eeaa3e52"
+        And login user admin "<credential>"
+        And Obtain "<against>" balance for "<userAnyId>" user over "<charge>"
+        And Execute overdrawn "<type>" synthetic lock against "<against>" for user "<userAnyId>"
+        And Execute balance synthetic payment
+        When Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<refundReason>" to the variable "refundReason"
+        And Assign the value "<refundAsset>" to the variable "refundAsset"
+        And Execute the POST method on the endpoint "/v1/admin/synthetics/{syntheticId}/refund"
+        Then Obtain a response 204
+        And Validate partial refund stages
+        And Obtain "<against>" balance for "<userAnyId>" user over "<charge>"
+
+        Examples:
+            | credential                | amount | refundReason  | refundAsset | type | against | userAnyId | charge  |
+            | andresperalta@manteca.dev | 500    | Manual refund | ARS         | QR   | ARS     | 100061862 | balance |
+            | andresperalta@manteca.dev | 500    | Manual refund | ARS         | QR   | USDT    | 100061862 | balance |
+            | andresperalta@manteca.dev | 500    | Manual refund | ARS         | QR   | USDC    | 100061862 | balance |
+
+    @Manual @Automated
+    Scenario Outline: Refund total de sintetico de pago QR3.0 contra <against> (Sobre Company)
+        Given The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Get credentials for company "69bf5afc19c429831287d1bf"
+        And login user admin "<credential>"
+        And Obtain "<against>" debt balance "company"
+        And Obtain "<against>" credit balance "company"
+        And Execute overdrawn "<type>" synthetic lock against "<against>" for user "<userAnyId>"
+        And Execute overdrawn synthetic payment
+        When Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<refundReason>" to the variable "refundReason"
+        And Assign the value "<refundAsset>" to the variable "refundAsset"
+        And Execute the POST method on the endpoint "/v1/admin/synthetics/{syntheticId}/refund"
+        Then Obtain a response 204
+        And Validate total refund stages
+        And Obtain "<against>" debt balance "company"
+        And Obtain "<against>" credit balance "company"
+
+        Examples:
+            | credential                | amount  | refundReason  | refundAsset | type | against | userAnyId | charge  |
+            | andresperalta@manteca.dev | dynamic | Manual refund | ARS         | QR   | USDT    | 100062353 | company |
+
+    @Manual @Automated
+    Scenario Outline: Refund partial de sintetico de pago QR3.0 contra <against> (Sobre Company)
+        Given The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Get credentials for company "69bf5afc19c429831287d1bf"
+        And login user admin "<credential>"
+        And Obtain "<against>" debt balance "company"
+        And Obtain "<against>" credit balance "company"
+        And Execute overdrawn "<type>" synthetic lock against "<against>" for user "<userAnyId>"
+        And Execute overdrawn synthetic payment
+        When Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<refundReason>" to the variable "refundReason"
+        And Assign the value "<refundAsset>" to the variable "refundAsset"
+        And Execute the POST method on the endpoint "/v1/admin/synthetics/{syntheticId}/refund"
+        Then Obtain a response 204
+        And Validate partial refund stages
+        And Obtain "<against>" debt balance "company"
+        And Obtain "<against>" credit balance "company" for partial refund
+
+        Examples:
+            | credential                | amount | refundReason  | refundAsset | type | against | userAnyId | charge  |
+            | andresperalta@manteca.dev | 500    | Manual refund | ARS         | QR   | USDT    | 100062353 | company |
+
+    # User exchange ARG opereted a QR3.0 against USDT
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago QR3.0 contra USDT (Sobre Company User Argentino)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -50,7 +139,7 @@ Feature: Synthetic Refunds
             | andresperalta@manteca.dev | dynamic | Manual refund | ARS         | QR   | USDT    | 100009359 | company |
 
     # User exchange ARG opereted a PIX against ARS
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIX contra ARS (Sobre User Balance Argentino)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -70,7 +159,7 @@ Feature: Synthetic Refunds
             | andresperalta@manteca.dev | dynamic | Manual refund | BRL         | PIX  | ARS_BRL | 100009359 | balance | ARS     |
 
     # User exchange ARG opereted a PIX against USDT
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIX contra ARS (Sobre User Balance Argentino)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -92,7 +181,7 @@ Feature: Synthetic Refunds
             | andresperalta@manteca.dev | dynamic | Manual refund | BRL         | PIX  | USDT_BRL | 100009359 | company | USDT    |
 
     # User exchange ARG opereted a PIX against BRL
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIX contra ARS (Sobre User Balance Argentino)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -113,7 +202,7 @@ Feature: Synthetic Refunds
 
 
     # User exchange BRL opereted a PIX against BRL
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIX contra BRL (Sobre User Balance Brasilero)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -133,7 +222,7 @@ Feature: Synthetic Refunds
             | andresperalta@manteca.dev | dynamic | Manual refund | BRL         | PIX  | BRL_BRL | 100011657 | balance | BRL     |
 
     # User exchange BRL opereted a PIX against USDT
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIX contra ARS (Sobre User Balance Argentino)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -155,7 +244,7 @@ Feature: Synthetic Refunds
             | andresperalta@manteca.dev | dynamic | Manual refund | BRL         | PIX  | USDT_BRL | 100011657 | company | USDT    |
 
     # User exchange BRL opereted a QR3.0 against BRL
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIX contra ARS (Sobre User Balance Argentino)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -175,7 +264,7 @@ Feature: Synthetic Refunds
             | andresperalta@manteca.dev | dynamic | Manual refund | ARS         | QR   | BRL     | 100011657 | balance | BRL     |
 
     # User exchange BRL opereted a QR3.0 against USDT
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIX contra ARS (Sobre User Balance Argentino)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -198,7 +287,7 @@ Feature: Synthetic Refunds
 
 
     # User exchange BRL opereted a PIXKEY against BRL
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIXKey contra BRL (Sobre User Balance Brazil)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"
@@ -218,7 +307,7 @@ Feature: Synthetic Refunds
             | andresperalta@manteca.dev | dynamic | Manual refund | BRL         | PIXKEY | BRL     | 100011657 | balance | BRL     |
 
     # User exchange BRL opereted a PIXKEY against USDT
-    @Manual @Automated
+    @Manual @Deprecated
     Scenario Outline: Refund manual de sintetico de pago PIXKey contra USDT (Sobre Company Balance Brazil)
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
         And login user admin "<credential>"

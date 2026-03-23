@@ -78,6 +78,36 @@ Feature: Retiros Crypto
             | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | OPTIMISM   | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
     # |67e56fea17c2cfbcc92efaab| USDC | 100007647 | ARBITRUM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
 
+    @Smoke @Crypto @V1 @Bind @Automated
+    Scenario Outline: Ejecutar retiro BIND crypto de <coin> mediante <chain> por V1 endpoints
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
+
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
+
+        When Wait for the processing of the "orden" por 40 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
+
+        Examples:
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 69addea7aa541dac7566fd9a | USDC | 100062359 | INTERNAL | 5      | 0x6BDfB5d3cc79f65e102d52F98d0724be446977B1 |
+            | 69addea7aa541dac7566fd9a | USDT | 100062359 | INTERNAL | 5      | 0x6BDfB5d3cc79f65e102d52F98d0724be446977B1 |
+            | 69addea7aa541dac7566fd9a | USDC | 100060231 | INTERNAL | 5      | 0x6856355786A7183Ff12A0a6d9a097a670a039fE7 |
+            | 69addea7aa541dac7566fd9a | USDT | 100060231 | INTERNAL | 5      | 0x6856355786A7183Ff12A0a6d9a097a670a039fE7 |
+
     @Regression @Crypto @ARG @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user ARG por V1
         Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
@@ -410,6 +440,35 @@ Feature: Retiros Crypto
             | USDC | 100009884 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
     # ------------- V2 ---------------
+
+    @Smoke @Crypto @V2 @Bind @Automated
+    Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<type>" to the variable "type"
+        And Assign the value "<country>" to the variable "country"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
+
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
+
+        @WLD
+        Examples:
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            | 69addea7aa541dac7566fd9a | crypto | USDT  | 100062359 | ARG     | INTERNAL | 5      | 0x6BDfB5d3cc79f65e102d52F98d0724be446977B1 |
+            | 69addea7aa541dac7566fd9a | crypto | USDC  | 100062359 | ARG     | INTERNAL | 5      | 0x6BDfB5d3cc79f65e102d52F98d0724be446977B1 |
+            | 69addea7aa541dac7566fd9a | crypto | USDT  | 100060231 | ARG     | INTERNAL | 5      | 0x6856355786A7183Ff12A0a6d9a097a670a039fE7 |
+            | 69addea7aa541dac7566fd9a | crypto | USDC  | 100060231 | ARG     | INTERNAL | 5      | 0x6856355786A7183Ff12A0a6d9a097a670a039fE7 |
+
 
     @Smoke @Crypto @ARGv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2

@@ -700,7 +700,7 @@ export const rampOnExchange = (userData: any) => {
 };
 
 export const manualRefund = (userData: any, world: any) => {
-  let amount = world.response.body.details.paymentAssetAmount;
+  let amount: string = userData.amount === 'dynamic' ? world.response.body.details.paymentAssetAmount : userData.amount;
   return {
     amount: amount,
     refundReason: userData.refundReason,

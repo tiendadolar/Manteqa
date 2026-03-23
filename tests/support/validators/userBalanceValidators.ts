@@ -53,8 +53,15 @@ export const compareBalanceFlowValidator = (inicialAmount: string, finalAmount: 
   const response: any = CustomWorld.getStoreData('responseBDD');
   const isRefund: boolean = CustomWorld.getStoreData('isRefund');
   const isCompanyDebt: boolean = CustomWorld.getStoreData('isCompanyDebt');
+  const isCompanyCred: boolean = CustomWorld.getStoreData('isCompanyCred');
+  const isPartial: boolean = CustomWorld.getStoreData('partial');
   let coin: string = '';
   let assetAmountOperated: string = '';
+
+  if (isRefund && isCompanyCred && isPartial) {
+    compareBalancePartialFlowValidator(inicialAmount, finalAmount);
+    return;
+  }
 
   // If is a refund synthetic and take debt company
   if (isRefund && isCompanyDebt) {
@@ -69,8 +76,13 @@ export const compareBalanceFlowValidator = (inicialAmount: string, finalAmount: 
 
   // If is just a refund, take balance funds
   if (isRefund) {
-    expect(parseFloat(inicialAmount)).to.be.closeTo(parseFloat(finalAmount), 0.02);
+    if (isPartial) {
+      expect(parseFloat(inicialAmount) - parseFloat(CustomWorld.getStoreData('amountToRefund'))).to.be.closeTo(parseFloat(finalAmount), 0.02);
+      logger.info(`In this case we operated onto user balance, the partial refund amount is ok`);
+      return;
+    }
 
+    expect(parseFloat(inicialAmount)).to.be.closeTo(parseFloat(finalAmount), 0.02);
     logger.info(`In this case we operated onto user balance, so both of them should be equal`);
     logger.info(`Balance after refund is correct: Inicial Balance ${inicialAmount}, Final Balance ${finalAmount}`);
     return;
@@ -97,4 +109,12 @@ export const compareBalanceFlowValidator = (inicialAmount: string, finalAmount: 
     if (coin === 'ARS') {
     }
   }
+};
+
+export const compareBalancePartialFlowValidator = (inicialAmount: string, finalAmount: string): void => {
+  let assetAmountOperated: string = '0.40';
+
+  const finalDebt = parseFloat(inicialAmount) + parseFloat(assetAmountOperated);
+  expect(finalDebt).to.be.closeTo(parseFloat(finalAmount), 0.02);
+  logger.info(`Company credit after refund is correct: Inicial Balance ${inicialAmount}, Final Balance ${finalDebt}`);
 };

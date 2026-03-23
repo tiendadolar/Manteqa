@@ -70,7 +70,7 @@ jobs:
             if [ "$HOUR" == "04" ] && [ "$MINUTE" -lt 15 ]; then
               TEST_SUITE="Smoke General"
             elif [ "$HOUR" == "04" ]; then
-              TEST_SUITE="Providers"
+              TEST_SUITE="Onboarding v2"
             elif [ "$HOUR" == "05" ]; then
               TEST_SUITE="Integrations - OnboardingV2"
             elif [ "$HOUR" == "06" ]; then

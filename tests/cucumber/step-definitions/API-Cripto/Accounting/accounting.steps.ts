@@ -100,6 +100,19 @@ Then('Obtain {string} credit balance {string}', { timeout: 500 * 1000 }, async f
   analizeBalances(undefined, 'inicialCreditBalance', 'finalCreditBalance');
 });
 
+Then('Obtain {string} credit balance {string} for partial refund', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, charge: string) {
+  const urlBase = this.urlBase;
+  const endpoint = `/v2/accounting/credit`;
+  const apiKEY = this.apiKey;
+  const currency: any = fiat.toUpperCase();
+  // Set this flag to identify that we are working with company debt and operate company debt validations
+  charge !== 'balance' ? CustomWorld.setStoreData('isCompanyCred', true, true) : undefined;
+
+  const response = await getCompanyCreditBalanceHelper(urlBase, endpoint, apiKEY, currency);
+  validateRes(response, 200);
+  analizeBalances(undefined, 'inicialCreditBalance', 'finalCreditBalance');
+});
+
 Then('Obtain refund on user in {string} balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {
   const response: any = this.response.body;
   const coin: any = fiat.toUpperCase();

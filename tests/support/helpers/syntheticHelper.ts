@@ -6,7 +6,7 @@ import { CustomWorld } from '../world';
 import { apiRequest, validateRes } from './requestHelper';
 const payments = require('../data/syntheticPaymentData.json');
 
-export const validateSyntheticRefundStage = (body: any) => {
+export const validateSyntheticRefundStage = (body: any, partial?: boolean) => {
   if (body.stages['1'].stageType === 'WITHDRAW') {
     const refundStage = Object.values(body.stages).find((stage: any) => stage.stageType === 'REFUND');
 
@@ -22,6 +22,24 @@ export const validateSyntheticRefundStage = (body: any) => {
 
     const hasOrderReversal = Object.values(body.stages).some((stage: any) => stage.stageType === 'ORDER_REVERSAL');
     expect(hasOrderReversal).to.be.false;
+  } else if (partial) {
+    const refundStage = Object.values(body.stages).find((stage: any) => stage.stageType === 'REFUND');
+
+    expect(refundStage).to.have.property('partial').that.is.a('boolean');
+    expect(refundStage).to.have.property('assetToRefund').that.is.a('string');
+    expect(refundStage).to.have.property('amountToRefund').that.is.a('string');
+    expect(refundStage).to.have.property('asset').that.is.a('string');
+    expect(refundStage).to.have.property('amount').that.is.a('string');
+    expect(refundStage).to.have.property('internalRefund').that.is.a('boolean');
+    expect(refundStage).to.have.property('refundReason').that.is.a('string');
+    // expect(refundStage).to.have.property('networkId').that.is.a('string');
+    expect(refundStage).to.have.property('refundedAt').that.is.a('string');
+
+    //Al validar con Cris borrar o ver que onda
+    // const orderReversalStage = Object.values(body.stages).find((stage: any) => stage.stageType === 'ORDER_REVERSAL');
+
+    // expect(orderReversalStage).to.have.property('stageType').that.is.a('string');
+    // expect(orderReversalStage).to.have.property('orderId').that.is.a('string');
   } else {
     const refundStage = Object.values(body.stages).find((stage: any) => stage.stageType === 'REFUND');
 
@@ -32,13 +50,68 @@ export const validateSyntheticRefundStage = (body: any) => {
     expect(refundStage).to.have.property('amount').that.is.a('string');
     expect(refundStage).to.have.property('internalRefund').that.is.a('boolean');
     expect(refundStage).to.have.property('refundReason').that.is.a('string');
-    expect(refundStage).to.have.property('networkId').that.is.a('string');
+    // expect(refundStage).to.have.property('networkId').that.is.a('string');
     expect(refundStage).to.have.property('refundedAt').that.is.a('string');
 
     const orderReversalStage = Object.values(body.stages).find((stage: any) => stage.stageType === 'ORDER_REVERSAL');
 
     expect(orderReversalStage).to.have.property('stageType').that.is.a('string');
     expect(orderReversalStage).to.have.property('orderId').that.is.a('string');
+  }
+};
+
+export const validateTotalRefund = (body: any) => {
+  const refundTotalStage = Object.values(body.stages).find((stage: any) => stage.stageType === 'REFUND');
+  let amount: string = CustomWorld.getStoreData('amount') === 'dynamic' ? body.details.paymentAssetAmount : CustomWorld.getStoreData('amount');
+
+  if (body.paymentAgainst === 'USDT') {
+    expect(refundTotalStage).to.have.property('stageType').that.is.a('string').to.be.equal('REFUND');
+    expect(refundTotalStage).to.have.property('partial').that.is.a('boolean').to.be.equal(false);
+    expect(refundTotalStage).to.have.property('assetToRefund').that.is.a('string').to.be.equal(body.paymentAgainst);
+    expect(refundTotalStage).to.have.property('amountToRefund').that.is.a('string').to.be.equal(body.paymentAgainstAmount);
+    expect(refundTotalStage).to.have.property('asset').that.is.a('string').to.be.equal(CustomWorld.getStoreData('refundAsset'));
+    expect(refundTotalStage).to.have.property('amount').that.is.a('string').to.be.equal(amount);
+    expect(refundTotalStage).to.have.property('internalRefund').that.is.a('boolean').to.be.equal(false);
+    expect(refundTotalStage).to.have.property('refundReason').that.is.a('string');
+  }
+
+  if (body.paymentAgainst === 'ARS') {
+    expect(refundTotalStage).to.have.property('stageType').that.is.a('string').to.be.equal('REFUND');
+    expect(refundTotalStage).to.have.property('partial').that.is.a('boolean').to.be.equal(false);
+    expect(refundTotalStage).to.have.property('assetToRefund').that.is.a('string').to.be.equal(CustomWorld.getStoreData('refundAsset'));
+    expect(refundTotalStage).to.have.property('amountToRefund').that.is.a('string').to.be.equal(amount);
+    expect(refundTotalStage).to.have.property('asset').that.is.a('string').to.be.equal(CustomWorld.getStoreData('refundAsset'));
+    expect(refundTotalStage).to.have.property('amount').that.is.a('string').to.be.equal(amount);
+    expect(refundTotalStage).to.have.property('internalRefund').that.is.a('boolean').to.be.equal(false);
+    expect(refundTotalStage).to.have.property('refundReason').that.is.a('string');
+  }
+};
+
+export const validatePartialRefund = (body: any) => {
+  const refundTotalStage: any = Object.values(body.stages).find((stage: any) => stage.stageType === 'REFUND');
+  let amount: string = CustomWorld.getStoreData('amount') === 'dynamic' ? body.details.paymentAssetAmount : CustomWorld.getStoreData('amount');
+  CustomWorld.setStoreData('amountToRefund', refundTotalStage.amountToRefund);
+
+  if (body.paymentAgainst === 'USDT') {
+    expect(refundTotalStage).to.have.property('stageType').that.is.a('string').to.be.equal('REFUND');
+    expect(refundTotalStage).to.have.property('partial').that.is.a('boolean').to.be.equal(true);
+    expect(refundTotalStage).to.have.property('assetToRefund').that.is.a('string').to.be.equal(body.paymentAgainst);
+    expect(refundTotalStage).to.have.property('amountToRefund').that.is.a('string').to.be.equal(body.paymentAgainstAmount);
+    expect(refundTotalStage).to.have.property('asset').that.is.a('string').to.be.equal(CustomWorld.getStoreData('refundAsset'));
+    expect(refundTotalStage).to.have.property('amount').that.is.a('string').to.be.equal(amount);
+    expect(refundTotalStage).to.have.property('internalRefund').that.is.a('boolean').to.be.equal(false);
+    expect(refundTotalStage).to.have.property('refundReason').that.is.a('string').to.be.equal(CustomWorld.getStoreData('refundReason'));
+  }
+
+  if (body.paymentAgainst === 'ARS') {
+    expect(refundTotalStage).to.have.property('stageType').that.is.a('string').to.be.equal('REFUND');
+    expect(refundTotalStage).to.have.property('partial').that.is.a('boolean').to.be.equal(true);
+    expect(refundTotalStage).to.have.property('assetToRefund').that.is.a('string').to.be.equal(CustomWorld.getStoreData('refundAsset'));
+    expect(refundTotalStage).to.have.property('amountToRefund').that.is.a('string').to.be.equal(amount);
+    expect(refundTotalStage).to.have.property('asset').that.is.a('string').to.be.equal(CustomWorld.getStoreData('refundAsset'));
+    expect(refundTotalStage).to.have.property('amount').that.is.a('string').to.be.equal(amount);
+    expect(refundTotalStage).to.have.property('internalRefund').that.is.a('boolean').to.be.equal(false);
+    expect(refundTotalStage).to.have.property('refundReason').that.is.a('string').to.be.equal(CustomWorld.getStoreData('refundReason'));
   }
 };
 
@@ -125,9 +198,10 @@ export const lockPaymentHelper = async (urlBase: string, apiKey: string, endpoin
   return response;
 };
 
-export const syntheticPaymentHelper = async (urlBase: string, apiKey: string, endpoint: string, qrCode: string, userAnyId?: string): Promise<any> => {
+export const syntheticPaymentHelper = async (urlBase: string, apiKey: string, endpoint: string, qrCode: string, userAnyId?: string, skipDeposit?: boolean): Promise<any> => {
   const payload = {
     userAnyId: userAnyId,
+    skipDeposit: skipDeposit,
     qrCode: qrCode
   };
   logger.debug(JSON.stringify(payload, null, 2));

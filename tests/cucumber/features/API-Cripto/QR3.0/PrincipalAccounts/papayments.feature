@@ -45,6 +45,43 @@ Feature: Sintéticos de Pago Principal Accounts
             | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056100 | +51986667537                  | 1.5       | QR-UserBalance-V1-n | USDT    | COLOMBIA  | 1.977.392     | ROGER   | SANCHEZ |
             | 699a62cc6e3dd6fb25fa5e91 | Peru      | 100056100 | +51986667537                  | 1.5       | QR-UserBalance-V1-n | PEN     | BOLIVIA   | 4563732       | ABRAHAM | GARCIA  |
 
+    @Smoke @PpalAccount @UserBalance @Bybit @Automated
+    Scenario Outline: Principal Account <country> Bybit: Ejecutar pago desde balance contra <against> para Bybit
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Validate initial balance before execute qr payment
+        And Obtain "<against>" balance for "<userAnyId>" user
+        # Request de lock payment
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<name>" to the variable "name"
+        And Assign the value "<surname>" to the variable "surname"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "true" to the variable "skipDeposit"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        # Validate balance after execute qr payment
+        And Obtain "<against>" balance for "<userAnyId>" user
+
+
+        Examples:
+            | companyId                | country   | userAnyId | paymentDestination            | amount    | sessionId           | against | exchange  | legalId       | name    | surname |
+            | 684a30ba52c321bbacb94c1c | Argentina | 100062360 | qr3manualamount               | 1000      | QR-UserBalance-V1-n | ARS     | ARGENTINA | 20167417435   | MARIO   | ABBADI  |
+            | 684a30ba52c321bbacb94c1c | Brasil    | 100062361 | +5511949227612                | 10        | QR-UserBalance-V1-n | BRL     | BRAZIL    | 731.443.71149 | MIGUEL  | ACOSTA  |
+            | 684a30ba52c321bbacb94c1c | Colombia  | 100062363 | manteca-breb-qa-manual-amount | 500       | QR-UserBalance-V1-n | COP     | COLOMBIA  | 1.977.392     | ROGER   | SANCHEZ |
+            | 684a30ba52c321bbacb94c1c | Bolivia   | 100062364 | qr3BOBmanualamount            | 61.980000 | QR-UserBalance-V1-n | BOB     | BOLIVIA   | 4563732       | ABRAHAM | GARCIA  |
+            | 684a30ba52c321bbacb94c1c | Peru      | 100062362 | +51986667537                  | 1.5       | QR-UserBalance-V1-n | PEN     | BOLIVIA   | 4563732       | ABRAHAM | GARCIA  |
+
     #***************** Funds: Deposito Cripto ********************
 
     @Smoke @PpalAccount @Deposit @Automated
@@ -169,3 +206,41 @@ Feature: Sintéticos de Pago Principal Accounts
             | 6981ff2f4af353838a534bc4 | Colombia  | 100038489 | manteca-breb-qa-manual-amount | 500    | s-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
             | 6981ff2f4af353838a534bc4 | Bolivia   | 100038490 | qr3BOBmanualamount            | 61.98  | s-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
             | 6981ff2f4af353838a534bc4 | Peru      | 100038488 | +51986667537                  | 1.5    | s-payment-ppalaccount-desc | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+
+    @Smoke @PpalAccount @Overdraw @Bybit @Automated
+    Scenario Outline: Principal Account <country>: Ejecutar pago mediante descubierto <against> para Bybit
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        # Validate initial balance before execute qr payment
+        And Obtain a company debt "<against>" balance
+        # Request de lock payment
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<paymentDestination>" to the variable "paymentDestination"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<name>" to the variable "name"
+        And Assign the value "<surname>" to the variable "surname"
+        And Execute the POST method on the endpoint "/v2/payment-locks"
+        Then Obtain a response 201 for lock payment
+        # Execute synthetic payment
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "pixCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/qr-payment"
+        Then Obtain a response 201
+        And The attributes of the QR "<against>" synthetic are validated
+        # Get status synthetic payment
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        # Validate balance after execute qr payment
+        And Obtain a company debt "<against>" balance
+
+        #QR BOB monto nuy bajo, falla contra USDT
+        Examples:
+            | companyId                | country   | userAnyId | paymentDestination            | amount    | sessionId           | against | exchange | legalId       | name   | surname |
+            | 684a30ba52c321bbacb94c1c | Argentina | 100062360 | qr3manualamount               | 1000      | QR-UserBalance-V1-n | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+            | 684a30ba52c321bbacb94c1c | Brasil    | 100062361 | +5511949227612                | 10        | QR-UserBalance-V1-n | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+            | 684a30ba52c321bbacb94c1c | Colombia  | 100062363 | manteca-breb-qa-manual-amount | 500       | QR-UserBalance-V1-n | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+            | 684a30ba52c321bbacb94c1c | Bolivia   | 100062364 | qr3BOBmanualamount            | 61.980000 | QR-UserBalance-V1-n | USDT    | BRAZIL   | 731.443.71149 | MIGUEL | ACOSTA  |
+            | 684a30ba52c321bbacb94c1c | Peru      | 100062362 | +51986667537                  | 1.5       | QR-UserBalance-V1-n | USDT    | COLOMBIA | 1.977.392     | ROGER  | SANCHEZ |
