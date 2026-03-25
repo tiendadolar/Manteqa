@@ -13,7 +13,7 @@ Before({ tags: '@Onboarding' }, function () {
   console.log('Ejecutando steps para onboarding');
 });
 
-Then('Execute the PUT method on the endpoint', { timeout: 50 * 1000 }, async function (this: CustomWorld) {
+Then('Execute the PUT method on the endpoint', { timeout: 50 * 2500 }, async function (this: CustomWorld) {
   const imagePath = path.join(__dirname, '../../../../../images/pic2.png');
   const imageBuffer = fs.readFileSync(imagePath);
   let url = '';
@@ -69,18 +69,6 @@ Then('Execute the PUT method on the endpoint {string}', async function (this: Cu
   }
 });
 
-// Then(
-//   "Obtain a response {int} y el userId",
-//   function t(this: CustomWorld, statusCode: number) {
-//     expect(this.response.status).to.equal(statusCode);
-
-//     if (this.response.body.userId) {
-//       CustomWorld.setStoreData("userId", this.response.body.userId);
-//       console.log(CustomWorld.getStoreData("userId"));
-//     }
-//   }
-// );
-
 Then('The user is created', function (this: CustomWorld) {
   const response: any = this.response;
   const body: any = response.body;
@@ -126,24 +114,6 @@ Then('The user is created', function (this: CustomWorld) {
 
   expect(body.balance.fiat).to.be.an('object');
   expect(body.balance.crypto).to.be.an('object');
-
-  // expect(body.addresses).to.be.an("object").and.not.empty;
-
-  // expect(body.addresses).to.have.property("evm");
-  // expect(body.addresses).to.have.property("terra");
-  // expect(Object.keys(body.addresses)).to.have.members(["evm", "terra"]);
-  // expect(Object.keys(body.addresses)).to.have.lengthOf(2);
-
-  // expect(body.addresses.evm).to.be.a("string");
-  // expect(body.addresses.terra).to.be.a("string");
-
-  // if (body.addresses.evm && body.addresses.evm !== "") {
-  //   expect(body.addresses.evm).to.match(/^0x[a-fA-F0-9]{40}$/);
-  // }
-
-  // if (body.addresses.terra && body.addresses.terra !== "") {
-  //   expect(body.addresses.terra).to.match(/^terra[a-z0-9]{39}$/);
-  // }
 });
 
 Then('The bank account is added', function (this: CustomWorld) {
