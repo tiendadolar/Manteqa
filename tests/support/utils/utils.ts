@@ -660,6 +660,7 @@ export const refundsPolling = async function (data: any, userData: any) {
 export const rampOffExchange = (userData: any) => {
   if (userData.against === 'BRL') {
     return {
+      externalId: CustomWorld.getExternalId(userData.externalId),
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
       asset: userData.asset,
@@ -671,6 +672,7 @@ export const rampOffExchange = (userData: any) => {
     };
   } else {
     return {
+      externalId: CustomWorld.getExternalId(userData.externalId),
       sessionId: CustomWorld.getSessionId(userData.sessionId),
       userAnyId: userData.userAnyId,
       asset: userData.asset,
@@ -687,6 +689,7 @@ export const rampOffExchange = (userData: any) => {
 
 export const rampOnExchange = (userData: any) => {
   return {
+    externalId: CustomWorld.getExternalId(userData.externalId),
     sessionId: CustomWorld.getSessionId(userData.sessionId),
     userAnyId: userData.userAnyId,
     asset: userData.asset,

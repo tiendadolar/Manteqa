@@ -112,7 +112,7 @@ export class WithdrawLockV2Handler implements EndpointHandler {
 
 export class SyntheticOnHandler implements EndpointHandler {
   canHandle(endpoint: string): boolean {
-    return ['/v1/synthetics/ramp-on'].includes(endpoint);
+    return ['/v1/synthetics/ramp-on', '/v2/synthetics/ramp-on'].includes(endpoint);
   }
 
   handle(userData: any, world?: any) {
@@ -155,7 +155,8 @@ export class BillingPaymentHandler implements EndpointHandler {
 
 export class SyntheticOffHandler implements EndpointHandler {
   canHandle(endpoint: string, userData: any): boolean {
-    return endpoint === '/v1/synthetics/ramp-off' && userData.against !== 'ARS';
+    // return endpoint === '/v2/synthetics/ramp-off' && userData.against !== 'ARS';
+    return endpoint === '/v2/synthetics/ramp-off';
   }
 
   handle(userData: any, world?: any) {

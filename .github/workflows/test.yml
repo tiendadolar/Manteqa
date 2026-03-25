@@ -33,6 +33,7 @@ on:
           - 'Withdraw Crypto V1'
           - 'Withdraw Crypto V2'
           - 'Remesas'
+          - 'Integrations'
           - 'Integrations - OnboardingV2'
           - 'Integrations - Lock Payment'
           - 'Integrations - Withdraw V2'
@@ -72,7 +73,7 @@ jobs:
             elif [ "$HOUR" == "04" ]; then
               TEST_SUITE="Onboarding v2"
             elif [ "$HOUR" == "05" ]; then
-              TEST_SUITE="Integrations - OnboardingV2"
+              TEST_SUITE="Integrations"
             elif [ "$HOUR" == "06" ]; then
               TEST_SUITE="Regression"
             else
@@ -141,6 +142,9 @@ jobs:
             "Remesas")
               TAGS="@Withdraw and @Smoke and @Remesas and @Automated"
               ;;
+            "Integrations")
+              TAGS="@Integrations and @Automated"
+              ;;              
             "Integrations - OnboardingV2")
               TAGS="@Integrations and @OnboardingV2 and @Regression and @Automated"
               ;;

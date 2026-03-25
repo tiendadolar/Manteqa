@@ -316,7 +316,7 @@ Feature: Sintéticos
         And Assign the value "<assetAmount>" to the variable "assetAmount"
         And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
         And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
-        And Execute the POST method on the endpoint "/v1/synthetics/ramp-off"
+        And Execute the POST method on the endpoint "/v2/synthetics/ramp-off"
         Then Obtain a response 201
         # Parte 2: Generar depósito
         And Execute crypto deposit
@@ -344,7 +344,7 @@ Feature: Sintéticos
         And Assign the value "<assetAmount>" to the variable "assetAmount"
         And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
         And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
-        And Execute the POST method on the endpoint "/v1/synthetics/ramp-off"
+        And Execute the POST method on the endpoint "/v2/synthetics/ramp-off"
         Then Obtain a response 201
         # Parte 2: Generar depósito
         And Execute crypto deposit
@@ -424,7 +424,7 @@ Feature: Sintéticos
         And Assign the value "<against>" to the variable "against"
         And Assign the value "<assetAmount>" to the variable "assetAmount"
         And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
-        And Execute the POST method on the endpoint "/v1/synthetics/ramp-off"
+        And Execute the POST method on the endpoint "/v2/synthetics/ramp-off"
         Then Obtain a response 201
         # Parte 2: Generar depósito
         And Execute crypto deposit

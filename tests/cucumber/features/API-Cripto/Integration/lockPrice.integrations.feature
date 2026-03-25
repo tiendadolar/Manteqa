@@ -25,7 +25,7 @@ Feature: Lock Price Integrations
             | sending expireSeconds empty     | 684b2f25dcca16d5557fd8b2 | 100009352 | SELL | USDT  | ARS     |               | true              |
 
     @ErrorPath @Automated
-    Scenario Outline: Validate error reponse lock price response <case>
+    Scenario Outline: Validate error reponse lock price <case>
         Given Get credentials for company "<companyId>"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<side>" to the variable "side"
