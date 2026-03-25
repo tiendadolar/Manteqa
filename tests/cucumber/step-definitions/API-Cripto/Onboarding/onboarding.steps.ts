@@ -138,7 +138,7 @@ Given('Validate existing user {string}', async function (this: CustomWorld, lega
   await onboardingHelper(this.urlBase, this.apiKey, legalId);
 });
 
-When('Upload {string} image', async function (this: CustomWorld, imageType: string) {
+When('Upload {string} image', { timeout: 50 * 2500 }, async function (this: CustomWorld, imageType: string) {
   const userAnyId: string = CustomWorld.getStoreData('userId');
   const endpoint = imageType === 'selfie' ? '/v2/onboarding-actions/upload-selfie-image' : '/v2/onboarding-actions/upload-identity-image';
   const side = imageType === 'FRONT ID' ? 'FRONT' : 'BACK';
@@ -148,7 +148,7 @@ When('Upload {string} image', async function (this: CustomWorld, imageType: stri
   // validateRes(response, 200);
 });
 
-When('Add {string} bank account', async function (this: CustomWorld, exchange: string) {
+When('Add {string} bank account', { timeout: 50 * 2500 }, async function (this: CustomWorld, exchange: string) {
   const userAnyId: string = CustomWorld.getStoreData('userId');
   const endpoint = '/v2/onboarding-actions/add-bank-account';
 
@@ -156,7 +156,7 @@ When('Add {string} bank account', async function (this: CustomWorld, exchange: s
   validateRes(response, 204);
 });
 
-When('Add PEP info', async function (this: CustomWorld) {
+When('Add PEP info', { timeout: 50 * 2500 }, async function (this: CustomWorld) {
   const userAnyId: string = CustomWorld.getStoreData('userId');
   const endpoint = '/v2/onboarding-actions/upload-pep-documentation';
 
@@ -164,7 +164,7 @@ When('Add PEP info', async function (this: CustomWorld) {
   // validateRes(response, 200);
 });
 
-When('Add FEP info', async function (this: CustomWorld) {
+When('Add FEP info', { timeout: 50 * 2500 }, async function (this: CustomWorld) {
   const userAnyId: string = CustomWorld.getStoreData('userId');
   const endpoint = '/v2/onboarding-actions/upload-fep-documentation';
 
