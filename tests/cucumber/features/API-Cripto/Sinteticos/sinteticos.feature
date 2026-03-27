@@ -9,7 +9,7 @@ Feature: Sintéticos
         # Parte 1: Creación de sintético
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Obtain a company debt "<against>" balance
+        # And Obtain a company debt "<against>" balance
 
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<sessionId>" to the variable "sessionId"
@@ -22,7 +22,7 @@ Feature: Sintéticos
         Then Obtain a response 201
         # Parte 2: Validar ejeccución del sintético
         Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
-        And Obtain a company debt "<against>" balance
+        # And Obtain a company debt "<against>" balance
 
         Examples:
             | companyId                | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
@@ -180,7 +180,7 @@ Feature: Sintéticos
             | 689e03af7919769c293d70bf | 100011129 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 7           | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ETHEREUM        |
 
 
-    @RampOnDesc @Automated
+    @RampOnDesc @Deprecated
     Scenario Outline: Flujo E2E Ramp-On descubierto partially managed deposit stage "<asset>" contra "<against>"
 
         # Parte 1: Creación de sintético

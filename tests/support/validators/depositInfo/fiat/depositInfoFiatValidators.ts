@@ -56,7 +56,7 @@ export class DepositInfoFiatValidator {
   private static validateDepositInfoFiatFields(response: any, exchange: string): void {
     switch (exchange) {
       case 'ARS':
-        expect(response.address).to.be.equal('43100013438000000451101');
+        expect(response.address).to.be.equal('4310001343800000045110');
         expect(response.network).to.be.equal('BANK_TRANSFER');
         expect(response.alias).to.be.equal('TIENDACRYPTO.ARS');
         break;

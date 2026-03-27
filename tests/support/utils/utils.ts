@@ -670,6 +670,21 @@ export const rampOffExchange = (userData: any) => {
         address: userData.withdrawAddress
       }
     };
+  } else if (userData.against === 'COP') {
+    return {
+      externalId: CustomWorld.getExternalId(userData.externalId),
+      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      userAnyId: userData.userAnyId,
+      asset: userData.asset,
+      against: userData.against,
+      assetAmount: userData.assetAmount,
+      destination: {
+        address: userData.withdrawAddress,
+        bankCode: exchangeData[validateExchange(userData.against)].code,
+        accountType: exchangeData[validateExchange(userData.against)].accountType,
+        network: exchangeData[validateExchange(userData.against)].network
+      }
+    };
   } else {
     return {
       externalId: CustomWorld.getExternalId(userData.externalId),

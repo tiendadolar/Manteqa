@@ -48,12 +48,13 @@ export const cryptoDepositHelper2 = async (urlBase: string, endpoint: string, to
   logger.info(`Crypto deposit response: ${JSON.stringify(response.body)}`);
 };
 
-export const fiatDepositHelper = async (urlBase: string, endpoint: string, apiKey: string, apiSecret: string, userId: string, amount: string, coin: string): Promise<any> => {
+export const fiatDepositHelper = async (urlBase: string, endpoint: string, apiKey: string, apiSecret: string, userId: string, amount: string, coin: string, entity?: string): Promise<any> => {
   const payload = {
     userId: userId,
     amount: amount,
-    coin: coin
+    coin: coin,
+    legalEntity: entity
   };
   const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, apiSecret, body: payload });
-  // const response = await request(urlBase).post(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY).set('md-api-secret', apiSecret).send(payload);
+  console.log(JSON.stringify(response.body, null, 2));
 };

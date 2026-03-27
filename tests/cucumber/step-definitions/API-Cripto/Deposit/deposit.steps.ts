@@ -58,13 +58,13 @@ Then('Execute fiat deposit', { timeout: 500 * 1000 }, async function (this: Cust
   const userId: string = CustomWorld.getStoreData('userNumberId') || this.userNumberId || response.userId;
   const amount: string = CustomWorld.getStoreData('thresholdAmount') || this.amount || response.stages['1'].thresholdAmount;
   const coin: string = CustomWorld.getStoreData('coin') || this.coin || response.details.paymentAgainst;
+  const entity: string = response.stages['1'].legalEntity;
 
   logger.info('Executing fiat deposit for synthetic payment...');
-  await fiatDepositHelper(urlBase, endpoint, apiKEY, apiSecret, userId, amount, coin);
+  await fiatDepositHelper(urlBase, endpoint, apiKEY, apiSecret, userId, amount, coin, entity);
 });
 
 Then('Execute cripto deposit to {string} by {string} chain', { timeout: 500 * 1000 }, async function (this: CustomWorld, address: string, chain: string) {
   const amount = this.amount;
   const service = new BlockchainService(chain);
-  
 });
