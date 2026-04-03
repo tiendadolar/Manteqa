@@ -387,8 +387,8 @@ export const fiatWithdrawApiCrypto = (userData: any) => {
 export const fiatWithdrawApiCryptoV2 = (userData: any) => {
   if (userData.asset === 'ARS' || userData.asset === 'USD' || userData.asset === 'BRL') {
     return {
-      externalId: CustomWorld.getExternalId(userData.externalId),
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      externalId: userData.externalId,
+      sessionId: userData.sessionId,
       userAnyId: userData.userAnyId,
       network: userData.network,
       asset: userData.asset,
@@ -400,8 +400,8 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
     };
   } else if (userData.asset === 'CRC') {
     return {
-      externalId: CustomWorld.getExternalId(userData.externalId),
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      externalId: userData.externalId,
+      sessionId: userData.sessionId,
       userAnyId: userData.userAnyId,
       network: userData.network,
       asset: userData.asset,
@@ -418,8 +418,8 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
   if (userData.type === 'crypto') {
     // if (userData.country === "ARG" || userData.country === "BRL") {
     return {
-      externalId: CustomWorld.getExternalId(userData.externalId),
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      externalId: userData.externalId,
+      sessionId: userData.sessionId,
       userAnyId: userData.userAnyId,
       // network: userData.network,
       asset: userData.asset,
@@ -432,8 +432,8 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
     };
   } else if (userData.type === 'crypto' && CustomWorld.getStoreData('code') !== undefined) {
     return {
-      externalId: CustomWorld.getExternalId(userData.externalId),
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      externalId: userData.externalId,
+      sessionId: userData.sessionId,
       userAnyId: userData.userAnyId,
       // network: userData.network,
       asset: userData.asset,
@@ -447,8 +447,8 @@ export const fiatWithdrawApiCryptoV2 = (userData: any) => {
   }
 
   return {
-    externalId: CustomWorld.getExternalId(userData.externalId),
-    sessionId: CustomWorld.getSessionId(userData.sessionId),
+    externalId: userData.externalId,
+    sessionId: userData.sessionId,
     userAnyId: userData.userAnyId,
     network: userData.network,
     asset: userData.asset,
@@ -660,8 +660,8 @@ export const refundsPolling = async function (data: any, userData: any) {
 export const rampOffExchange = (userData: any) => {
   if (userData.against === 'BRL') {
     return {
-      externalId: CustomWorld.getExternalId(userData.externalId),
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      externalId: userData.externalId,
+      sessionId: userData.sessionId,
       userAnyId: userData.userAnyId,
       asset: userData.asset,
       against: userData.against,
@@ -672,8 +672,8 @@ export const rampOffExchange = (userData: any) => {
     };
   } else if (userData.against === 'COP') {
     return {
-      externalId: CustomWorld.getExternalId(userData.externalId),
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      externalId: userData.externalId,
+      sessionId: userData.sessionId,
       userAnyId: userData.userAnyId,
       asset: userData.asset,
       against: userData.against,
@@ -687,8 +687,8 @@ export const rampOffExchange = (userData: any) => {
     };
   } else {
     return {
-      externalId: CustomWorld.getExternalId(userData.externalId),
-      sessionId: CustomWorld.getSessionId(userData.sessionId),
+      externalId: userData.externalId,
+      sessionId: userData.sessionId,
       userAnyId: userData.userAnyId,
       asset: userData.asset,
       against: userData.against,
@@ -704,8 +704,8 @@ export const rampOffExchange = (userData: any) => {
 
 export const rampOnExchange = (userData: any) => {
   return {
-    externalId: CustomWorld.getExternalId(userData.externalId),
-    sessionId: CustomWorld.getSessionId(userData.sessionId),
+    externalId: userData.externalId,
+    sessionId: userData.sessionId,
     userAnyId: userData.userAnyId,
     asset: userData.asset,
     against: userData.against,

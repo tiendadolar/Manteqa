@@ -6,6 +6,8 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+const PREFIX = `${Date.now()}-${uuidv4().split('-')[0]}`;
+
 export interface UserData {
   userAnyId?: string;
   against?: string;
@@ -80,9 +82,9 @@ export class CustomWorld extends World {
     if (value === 'integrations') return value;
     if (value === 'externalIdRepeat') return value;
     this.extIdCounter++;
-    fs.writeFileSync(this.externalIdFile, this.extIdCounter.toString());
-    CustomWorld.setStoreData('externalId', `${value}-${this.extIdCounter}`);
-    return `${value}-${this.extIdCounter}`;
+    const externalId = `${value}-${PREFIX}-${this.extIdCounter}`;
+    CustomWorld.setStoreData('externalId', externalId);
+    return externalId;
   }
 
   static getNetworkId(): string {
