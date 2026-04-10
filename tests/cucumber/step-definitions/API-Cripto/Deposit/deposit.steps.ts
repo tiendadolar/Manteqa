@@ -20,7 +20,7 @@ Then('Execute crypto deposit', { timeout: 500 * 1000 }, async function (this: Cu
   const apiSecret: string = this.apiSecret;
   const from: string = isTron ? 'TB32aawPahWHakN9YPCnshYXP5WXnByCPm' : '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5';
   const to: string = isTron
-    ? response.details.depositAddresses.TRON
+    ? response.details.depositAddresses.TRON.address
     : CustomWorld.getStoreData('depositAddress') || this.to || response.details.depositAddress || response.details.depositAddresses.ETHEREUM.address;
   const wei: string = this.wei || md.toWei(response.stages['1'].thresholdAmount);
   const human: string = CustomWorld.getStoreData('thresholdAmount') || this.human || response.stages['1'].thresholdAmount;

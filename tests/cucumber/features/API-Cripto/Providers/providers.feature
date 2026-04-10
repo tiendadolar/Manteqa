@@ -1,7 +1,7 @@
 @Provider
 Feature: Providers
 
-    @Smoke @Automated
+    @Smoke @ToBeAutomated
     Scenario Outline: Validar providers de pagos <type> para user exchange <exchange>
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://api-qa.tiendacrypto.com"

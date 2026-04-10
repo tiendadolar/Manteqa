@@ -702,6 +702,34 @@ export const rampOffExchange = (userData: any) => {
   }
 };
 
+export const thirdparty = (userData: any) => {
+  return {
+    externalId: userData.externalId,
+    sessionId: userData.sessionId,
+    userAnyId: userData.userAnyId,
+    asset: userData.asset,
+    against: userData.against,
+    assetAmount: userData.assetAmount,
+    destination: {
+      address: userData.withdrawAddress,
+      bankCode: exchangeData[validateExchange(userData.against)].code,
+      accountType: exchangeData[validateExchange(userData.against)].accountType
+    },
+    sender: {
+      exchange: userData.senderExchange,
+      legalId: userData.senderLegalId,
+      name: userData.senderName,
+      surname: userData.senderSurname
+    },
+    recipient: {
+      exchange: userData.recipientExchange,
+      legalId: userData.recipientLegalId,
+      name: userData.recipientName,
+      surname: userData.recipientSurname
+    }
+  };
+};
+
 export const rampOnExchange = (userData: any) => {
   return {
     externalId: userData.externalId,

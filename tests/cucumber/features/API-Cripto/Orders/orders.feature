@@ -443,6 +443,42 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100009089 | 5           | PHP     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | WLD   | SELL | 100061435 | 5           | PYG     |
 
+    @Smoke @Aggregator @V2 @Regression
+    Scenario Outline: Ejecutar ordenes de <trade> de <asset> contra <against> V2 con aggregator
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<side>" to the variable "side"
+        And Assign the value "pixCode" to the variable "code"
+        And Execute the POST method on the endpoint "/v2/orders"
+        Then Obtain a response 201
+
+        When Wait for the processing of the "orden" por 1 seconds
+        And Execute the GET method on the endpoint "/v2/orders/{orderNumberId}"
+        Then Obtain a response 200 y status "COMPLETED"
+        And validate aggregator propierties
+
+        @USDT @Automated
+        Examples:
+            | companyId                | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
+            | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDT  | BUY  | 100065187 | 5           | ARS     |
+            | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDT  | BUY  | 100065187 | 5           | USD     |
+            | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDT  | SELL | 100065187 | 5           | ARS     |
+            | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDT  | SELL | 100065187 | 5           | USD     |
+            
+
+        @USDC @Automated
+        Examples:
+            | companyId                | sessionId   | trade  | asset | side | userAnyId | assetAmount | against |
+            | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDC  | BUY  | 100065187 | 5           | ARS     |
+            | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDC  | BUY  | 100065187 | 5           | USD     |
+            | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDC  | SELL | 100065187 | 5           | ARS     |
+            | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDC  | SELL | 100065187 | 5           | USD     |
+
     @Smoke @V2 @Regression @Plus
     Scenario Outline: Ejecutar ordenes de <trade> de <asset> contra <against> V2 para user PLUS
         Given Get credentials for company "<companyId>"

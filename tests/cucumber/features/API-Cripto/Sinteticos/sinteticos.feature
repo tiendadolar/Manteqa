@@ -37,8 +37,8 @@ Feature: Sintéticos
 
         @Smoke
         Examples:
-            | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
 
     @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed con deposito "<asset>" contra "<against>"
@@ -153,7 +153,7 @@ Feature: Sintéticos
             | 6849d02e906eb70b50893536 | 100009781 | smoke-partialRampOn-DESC-test-n | WLD   | ARS     | 3           | 0x63c91C1F898389bF7b09cD275d4BAD1194f1b77e | WORLDCHAIN      |
 
     # ----- PartiallyManagedAssets -----
-    @RampOnDesc @Automated
+    @RampOnDesc @ToBeAutomated
     Scenario Outline: Flujo E2E Ramp-On descubierto partially managed generando deuda a la company "<asset>" contra "<against>"
 
         # Parte 1: Creación de sintético
@@ -433,15 +433,15 @@ Feature: Sintéticos
         # And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
-            | companyId                | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress        | withdrawNetwork |
-            | 684b2f25dcca16d5557fd8b2 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 3           | 53724491875            | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012259 | smoke-rampoff-n | USDT  | CLP     | 3           | 16778957               | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 3           | 1234567                | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 3           | CR88010404046620113218 | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654     | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        |
+            | companyId                | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress    | withdrawNetwork |
+            # | 684b2f25dcca16d5557fd8b2 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 3           | 53724491875            | ETHEREUM        |
+            # | 684b2f25dcca16d5557fd8b2 | 100012259 | smoke-rampoff-n | USDT  | CLP     | 3           | 16778957               | ETHEREUM        |
+            # | 684b2f25dcca16d5557fd8b2 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 3           | 1234567                | ETHEREUM        |
+            # | 684b2f25dcca16d5557fd8b2 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 3           | CR88010404046620113218 | ETHEREUM        |
+            | 684b2f25dcca16d5557fd8b2 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654 | ETHEREUM        |
+    # | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
+    # | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
+    # | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        |
 
     @Smoke @RampOn @Exchange @Automated @test
     Scenario Outline: Flujo E2E Ramp-On no descubierto para usuario exchange <against>
@@ -474,3 +474,32 @@ Feature: Sintéticos
             | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDC  | PHP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
             | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDC  | COP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
             | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDC  | PUSD    | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+
+    @Smoke @RampOff @ThirdParty @Aggregator @Automated
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Assign the value "<senderExchange>" to the variable "senderExchange"
+        And Assign the value "<senderLegalId>" to the variable "senderLegalId"
+        And Assign the value "<senderName>" to the variable "senderName"
+        And Assign the value "<senderSurname>" to the variable "senderSurname"
+        And Assign the value "<recipientExchange>" to the variable "recipientExchange"
+        And Assign the value "<recipientLegalId>" to the variable "recipientLegalId"
+        And Assign the value "<recipientName>" to the variable "recipientName"
+        And Assign the value "<recipientSurname>" to the variable "recipientSurname"
+        And Execute the POST method on the endpoint "/v2/synthetics/ramp-off"
+        Then Obtain a response 201
+        # Parte 2: Generar depósito
+        And Execute crypto deposit
+        # Parte 2: Validar ejeccución del sintético
+        Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
+        And validate aggregator propierties
+
+        Examples:
+            | companyId                | userAnyId | asset | against | assetAmount | withdrawAddress        | senderExchange | senderLegalId | senderName | senderSurname | recipientExchange | recipientLegalId | recipientName | recipientSurname |
+            | 69d80588cdd32301bed406ab | 100065187 | USDT  | ARS     | 10          | 4530000800015017168564 | ARGENTINA      | 20293755311   | CESAR      | MANRIQUE      | ARGENTINA         | 20344554332      | Lucas         | Segura           |

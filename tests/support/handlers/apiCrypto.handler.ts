@@ -14,6 +14,7 @@ import {
   rampOnExchange,
   remittances,
   senderPaymentSynthetic,
+  thirdparty,
   withdrawLockApiCryptoV2
 } from '../utils/utils';
 import { CustomWorld } from '../world';
@@ -91,6 +92,7 @@ export class CbuCRCHandler implements EndpointHandler {
 
 export class WithdrawFiatV2Handler implements EndpointHandler {
   canHandle(endpoint: string): boolean {
+    CustomWorld.setStoreData('endpoint', '/v2/withdraws');
     return endpoint === '/v2/withdraws';
   }
 
@@ -107,6 +109,17 @@ export class WithdrawLockV2Handler implements EndpointHandler {
 
   handle(userData: any, world?: any) {
     return withdrawLockApiCryptoV2(userData);
+  }
+}
+
+export class ordersHandler implements EndpointHandler {
+  canHandle(endpoint: string): boolean {
+    CustomWorld.setStoreData('endpoint', '/v2/orders');
+    return endpoint === '/v2/orders';
+  }
+
+  handle(userData: any, world?: any) {
+    return;
   }
 }
 
@@ -160,7 +173,11 @@ export class SyntheticOffHandler implements EndpointHandler {
   }
 
   handle(userData: any, world?: any) {
-    return rampOffExchange(userData);
+    if (userData.senderExchange) {
+      return thirdparty(userData);
+    } else {
+      return rampOffExchange(userData);
+    }
   }
 }
 

@@ -44,6 +44,7 @@ Feature: Retiros Fiat
         And Assign the value "<asset>" to the variable "asset"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<address>" to the variable "address"
+        And Assign the value "<network>" to the variable "network"
         And Assign the value "<bankCode>" to the variable "bankCode"
         And Assign the value "<accountType>" to the variable "accountType"
         And Execute the POST method on the endpoint "/v2/withdraws"
@@ -57,18 +58,46 @@ Feature: Retiros Fiat
         Then Obtain a response 200 and status EXECUTED for fiat withdraw
 
         Examples:
-            | companyId                | userAnyId | asset | address                | amount | bankCode  | accountType |
-            | 6864976a08430ed74bf61d0c | 100009881 | CRC   | CR14010200009650656758 | 500    | 0102      | SAVINGS     |
-            | 6864976a08430ed74bf61d0c | 100009874 | BRL   | 02103213262            | 10     |           |             |
-            | 6864976a08430ed74bf61d0c | 100009875 | CLP   | 13033517               | 10000  | 317       | RUT         |
-            | 6864976a08430ed74bf61d0c | 100009876 | COP   | 3172655787             | 100    | 1507      | SAVINGS     |
-            | 6864976a08430ed74bf61d0c | 100009879 | GTQ   | 00980725433            | 100    | 042       | SAVINGS     |
-            | 6864976a08430ed74bf61d0c | 100009877 | MXN   | 4189143297879093       | 100    | 002       | DEBIT       |
-            | 6864976a08430ed74bf61d0c | 100009880 | PHP   | 09931984160            | 100    | shopeepay | SAVINGS     |
-            | 6864976a08430ed74bf61d0c | 100009878 | PUSD  | 117353318              | 100    | 0026      | SAVINGS     |
-            | 6864976a08430ed74bf61d0c | 100009873 | USD   | 1430001714039384360025 | 10     |           |             |
-            | 6864976a08430ed74bf61d0c | 100009873 | ARS   | 1430001713039384360017 | 1000   |           |             |
-            | 6864976a08430ed74bf61d0c | 100036551 | PEN   | 00219400342961406492   | 1000   | 002       | SAVINGS     |
+            | companyId                | userAnyId | asset | address                | amount | bankCode  | accountType | network       |
+            | 6864976a08430ed74bf61d0c | 100009881 | CRC   | CR14010200009650656758 | 500    | 0102      | SAVINGS     |               |
+            | 6864976a08430ed74bf61d0c | 100009874 | BRL   | 02103213262            | 10     |           |             |               |
+            | 6864976a08430ed74bf61d0c | 100009875 | CLP   | 13033517               | 10000  | 317       | RUT         |               |
+            | 6864976a08430ed74bf61d0c | 100009876 | COP   | 3172655787             | 100    | 1507      | SAVINGS     | BANK_TRANSFER |
+            | 6864976a08430ed74bf61d0c | 100009879 | GTQ   | 00980725433            | 100    | 042       | SAVINGS     |               |
+            | 6864976a08430ed74bf61d0c | 100009877 | MXN   | 4189143297879093       | 100    | 002       | DEBIT       |               |
+            | 6864976a08430ed74bf61d0c | 100009880 | PHP   | 09931984160            | 100    | shopeepay | SAVINGS     |               |
+            | 6864976a08430ed74bf61d0c | 100009878 | PUSD  | 117353318              | 100    | 0026      | SAVINGS     |               |
+            | 6864976a08430ed74bf61d0c | 100009873 | USD   | 1430001714039384360025 | 10     |           |             |               |
+            | 6864976a08430ed74bf61d0c | 100009873 | ARS   | 1430001713039384360017 | 1000   |           |             |               |
+            | 6864976a08430ed74bf61d0c | 100036551 | PEN   | 00219400342961406492   | 1000   | 002       | SAVINGS     |               |
+
+
+    @Smoke @Fiat @V2 @Aggregator @Automated
+    Scenario Outline: Crear retiro fiat user por country por V2 "<asset>" con aggregator
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
+
+        When The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Wait for the processing of the "orden" por 5 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
+        And validate aggregator propierties
+
+        Examples:
+            | companyId                | sessionId                | userAnyId | asset | address                | amount | bankCode | accountType | network       |
+            | 69d80588cdd32301bed406ab | test-withdraw-aggregator | 100065187 | ARS   | 1430001713039384360017 | 1000   |          |             | BANK_TRANSFER |
+            | 69d80588cdd32301bed406ab | test-withdraw-aggregator | 100065187 | USD   | 1430001713039384360017 | 1      |          |             | BANK_TRANSFER |
+
 
     @Smoke @Remesas @Automated
     Scenario Outline: Crear retiro fiat user por country por V2 "<asset>"
@@ -110,6 +139,38 @@ Feature: Retiros Fiat
             | 6864976a08430ed74bf61d0c | 100009878 | PUSD  | 117353318              | 1000   | 0026     | CHECKING    | VIETNAM        | 1512121354    | Phong Cao  | Nguyen        | PANAMA            | 17601100           | Jhonnyel      | Yosimar           |
             | 6864976a08430ed74bf61d0c | 100009879 | GTQ   | 32992083658602         | 1000   | 016      | CHECKING    | VIETNAM        | 1512121354    | Phong Cao  | Nguyen        | GUATEMALA         | 2573057420101      | Mónica        | Michelle          |
             | 6864976a08430ed74bf61d0c | 100009881 | CRC   | CR14010200009650656758 | 1000   | 0102     | CHECKING    | VIETNAM        | 1512121354    | Phong Cao  | Nguyen        | COSTA_RICA        | 116800458          | Gloriana      | Aguilar           |
+
+    @Smoke @Remesas @Aggregator @Automated
+    Scenario Outline: Crear retiro fiat user por country por V2 "<asset>"
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<address>" to the variable "address"
+        And Assign the value "<bankCode>" to the variable "bankCode"
+        And Assign the value "<accountType>" to the variable "accountType"
+        And Assign the value "<senderExchange>" to the variable "senderExchange"
+        And Assign the value "<senderLegalId>" to the variable "senderLegalId"
+        And Assign the value "<senderName>" to the variable "senderName"
+        And Assign the value "<senderSurname>" to the variable "senderSurname"
+        And Assign the value "<recipientExchange>" to the variable "recipientExchange"
+        And Assign the value "<recipientLegalId>" to the variable "recipientLegalId"
+        And Assign the value "<recipientName>" to the variable "recipientName"
+        And Assign the value "<recipientSurname>" to the variable "recipientSurname"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
+
+        When Wait for the processing of the "orden" por 5 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED for fiat withdraw
+        And validate aggregator propierties
+
+        Examples:
+            | companyId                | userAnyId | asset | address                | amount | bankCode | accountType | senderExchange | senderLegalId | senderName | senderSurname | recipientExchange | recipientLegalId | recipientName | recipientSurname |
+            | 69d80588cdd32301bed406ab | 100065187 | ARS   | 1430001713039384360017 | 1000   |          |             | ARGENTINA      | 20293755311   | CESAR      | MANRIQUE      | ARGENTINA         | 20344554332      | Lucas         | Segura           |
+            | 69d80588cdd32301bed406ab | 100065187 | ARS   | 1430001713039384360017 | 1000   |          |             | BRAZIL         | 64406822100   | ALTINA     | DOS REIS      | ARGENTINA         | 20344554332      | Lucas         | Segura           |
 
 
     @Regression @Fiat @pendingAdmin
@@ -199,29 +260,3 @@ Feature: Retiros Fiat
         Examples:
             | userAnyId | asset | address                | amount   | bankCode | accountType |
             | 100009997 | ARS   | 1430001713039384360017 | 12000000 |          |             |
-
-# @Regression @Fiat @coinag
-# Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING MERU
-#     Given The API key is available "JHD27DA-1KNMGS7-KZS2V9R-963H29E"
-#     And The urlBase is available "https://sandbox.manteca.dev/crypto"
-#     When Assign the value "<sessionId>" to the variable "sessionId"
-#     And Assign the value "<userAnyId>" to the variable "userAnyId"
-#     # And Assign the value "<network>" to the variable "network"
-#     And Assign the value "<asset>" to the variable "asset"
-#     And Assign the value "<amount>" to the variable "amount"
-#     And Assign the value "<address>" to the variable "address"
-#     And Assign the value "<bankCode>" to the variable "bankCode"
-#     And Assign the value "<accountType>" to the variable "accountType"
-#     And Execute the POST method on the endpoint "/v2/withdraws"
-#     Then Obtain a response 201
-
-#     # Parte 2: Validar ejeccución del sintético
-#     Given The API key is available "JHD27DA-1KNMGS7-KZS2V9R-963H29E"
-#     And The urlBase is available "https://sandbox.manteca.dev/crypto"
-#     When Wait for the processing of the "orden" por 2 seconds
-#     And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
-#     Then Obtain a response 200 and status EXECUTED for fiat withdraw
-
-#     Examples:
-#         | userAnyId | asset | address                | amount   | bankCode | accountType |
-#         | 100009999 | ARS   | 1430001713039384360017 | 12000000 |          |             |

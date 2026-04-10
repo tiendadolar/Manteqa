@@ -142,6 +142,8 @@ When(
         this.userData = handler.handle(this.userData, this);
       }
 
+      CustomWorld.setStoreData('endpoint', endpoint);
+
       console.log('API payload:', JSON.stringify(this.userData, null, 2));
 
       if (/admin/.test(endpoint)) this.urlBase = 'https://api-qa.tiendacrypto.com';

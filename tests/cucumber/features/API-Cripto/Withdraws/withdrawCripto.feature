@@ -72,7 +72,7 @@ Feature: Retiros Crypto
             #|67e56fea17c2cfbcc92efaab | ETH  | 100007647 | ETHEREUM   | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             #|67e56fea17c2cfbcc92efaab | BNB  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             #|67e56fea17c2cfbcc92efaab | BTC  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | 67e56fea17c2cfbcc92efaab | POL  | 100007647 | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 67e56fea17c2cfbcc92efaab | POL  | 100007647 | POLYGON    | 2      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             #| 67e56fea17c2cfbcc92efaab| USDC | 100007647 | POLYGON    | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No Funds in hot wallet Argentina
             # |67e56fea17c2cfbcc92efaab| USDC | 100007647 | BSC        | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | OPTIMISM   | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |

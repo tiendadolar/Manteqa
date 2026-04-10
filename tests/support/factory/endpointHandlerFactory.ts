@@ -8,6 +8,7 @@ import {
   manualRefundHandler,
   OnboardingInitialV1Handler,
   OnboardingInitialV2Handler,
+  ordersHandler,
   SyntheticOffHandler,
   SyntheticPaymentHandler,
   WithdrawFiatV1Handler,
