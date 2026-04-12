@@ -206,6 +206,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDT_PUSD | BUY       | 100009508 | 5      | PUSD    |
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDT_MXN  | BUY       | 100009051 | 5      | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDT_PHP  | BUY       | 100009089 | 5      | PHP     |
+            | 683cce15397feba125068c9b | order-qaa-n | compra | USDT_PYG  | BUY       | 100061435 | 5      | PYG     |
 
         @BuyByCountry @USDC
         Examples:
@@ -220,6 +221,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDC_PUSD | BUY       | 100009508 | 5      | PUSD    |
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDC_MXN  | BUY       | 100009051 | 5      | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | compra | USDC_PHP  | BUY       | 100009089 | 5      | PHP     |
+            | 683cce15397feba125068c9b | order-qaa-n | compra | USDC_PYG  | BUY       | 100061435 | 5      | PYG     |
 
         @SellByCountry @USDT @Automated
         Examples:
@@ -234,6 +236,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDT_PUSD | SELL      | 100009508 | 5      | PUSD    |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDT_MXN  | SELL      | 100009051 | 5      | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDT_PHP  | SELL      | 100009089 | 5      | PHP     |
+            | 683cce15397feba125068c9b | order-qaa-n | venta | USDT_PYG  | SELL      | 100061435 | 5      | PYG     |
 
         @SellByCountry @USDC
         Examples:
@@ -248,6 +251,7 @@ Feature: Ordenes
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC_PUSD | SELL      | 100009508 | 5      | PUSD    |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC_MXN  | SELL      | 100009051 | 5      | MXN     |
             | 683cce15397feba125068c9b | order-qaa-n | venta | USDC_PHP  | SELL      | 100009089 | 5      | PHP     |
+            | 683cce15397feba125068c9b | order-qaa-n | venta | USDC_PYG  | SELL      | 100061435 | 5      | PYG     |
 
     #*---------------- PLUS -----------------*
 
@@ -469,7 +473,7 @@ Feature: Ordenes
             | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDT  | BUY  | 100065187 | 5           | USD     |
             | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDT  | SELL | 100065187 | 5           | ARS     |
             | 69d80588cdd32301bed406ab | order-qaa-n | compra | USDT  | SELL | 100065187 | 5           | USD     |
-            
+
 
         @USDC @Automated
         Examples:

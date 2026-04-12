@@ -412,7 +412,7 @@ Feature: Sintéticos
             | 6830d459db3fdce1729dd147 | 100009774 | smoke-partialRampOff-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | ETHEREUM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDT   | 0     |
     #| 6830d459db3fdce1729dd147| 100009774 | smoke-partialRampOff-test-n | USDC  | ARS     | 10          | 4530000800015017168564 | OPTIMISM        | 0x367b5Aa470049B722ce815b8f9EB66064D0415d4 | USDC   | 5     |
 
-    @Smoke @RampOfft @Exchange @Automated
+    @Smoke @RampOff @Exchange @Automated
     Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
@@ -433,15 +433,15 @@ Feature: Sintéticos
         # And Obtain "<against>" balance for "<userAnyId>" user
 
         Examples:
-            | companyId                | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress    | withdrawNetwork |
-            # | 684b2f25dcca16d5557fd8b2 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 3           | 53724491875            | ETHEREUM        |
-            # | 684b2f25dcca16d5557fd8b2 | 100012259 | smoke-rampoff-n | USDT  | CLP     | 3           | 16778957               | ETHEREUM        |
-            # | 684b2f25dcca16d5557fd8b2 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 3           | 1234567                | ETHEREUM        |
-            # | 684b2f25dcca16d5557fd8b2 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 3           | CR88010404046620113218 | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012271 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654 | ETHEREUM        |
-    # | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
-    # | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
-    # | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        |
+            | companyId                | userAnyId | sessionId       | asset | against | assetAmount | withdrawAddress        | withdrawNetwork |
+            | 684b2f25dcca16d5557fd8b2 | 100011660 | smoke-rampoff-n | USDT  | BRL     | 3           | 53724491875            | ETHEREUM        |
+            | 684b2f25dcca16d5557fd8b2 | 100012259 | smoke-rampoff-n | USDT  | CLP     | 3           | 16778957               | ETHEREUM        |
+            | 684b2f25dcca16d5557fd8b2 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 3           | 1234567                | ETHEREUM        |
+            | 684b2f25dcca16d5557fd8b2 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 3           | CR88010404046620113218 | ETHEREUM        |
+            | 684b2f25dcca16d5557fd8b2 | 100067285 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654     | ETHEREUM        |
+            | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
+            | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
+            | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        |
 
     @Smoke @RampOn @Exchange @Automated @test
     Scenario Outline: Flujo E2E Ramp-On no descubierto para usuario exchange <against>
@@ -470,13 +470,13 @@ Feature: Sintéticos
             | 684b2f25dcca16d5557fd8b2 | 100012259 | smoke-rampoff-n | USDC  | CLP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
             | 684b2f25dcca16d5557fd8b2 | 100012269 | smoke-rampoff-n | USDC  | GTQ     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
             | 684b2f25dcca16d5557fd8b2 | 100012270 | smoke-rampoff-n | USDC  | CRC     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
-            | 684b2f25dcca16d5557fd8b2 | 100012271 | smoke-rampoff-n | USDC  | MXN     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
+            | 684b2f25dcca16d5557fd8b2 | 100067285 | smoke-rampoff-n | USDC  | MXN     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
             | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDC  | PHP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
             | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDC  | COP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
             | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDC  | PUSD    | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
 
     @Smoke @RampOff @Aggregator @Automated
-    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against> con aggregator
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
@@ -497,7 +497,7 @@ Feature: Sintéticos
             | 69d80588cdd32301bed406ab | 100065187 | USDT  | ARS     | 10          | 4530000800015017168564 |
 
     @Smoke @RampOff @ThirdParty @Aggregator @Automated
-    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against> con aggregator
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<userAnyId>" to the variable "userAnyId"

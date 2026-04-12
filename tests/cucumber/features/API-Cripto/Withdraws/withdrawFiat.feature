@@ -32,6 +32,7 @@ Feature: Retiros Fiat
             | 6864a82d08430ed74bf6296f | 100009887 | PUSD | 0472001494028          | 100    |              |
             | 6864a82d08430ed74bf6296f | 100009893 | USD  | 1430001714039384360025 | 10     |              |
             | 6864a82d08430ed74bf6296f | 100009893 | ARS  | 1430001713039384360017 | 1000   |              |
+            | 6864a82d08430ed74bf6296f | 100067281 | PYG  | 111121996495           | 1000   |              |
 
 
     @Smoke @Fiat @V2 @Automated
@@ -70,6 +71,7 @@ Feature: Retiros Fiat
             | 6864976a08430ed74bf61d0c | 100009873 | USD   | 1430001714039384360025 | 10     |           |             |               |
             | 6864976a08430ed74bf61d0c | 100009873 | ARS   | 1430001713039384360017 | 1000   |           |             |               |
             | 6864976a08430ed74bf61d0c | 100036551 | PEN   | 00219400342961406492   | 1000   | 002       | SAVINGS     |               |
+            | 6864976a08430ed74bf61d0c | 100067267 | PYG   | 111121996495           | 1000   | 003       | SAVINGS     |               |
 
 
     @Smoke @Fiat @V2 @Aggregator @Automated
@@ -141,6 +143,7 @@ Feature: Retiros Fiat
             | 6864976a08430ed74bf61d0c | 100009878 | PUSD  | 117353318              | 1000   | 0026     | CHECKING    | VIETNAM        | 1512121354    | Phong Cao  | Nguyen        | PANAMA            | 17601100           | Jhonnyel      | Yosimar           |
             | 6864976a08430ed74bf61d0c | 100009879 | GTQ   | 32992083658602         | 1000   | 016      | CHECKING    | VIETNAM        | 1512121354    | Phong Cao  | Nguyen        | GUATEMALA         | 2573057420101      | Mónica        | Michelle          |
             | 6864976a08430ed74bf61d0c | 100009881 | CRC   | CR14010200009650656758 | 1000   | 0102     | CHECKING    | VIETNAM        | 1512121354    | Phong Cao  | Nguyen        | COSTA_RICA        | 116800458          | Gloriana      | Aguilar           |
+            | 6864976a08430ed74bf61d0c | 100067267 | PYG   | 111121996495           | 1000   | 003      | SAVINGS     | VIETNAM        | 1512121354    | Phong Cao  | Nguyen        | PARAGUAY          | 116800458          | Gloriana      | Aguilar           |
 
     @Smoke @Remesas @Aggregator @Automated
     Scenario Outline: Crear retiro fiat user por country por V2 "<asset>" con aggregator

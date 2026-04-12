@@ -41,8 +41,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -53,8 +51,6 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -110,7 +106,7 @@ Feature: Retiros Crypto
 
     @Regression @Crypto @ARG @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user ARG por V1
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -118,8 +114,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -130,30 +124,28 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100009893 | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-        # | WLD  | 100009893 | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | No funds in hot wallet Argentina
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | WLD  | 100009893 | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+        #| | WLD  | 100009893 | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | No funds in hot wallet Argentina
 
         @Working
         Examples:
-            | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009893 | POLYGON  | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            # | USDT | 100009893 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | USDT | 100009893 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009893 | OPTIMISM | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100009893 | POLYGON  | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            #| 6864a82d08430ed74bf6296f| USDT | 100009893 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
+            | 6864a82d08430ed74bf6296f | USDT | 100009893 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDC | 100009893 | OPTIMISM | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
 
     @Regression @Crypto @CHL @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user CHL por V1
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -161,8 +153,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -173,29 +163,27 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100009892 | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | WLD  | 100009892 | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | WLD  | 100009892 | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864a82d08430ed74bf6296f | WLD  | 100009892 | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @NoFundsAvailableInHotWallet
         Examples:
-            | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009892 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009892 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009892 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009892 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100009892 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009892 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009892 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDC | 100009892 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
     @Regression @Crypto @COL @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user COL por V1
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -203,8 +191,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -215,28 +201,26 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 40 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100009891 | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | WLD  | 100009891 | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @NoFundsAvailableInHotWallet
         Examples:
-            | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009891 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009891 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009891 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009891 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100009891 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009891 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009891 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDC | 100009891 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
     @Regression @Crypto @MXN @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user MXN por V1
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -244,8 +228,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -256,28 +238,26 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100009889 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | WLD  | 100009889 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @NoFundsAvailableInHotWallet
         Examples:
-            | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009889 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009889 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009889 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009889 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100009889 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009889 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009889 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDC | 100009889 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
     @Regression @Crypto @PAN @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user PAN por V1
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -285,8 +265,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -297,28 +275,26 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100009887 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId | coin | userId    | chain      | amount | wallet                                     |
+            |           | WLD  | 100009887 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @NoFundsAvailableInHotWallet
         Examples:
-            | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009887 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009887 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009887 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009887 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100009887 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009887 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009887 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDC | 100009887 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
     @Regression @Crypto @GTQ @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user GTQ por V1
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -326,8 +302,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -338,28 +312,26 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100009886 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | WLD  | 100009886 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @NoFundsAvailableInHotWallet
         Examples:
-            | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009886 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009886 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009886 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009886 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100009886 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009886 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009886 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDC | 100009886 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
     @Regression @Crypto @PHP @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user PHP por V1
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -367,8 +339,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -379,28 +349,26 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100009885 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | WLD  | 100009885 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @NoFundsAvailableInHotWallet
         Examples:
-            | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009885 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009885 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009885 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009885 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100009885 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009885 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009885 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDC | 100009885 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
 
     @Regression @Crypto @BRA @V1 @Automated
     Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user BRA por V1
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
+        Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<userId>" to the variable "userId"
@@ -408,8 +376,6 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
         Then Obtain a response 200
 
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<coin>" to the variable "coin"
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<wallet>" to the variable "to"
@@ -420,24 +386,60 @@ Feature: Retiros Crypto
         Then Obtain a response 200
 
         # Parte 2: Validar ejeccución del sintético
-        Given The API key is available "Y2HQYTM-BHQ4377-Q9XS7RX-17PPS04"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         @WLD
         Examples:
-            | coin | userId    | chain      | amount | wallet                                     |
-            | WLD  | 100009884 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | WLD  | 100009884 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @NoFundsAvailableInHotWallet
         Examples:
-            | coin | userId    | chain    | amount | wallet                                     |
-            | USDT | 100009884 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009884 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDT | 100009884 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
-            | USDC | 100009884 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100009884 | POLYGON  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009884 | BINANCE  | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100009884 | ETHEREUM | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDC | 100009884 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+
+    @Regression @Crypto @PYG @V1 @Automated
+    Scenario Outline: Ejecutar retiro crypto de <coin> mediante <chain> para user BRA por V1
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "<chain>" to the variable "chain"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw/lock"
+        Then Obtain a response 200
+
+        When Assign the value "<coin>" to the variable "coin"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<wallet>" to the variable "to"
+        And Assign the value "<chain>" to the variable "chain"
+        And Assign the value "<userId>" to the variable "userId"
+        And Assign the value "code" to the variable "costCode"
+        And Execute the POST method on the endpoint "/v1/transaction/withdraw"
+        Then Obtain a response 200
+
+        # Parte 2: Validar ejeccución del sintético
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
+
+        @WLD
+        Examples:
+            | companyId                | coin | userId    | chain      | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | WLD  | 100067281 | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+        @NoFundsAvailableInHotWallet
+        Examples:
+            | companyId                | coin | userId    | chain    | amount | wallet                                     |
+            | 6864a82d08430ed74bf6296f | USDT | 100067281 | POLYGON  | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            # | 6864a82d08430ed74bf6296f | USDT | 100067281 | BINANCE  | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+            | 6864a82d08430ed74bf6296f | USDT | 100067281 | ETHEREUM | 4      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+    # | 6864a82d08430ed74bf6296f | USDC | 100067281 | OPTIMISM | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
+
 
     # ------------- V2 ---------------
 
@@ -481,14 +483,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -503,7 +500,7 @@ Feature: Retiros Crypto
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
             | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | POLYGON  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 7      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | BINANCE  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -524,14 +521,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -539,16 +531,16 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | 683cce15397feba125068c9b | crypto | WLD   | 100011214 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 683cce15397feba125068c9b | crypto | WLD   | 100011214 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | WLD   | 100011214 | BRA     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | WLD   | 100011214 | BRA     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | BRA     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @TRON
         Examples:
@@ -576,14 +568,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -591,16 +578,16 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009875 | ARG     | WORLDCHAIN | 3      | 0x48ed4fdbc27c52658912e7daad711defd7777908 |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009875 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009875 | CPL     | WORLDCHAIN | 3      | 0x48ed4fdbc27c52658912e7daad711defd7777908 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009875 | CPL     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009875 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | CPL     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | CPL     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | CPL     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009875 | CPL     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -623,14 +610,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -638,16 +620,16 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009876 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009876 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009876 | COP     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009876 | COP     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009876 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | COP     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | COP     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 |COP     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009876 | COP     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
     #     | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
@@ -669,14 +651,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -684,16 +661,16 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009877 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009877 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009877 | MXN     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009877 | MXN     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009877 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | MXN     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | MXN     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | MXN     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009877 | MXN     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -716,14 +693,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -731,16 +703,16 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009878 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009878 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009878 | PAN     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009878 | PAN     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009878 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | PAN     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | PAN     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+    # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009878 | PAN     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+    # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009878 | PAN     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -763,14 +735,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -778,14 +745,14 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009879 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009879 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009879 | GTQ     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009879 | GTQ     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009879 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009879 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009879 | GTQ     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009879 | GTQ     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009879 | ARG     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009879 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
@@ -810,14 +777,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -825,17 +787,17 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009880 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009880 | ARG     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009880 | PHP     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009880 | PHP     | OPTIMISM   | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
-            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009880 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009880 | ARG     | ETHEREUM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | ARG     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | PHP     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009880 | PHP     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009880 | PHP     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | PHP     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009880 | PHP     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -858,14 +820,9 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
-
         # Parte 2: Validar ejeccución del sintético
-        Given Get credentials for company "<companyId>"
-        And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Wait for the processing of the "orden" por 60 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
@@ -873,16 +830,16 @@ Feature: Retiros Crypto
         @WLD
         Examples:
             | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
-            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009881 | ARG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100009881 | CRC     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
         @Working
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
-            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 | ARG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009881 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009881 | ARG     | ETHEREUM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 | ARG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 | ARG     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 |CRC     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009881 |CRC     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009881 | CRC     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 | CRC    | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009881 | CRC     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -893,6 +850,39 @@ Feature: Retiros Crypto
     #     | crypto | USDT  | 100009873 | ARG     | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
     #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+    @Smoke @Crypto @PYGv2 @V2 @Automated
+    Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<network>" to the variable "network"
+        And Assign the value "<address>" to the variable "address"
+        And Execute the POST method on the endpoint "/v2/withdraws"
+        Then Obtain a response 201
+        # Parte 2: Validar ejeccución del sintético
+        When Wait for the processing of the "orden" por 60 seconds
+        And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
+        Then Obtain a response 200 and status EXECUTED
+
+        @WLD
+        Examples:
+            | companyId                | type   | asset | userAnyId | country | network    | amount | address                                    |
+            | 6864976a08430ed74bf61d0c | crypto | WLD   | 100067267 | PYG     | WORLDCHAIN | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
+        @Working
+        Examples:
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
+            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100067267 |PYG     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100067267 |PYG     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100067267 | PYG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100067267 | PYG    | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100067267 | PYG     | BASE     | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+
 
     @Smoke @Crypto @V2Endpoint @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> haciendo lock price por V2
@@ -912,8 +902,6 @@ Feature: Retiros Crypto
         And Assign the value "<amount>" to the variable "amount"
         And Assign the value "<network>" to the variable "network"
         And Assign the value "<address>" to the variable "address"
-        And Assign the value "<type>" to the variable "type"
-        And Assign the value "<country>" to the variable "country"
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
 
