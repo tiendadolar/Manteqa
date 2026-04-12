@@ -475,6 +475,27 @@ Feature: Sintéticos
             | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDC  | COP     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
             | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDC  | PUSD    | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | BASE            |
 
+    @Smoke @RampOff @Aggregator @Automated
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Execute the POST method on the endpoint "/v2/synthetics/ramp-off"
+        Then Obtain a response 201
+        # Parte 2: Generar depósito
+        And Execute crypto deposit
+        # Parte 2: Validar ejeccución del sintético
+        Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
+        And validate aggregator propierties
+
+        Examples:
+            | companyId                | userAnyId | asset | against | assetAmount | withdrawAddress        |
+            | 69d80588cdd32301bed406ab | 100065187 | USDT  | ARS     | 10          | 4530000800015017168564 |
+
     @Smoke @RampOff @ThirdParty @Aggregator @Automated
     Scenario Outline: Flujo E2E Ramp-Off no descubierto para usuario exchange <against>
         Given Get credentials for company "<companyId>"

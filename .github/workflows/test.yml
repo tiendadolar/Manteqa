@@ -33,6 +33,7 @@ on:
           - 'Withdraw Crypto V1'
           - 'Withdraw Crypto V2'
           - 'Remesas'
+          - 'Aggregator'
           - 'Integrations'
           - 'Integrations - OnboardingV2'
           - 'Integrations - Lock Payment'
@@ -141,6 +142,9 @@ jobs:
               ;;
             "Remesas")
               TAGS="@Withdraw and @Smoke and @Remesas and @Automated"
+              ;;
+            "Aggregator")
+              TAGS="@Aggregator and @Smoke"
               ;;
             "Integrations")
               TAGS="@Integrations and @Automated"

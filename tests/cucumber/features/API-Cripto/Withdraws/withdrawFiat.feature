@@ -93,6 +93,8 @@ Feature: Retiros Fiat
         Then Obtain a response 200 and status EXECUTED for fiat withdraw
         And validate aggregator propierties
 
+        #ARS Withdraw must be consume for WALLET_ARG
+        #USD Withdraw must be consume for CRYPTO_ARG
         Examples:
             | companyId                | sessionId                | userAnyId | asset | address                | amount | bankCode | accountType | network       |
             | 69d80588cdd32301bed406ab | test-withdraw-aggregator | 100065187 | ARS   | 1430001713039384360017 | 1000   |          |             | BANK_TRANSFER |
@@ -141,7 +143,7 @@ Feature: Retiros Fiat
             | 6864976a08430ed74bf61d0c | 100009881 | CRC   | CR14010200009650656758 | 1000   | 0102     | CHECKING    | VIETNAM        | 1512121354    | Phong Cao  | Nguyen        | COSTA_RICA        | 116800458          | Gloriana      | Aguilar           |
 
     @Smoke @Remesas @Aggregator @Automated
-    Scenario Outline: Crear retiro fiat user por country por V2 "<asset>"
+    Scenario Outline: Crear retiro fiat user por country por V2 "<asset>" con aggregator
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
@@ -167,11 +169,11 @@ Feature: Retiros Fiat
         Then Obtain a response 200 and status EXECUTED for fiat withdraw
         And validate aggregator propierties
 
+        #ARS Withdraw must be consume for WALLET_ARG
         Examples:
             | companyId                | userAnyId | asset | address                | amount | bankCode | accountType | senderExchange | senderLegalId | senderName | senderSurname | recipientExchange | recipientLegalId | recipientName | recipientSurname |
             | 69d80588cdd32301bed406ab | 100065187 | ARS   | 1430001713039384360017 | 1000   |          |             | ARGENTINA      | 20293755311   | CESAR      | MANRIQUE      | ARGENTINA         | 20344554332      | Lucas         | Segura           |
             | 69d80588cdd32301bed406ab | 100065187 | ARS   | 1430001713039384360017 | 1000   |          |             | BRAZIL         | 64406822100   | ALTINA     | DOS REIS      | ARGENTINA         | 20344554332      | Lucas         | Segura           |
-
 
     @Regression @Fiat @pendingAdmin
     Scenario Outline: Crear retiro fiat user por country por V2 ADMIN_PENDING "<asset>"

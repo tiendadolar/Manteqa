@@ -14,8 +14,6 @@ Then('validate aggregator propierties', { timeout: 50 * 2500 }, async function (
   let asset: string = '';
   let against: string = '';
   let legalEntity: string = '';
-  const order: any = Object.values(response.body.stages).find((stage: any) => stage.stageType === 'ORDER');
-  const withdraw: any = Object.values(response.body.stages).find((stage: any) => stage.stageType === 'WITHDRAW');
 
   switch (endpoint) {
     case '/v2/withdraws':
@@ -33,6 +31,8 @@ Then('validate aggregator propierties', { timeout: 50 * 2500 }, async function (
       break;
 
     case '/v2/synthetics/ramp-off':
+      const order: any = Object.values(response.body.stages).find((stage: any) => stage.stageType === 'ORDER');
+      const withdraw: any = Object.values(response.body.stages).find((stage: any) => stage.stageType === 'WITHDRAW');
       validateEntitySyntheticOrder(order.against, order.legalEntity);
       validateEntitySyntheticWithdraw(withdraw.asset, withdraw.legalEntity);
       break;
