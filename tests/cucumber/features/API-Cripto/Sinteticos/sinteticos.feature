@@ -28,7 +28,6 @@ Feature: Sintéticos
             | companyId                | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
             | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 5           | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | ETHEREUM        |
-            #|6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | DAI   | ARS     | 5           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
             #|6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | BINANCE         |
             #|6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | POLYGON         |
             | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 15          | 0xd673e64ea7b8689920c957414d01c488B5a4fab5 | OPTIMISM        |
@@ -242,7 +241,6 @@ Feature: Sintéticos
             | companyId                | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
             | 6830d459db3fdce1729dd147 | 100008214 | smoke-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
             | 6830d459db3fdce1729dd147 | 100008214 | smoke-test-n | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
-            # | 6830d459db3fdce1729dd147 | 100008214 | smoke-test-n | DAI   | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | ETHEREUM        |
             | 6830d459db3fdce1729dd147 | 100008214 | smoke-test-n | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | OPTIMISM        |
 
 
@@ -334,7 +332,6 @@ Feature: Sintéticos
             | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | USDT   | 3     |
             | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | STELLAR         | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | USDC   | 3     |
     # |6830d459db3fdce1729dd147| 100009688 | smoke-test-n | USDT  | ARS     | 7           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
-    # |6830d459db3fdce1729dd147| 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
     # |6830d459db3fdce1729dd147| 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |
 
     @RampOff @Tron @Automated

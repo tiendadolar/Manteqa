@@ -17,7 +17,6 @@ Feature: Retiros Crypto
             | 67e56fea17c2cfbcc92efaab | USDT  | 100007647 | POLYGON  |
             | 67e56fea17c2cfbcc92efaab | USDC  | 100007647 | POLYGON  |
             | 67e56fea17c2cfbcc92efaab | POL   | 100007647 | POLYGON  |
-            | 67e56fea17c2cfbcc92efaab | DAI   | 100007647 | BSC      |
             | 67e56fea17c2cfbcc92efaab | BNB   | 100007647 | BSC      |
             | 67e56fea17c2cfbcc92efaab | ETH   | 100007647 | BSC      |
             | 67e56fea17c2cfbcc92efaab | BTC   | 100007647 | BSC      |
@@ -68,7 +67,6 @@ Feature: Retiros Crypto
             # |67e56fea17c2cfbcc92efaab| USDT | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             # |67e56fea17c2cfbcc92efaab| USDT | 100007647 | ARBITRUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             | 67e56fea17c2cfbcc92efaab | USDT | 100007647 | ETHEREUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA               |
-            #|67e56fea17c2cfbcc92efaab | DAI  | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             #| 67e56fea17c2cfbcc92efaab| ETH  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             #|67e56fea17c2cfbcc92efaab | ETH  | 100007647 | ETHEREUM   | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             #|67e56fea17c2cfbcc92efaab | BNB  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA

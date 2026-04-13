@@ -37,7 +37,6 @@ Feature: Ordenes
             | companyId                | sessionId   | trade  | coin     | operation | userId    | amount | against |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | compra | WLD_ARS  | BUY       | 100010451 | 5      | ARS     |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | compra | USDT_ARS | BUY       | 100010451 | 5      | ARS     |
-            | 684b2f25dcca16d5557fd8b2 | order-qaa-n | compra | DAI_ARS  | BUY       | 100010451 | 5      | ARS     |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | compra | USDC_ARS | BUY       | 100010451 | 5      | ARS     |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | compra | ETH_ARS  | BUY       | 100010451 | 0.01   | ARS     |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | compra | BNB_ARS  | BUY       | 100010451 | 0.01   | ARS     |
@@ -105,7 +104,6 @@ Feature: Ordenes
             | companyId                | sessionId   | trade | coin     | operation | userId    | amount | against |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | venta | WLD_ARS  | SELL      | 100010451 | 5      | ARS     |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | venta | USDT_ARS | SELL      | 100010451 | 5      | ARS     |
-            | 684b2f25dcca16d5557fd8b2 | order-qaa-n | venta | DAI_ARS  | SELL      | 100010451 | 5      | ARS     |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | venta | USDC_ARS | SELL      | 100010451 | 5      | ARS     |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | venta | ETH_ARS  | SELL      | 100010451 | 0.01   | ARS     |
             | 684b2f25dcca16d5557fd8b2 | order-qaa-n | venta | BNB_ARS  | SELL      | 100010451 | 0.01   | ARS     |
@@ -289,7 +287,6 @@ Feature: Ordenes
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDC_ARS  | BUY       | 100058862 | 5      | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDCB_ARS | BUY       | 100058862 | 5      | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | WLD_ARS   | BUY       | 100058862 | 5      | ARS     |
-            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | DAI_ARS   | BUY       | 100058862 | 5      | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | ETH_ARS   | BUY       | 100058862 | 0.01   | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BTC_ARS   | BUY       | 100058862 | 0.01   | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BNB_ARS   | BUY       | 100058862 | 0.1    | ARS     |
@@ -328,7 +325,6 @@ Feature: Ordenes
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDC_ARS  | SELL      | 100058862 | 4      | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDCB_ARS | SELL      | 100058862 | 4      | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | WLD_ARS   | SELL      | 100058862 | 4      | ARS     |
-            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | DAI_ARS   | SELL      | 100058862 | 4      | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | ETH_ARS   | SELL      | 100058862 | 0.01   | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | BTC_ARS   | SELL      | 100058862 | 0.01   | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | BNB_ARS   | SELL      | 100058862 | 0.1    | ARS     |
@@ -509,7 +505,6 @@ Feature: Ordenes
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDC  | BUY  | 100058862 | 5           | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | USDCB | BUY  | 100058862 | 5           | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | WLD   | BUY  | 100058862 | 5           | ARS     |
-            | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | DAI   | BUY  | 100058862 | 5           | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | ETH   | BUY  | 100058862 | 0.01        | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BTC   | BUY  | 100058862 | 0.01        | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | compra | BNB   | BUY  | 100058862 | 0.1         | ARS     |
@@ -521,7 +516,6 @@ Feature: Ordenes
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDC  | SELL | 100058862 | 5           | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | USDCB | SELL | 100058862 | 5           | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | WLD   | SELL | 100058862 | 5           | ARS     |
-            | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | DAI   | SELL | 100058862 | 5           | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | ETH   | SELL | 100058862 | 0.01        | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | BTC   | SELL | 100058862 | 0.01        | ARS     |
             | 69aa390533ca661b9c97bf94 | order-qaa-n | venta | BNB   | SELL | 100058862 | 0.1         | ARS     |

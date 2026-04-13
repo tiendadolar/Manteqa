@@ -19,7 +19,6 @@ Feature: Prices V2
             | 683cce15397feba125068c9b | ETH_ARS   |
             | 683cce15397feba125068c9b | BTC_ARS   |
             | 683cce15397feba125068c9b | BNB_ARS   |
-            | 683cce15397feba125068c9b | DAI_ARS   |
             | 683cce15397feba125068c9b | TRX_ARS   |
 
         @USD
@@ -32,7 +31,6 @@ Feature: Prices V2
             | 683cce15397feba125068c9b | ETH_USD   |
             | 683cce15397feba125068c9b | BTC_USD   |
             | 683cce15397feba125068c9b | BNB_USD   |
-            | 683cce15397feba125068c9b | DAI_USD   |
             | 683cce15397feba125068c9b | TRX_USD   |
 
         @CLP

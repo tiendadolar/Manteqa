@@ -37,12 +37,12 @@ Feature: Initial Onboarding Integrations
         And Validate initial onboarding response attributes
 
         Examples:
-            | companyId                | credential                | externalId            | email                          | legalId     | exchange  | name            | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street         |
-            | 683cce15397feba125068c9b | andresperalta@manteca.dev | Integrations-test-Arg | testargentinaonbauto@gmail.com | 20127748331 | ARGENTINA | EDUARDO MARCELO | ACHA    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | Av. Corrientes |
+            | companyId                | credential                | externalId            | email                          | legalId     | exchange  | name   | surname | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street         |
+            | 683cce15397feba125068c9b | andresperalta@manteca.dev | Integrations-test-Arg | testargentinaonbauto@gmail.com | 20217831157 | ARGENTINA | JAVIER | ADUR    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | Av. Corrientes |
 
     # ------------------------------- Error Path -------------------------------
 
-    @ErrorPath1 @Automated
+    @ErrorPath @Automated
     Scenario Outline: Validate error initial onboarding sending <case> V2
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
