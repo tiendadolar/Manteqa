@@ -37,8 +37,9 @@ Feature: Sintéticos
 
         @Smoke
         Examples:
-            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
-            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                                          | withdrawNetwork |
+            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | WORLDCHAIN      |
+            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | STELLAR         |
 
     @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed con deposito "<asset>" contra "<against>"
@@ -65,8 +66,9 @@ Feature: Sintéticos
 
         @Smoke
         Examples:
-            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                            | withdrawNetwork |
-            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                              | withdrawNetwork |
+            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   | WORLDCHAIN      |
+            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | true         | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw | SOLANA          |
 
     @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed operando desde userBalance "<asset>" contra "<against>"
@@ -90,8 +92,9 @@ Feature: Sintéticos
 
         @Smoke
         Examples:
-            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                            | withdrawNetwork |
-            | 6849d02e906eb70b50893536 | 100009788 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | disallowDebt | withdrawAddress                              | withdrawNetwork |
+            | 6849d02e906eb70b50893536 | 100009788 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | true         | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   | WORLDCHAIN      |
+            | 6849d02e906eb70b50893536 | 100009788 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 3           | true         | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw | SOLANA          |
 
     @RampOnDesc @Tron @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed generando deuda a la company "<asset>" contra "<against>"
@@ -325,8 +328,11 @@ Feature: Sintéticos
 
 
         Examples:
-            | companyId                | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
-            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | WLD   | ARS     | 10          | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
+            | companyId                | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                                       | ticker | chain |
+            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | WLD   | ARS     | 5           | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | WLD    | 6     |
+            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | USDC   | 3     |
+            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | USDT   | 3     |
+            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | STELLAR         | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | USDC   | 3     |
     # |6830d459db3fdce1729dd147| 100009688 | smoke-test-n | USDT  | ARS     | 7           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
     # |6830d459db3fdce1729dd147| 100009688 | smoke-test-n | DAI   | ARS     | 5           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | DAI    | 0     |
     # |6830d459db3fdce1729dd147| 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |

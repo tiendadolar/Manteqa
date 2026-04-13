@@ -4,7 +4,7 @@ const request = require('supertest');
 const md = require('@md/math');
 import { getCredentials } from '../../../../support/config/credentials.config';
 import { NETWORKS_MAPPINGS } from '../../../../support/constants/constantsNetworks';
-import { cryptoDepositHelper, cryptoDepositHelper2, fiatDepositHelper } from '../../../../support/helpers/depositHelper';
+import { cryptoDepositHelper, cryptoDepositHelper2, fiatDepositHelper, getHotWallet } from '../../../../support/helpers/depositHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import { BlockchainService } from '../../../../support/services/blockChain.services';
 import logger from '../../../../support/utils/logger';
@@ -13,15 +13,19 @@ import { CustomWorld, UserData } from '../../../../support/world';
 Then('Execute crypto deposit', { timeout: 500 * 1000 }, async function (this: CustomWorld) {
   const withdrawNetwork = CustomWorld.getStoreData('withdrawNetwork');
   const response = this.response.body;
+  const depositStage: any = Object.values(this.response.body.stages).find((s: any) => s.stageType === 'DEPOSIT');
+  const entity: string = depositStage.legalEntity;
   const isTron = Object.keys(response.details.depositAddresses).length === 1 && response.details.depositAddresses.hasOwnProperty('TRON');
   const urlBase: string = this.urlBase;
   const endpoint: string = '/v1/transaction/deposit';
   const apiKEY: string = getCredentials('6127ac5e8e7d68001294d6bb');
   const apiSecret: string = this.apiSecret;
-  const from: string = isTron ? 'TB32aawPahWHakN9YPCnshYXP5WXnByCPm' : '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5';
-  const to: string = isTron
-    ? response.details.depositAddresses.TRON.address
-    : CustomWorld.getStoreData('depositAddress') || this.to || response.details.depositAddress || response.details.depositAddresses.ETHEREUM.address;
+  // const from: string = isTron ? 'TB32aawPahWHakN9YPCnshYXP5WXnByCPm' : '0x9bD31d82B6212dd60a9328CCe7277161e5975fB5';
+  const from: string = getHotWallet(withdrawNetwork, entity);
+  // const to: string = isTron
+  //   ? response.details.depositAddresses.TRON.address
+  //   : CustomWorld.getStoreData('depositAddress') || this.to || response.details.depositAddress || response.details.depositAddresses.ETHEREUM.address;
+  const to: string = response.details.depositAddresses[withdrawNetwork]?.address ?? response.details.depositAddress;
   const wei: string = this.wei || md.toWei(response.stages['1'].thresholdAmount);
   const human: string = CustomWorld.getStoreData('thresholdAmount') || this.human || response.stages['1'].thresholdAmount;
   const ticker: string = this.ticker || response.details.paymentAgainstAsset || response.details.paymentAgainst || response.stages['1'].asset;

@@ -58,3 +58,34 @@ export const fiatDepositHelper = async (urlBase: string, endpoint: string, apiKe
   const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, apiSecret, body: payload });
   console.log(JSON.stringify(response.body, null, 2));
 };
+
+export const getHotWallet = (network: string | undefined, entity: string): string => {
+  if (!network || network === undefined) {
+    if (entity === 'CRYPTO_GLOBAL') return '0x0BB116fED4F402DBE82dF6AA66E50105c1d310d9';
+    if (entity === 'CRYPTO_ARG') return '0xd99589F1b1695996533bB4dB43B97DD6331dBcc2';
+    if (entity === 'WALLET_ARG') return '0x500BD656601F3454121FF72ef52AEB27bA8CC88C';
+  }
+
+  switch (network) {
+    case 'SOLANA':
+      if (entity === 'CRYPTO_GLOBAL') return 'A5FrHAimj28EmysnRXoPb1go3Z1tfCuYqdvV8NrWeioe';
+      if (entity === 'CRYPTO_ARG') return 'tiKHPRHbxnUSmeggWWd17zuQ1z4HV2427x4xcmuVD8p';
+      break;
+
+    case 'STELLAR':
+      if (entity === 'CRYPTO_GLOBAL') return 'GCVQ3XR5GZK76BA4EAWM5Z7DEBCXVA5NYPJSEB6UOKMCHHA4QYQQURYK';
+      if (entity === 'CRYPTO_ARG') return 'GDDF5T734QWTTLFSBDZVO2J6ERT2LO2LNRKNLYRPIXMA3KUSKW755LTU';
+      break;
+
+    case 'TRON':
+      if (entity === 'CRYPTO_GLOBAL') return '0x0BB116fED4F402DBE82dF6AA66E50105c1d310d9';
+      if (entity === 'CRYPTO_ARG') return 'TVogmpw7MbNCD9i91fsDYENVkh7HFUfcoB';
+      break;
+
+    default:
+      if (entity === 'CRYPTO_GLOBAL') return '0x0BB116fED4F402DBE82dF6AA66E50105c1d310d9';
+      if (entity === 'CRYPTO_ARG') return '0xd99589F1b1695996533bB4dB43B97DD6331dBcc2';
+  }
+
+  return '';
+};

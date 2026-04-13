@@ -137,7 +137,7 @@ Feature: Lock Payment Integrations
             | surname     | 6913d6f4db01142cde3fb7e0 | PIX | BRAZIL   | 40842073817 | DARIO AUGUSTO |          | 100014295 | qr3manualamount    | USDT    | 10     | ARGENTINA  | 400        | BAD_REQUEST       | Bad request.       | sender.surname is missing.                                                                                                                                                                                                                                                                                            |
             | user status | 683cce15397feba125068c9b | PIX | BRAZIL   | 40842073817 | DARIO AUGUSTO | DA SILVA | 100036843 | qr3manualamount    | USDT    | 10     | ARGENTINA  | 400        | DNI_NOT_VALIDATED | DNI not validated. |                                                                                                                                                                                                                                                                                                                       |
 
-    @ErrorPath @Automated
+    @ErrorPatht @Automated
     Scenario Outline: Validate error lock payment response sending invalid enviroment
         Given The urlBase is available "https://api.manteca.dev/crypto"
         And Get credentials for company "<companyId>"
