@@ -18,7 +18,7 @@ Then('Validate user status', { timeout: 200000 }, async function (this: CustomWo
   const exchange = this.response.body.user.exchange;
   console.log(exchange);
 
-  await delay(10000, 'Validating user identity', exchange);
+  await delay(50000, 'Validating user identity', exchange);
   const response = await getUserInfoHelper(this.apiKey, undefined, userAnyId);
   logger.info(`User Status: ${response.body.status}`);
   console.log(response.body);

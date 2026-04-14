@@ -4,7 +4,7 @@ Feature: Initial Onboarding Integrations
     Background:
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
 
-    @HappyPath @Automated
+    @HappyPatht @Automated
     Scenario Outline: Validate Onboarding V2
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

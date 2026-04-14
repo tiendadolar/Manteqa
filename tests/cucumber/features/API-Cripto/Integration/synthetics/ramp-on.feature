@@ -5,7 +5,7 @@ Feature: Sintéticos Integrations
         Given The urlBase is available "https://sandbox.manteca.dev/crypto"
 
     @HappyPath @Automated
-    Scenario Outline: Validate success ramp on response <case>
+    Scenario Outline: Validate success ramp on response
         Given Get credentials for company "<companyId>"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "<externalId>" to the variable "externalId"

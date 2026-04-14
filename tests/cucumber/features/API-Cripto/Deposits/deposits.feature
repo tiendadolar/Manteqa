@@ -60,3 +60,10 @@ Feature: Depositos
         Examples:
             | hash | from                               | to                                 | wei                  | human | ticker | chain |
             | hash | TB32aawPahWHakN9YPCnshYXP5WXnByCPm | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | 10000000000000000000 | 10    | USDT   | 9     |
+
+
+
+    @evm
+    Scenario: Generar deposito Crypto vía API admin
+        Given Execute cripto deposit to "0x5CB21dFFaE75F981D1b819cD271Edc9CD8e1818d" by "base" chain
+

@@ -68,7 +68,18 @@ Then('Execute fiat deposit', { timeout: 500 * 1000 }, async function (this: Cust
   await fiatDepositHelper(urlBase, endpoint, apiKEY, apiSecret, userId, amount, coin, entity);
 });
 
+// Then('Execute cripto deposit to {string} by {string} chain', { timeout: 500 * 1000 }, async function (this: CustomWorld, address: string, chain: string) {
+//   const amount = this.amount;
+//   const service = new BlockchainService(chain);
+// });
+
 Then('Execute cripto deposit to {string} by {string} chain', { timeout: 500 * 1000 }, async function (this: CustomWorld, address: string, chain: string) {
-  const amount = this.amount;
-  const service = new BlockchainService(chain);
+  const service = new BlockchainService(chain); // chain = nombre de la env var, ej: "RPC_URL_ETHEREUM"
+
+  let amount: string = '5';
+  const receipt = await service.withdrawToken(address, amount, 'USDC');
+
+  expect(receipt.status).to.equal(1);
+  this.txHash = receipt.hash;
+  console.log(this.txHash);
 });
