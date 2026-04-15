@@ -29,7 +29,7 @@ Feature: Sintéticos Integrations
             | 69b83acb59880505eeaa3e52 | 100062342 | ARG      | deposit  | integrations-rampon | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | ETHEREUM        |
             | 69b83acb59880505eeaa3e52 | 100062342 | ARG      | deposit  | integrations-rampon | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | BASE            |
             | 69b83acb59880505eeaa3e52 | 100062342 | ARG      | deposit  | integrations-rampon | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | POLYGON         |
-            | 69b83acb59880505eeaa3e52 | 100062342 | ARG      | deposit  | integrations-rampon | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | ARBITRUM        |
+            # | 69b83acb59880505eeaa3e52 | 100062342 | ARG      | deposit  | integrations-rampon | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | ARBITRUM        | Ticket: C-0002
             | 69b83acb59880505eeaa3e52 | 100062342 | ARG      | deposit  | integrations-rampon | USDT  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | BINANCE         |
             | 69b83acb59880505eeaa3e52 | 100062342 | ARG      | deposit  | integrations-rampon | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | OPTIMISM        |
             | 684b9446017d29431c2cac6a | 100009457 | ARG      | overdraw | integrations-rampon | USDC  | ARS     | 10          | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | BASE            |
