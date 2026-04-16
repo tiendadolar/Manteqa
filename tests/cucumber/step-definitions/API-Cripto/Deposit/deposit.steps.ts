@@ -83,3 +83,24 @@ Then('Execute cripto deposit to {string} by {string} chain', { timeout: 500 * 10
   this.txHash = receipt.hash;
   console.log(this.txHash);
 });
+
+Then('Execute cripto deposit to {string} chain', { timeout: 500 * 1000 }, async function (this: CustomWorld, chain: string) {
+  const response: any = this.response;
+  const depositStage: any = Object.values(response.body.stages).find((s: any) => s.stageType === 'DEPOSIT');
+  const amount: string = depositStage.thresholdAmount;
+  const asset: string = depositStage.asset;
+  const address: string = response.body.details.depositAddress;
+
+  console.log('TESTNET');
+  console.log(amount);
+  console.log(asset);
+  console.log(address);
+
+  const service = new BlockchainService(chain);
+
+  const receipt = await service.withdrawToken(address, amount, asset);
+
+  expect(receipt.status).to.equal(1);
+  this.txHash = receipt.hash;
+  console.log(this.txHash);
+});

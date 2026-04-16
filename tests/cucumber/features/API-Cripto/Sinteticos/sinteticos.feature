@@ -120,7 +120,7 @@ Feature: Sintéticos
         Examples:
             | companyId                | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                    | withdrawNetwork |
             | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | TRX   | ARS     | 3           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
-            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
+    # | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDT  | ARS     | 10          | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            | Ticket C-0003
 
     # Se ejecuta solo el stage de orden
     @PartialRampOnDesc @Automated
@@ -275,7 +275,7 @@ Feature: Sintéticos
         Examples:
             | companyId                | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress                    | withdrawNetwork |
             | 683cce15397feba125068c9b | 100011193 | smoke-test-n | TRX   | ARS     | 5           | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
-            | 683cce15397feba125068c9b | 100011193 | smoke-test-n | USDT  | ARS     | 10          | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            |
+    # | 683cce15397feba125068c9b | 100011193 | smoke-test-n | USDT  | ARS     | 10          | TRaHQ7KfnkQHCM8zFyX7HrNmMkr54A9oyM | TRON            | Ticket C-0003
 
     @RampOn @Automated
     Scenario Outline: Flujo E2E Ramp-On no descubierto operando desde el user balance "<asset>" contra "<against>"
@@ -331,8 +331,6 @@ Feature: Sintéticos
             | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | USDC   | 3     |
             | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | USDT   | 3     |
             | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | STELLAR         | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | USDC   | 3     |
-    # |6830d459db3fdce1729dd147| 100009688 | smoke-test-n | USDT  | ARS     | 7           | 4530000800015017168564 | ETHEREUM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 0     |
-    # |6830d459db3fdce1729dd147| 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | OPTIMISM        | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 5     |
 
     @RampOff @Tron @Automated
     Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
@@ -358,7 +356,7 @@ Feature: Sintéticos
         Examples:
             | companyId                | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                 | ticker | chain |
             | 683cce15397feba125068c9b | 100011193 | smoke-test-n | TRX   | ARS     | 3           | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | TRX    | 9     |
-            | 683cce15397feba125068c9b | 100011193 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | USDT   | 9     |
+    # | 683cce15397feba125068c9b | 100011193 | smoke-test-n | USDT  | ARS     | 10          | 4530000800015017168564 | TRON            | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | USDT   | 9     | Ticket C-0003
 
     @PartialRampOn @Automated
     Scenario Outline: Flujo E2E Partial-Ramp-On no descubierto
@@ -444,7 +442,7 @@ Feature: Sintéticos
             | 684b2f25dcca16d5557fd8b2 | 100067285 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654     | ETHEREUM        |
             | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
             | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        |
+    # | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        | Ticket C-0004
 
     @Smoke @RampOn @Exchange @Automated @test
     Scenario Outline: Flujo E2E Ramp-On no descubierto para usuario exchange <against>
@@ -527,3 +525,32 @@ Feature: Sintéticos
         Examples:
             | companyId                | userAnyId | asset | against | assetAmount | withdrawAddress        | senderExchange | senderLegalId | senderName | senderSurname | recipientExchange | recipientLegalId | recipientName | recipientSurname |
             | 69d80588cdd32301bed406ab | 100065187 | USDT  | ARS     | 10          | 4530000800015017168564 | ARGENTINA      | 20293755311   | CESAR      | MANRIQUE      | ARGENTINA         | 20344554332      | Lucas         | Segura           |
+
+    # ---- TEST DE TEST
+
+    @testnet
+    Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
+        # Parte 1: Creación de sintético
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "<sessionId>" to the variable "sessionId"
+        And Assign the value "<asset>" to the variable "asset"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<assetAmount>" to the variable "assetAmount"
+        And Assign the value "<withdrawAddress>" to the variable "withdrawAddress"
+        And Assign the value "<withdrawNetwork>" to the variable "withdrawNetwork"
+        And Execute the POST method on the endpoint "/v2/synthetics/ramp-off"
+        Then Obtain a response 201
+        # Parte 2: Generar depósito
+        And Execute cripto deposit to "<withdrawNetwork>" chain
+        # Parte 2: Validar ejeccución del sintético
+        Then Obtain a response 200 and status "COMPLETED" for "ramp" synthetic
+
+
+        Examples:
+            | companyId                | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
+            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 5           | 4530000800015017168564 | BASE            | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 7     |
+
+
+

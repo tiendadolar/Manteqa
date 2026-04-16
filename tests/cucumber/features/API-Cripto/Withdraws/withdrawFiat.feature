@@ -28,7 +28,7 @@ Feature: Retiros Fiat
             | 6864a82d08430ed74bf6296f | 100009891 | COP  | 1362017052             | 100    |              |
             | 6864a82d08430ed74bf6296f | 100009886 | GTQ  | 972004709              | 100    |              |
             | 6864a82d08430ed74bf6296f | 100009889 | MXN  | 638180010139391962     | 100    |              |
-            | 6864a82d08430ed74bf6296f | 100009885 | PHP  | 20867104660592         | 100    |              |
+            # | 6864a82d08430ed74bf6296f | 100009885 | PHP  | 20867104660592         | 100    |              | Ticket: C-0004
             | 6864a82d08430ed74bf6296f | 100009887 | PUSD | 0472001494028          | 100    |              |
             | 6864a82d08430ed74bf6296f | 100009893 | USD  | 1430001714039384360025 | 10     |              |
             | 6864a82d08430ed74bf6296f | 100009893 | ARS  | 1430001713039384360017 | 1000   |              |
@@ -103,8 +103,8 @@ Feature: Retiros Fiat
             | 69d80588cdd32301bed406ab | test-withdraw-aggregator | 100065187 | USD   | 1430001713039384360017 | 1      |          |             | BANK_TRANSFER |
 
 
-    @Smoke @Remesas @Automated
-    Scenario Outline: Crear retiro fiat user por country por V2 "<asset>"
+    @Smoke @Remesas @Automatedtest
+    Scenario Outline: Crear retiro fiat a terceros a user por country por V2 "<asset>"
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"

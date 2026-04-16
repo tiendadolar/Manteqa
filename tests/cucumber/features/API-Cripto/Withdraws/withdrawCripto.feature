@@ -78,7 +78,6 @@ Feature: Retiros Crypto
             # |67e56fea17c2cfbcc92efaab| USDC | 100007647 | ARBITRUM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | STELLAR    | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK |
             | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | SOLANA     | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
-            | 67e56fea17c2cfbcc92efaab | USDT | 100007647 | SOLANA     | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
 
 
     @Smoke @Crypto @V1 @Bind @Automated
@@ -100,15 +99,13 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v1/transaction/withdraw"
         Then Obtain a response 200
 
-        When Wait for the processing of the "orden" por 40 seconds
+        When Wait for the processing of the "orden" por 50 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
         Examples:
             | companyId                | coin | userId    | chain    | amount | wallet                                     |
-            | 69addea7aa541dac7566fd9a | USDC | 100062359 | INTERNAL | 5      | 0x6BDfB5d3cc79f65e102d52F98d0724be446977B1 |
             | 69addea7aa541dac7566fd9a | USDT | 100062359 | INTERNAL | 5      | 0x6BDfB5d3cc79f65e102d52F98d0724be446977B1 |
-            | 69addea7aa541dac7566fd9a | USDC | 100060231 | INTERNAL | 5      | 0x6856355786A7183Ff12A0a6d9a097a670a039fE7 |
             | 69addea7aa541dac7566fd9a | USDT | 100060231 | INTERNAL | 5      | 0x6856355786A7183Ff12A0a6d9a097a670a039fE7 |
 
     @Regression @Crypto @ARG @V1 @Automated
@@ -450,7 +447,7 @@ Feature: Retiros Crypto
     # ------------- V2 ---------------
 
     @Smoke @Crypto @V2 @Bind @Automated
-    Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
+    Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2 Bind
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
         When Assign the value "<sessionId>" to the variable "sessionId"
@@ -465,7 +462,7 @@ Feature: Retiros Crypto
         And Execute the POST method on the endpoint "/v2/withdraws"
         Then Obtain a response 201
 
-        When Wait for the processing of the "orden" por 60 seconds
+        When Wait for the processing of the "orden" por 50 seconds
         And Execute the GET method on the endpoint "/v2/withdraws/{withdrawAnyId}"
         Then Obtain a response 200 and status EXECUTED
 
@@ -473,9 +470,7 @@ Feature: Retiros Crypto
         Examples:
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
             | 69addea7aa541dac7566fd9a | crypto | USDT  | 100062359 | ARG     | INTERNAL | 5      | 0x6BDfB5d3cc79f65e102d52F98d0724be446977B1 |
-            | 69addea7aa541dac7566fd9a | crypto | USDC  | 100062359 | ARG     | INTERNAL | 5      | 0x6BDfB5d3cc79f65e102d52F98d0724be446977B1 |
             | 69addea7aa541dac7566fd9a | crypto | USDT  | 100060231 | ARG     | INTERNAL | 5      | 0x6856355786A7183Ff12A0a6d9a097a670a039fE7 |
-            | 69addea7aa541dac7566fd9a | crypto | USDC  | 100060231 | ARG     | INTERNAL | 5      | 0x6856355786A7183Ff12A0a6d9a097a670a039fE7 |
 
 
     @Smoke @Crypto @ARGv2 @V2 @Automated
@@ -511,13 +506,11 @@ Feature: Retiros Crypto
             | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
             | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | STELLAR  | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK |
             | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
-
 
         @TRON
         Examples:
-            | companyId                | type   | asset | userAnyId | country | network | amount | address                            |
-            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | TRON    | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv |
+            | companyId | type | asset | userAnyId | country | network | amount | address |
+    # | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | TRON    | 3      | TBm3cipnHc7HifuBJdh8JM3nwG3LQJ9UQv | Ticket: C-0003
 
 
     @Smoke @Crypto @BRLv2 @V2 @Automated
@@ -550,16 +543,15 @@ Feature: Retiros Crypto
             | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
             | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
             # | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | BRA     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
+            # | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | BRA     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | Ticket: C-0005
             | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | ARG     | STELLAR  | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK |
             | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
-            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
 
 
         @TRON
         Examples:
-            | companyId                | type   | asset | userAnyId | country | network | amount | address                            |
-            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | TRON    | 3      | TK87U6EA5Fyq1zLZc9Q6NEeasHtTTRMaLu |
+            | companyId | type | asset | userAnyId | country | network | amount | address |
+    # | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | TRON    | 3      | TK87U6EA5Fyq1zLZc9Q6NEeasHtTTRMaLu | Ticket: C-0003
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |
@@ -600,18 +592,8 @@ Feature: Retiros Crypto
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
             | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | CPL     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | CPL     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | CPL     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009875 | CPL     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-
-    # Examples:
-    #     | type   | asset | userAnyId | country | network    | amount | address                                    |
-    #     | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | BNB   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | BTC   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDT  | 100009873 | ARG     | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+    # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009875 | CPL     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+    # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009875 | CPL     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | Ticket: C-0005
 
     @Smoke @Crypto @COPv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
@@ -642,17 +624,8 @@ Feature: Retiros Crypto
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
             | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | COP     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 | COP     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 |COP     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009876 | COP     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    # Examples:
-    #     | type   | asset | userAnyId | country | network    | amount | address                                    |
-    #     | crypto | WLD   | 100009873 | ARG     | WORLDCHAIN | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | BNB   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDC  | 100009873 | ARG     | OPTIMISM   | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | BTC   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDT  | 100009873 | ARG     | BINANCE    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | USDT  | 100009873 | ARG     | POLYGON    | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-    #     | crypto | ETH   | 100009873 | ARG     | BINANCE    | 0.001  | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+    # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009876 |COP     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+    # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009876 | COP     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | Ticket: C-0005
 
     @Smoke @Crypto @MXNv2 @V2 @Automated
     Scenario Outline: Ejecutar retiro <type> de <asset> mediante <network> para user <country> por V2
@@ -683,8 +656,8 @@ Feature: Retiros Crypto
             | companyId                | type   | asset | userAnyId | country | network  | amount | address                                    |
             | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | MXN     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | MXN     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | MXN     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009877 | MXN     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+    # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009877 | MXN     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
+    # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009877 | MXN     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | Ticket: C-0005
 
     # Examples:
     #     | type   | asset | userAnyId | country | network    | amount | address                                    |

@@ -162,9 +162,9 @@ Feature: Sintético QR 3.0
 
         @Smoke @WLD
         Examples:
-            | companyId                | credential                | accion   | userAnyId | qrCode          | amount | sessionId    | to                                         | ticker |
-            | 684b2f25dcca16d5557fd8b2 | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    |
-            | 684b2f25dcca16d5557fd8b2 | andresperalta@manteca.dev | embebido | 100009502 | qr3             | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    |
+            | companyId | credential | accion | userAnyId | qrCode | amount | sessionId | to | ticker |
+    # | 684b2f25dcca16d5557fd8b2 | andresperalta@manteca.dev | estatico | 100009502 | qr3manualamount | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    | Ticket: C-0007
+    # | 684b2f25dcca16d5557fd8b2 | andresperalta@manteca.dev | embebido | 100009502 | qr3             | 1500   | QR-V2-DESC-n | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | WLD    | Ticket: C-0007
 
 
     @Smoke @QRV2NoDesc @Automated
@@ -335,7 +335,7 @@ Feature: Sintético QR 3.0
         #     | accion   | userAnyId | qrCode             | against | amount | sessionId                 | to                                         | ticker |
         #     | manual   | 100009628 | pixmanualamount    | ARS     | 10     | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
         #     | embebido | 100009628 | pix                | ARS     | 10     | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-        #     | estatico | 100013787 | qr3BOBmanualamount | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
+        #     | estatico | 100013787 | qr3BOBmanualamount | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   | Ticket: C-0006
 
         #When transfero pix failed
         @Smoke
@@ -343,7 +343,6 @@ Feature: Sintético QR 3.0
             | companyId                | accion   | userAnyId | qrCode                               | against | amount | sessionId                 | to                                         | ticker |
             # | manual   | 100011660 | 08449ae2-8a26-47a5-992d-2689f135bc11 | BRL     | 5      | PIX-manual-V2-NO-DESC-n   | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
             | 684b2f25dcca16d5557fd8b2 | embebido | 100011660 | 08449ae2-8a26-47a5-992d-2689f135bc11 | BRL     | 5      | PIX-embebido-V2-NO-DESC-n | 0xF26A2ECa66d87Dd16225c8507ABbBf3CD14Cfcd2 | USDT   |
-            | 684b2f25dcca16d5557fd8b2 | estatico | 100013787 | qr3BOBmanualamount                   | BOB     | 1000   | QR-V2-DESC-n              | 0xff26ffee34fD1BDd8A4aDeD1A8bb961e07926802 | USDT   |
 
     # @Smoke
     # Examples:
@@ -1317,7 +1316,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | companyId                | payment   | userAnyId | paymentDestination                                                                                                                                                          | against | amount | sessionId             |
-            | 696d44e622cceda591c025cd | QR BOB    | 100037877 | qr3BOBmanualamount                                                                                                                                                          | USDT    | 10     | useraccount-payment-n |
+            # | 696d44e622cceda591c025cd | QR BOB    | 100037877 | qr3BOBmanualamount                                                                                                                                                          | USDT    | 10     | useraccount-payment-n | Ticket: C-0006
             # | 696d44e622cceda591c025cd | QR PERU    | 100037878 | 0002010102122637000280010390302202511060921196434575252044829530360454031505802PE5917CESAR TACURI INGA6004Lima80550003ID10144suGASdIEsZFzlFh4eZ/UMQRNdpSojGNBwPiV0Punz2o=90490005GLOSA0136Happy Path Generación de QR Dinamico91230007FECVCTO01082025123192210005QUOTA0108999999996304C993 | USDT    | 10     | useraccount-payment-n |
             # | 696d44e622cceda591c025cd | PERU PHONE | 100037878 | +51986667537                                                                                                                                                                | USDT    | 10     | useraccount-payment-n |
             | 696d44e622cceda591c025cd | QR BRAZIL | 100037879 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | USDT    | 10     | useraccount-payment-n |
@@ -1357,7 +1356,7 @@ Feature: Sintético QR 3.0
         @bob
         Examples:
             | companyId                | payment   | userAnyId | paymentDestination                                                                                                                                                          | against | amount | sessionId             |
-            | 696d44e622cceda591c025cd | QR BOB    | 100037877 | qr3BOBmanualamount                                                                                                                                                          | BOB     | 1000   | useraccount-payment-n |
+            # | 696d44e622cceda591c025cd | QR BOB    | 100037877 | qr3BOBmanualamount                                                                                                                                                          | BOB     | 1000   | useraccount-payment-n | Ticket: C-0006
             # | 696d44e622cceda591c025cd | QR PERU   | 100037878 | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | PEN     | 1000   | useraccount-payment-n |
             #             | 696d44e622cceda591c025cd | QR PERU   | 100037878 | +51986667537                                                                                                                                                                                                                                                                                                           | PEN     | 1000   | useraccount-payment-n |
             | 696d44e622cceda591c025cd | QR BRAZIL | 100037879 | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8 | BRL     | 10     | useraccount-payment-n |
@@ -1396,7 +1395,7 @@ Feature: Sintético QR 3.0
 
         Examples:
             | companyId                | payment   | userAnyId | principalAccount | paymentDestination                                                                                                                                                                                                                                                                                                     | against | amount | sessionId             |
-            | 6981ff2f4af353838a534bc4 | QR BOB    | 100038494 | 100038490        | qr3BOBmanualamount                                                                                                                                                                                                                                                                                                     | USDT    | 10     | useraccount-payment-n |
+            # | 6981ff2f4af353838a534bc4 | QR BOB    | 100038494 | 100038490        | qr3BOBmanualamount                                                                                                                                                                                                                                                                                                     | USDT    | 10     | useraccount-payment-n | Ticket: C-0006
             | 696e44372190b0a1c211a430 | QR BRAZIL | 100038086 | 100038082        | 00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8                                                                                                                                            | USDT    | 10     | useraccount-payment-n |
             | 696e44372190b0a1c211a430 | QR PERU   | 100038086 | 100038083        | 00020101021102164096230055528616041553015000555286109166499890055528615123900111000000040610740923902707005552861826800011FACILITADOR0161IZIPAYVIR;1771899483420;5552861;989931923;348518349303003;;;252045999530360454030.05802PE5922IZI*FAST STORE PREMIUM6008TRUJILLO6103PER82270009FECHAVCTO01102036-02-2463048443 | USDT    | 1.5    | useraccount-payment-n |
             | 6981ff2f4af353838a534bc4 | QR ARG    | 100038493 | 100038486        | 00020101021140200010com.yacare02022350150011336972350495204739953030325802AR5910HAVANNA SA6012BUENOS AIRES81220010com.yacare0204Y2156304E401manualamount                                                                                                                                                               | USDT    | 1000   | useraccount-payment-n |
