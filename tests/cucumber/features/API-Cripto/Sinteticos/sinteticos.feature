@@ -36,9 +36,9 @@ Feature: Sintéticos
 
         @Smoke
         Examples:
-            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                                          | withdrawNetwork |
-            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | WORLDCHAIN      |
-            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | STELLAR         |
+            | companyId                | userAnyId | sessionId                | asset | against | assetAmount | withdrawAddress                            | withdrawNetwork |
+            | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | WLD   | ARS     | 3           | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 | WORLDCHAIN      |
+    # | 6849d02e906eb70b50893536 | 100009780 | smoke-rampOn-DESC-test-n | USDC  | ARS     | 3           | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | STELLAR         | Ticket: C-0008
 
     @RampOnDesc @Automated
     Scenario Outline: Flujo E2E Ramp-On descubierto loosely managed con deposito "<asset>" contra "<against>"
@@ -326,11 +326,11 @@ Feature: Sintéticos
 
 
         Examples:
-            | companyId                | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                                       | ticker | chain |
-            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | WLD   | ARS     | 5           | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | WLD    | 6     |
-            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | USDC   | 3     |
-            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187               | USDT   | 3     |
-            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | STELLAR         | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | USDC   | 3     |
+            | companyId                | userAnyId | sessionId    | asset | against | assetAmount | withdrawAddress        | withdrawNetwork | to                                         | ticker | chain |
+            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | WLD   | ARS     | 5           | 4530000800015017168564 | WORLDCHAIN      | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | WLD    | 6     |
+            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDC   | 3     |
+            | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | SOLANA          | 0xFFb66dD89211C43Dd76cF7fbE287172bDF35A187 | USDT   | 3     |
+    # | 6830d459db3fdce1729dd147 | 100009688 | smoke-test-n | USDC  | ARS     | 3           | 4530000800015017168564 | STELLAR         | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | USDC   | 3     | Ticket: C-0008
 
     @RampOff @Tron @Automated
     Scenario Outline: Flujo E2E Ramp-Off no descubierto "<asset>" constra "<against>"
@@ -440,7 +440,7 @@ Feature: Sintéticos
             | 684b2f25dcca16d5557fd8b2 | 100012269 | smoke-rampoff-n | USDT  | GTQ     | 3           | 1234567                | ETHEREUM        |
             | 684b2f25dcca16d5557fd8b2 | 100012270 | smoke-rampoff-n | USDT  | CRC     | 3           | CR88010404046620113218 | ETHEREUM        |
             | 684b2f25dcca16d5557fd8b2 | 100067285 | smoke-rampoff-n | USDT  | MXN     | 3           | 156356784125789654     | ETHEREUM        |
-            | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        |
+            # | 684b2f25dcca16d5557fd8b2 | 100012272 | smoke-rampoff-n | USDT  | PHP     | 3           | 09300164750            | ETHEREUM        | Ticket C-0004
             | 684b2f25dcca16d5557fd8b2 | 100013985 | smoke-rampoff-n | USDT  | COP     | 3           | 3511234567             | ETHEREUM        |
     # | 684b2f25dcca16d5557fd8b2 | 100012268 | smoke-rampoff-n | USDT  | PUSD    | 3           | 0472018417951          | ETHEREUM        | Ticket C-0004
 

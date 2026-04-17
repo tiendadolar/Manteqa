@@ -61,23 +61,23 @@ Feature: Retiros Crypto
 
         # Polygon has nonce number faileds so it can generate failed withdraws
         Examples:
-            | companyId                | coin | userId    | chain      | amount | wallet                                                   |
-            | 67e56fea17c2cfbcc92efaab | WLD  | 100007647 | WORLDCHAIN | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA               |
-            | 67e56fea17c2cfbcc92efaab | USDT | 100007647 | POLYGON    | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA               |
+            | companyId                | coin | userId    | chain      | amount | wallet                                       |
+            | 67e56fea17c2cfbcc92efaab | WLD  | 100007647 | WORLDCHAIN | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA   |
+            | 67e56fea17c2cfbcc92efaab | USDT | 100007647 | POLYGON    | 3      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA   |
             # |67e56fea17c2cfbcc92efaab| USDT | 100007647 | BSC        | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             # |67e56fea17c2cfbcc92efaab| USDT | 100007647 | ARBITRUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | 67e56fea17c2cfbcc92efaab | USDT | 100007647 | ETHEREUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA               |
+            | 67e56fea17c2cfbcc92efaab | USDT | 100007647 | ETHEREUM   | 10     | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA   |
             #| 67e56fea17c2cfbcc92efaab| ETH  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             #|67e56fea17c2cfbcc92efaab | ETH  | 100007647 | ETHEREUM   | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA |
             #|67e56fea17c2cfbcc92efaab | BNB  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
             #|67e56fea17c2cfbcc92efaab | BTC  | 100007647 | BSC        | 0.001  | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | 67e56fea17c2cfbcc92efaab | POL  | 100007647 | POLYGON    | 2      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
+            | 67e56fea17c2cfbcc92efaab | POL  | 100007647 | POLYGON    | 2      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
             #| 67e56fea17c2cfbcc92efaab| USDC | 100007647 | POLYGON    | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No Funds in hot wallet Argentina
             # |67e56fea17c2cfbcc92efaab| USDC | 100007647 | BSC        | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | OPTIMISM   | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA               |
+            | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | OPTIMISM   | 2      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA   |
             # |67e56fea17c2cfbcc92efaab| USDC | 100007647 | ARBITRUM   | 5      | 0x09219631A56D2A8414B99d227A3Aa07A2b74F0EA | No working Binance Provider QA
-            | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | STELLAR    | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK |
-            | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | SOLANA     | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
+            # | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | STELLAR    | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | Ticket: C-0008
+            | 67e56fea17c2cfbcc92efaab | USDC | 100007647 | SOLANA     | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw |
 
 
     @Smoke @Crypto @V1 @Bind @Automated
@@ -499,13 +499,13 @@ Feature: Retiros Crypto
 
         @Working
         Examples:
-            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                                  |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | POLYGON  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                      |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | POLYGON  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
             # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | BINANCE  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | STELLAR  | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
+            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | STELLAR  | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | Ticket: C-0008
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw |
 
         @TRON
         Examples:
@@ -539,13 +539,13 @@ Feature: Retiros Crypto
 
         @Working
         Examples:
-            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                                  |
-            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
-            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                      |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | POLYGON  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
+            | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
             # | 683cce15397feba125068c9b | crypto | USDT  | 100011214 | BRA     | BINANCE  | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
             # | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | BRA     | OPTIMISM | 1      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               | Ticket: C-0005
-            | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | ARG     | STELLAR  | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK |
-            | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
+            # | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | ARG     | STELLAR  | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | Ticket: C-0008
+            | 683cce15397feba125068c9b | crypto | USDC  | 100011214 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw |
 
 
         @TRON
