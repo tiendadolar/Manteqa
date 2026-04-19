@@ -105,6 +105,33 @@ export const getUserDebtBalance = async (
   return response;
 };
 
+export const getUserBalance = async (urlBase: string, endpoint: string, apiKey: string): Promise<any> => {
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  return response;
+};
+
+export function getCoinBalance(response: Record<string, any>, coin: string): string {
+  return response?.balance?.[coin] ?? '0';
+}
+
+export function compareUserBalance(initial: string, final: string, operation: string): void {
+  switch (operation) {
+    case 'TOTALREFUND':
+      expect(initial).to.be.equal(final);
+      logger.info('The total refund result OK');
+      break;
+
+    case 'PARTIALREFUND':
+      const finalBalance: number = parseFloat(initial) - parseFloat(CustomWorld.getStoreData('amountToRefund'));
+      expect(finalBalance).to.be.closeTo(parseFloat(final), 0.02);
+      logger.info(finalBalance);
+      logger.info(final);
+      logger.info('The final refund result OK');
+    default:
+      break;
+  }
+}
+
 export const getCompanyCreditBalanceHelper = async (urlBase: string, endpoint: string, apiKey: string, currency: string) => {
   // call API endpoint to get company debt balance
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });

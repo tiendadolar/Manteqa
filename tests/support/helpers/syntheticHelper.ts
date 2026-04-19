@@ -164,6 +164,11 @@ export const validateSyntheticStatus = (body: any, httpStatus: number, statusCod
   if (body.hasOwnProperty('details') && body.details.paymentAgainst !== 'USDT') CustomWorld.setStoreData('againstAmountOperated', body.details.againstAmountOperated);
 };
 
+export const validateRefundSyntheticStatus = (response: any, status: string): void => {
+  const syntheticStatus: string = response.body.status;
+  expect(syntheticStatus).to.be.equal(status);
+};
+
 export const getSyntheticStatus = async (urlBase: string, endpoint: string, apiKey: string, statusCode?: number, statusName?: string): Promise<any> => {
   const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
   // const response = await request(urlBase).get(endpoint).set('User-Agent', 'PostmanRuntime/7.44.1').set('md-api-key', apiKEY);
@@ -186,24 +191,54 @@ export const adminRefundHelper = async (urlBase: string, endpoint: string, token
 };
 
 export const lockPaymentHelper = async (urlBase: string, apiKey: string, endpoint: string, type: string, par: string, userAnyId: string): Promise<any> => {
-  const payload = {
-    userAnyId: userAnyId,
-    paymentDestination: payments[type][par].paymentDestination,
-    amount: payments[type][par].amount,
-    against: payments[type][par].against
-  };
+  let payload = {};
+
+  if (par === 'USDT_BRL_SENDER') {
+    payload = {
+      userAnyId: userAnyId,
+      paymentDestination: payments[type][par].paymentDestination,
+      amount: payments[type][par].amount,
+      against: payments[type][par].against,
+      sender: {
+        exchange: payments[type][par].sender.exchange,
+        legalId: payments[type][par].sender.legalId,
+        name: payments[type][par].sender.name,
+        surname: payments[type][par].sender.surname
+      }
+    };
+  } else {
+    payload = {
+      userAnyId: userAnyId,
+      paymentDestination: payments[type][par].paymentDestination,
+      amount: payments[type][par].amount,
+      against: payments[type][par].against
+    };
+  }
+
   logger.debug(JSON.stringify(payload, null, 2));
   const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, body: payload });
   validateRes(response, 201);
   return response;
 };
 
-export const syntheticPaymentHelper = async (urlBase: string, apiKey: string, endpoint: string, qrCode: string, userAnyId?: string, skipDeposit?: boolean): Promise<any> => {
-  const payload = {
-    userAnyId: userAnyId,
-    skipDeposit: skipDeposit,
-    qrCode: qrCode
-  };
+export const syntheticPaymentHelper = async (urlBase: string, apiKey: string, endpoint: string, qrCode: string, userAnyId?: string, skipDeposit?: boolean, against?: string): Promise<any> => {
+  let payload: object = {};
+
+  if (userAnyId === '100062353' || against === 'ARS') {
+    payload = {
+      userAnyId: userAnyId,
+      skipDeposit: skipDeposit,
+      disallowDebt: true,
+      qrCode: qrCode
+    };
+  } else {
+    payload = {
+      userAnyId: userAnyId,
+      skipDeposit: skipDeposit,
+      qrCode: qrCode
+    };
+  }
+
   logger.debug(JSON.stringify(payload, null, 2));
   const response = await apiRequest({ urlBase, endpoint, method: 'post', apiKey, body: payload });
 

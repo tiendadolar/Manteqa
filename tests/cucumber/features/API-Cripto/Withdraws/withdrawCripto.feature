@@ -499,13 +499,13 @@ Feature: Retiros Crypto
 
         @Working
         Examples:
-            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                      |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | POLYGON  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
-            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
+            | companyId                | type   | asset | userAnyId | country | network  | amount | address                                                  |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | POLYGON  | 3      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
+            | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | ETHEREUM | 4      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
             # | 6864976a08430ed74bf61d0c | crypto | USDT  | 100009873 | ARG     | BINANCE  | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2 |
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2   |
-            # | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | STELLAR  | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK | Ticket: C-0008
-            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | OPTIMISM | 5      | 0x4cD0820ca71Bda1A6cEfe1A6D5a2F6E50D4370f2               |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | STELLAR  | 3      | GDUARKVEGQYUS32AC3W4WLYBZUTXUAODZEPMXIJ3D2PKOMT6624TL7SK |
+            | 6864976a08430ed74bf61d0c | crypto | USDC  | 100009873 | ARG     | SOLANA   | 2      | E7kG9CFGGBdoGWticHtoM81t38RuZt2ziMnXeSsLgfbw             |
 
         @TRON
         Examples:

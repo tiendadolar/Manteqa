@@ -38,6 +38,18 @@
       "amount": "10",
       "against": "USDT"
     },
+    "USDT_BRL_SENDER": {
+      "userAnyId": "100009359",
+      "paymentDestination": "pixmanualamount",
+      "amount": "10",
+      "against": "USDT",
+      "sender": {
+        "exchange": "ARGENTINA",
+        "legalId": "20361634528",
+        "name": "MANUEL",
+        "surname": "OUBINA"
+      }
+    },
     "BRL_BRL": {
       "userAnyId": "100011657",
       "paymentDestination": "00020126480014BR.GOV.BCB.PIX0126leandro.ribeiro@meujota.ai520400005303986540550.005802BR5925LEANDRO DE OLIVEIRA NOEL 6009SAO PAULO622905255b9f00c0931f47dd89e207276630474E8",

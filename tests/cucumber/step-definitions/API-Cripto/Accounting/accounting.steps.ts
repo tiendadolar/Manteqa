@@ -4,12 +4,16 @@ const request = require('supertest');
 import {
   analizeBalances,
   compareBalance,
+  compareUserBalance,
+  getCoinBalance,
   getCompanyCreditBalanceHelper,
   getCompanyDebtBalance,
   getCompanyDebtBalanceHelper,
+  getUserBalance,
   getUserBalanceHelper,
   getUserDebtBalance
 } from '../../../../support/helpers/accountingHelper';
+import { normalizeCoin } from '../../../../support/helpers/coinHelper';
 import { validateRes } from '../../../../support/helpers/requestHelper';
 import logger from '../../../../support/utils/logger';
 import { CustomWorld, UserData } from '../../../../support/world';
@@ -161,4 +165,37 @@ Then('Obtain refund on company cred {string} balance', { timeout: 500 * 1000 }, 
       throw new Error(`La moneda ${coin} no está presente en la response`);
     }
   }
+});
+
+// --------------- nuevo
+
+Then('Get {string} initial user balance for {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, userAnyId: string) {
+  const urlBase: string = this.urlBase;
+  const endpoint: string = `/v2/user-balances/${userAnyId}`;
+  const apiKEY: string = this.apiKey;
+  const coin: string = normalizeCoin(fiat.toUpperCase());
+
+  const response: any = await getUserBalance(urlBase, endpoint, apiKEY);
+  const balance: string = getCoinBalance(response.body, coin);
+  CustomWorld.setStoreData('initialBalance', balance);
+  logger.info(`Initial balance for ${coin}: ${balance}`);
+});
+
+Then('Get {string} final user balance for {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string, userAnyId: string) {
+  const urlBase: string = this.urlBase;
+  const endpoint: string = `/v2/user-balances/${userAnyId}`;
+  const apiKEY: string = this.apiKey;
+  const coin: string = normalizeCoin(fiat.toUpperCase());
+
+  const response: any = await getUserBalance(urlBase, endpoint, apiKEY);
+  const balance: string = getCoinBalance(response.body, coin);
+  CustomWorld.setStoreData('finalBalance', balance);
+  logger.info(`Final balance for ${coin}: ${balance}`);
+});
+
+Then('Compare balance for {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, operation: string) {
+  const initial: string = CustomWorld.getStoreData('initialBalance');
+  const final: string = CustomWorld.getStoreData('finalBalance');
+
+  compareUserBalance(initial, final, operation);
 });

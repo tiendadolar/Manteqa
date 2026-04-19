@@ -376,7 +376,7 @@ Feature: Onboarding User - V2
 
         @test
         Examples:
-            | companyId                | credential                | externalId          | email                  | legalId     | exchange  | name   | surname   | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
+            | companyId                | credential                | externalId   | email                | legalId | exchange | name    | surname      | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | legalIdType |
             # | 6981ff2f4af353838a534bc4 | andresperalta@manteca.dev | user-account-pen-1-pa | lauarias@gmail.com | 47498918 | PERU     | LAURA | ARIAS   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Peru        | SAMUEL PIRES DE MELO |             |
             # | DG0DKDD-VRXMF9F-G84XH2H-03PXFMD | andresperalta@manteca.dev | user-account-bra-1 | alti2reis@gmail.com | 64406822100 | BRAZIL   | ALTINA | DOS REIS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Brasil      | SAMUEL PIRES DE MELO |             |
             # | 69972e13e4c6077150f16ce8 | andresperalta@manteca.dev | user-account-per-1 | esipdiana@gmail.com    | 77667305    | PERU      | DIANA    | ESPINOZA | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Peru        | SAMUEL PIRES DE MELO |             |
@@ -385,5 +385,5 @@ Feature: Onboarding User - V2
             # | 69972e13e4c6077150f16ce8 | andresperalta@manteca.dev | user-account-cop-1 | hectorrincon@gmail.com | 2999652     | COLOMBIA  | HECTOR   | RINCON   | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Colombia    | SAMUEL PIRES DE MELO | NATIONAL_ID |
             # | 683cce15397feba125068c9b | andresperalta@manteca.dev | user-account-py-1-onb | cantivinz@gmail.com | 2143989 | PARAGUAY | CANTIDO | VINZ    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400152   | Paraguay    | SAMUEL PIRES DE MELO |             |
             # | 684b2f25dcca16d5557fd8b2 | andresperalta@manteca.dev | user-mxn-1 | amandaperex@gmail.com | BALA780128MTLZNN08 | MEXICO   | ANABEL | BAEZ    | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Mexico      | SAMUEL PIRES DE MELO |             |
-            | 683cce15397feba125068c9b | andresperalta@manteca.dev | test-RESCUE-STELLAR | agaliotiseli@gmail.com | 27274882145 | ARGENTINA | ELIANA | AGALIOTTI | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Argentina   | SAMUEL PIRES DE MELO |             |
+            | 6864976a08430ed74bf61d0c | andresperalta@manteca.dev | test-bob-wV2 | rojemolina@gmail.com | 7893414 | BOLIVIA  | ROGELIO | ROJAS MOLINA | F   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400130   | Bolivia     | SAMUEL PIRES DE MELO |             |
 

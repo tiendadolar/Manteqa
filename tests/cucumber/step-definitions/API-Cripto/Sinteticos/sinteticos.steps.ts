@@ -9,6 +9,7 @@ import {
   lockPaymentHelper,
   syntheticPaymentHelper,
   validatePartialRefund,
+  validateRefundSyntheticStatus,
   validateSyntheticRefundStage,
   validateSyntheticStatus,
   validateTotalRefund
@@ -25,6 +26,7 @@ const payType: Record<string, string> = {
   BRL: 'BRL_ARS',
   ARS_BRL: 'ARS_BRL',
   USDT_BRL: 'USDT_BRL',
+  USDT_BRL_SENDER: 'USDT_BRL_SENDER',
   BRL_BRL: 'BRL_BRL',
   uBRL_BRL: 'uBRL_BRL'
 };
@@ -160,13 +162,14 @@ Then('Execute overdrawn {string} synthetic lock against {string} for user {strin
 
 Then('Execute overdrawn synthetic payment', { timeout: 125000 }, async function (this: CustomWorld) {
   const userAnyId: string = this.response.body.userNumberId;
+  const against: string = this.response.body.paymentAgainst;
   const qrCode = this.response.body.code;
   const urlBase: string = 'https://sandbox.manteca.dev/crypto';
   // const apiKEY: string = getCredentials('684b9446017d29431c2cac6a');
   const apiKEY: string = this.apiKey;
   const endpointPayment: string = '/v2/synthetics/qr-payment';
 
-  this.response = await syntheticPaymentHelper(urlBase, apiKEY, endpointPayment, qrCode, userAnyId);
+  this.response = await syntheticPaymentHelper(urlBase, apiKEY, endpointPayment, qrCode, userAnyId, undefined, against);
   await delay(5000);
 });
 
@@ -211,4 +214,13 @@ Then('Validate partial refund stages', { timeout: 125000 }, async function (this
   // validateSyntheticStatus(response.body, response.status, 200, 'CANCELLED');
   validateSyntheticRefundStage(response.body, partial);
   validatePartialRefund(response.body);
+});
+
+Then('Validate {string} status', { timeout: 125000 }, async function (this: CustomWorld, status: string) {
+  const urlBase = this.urlBase;
+  const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
+  const apiKEY = this.apiKey;
+
+  const response = await getSyntheticStatus(urlBase, endpoint, apiKEY);
+  validateRefundSyntheticStatus(response, status);
 });
