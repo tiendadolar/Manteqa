@@ -110,8 +110,17 @@ export const getUserBalance = async (urlBase: string, endpoint: string, apiKey: 
   return response;
 };
 
+export const getDebtCompanyBalance = async (urlBase: string, endpoint: string, apiKey: string): Promise<any> => {
+  const response = await apiRequest({ urlBase, endpoint, method: 'get', apiKey });
+  return response;
+};
+
 export function getCoinBalance(response: Record<string, any>, coin: string): string {
   return response?.balance?.[coin] ?? '0';
+}
+
+export function getCompanyCoinBalance(response: Record<string, any>, coin: string): string {
+  return response?.[coin] ?? '0';
 }
 
 export function compareUserBalance(initial: string, final: string, operation: string): void {
@@ -127,6 +136,35 @@ export function compareUserBalance(initial: string, final: string, operation: st
       logger.info(finalBalance);
       logger.info(final);
       logger.info('The final refund result OK');
+    default:
+      break;
+  }
+}
+
+export function compareCompanyDebtBalance(initial: string, final: string, operation?: string, paymentAgainstAmount?: string): void {
+  const initialDebt: number = parseFloat(initial);
+  const finalDebt: number = parseFloat(final);
+  const amount: any = parseFloat(paymentAgainstAmount || '0');
+
+  expect(finalDebt).to.be.closeTo(initialDebt + amount, 0.02);
+  logger.info('The final company debt result OK');
+}
+
+export function compareCompanyCreditBalance(initial: string, final: string, operation?: string, amountToRefund?: string): void {
+  const initialCredit: number = parseFloat(initial);
+  const finalCredit: number = parseFloat(final);
+  const refundAmount: number = parseFloat(amountToRefund || '0');
+
+  switch (operation) {
+    case 'TOTALREFUND':
+      expect(finalCredit).to.be.closeTo(initialCredit + refundAmount, 0.02);
+      logger.info('The total refund result OK');
+      break;
+
+    case 'PARTIALREFUND':
+      const finalBalance: number = parseFloat(initial) + refundAmount;
+      expect(finalBalance).to.be.closeTo(parseFloat(final), 0.02);
+      logger.info('The partial refund result OK');
     default:
       break;
   }

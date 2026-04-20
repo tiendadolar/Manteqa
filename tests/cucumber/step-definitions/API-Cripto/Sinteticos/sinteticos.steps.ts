@@ -194,6 +194,7 @@ Then('Validate total refund stages', { timeout: 125000 }, async function (this: 
 
   await delay(ms);
   const response = await getSyntheticStatus(urlBase, endpoint, apiKEY);
+  this.response = response;
 
   validateSyntheticStatus(response.body, response.status, 200, 'CANCELLED');
   validateSyntheticRefundStage(response.body);
@@ -220,7 +221,9 @@ Then('Validate {string} status', { timeout: 125000 }, async function (this: Cust
   const urlBase = this.urlBase;
   const endpoint = `/v2/synthetics/${CustomWorld.getStoreData('syntheticId')}`;
   const apiKEY = this.apiKey;
+  await delay(5000);
 
   const response = await getSyntheticStatus(urlBase, endpoint, apiKEY);
+  this.response = response;
   validateRefundSyntheticStatus(response, status);
 });

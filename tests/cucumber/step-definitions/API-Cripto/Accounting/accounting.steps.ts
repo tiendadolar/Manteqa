@@ -4,11 +4,15 @@ const request = require('supertest');
 import {
   analizeBalances,
   compareBalance,
+  compareCompanyCreditBalance,
+  compareCompanyDebtBalance,
   compareUserBalance,
   getCoinBalance,
+  getCompanyCoinBalance,
   getCompanyCreditBalanceHelper,
   getCompanyDebtBalance,
   getCompanyDebtBalanceHelper,
+  getDebtCompanyBalance,
   getUserBalance,
   getUserBalanceHelper,
   getUserDebtBalance
@@ -193,9 +197,85 @@ Then('Get {string} final user balance for {string}', { timeout: 500 * 1000 }, as
   logger.info(`Final balance for ${coin}: ${balance}`);
 });
 
-Then('Compare balance for {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, operation: string) {
+Then('Compare user balance for {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, operation: string) {
   const initial: string = CustomWorld.getStoreData('initialBalance');
   const final: string = CustomWorld.getStoreData('finalBalance');
 
   compareUserBalance(initial, final, operation);
+});
+
+Then('Get {string} initial debt company balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {
+  const urlBase: string = this.urlBase;
+  const endpoint: string = `/v2/accounting/debt`;
+  const apiKEY: string = this.apiKey;
+  const coin: string = normalizeCoin(fiat.toUpperCase());
+
+  const response: any = await getDebtCompanyBalance(urlBase, endpoint, apiKEY);
+  const balance: string = getCompanyCoinBalance(response.body, coin);
+  CustomWorld.setStoreData('initialDebt', balance);
+  logger.info(`Initial debt balance for ${coin}: ${balance}`);
+});
+
+Then('Get {string} final debt company balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {
+  const urlBase: string = this.urlBase;
+  const endpoint: string = `/v2/accounting/debt`;
+  const apiKEY: string = this.apiKey;
+  const coin: string = normalizeCoin(fiat.toUpperCase());
+
+  const response: any = await getDebtCompanyBalance(urlBase, endpoint, apiKEY);
+  const balance: string = getCompanyCoinBalance(response.body, coin);
+  CustomWorld.setStoreData('finalDebt', balance);
+  logger.info(`Final debt balance for ${coin}: ${balance}`);
+});
+
+Then('Get {string} initial credit company balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {
+  const urlBase: string = this.urlBase;
+  const endpoint: string = `/v2/accounting/credit`;
+  const apiKEY: string = this.apiKey;
+  const coin: string = normalizeCoin(fiat.toUpperCase());
+
+  const response: any = await getDebtCompanyBalance(urlBase, endpoint, apiKEY);
+  const balance: string = getCompanyCoinBalance(response.body, coin);
+  CustomWorld.setStoreData('initialCredit', balance);
+  logger.info(`Initial credit balance for ${coin}: ${balance}`);
+});
+
+Then('Get {string} final credit company balance', { timeout: 500 * 1000 }, async function (this: CustomWorld, fiat: string) {
+  const urlBase: string = this.urlBase;
+  const endpoint: string = `/v2/accounting/credit`;
+  const apiKEY: string = this.apiKey;
+  const coin: string = normalizeCoin(fiat.toUpperCase());
+
+  const response: any = await getDebtCompanyBalance(urlBase, endpoint, apiKEY);
+  const balance: string = getCompanyCoinBalance(response.body, coin);
+  CustomWorld.setStoreData('finalCredit', balance);
+  logger.info(`Final credit balance for ${coin}: ${balance}`);
+});
+
+Then('Compare accounting company balance for {string}', { timeout: 500 * 1000 }, async function (this: CustomWorld, operation: string) {
+  const initialDebt: string = CustomWorld.getStoreData('initialDebt');
+  const finalDebt: string = CustomWorld.getStoreData('finalDebt');
+  const initialCredit: string = CustomWorld.getStoreData('initialCredit');
+  const finalCredit: string = CustomWorld.getStoreData('finalCredit');
+  const paymentAgainstAmount: string = this.response.body.details.paymentAgainstAmount;
+  const refundStage: any = Object.values(this.response.body.stages).find((s: any) => s.stageType === 'REFUND');
+  const amountToRefund: string = refundStage.amountToRefund;
+
+  logger.warn(amountToRefund);
+
+  compareCompanyDebtBalance(initialDebt, finalDebt, undefined, paymentAgainstAmount);
+
+  compareCompanyCreditBalance(initialCredit, finalCredit, operation, amountToRefund);
+});
+
+Then('Compare equal accounting company balance', { timeout: 500 * 1000 }, async function (this: CustomWorld) {
+  const initialDebt: string = CustomWorld.getStoreData('initialDebt');
+  const finalDebt: string = CustomWorld.getStoreData('finalDebt');
+  const initialCredit: string = CustomWorld.getStoreData('initialCredit');
+  const finalCredit: string = CustomWorld.getStoreData('finalCredit');
+
+  expect(initialDebt).to.be.equal(finalDebt);
+  expect(initialCredit).to.be.equal(finalCredit);
+
+  logger.info('Not operated company account');
 });
