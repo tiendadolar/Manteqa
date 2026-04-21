@@ -7,7 +7,7 @@ Feature: Sintético top-up payments
     Scenario Outline: Ejecutar sintético top up en descubierto operando contra <against> desde principal account ARG enviando sender <exchange>
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from top up provider
+        And Get billId from top up provider for "<country>"
         And Obtain "<against>" debt balance "company"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -27,18 +27,48 @@ Feature: Sintético top-up payments
         And Obtain "<against>" debt balance "company"
 
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name                          |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 2000   | CHILE     | 17710453-1    | ESTEFANIA ESPINOZA            |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 3000   | MEXICO    | CAOD421009K78 | DIONICIO CARRILLO OLVERA      |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 80000  | PERU      | 28316206      | CURI QUISPE WILDHER CHRISTIAN |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDC    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name                          | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 2000   | CHILE     | 17710453-1    | ESTEFANIA ESPINOZA            | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 3000   | MEXICO    | CAOD421009K78 | DIONICIO CARRILLO OLVERA      | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 80000  | PERU      | 28316206      | CURI QUISPE WILDHER CHRISTIAN | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDC    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               | ARGENTINA |
 
         @Smoke
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS | ARGENTINA |
 
+    @Descubierto @PA @MultiCountry @Automated
+    Scenario Outline: Ejecutar sintético top up en descubierto operando contra <against> desde principal account <country> enviando sender <exchange>
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Get billId from top up provider for "<country>"
+        And Obtain "<against>" debt balance "company"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "billId" to the variable "billId"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<name>" to the variable "name"
+        And Execute the POST method on the endpoint "/v2/bill-locks"
+        Then Obtain a response 201 for bill payment overdraw
+        When Assign the value "<externalId>" to the variable "externalId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "billCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/bill-payment"
+        Then Obtain a response 201
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        And Obtain "<against>" debt balance "company"
+
+        @Smoke
+        Examples:
+            | companyId                | externalId     | userAnyId | against | amount | exchange | legalId       | name                          | country  |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064518 | USDT    | 1000   | CHILE    | 17710453-1    | ESTEFANIA ESPINOZA            | COLOMBIA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064758 | USDT    | 2000   | CHILE    | 17710453-1    | ESTEFANIA ESPINOZA            | MEXICO   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036729 | USDT    | 3000   | MEXICO   | CAOD421009K78 | DIONICIO CARRILLO OLVERA      | PERU     |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064520 | USDT    | 80000  | PERU     | 28316206      | CURI QUISPE WILDHER CHRISTIAN | CHILE    |
 
     @Balance @PA @ARG @Automated
     Scenario Outline: Ejecutar sintético top up sobre user balance operando contra <against> desde principal account ARG enviando sender <exchange>

@@ -244,7 +244,7 @@ Feature: Initial Onboarding Integrations
             | companyId                | case          | credential                | externalId | email            | legalId | exchange  | name   | surname  | sex | work     | birthDate  | maritalStatus | isPep | isFep | isFatca | phoneNumber | nationality | street               | statusCode | internalStatus | message      | errors              |
             | 683cce15397feba125068c9b | empty legalId | andresperalta@manteca.dev | external-n | user@manteca.dev | null    | ARGENTINA | MALENA | CANTEROS | M   | empleado | 1999-05-15 | Soltero       | false | false | false   | 112400201   | Argentina   | SAMUEL PIRES DE MELO | 400        | BAD_REQUEST    | Bad request. | legalId is missing. |
 
-    @ErrorPath @Automated
+    @ErrorPath @Automatedte
     Scenario Outline: Validate error initial onboarding sending <case> V2
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

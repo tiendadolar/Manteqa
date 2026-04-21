@@ -7,7 +7,7 @@ Feature: Sintético billing payments
     Scenario Outline: Ejecutar sintético billing en descubierto operando contra <against> desde principal account ARG enviando sender <exchange>
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from billing provider
+        And Get billId from billing provider for "<country>"
         And Obtain "<against>" debt balance "company"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -27,23 +27,86 @@ Feature: Sintético billing payments
         And Obtain "<against>" debt balance "company"
 
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name                          |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 2000   | CHILE     | 17710453-1    | ESTEFANIA ESPINOZA            |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 3000   | MEXICO    | CAOD421009K78 | DIONICIO CARRILLO OLVERA      |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 80000  | PERU      | 28316206      | CURI QUISPE WILDHER CHRISTIAN |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDC    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name                          | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 2000   | CHILE     | 17710453-1    | ESTEFANIA ESPINOZA            | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 3000   | MEXICO    | CAOD421009K78 | DIONICIO CARRILLO OLVERA      | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 80000  | PERU      | 28316206      | CURI QUISPE WILDHER CHRISTIAN | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDC    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS               | ARGENTINA |
 
         @Smoke
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | USDT    | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS | ARGENTINA |
+
+    @Descubierto @PA @MultiCountry @Automated
+    Scenario Outline: Ejecutar sintético billing multicountry en descubierto operando contra <against> desde user <country>
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Get billId from billing provider for "<country>"
+        And Obtain "<against>" debt balance "company"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "billId" to the variable "billId"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<name>" to the variable "name"
+        And Execute the POST method on the endpoint "/v2/bill-locks"
+        Then Obtain a response 201 for bill payment overdraw
+        When Assign the value "<externalId>" to the variable "externalId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "billCode"
+        And Execute the POST method on the endpoint "/v2/synthetics/bill-payment"
+        Then Obtain a response 201
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        And Obtain "<against>" debt balance "company"
+
+        @Smoke
+        Examples:
+            | companyId                | externalId     | userAnyId | against | amount | exchange | legalId       | name                     | country  |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064518 | USDT    | 7000   | CHILE    | 17655779-6    | MARIELA RAMOS            | COLOMBIA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064758 | USDT    | 1000   | CHILE    | 17710453-1    | ESTEFANIA ESPINOZA       | MEXICO   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036729 | USDT    | 1.5    | MEXICO   | CAOD421009K78 | DIONICIO CARRILLO OLVERA | PERU     |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064520 | USDT    | 1000   | MEXICO   | CAOD421009K78 | DIONICIO CARRILLO OLVERA | CHILE    |
+
+    @Descubierto @PA @MultiCountry @Automated
+    Scenario Outline: Ejecutar sintético billing multicountry en descubierto operando contra <against> desde user <country>
+        Given Get credentials for company "<companyId>"
+        And The urlBase is available "https://sandbox.manteca.dev/crypto"
+        And Get billId from billing provider for "<country>"
+        And Obtain "<against>" debt balance "company"
+        When Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "billId" to the variable "billId"
+        And Assign the value "<against>" to the variable "against"
+        And Assign the value "<amount>" to the variable "amount"
+        And Assign the value "<exchange>" to the variable "exchange"
+        And Assign the value "<legalId>" to the variable "legalId"
+        And Assign the value "<name>" to the variable "name"
+        And Execute the POST method on the endpoint "/v2/bill-locks"
+        Then Obtain a response 201 for bill payment overdraw
+        When Assign the value "<externalId>" to the variable "externalId"
+        And Assign the value "<userAnyId>" to the variable "userAnyId"
+        And Assign the value "pixCode" to the variable "billCode"
+        And Assign the value "true" to the variable "skipDeposit"
+        And Execute the POST method on the endpoint "/v2/synthetics/bill-payment"
+        Then Obtain a response 201
+        And Obtain a response 200 and status "COMPLETED" for "qr payment" synthetic
+        And Obtain "<against>" debt balance "company"
+
+        @Smoke
+        Examples:
+            | companyId                | externalId     | userAnyId | against | amount | exchange | legalId       | name                     | country  |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064518 | COP     | 1500   | CHILE    | 17655779-6    | MARIELA RAMOS            | COLOMBIA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064758 | MXN     | 1000   | CHILE    | 17710453-1    | ESTEFANIA ESPINOZA       | MEXICO   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036729 | PEN     | 1.5    | MEXICO   | CAOD421009K78 | DIONICIO CARRILLO OLVERA | PERU     |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064520 | CLP     | 1000   | MEXICO   | CAOD421009K78 | DIONICIO CARRILLO OLVERA | CHILE    |
 
     @Balance @PA @ARG @Automated
     Scenario Outline: Ejecutar sintético billing sobre user balance operando contra <against> desde principal account ARG enviando sender <exchange>
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from billing provider
+        And Get billId from billing provider for "<country>"
         And Get "<against>" balance for "<userAnyId>"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -66,16 +129,16 @@ Feature: Sintético billing payments
 
         @Smoke
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | ARS     | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | ARS     | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS | ARGENTINA |
 
     # ------ NO DESCUBIERTOS -------
 
-    @NoDescubierto @UA @Crypto @ARG @Automated
+    @NoDescubierto @UA @Crypto @ARG @ToBeAutomated
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from billing provider
+        And Get billId from billing provider for "<country>"
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -94,15 +157,15 @@ Feature: Sintético billing payments
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
 
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDT    | 1000   |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDC    | 1000   |
+            | companyId                | externalId     | userAnyId | against | amount | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDT    | 1000   | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDC    | 1000   | ARGENTINA |
 
-    @NoDescubierto @UA @Fiat @ARG @Automated
+    @NoDescubierto @UA @Fiat @ARG @Automatedt
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from billing provider
+        And Get billId from billing provider for "<country>"
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -121,6 +184,6 @@ Feature: Sintético billing payments
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
 
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   |
+            | companyId                | externalId     | userAnyId | against | amount | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   | ARGENTINA |

@@ -6,8 +6,8 @@ const { Given, When, Then, Before } = require('@cucumber/cucumber');
 const { expect } = require('chai');
 const request = require('supertest');
 
-Given('Get billId from billing provider', async function (this: CustomWorld) {
-  const res = await getBillIdInfoHelper(this.apiKey);
+Given('Get billId from billing provider for {string}', async function (this: CustomWorld, country: string) {
+  const res = await getBillIdInfoHelper(this.apiKey, country);
   const billId = res.body[0].id;
   await validateRes(res, 200);
 
@@ -15,8 +15,8 @@ Given('Get billId from billing provider', async function (this: CustomWorld) {
   console.log(CustomWorld.getStoreData('billId'));
 });
 
-Given('Get billId from top up provider', async function (this: CustomWorld) {
-  const res = await getTopUpIdInfoHelper(this.apiKey);
+Given('Get billId from top up provider for {string}', async function (this: CustomWorld, country: string) {
+  const res = await getTopUpIdInfoHelper(this.apiKey, country);
   const billId = res.body[0].id;
   await validateRes(res, 200);
 
