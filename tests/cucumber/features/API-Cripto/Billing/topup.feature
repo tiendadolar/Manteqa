@@ -65,16 +65,16 @@ Feature: Sintético top-up payments
         @Smoke
         Examples:
             | companyId                | externalId     | userAnyId | against | amount | exchange | legalId       | name                          | country  |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064518 | USDT    | 1000   | CHILE    | 17710453-1    | ESTEFANIA ESPINOZA            | COLOMBIA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064518 | USDT    | 5000   | CHILE    | 17710453-1    | ESTEFANIA ESPINOZA            | COLOMBIA |
             | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064758 | USDT    | 2000   | CHILE    | 17710453-1    | ESTEFANIA ESPINOZA            | MEXICO   |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036729 | USDT    | 3000   | MEXICO   | CAOD421009K78 | DIONICIO CARRILLO OLVERA      | PERU     |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036729 | USDT    | 1.5    | MEXICO   | CAOD421009K78 | DIONICIO CARRILLO OLVERA      | PERU     |
             | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100064520 | USDT    | 80000  | PERU     | 28316206      | CURI QUISPE WILDHER CHRISTIAN | CHILE    |
 
     @Balance @PA @ARG @Automated
     Scenario Outline: Ejecutar sintético top up sobre user balance operando contra <against> desde principal account ARG enviando sender <exchange>
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from top up provider
+        And Get billId from top up provider for "<country>"
         And Get "<against>" balance for "<userAnyId>"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -97,8 +97,8 @@ Feature: Sintético top-up payments
 
         @Smoke
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | ARS     | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS |
+            | companyId                | externalId     | userAnyId | against | amount | exchange  | legalId       | name            | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036128 | ARS     | 1000   | ARGENTINA | 27-16749876-6 | MIGUEL GRANADOS | ARGENTINA |
 
     # ------ NO DESCUBIERTOS -------
 
@@ -106,7 +106,7 @@ Feature: Sintético top-up payments
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from top up provider
+        And Get billId from top up provider for "<country>"
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -125,15 +125,15 @@ Feature: Sintético top-up payments
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
 
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDT    | 1000   |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDC    | 1000   |
+            | companyId                | externalId     | userAnyId | against | amount | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDT    | 1000   | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDC    | 1000   | ARGENTINA |
 
     @NoDescubierto @UA @Fiat @ARG @Automated
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"
-        And Get billId from top up provider
+        And Get billId from top up provider for "<country>"
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
         When Assign the value "<userAnyId>" to the variable "userAnyId"
         And Assign the value "billId" to the variable "billId"
@@ -152,6 +152,6 @@ Feature: Sintético top-up payments
         And Obtain "<against>" balance for "<userAnyId>" user over "balance"
 
         Examples:
-            | companyId                | externalId     | userAnyId | against | amount |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   |
-            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   |
+            | companyId                | externalId     | userAnyId | against | amount | country   |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   | ARGENTINA |
+            | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | ARS     | 1000   | ARGENTINA |

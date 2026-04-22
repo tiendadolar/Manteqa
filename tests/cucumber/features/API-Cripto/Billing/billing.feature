@@ -161,7 +161,7 @@ Feature: Sintético billing payments
             | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDT    | 1000   | ARGENTINA |
             | 6931a74f8cf4de3e06e6a135 | billing-test-n | 100036761 | USDC    | 1000   | ARGENTINA |
 
-    @NoDescubierto @UA @Fiat @ARG @Automatedt
+    @NoDescubierto @UA @Fiat @ARG @Automated
     Scenario Outline: Ejecutar sintético billing en no descubierto operando contra <against> desde user account ARG
         Given Get credentials for company "<companyId>"
         And The urlBase is available "https://sandbox.manteca.dev/crypto"

@@ -13,6 +13,7 @@ const addresses: Record<string, RegExp> = {
   BASE: /^0x[a-fA-F0-9]{40}$/,
   TERRA: /^terra1[a-z0-9]{38}$/,
   TERRA2: /^terra1[a-z0-9]{38}$/,
+  TEMPO: /^0x[a-fA-F0-9]{40}$/,
   TRON: /^T[A-Za-z0-9]{33}$/,
   STELLAR: /^[GMA][A-Z2-7]{55,68}$/,
   SOLANA: /^[1-9A-HJ-NP-Za-km-z]{32,44}$/
